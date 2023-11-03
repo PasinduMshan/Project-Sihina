@@ -1,8 +1,246 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="780.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.ProjectSihina.controller.DashBoardFormController">
-
+<AnchorPane fx:id="rootNode" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.ProjectSihina.controller.DashBoardFormController">
+   <children>
+      <AnchorPane layoutX="9.0" layoutY="11.0" prefHeight="700.0" prefWidth="244.0" style="-fx-background-color: #bdc3c7; -fx-background-radius: 15;">
+         <children>
+            <ImageView fitHeight="55.0" fitWidth="138.0" layoutX="83.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Images/NAMELOGO.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="55.0" fitWidth="60.0" layoutX="23.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Images/LOGO.png" />
+               </image>
+            </ImageView>
+            <JFXButton alignment="CENTER" buttonType="RAISED" layoutX="27.0" layoutY="111.0" onAction="#btnDashboardOnAction" prefHeight="40.0" prefWidth="191.0" style="-fx-background-color: #a29bfe; -fx-background-radius: 10;" text="        Dashboard">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </JFXButton>
+            <JFXButton alignment="CENTER" buttonType="RAISED" layoutX="27.0" layoutY="169.0" onAction="#btnStudentOnAction" prefHeight="40.0" prefWidth="191.0" style="-fx-background-color: #a29bfe; -fx-background-radius: 10;" text="     Students">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </JFXButton>
+            <JFXButton alignment="CENTER" buttonType="RAISED" layoutX="27.0" layoutY="225.0" onAction="#btnTeacherOnAction" prefHeight="40.0" prefWidth="191.0" style="-fx-background-color: #a29bfe; -fx-background-radius: 10;" text="     Teachers">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </JFXButton>
+            <JFXButton alignment="CENTER" buttonType="RAISED" layoutX="27.0" layoutY="281.0" onAction="#btnClassOnAction" prefHeight="40.0" prefWidth="191.0" style="-fx-background-color: #a29bfe; -fx-background-radius: 10;" text="Class">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </JFXButton>
+            <JFXButton alignment="CENTER" buttonType="RAISED" layoutX="27.0" layoutY="565.0" onAction="#btnPaymentOnAction" prefHeight="40.0" prefWidth="191.0" style="-fx-background-color: #a29bfe; -fx-background-radius: 10;" text="     Payment">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </JFXButton>
+            <JFXButton alignment="CENTER" buttonType="RAISED" layoutX="27.0" layoutY="394.0" onAction="#btnSubjectOnAction" prefHeight="40.0" prefWidth="191.0" style="-fx-background-color: #a29bfe; -fx-background-radius: 10;" text="     Subjects">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </JFXButton>
+            <JFXButton alignment="CENTER" buttonType="RAISED" layoutX="27.0" layoutY="451.0" onAction="#btnScheduleOnAction" prefHeight="40.0" prefWidth="191.0" style="-fx-background-color: #a29bfe; -fx-background-radius: 10;" text="      Schedule">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </JFXButton>
+            <JFXButton alignment="CENTER" buttonType="RAISED" layoutX="27.0" layoutY="338.0" onAction="#btnAttendanceOnAction" prefHeight="40.0" prefWidth="191.0" style="-fx-background-color: #a29bfe; -fx-background-radius: 10;" text="          Attendance">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </JFXButton>
+            <JFXButton alignment="CENTER" buttonType="RAISED" layoutX="27.0" layoutY="510.0" onAction="#btnExamsOnAction" prefHeight="40.0" prefWidth="191.0" style="-fx-background-color: #a29bfe; -fx-background-radius: 10;" text="  Exams">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </JFXButton>
+            <JFXButton alignment="CENTER" buttonType="RAISED" layoutX="50.0" layoutY="646.0" onAction="#btnLogOutOnAction" prefHeight="40.0" prefWidth="146.0" style="-fx-background-color: #a29bfe; -fx-background-radius: 10;" text="     Log out">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </JFXButton>
+            <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="46.0" layoutY="116.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Images/dashboard-icon.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="46.0" layoutY="174.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Images/MainStudenticon.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="46.0" layoutY="230.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Images/Main-Teacher-icon.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="46.0" layoutY="286.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Images/Class.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="46.0" layoutY="343.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Images/Attendents.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="46.0" layoutY="399.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Images/Main-Subject.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="46.0" layoutY="457.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Images/Schedule.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="46.0" layoutY="515.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Images/Exam.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="46.0" layoutY="571.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Images/Payment.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="61.0" layoutY="653.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Images/Log-out.png" />
+               </image>
+            </ImageView>
+         </children></AnchorPane>
+      <AnchorPane layoutX="261.0" layoutY="11.0" prefHeight="700.0" prefWidth="1011.0" style="-fx-background-color: #dcdde1; -fx-background-radius: 10;">
+         <children>
+            <Label layoutX="14.0" layoutY="8.0" prefHeight="30.0" prefWidth="116.0" text="Welcme Back!">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblUserName" layoutX="14.0" layoutY="29.0">
+               <font>
+                  <Font name="System Bold" size="36.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblDate" layoutX="850.0" layoutY="23.0" textFill="#2610b2">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblTime" layoutX="683.0" layoutY="23.0" textFill="#2610b2">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
+            <Line endX="5.0" endY="-6.0" layoutX="838.0" layoutY="63.0" startX="5.0" startY="-43.0" strokeWidth="3.0" />
+            <AnchorPane layoutX="32.0" layoutY="113.0" prefHeight="125.0" prefWidth="215.0" style="-fx-background-color: #00BEDC; -fx-background-radius: 10;">
+               <children>
+                  <Label layoutX="20.0" layoutY="14.0" text="Students Count" textFill="#fffafa">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblStudentCount" layoutX="97.0" layoutY="55.0" prefHeight="44.0" prefWidth="81.0" text="700">
+                     <font>
+                        <Font name="System Bold" size="36.0" />
+                     </font>
+                  </Label>
+                  <ImageView fitHeight="44.0" fitWidth="44.0" layoutX="30.0" layoutY="55.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Images/StudentsDashBoard.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="274.0" layoutY="113.0" prefHeight="125.0" prefWidth="215.0" style="-fx-background-color: #00BEDC; -fx-background-radius: 10;">
+               <children>
+                  <Label layoutX="20.0" layoutY="14.0" text="Teachers Count" textFill="#fffafa">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblTeachersCount" layoutX="97.0" layoutY="55.0" prefHeight="44.0" prefWidth="81.0" text="700">
+                     <font>
+                        <Font name="System Bold" size="36.0" />
+                     </font>
+                  </Label>
+                  <ImageView fitHeight="44.0" fitWidth="44.0" layoutX="36.0" layoutY="55.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Images/TeacherDashBoard.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="516.0" layoutY="113.0" prefHeight="125.0" prefWidth="215.0" style="-fx-background-color: #00BEDC; -fx-background-radius: 10;">
+               <children>
+                  <Label layoutX="28.0" layoutY="14.0" text="Subject Count" textFill="#fffafa">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblSubjectsCount" layoutX="97.0" layoutY="55.0" prefHeight="44.0" prefWidth="81.0" text="700">
+                     <font>
+                        <Font name="System Bold" size="36.0" />
+                     </font>
+                  </Label>
+                  <ImageView fitHeight="44.0" fitWidth="44.0" layoutX="36.0" layoutY="55.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Images/SubjectDashBoard.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="753.0" layoutY="113.0" prefHeight="125.0" prefWidth="244.0" style="-fx-background-color: #00BEDC; -fx-background-radius: 10;">
+               <children>
+                  <Label layoutX="44.0" layoutY="14.0" text="Today Income" textFill="#fffafa">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblTodayIncome" layoutX="97.0" layoutY="55.0" prefHeight="44.0" prefWidth="137.0" text="10000">
+                     <font>
+                        <Font name="System Bold" size="36.0" />
+                     </font>
+                  </Label>
+                  <ImageView fitHeight="44.0" fitWidth="44.0" layoutX="36.0" layoutY="55.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Images/IncomeDashBoard.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="32.0" layoutY="253.0" prefHeight="433.0" prefWidth="458.0" style="-fx-background-color: #B3CAD6; -fx-background-radius: 10;">
+               <children>
+                  <Label layoutX="21.0" layoutY="14.0" text="Today Schedule" textFill="#06021e">
+                     <font>
+                        <Font name="System Bold" size="26.0" />
+                     </font>
+                  </Label>
+                  <TableView layoutX="21.0" layoutY="59.0" prefHeight="358.0" prefWidth="416.0" style="-fx-background-color: #D8E8F0;">
+                    <columns>
+                      <TableColumn prefWidth="75.0" text="Time" />
+                      <TableColumn prefWidth="266.0" text="Program" />
+                        <TableColumn prefWidth="73.0" text="Action" />
+                    </columns>
+                  </TableView>
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="516.0" layoutY="253.0" prefHeight="433.0" prefWidth="482.0" style="-fx-background-color: #B3CAD6; -fx-background-radius: 10;" />
+         </children></AnchorPane>
+   </children>
 </AnchorPane>
