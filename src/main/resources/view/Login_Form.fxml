@@ -47,9 +47,9 @@
                   <Font name="System Bold" size="48.0" />
                </font>
             </Label>
-            <JFXTextField layoutX="80.0" layoutY="160.0" prefHeight="33.0" prefWidth="375.0" promptText="User Name" />
-            <JFXTextField layoutX="80.0" layoutY="276.0" prefHeight="33.0" prefWidth="375.0" promptText="Password" />
-            <JFXButton alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" layoutX="238.0" layoutY="423.0" prefHeight="33.0" prefWidth="82.0" ripplerFill="BLACK" style="-fx-background-color: #B1A8B9;" text="Login">
+            <JFXTextField fx:id="txtUserName" layoutX="80.0" layoutY="160.0" prefHeight="33.0" prefWidth="375.0" promptText="User Name" />
+            <JFXTextField fx:id="txtPassword" layoutX="80.0" layoutY="276.0" prefHeight="33.0" prefWidth="375.0" promptText="Password" />
+            <JFXButton alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" layoutX="238.0" layoutY="423.0" onAction="#btnLoginOnAction" prefHeight="33.0" prefWidth="82.0" ripplerFill="BLACK" style="-fx-background-color: #B1A8B9; -fx-background-radius: 10;" text="Login" textFill="#101072">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
@@ -63,7 +63,7 @@
                   <Font name="System Bold" size="14.0" />
                </font>
             </Label>
-            <JFXButton defaultButton="true" layoutX="320.0" layoutY="572.0" text="Sing Up Now." textFill="#11c3d7">
+            <JFXButton defaultButton="true" layoutX="320.0" layoutY="572.0" onAction="#btnSignUpOnAction" text="Sign Up Now." textFill="#11c3d7">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>

@@ -56,7 +56,7 @@
             <JFXTextField layoutX="74.0" layoutY="308.0" prefHeight="33.0" prefWidth="392.0" promptText="NIC" />
             <JFXTextField layoutX="74.0" layoutY="382.0" prefHeight="33.0" prefWidth="392.0" promptText="User Name" />
             <JFXTextField layoutX="74.0" layoutY="449.0" prefHeight="33.0" prefWidth="392.0" promptText="Password" />
-            <JFXButton alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" layoutX="215.0" layoutY="553.0" prefHeight="33.0" prefWidth="110.0" ripplerFill="BLACK" style="-fx-background-color: #B1A8B9;" text="Register">
+            <JFXButton alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" layoutX="215.0" layoutY="553.0" prefHeight="33.0" prefWidth="110.0" ripplerFill="BLACK" style="-fx-background-color: #B1A8B9; -fx-background-radius: 10;" text="Register" textFill="#101072">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
