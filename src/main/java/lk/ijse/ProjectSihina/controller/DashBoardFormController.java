@@ -10,6 +10,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 public class DashBoardFormController {
 
@@ -37,6 +39,18 @@ public class DashBoardFormController {
     @FXML
     private Label lblUserName;
 
+    public void initialize() {
+        setDate();
+        setTime();
+    }
+
+    private void setDate() {
+        lblDate.setText(String.valueOf(LocalDate.now()));
+    }
+
+    private void setTime() {
+        lblTime.setText(String.valueOf(LocalTime.now()));
+    }
     @FXML
     void btnAttendanceOnAction(ActionEvent event) {
 
