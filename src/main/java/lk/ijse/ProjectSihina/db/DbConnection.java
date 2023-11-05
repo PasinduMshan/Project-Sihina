@@ -16,7 +16,7 @@ public class DbConnection {
                 "Ijse@1234"
         );
     }
-    private static DbConnection getInstance() throws SQLException {
+    public static DbConnection getInstance() throws SQLException {
         return (null == dbConnection) ? dbConnection = new DbConnection() :dbConnection;
     }
 
