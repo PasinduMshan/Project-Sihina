@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.embed.swing.SwingNode?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="rootNode" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.ProjectSihina.controller.StudentFormController">
+    <children>
+        <AnchorPane layoutX="9.0" layoutY="11.0" prefHeight="700.0" prefWidth="244.0" style="-fx-background-color: #bdc3c7; -fx-background-radius: 15;">
+            <children>
+                <ImageView fitHeight="55.0" fitWidth="138.0" layoutX="83.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../Images/NAMELOGO.png" />
+                    </image>
+                </ImageView>
+                <ImageView fitHeight="55.0" fitWidth="60.0" layoutX="23.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../Images/LOGO.png" />
+                    </image>
+                </ImageView>
+                <JFXButton alignment="CENTER" buttonType="RAISED" layoutX="27.0" layoutY="111.0" onAction="#btnDashboardOnAction" prefHeight="40.0" prefWidth="191.0" style="-fx-background-color: #a29bfe; -fx-background-radius: 10;" text="        Dashboard">
+                    <font>
+                        <Font name="System Bold" size="15.0" />
+                    </font>
+                </JFXButton>
+                <JFXButton alignment="CENTER" buttonType="RAISED" layoutX="27.0" layoutY="169.0" onAction="#btnStudentOnAction" prefHeight="40.0" prefWidth="191.0" style="-fx-background-color: #a29bfe; -fx-background-radius: 10;" text="     Students">
+                    <font>
+                        <Font name="System Bold" size="15.0" />
+                    </font>
+                </JFXButton>
+                <JFXButton alignment="CENTER" buttonType="RAISED" layoutX="27.0" layoutY="225.0" onAction="#btnTeacherOnAction" prefHeight="40.0" prefWidth="191.0" style="-fx-background-color: #a29bfe; -fx-background-radius: 10;" text="     Teachers">
+                    <font>
+                        <Font name="System Bold" size="15.0" />
+                    </font>
+                </JFXButton>
+                <JFXButton alignment="CENTER" buttonType="RAISED" layoutX="27.0" layoutY="281.0" onAction="#btnClassOnAction" prefHeight="40.0" prefWidth="191.0" style="-fx-background-color: #a29bfe; -fx-background-radius: 10;" text="Class">
+                    <font>
+                        <Font name="System Bold" size="15.0" />
+                    </font>
+                </JFXButton>
+                <JFXButton alignment="CENTER" buttonType="RAISED" layoutX="27.0" layoutY="565.0" onAction="#btnPaymentOnAction" prefHeight="40.0" prefWidth="191.0" style="-fx-background-color: #a29bfe; -fx-background-radius: 10;" text="     Payment">
+                    <font>
+                        <Font name="System Bold" size="15.0" />
+                    </font>
+                </JFXButton>
+                <JFXButton alignment="CENTER" buttonType="RAISED" layoutX="27.0" layoutY="394.0" onAction="#btnSubjectOnAction" prefHeight="40.0" prefWidth="191.0" style="-fx-background-color: #a29bfe; -fx-background-radius: 10;" text="     Subjects">
+                    <font>
+                        <Font name="System Bold" size="15.0" />
+                    </font>
+                </JFXButton>
+                <JFXButton alignment="CENTER" buttonType="RAISED" layoutX="27.0" layoutY="451.0" onAction="#btnScheduleOnAction" prefHeight="40.0" prefWidth="191.0" style="-fx-background-color: #a29bfe; -fx-background-radius: 10;" text="      Schedule">
+                    <font>
+                        <Font name="System Bold" size="15.0" />
+                    </font>
+                </JFXButton>
+                <JFXButton alignment="CENTER" buttonType="RAISED" layoutX="27.0" layoutY="338.0" onAction="#btnAttendanceOnAction" prefHeight="40.0" prefWidth="191.0" style="-fx-background-color: #a29bfe; -fx-background-radius: 10;" text="          Attendance">
+                    <font>
+                        <Font name="System Bold" size="15.0" />
+                    </font>
+                </JFXButton>
+                <JFXButton alignment="CENTER" buttonType="RAISED" layoutX="27.0" layoutY="510.0" onAction="#btnExamsOnAction" prefHeight="40.0" prefWidth="191.0" style="-fx-background-color: #a29bfe; -fx-background-radius: 10;" text="  Exams">
+                    <font>
+                        <Font name="System Bold" size="15.0" />
+                    </font>
+                </JFXButton>
+                <JFXButton alignment="CENTER" buttonType="RAISED" layoutX="50.0" layoutY="646.0" onAction="#btnLogOutOnAction" prefHeight="40.0" prefWidth="146.0" style="-fx-background-color: #a29bfe; -fx-background-radius: 10;" text="     Log out">
+                    <font>
+                        <Font name="System Bold" size="15.0" />
+                    </font>
+                </JFXButton>
+                <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="46.0" layoutY="116.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../Images/dashboard-icon.png" />
+                    </image>
+                </ImageView>
+                <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="46.0" layoutY="174.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../Images/MainStudenticon.png" />
+                    </image>
+                </ImageView>
+                <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="46.0" layoutY="230.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../Images/Main-Teacher-icon.png" />
+                    </image>
+                </ImageView>
+                <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="46.0" layoutY="286.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../Images/Class.png" />
+                    </image>
+                </ImageView>
+                <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="46.0" layoutY="343.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../Images/Attendents.png" />
+                    </image>
+                </ImageView>
+                <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="46.0" layoutY="399.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../Images/Main-Subject.png" />
+                    </image>
+                </ImageView>
+                <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="46.0" layoutY="457.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../Images/Schedule.png" />
+                    </image>
+                </ImageView>
+                <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="46.0" layoutY="515.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../Images/Exam.png" />
+                    </image>
+                </ImageView>
+                <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="46.0" layoutY="571.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../Images/Payment.png" />
+                    </image>
+                </ImageView>
+                <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="61.0" layoutY="653.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../Images/Log-out.png" />
+                    </image>
+                </ImageView>
+            </children></AnchorPane>
+        <AnchorPane layoutX="261.0" layoutY="11.0" prefHeight="700.0" prefWidth="1011.0" style="-fx-background-color: #dcdde1; -fx-background-radius: 10;">
+         <children>
+            <Label layoutX="14.0" layoutY="14.0" text="Student Information">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
+            <JFXTextField layoutX="33.0" layoutY="82.0" prefHeight="30.0" prefWidth="66.0" promptText="ID">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </JFXTextField>
+            <JFXTextField layoutX="314.0" layoutY="82.0" prefHeight="30.0" prefWidth="254.0" promptText="Name with Initials">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </JFXTextField>
+            <JFXTextField layoutX="201.0" layoutY="149.0" prefHeight="30.0" prefWidth="368.0" promptText="E-mail Address">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </JFXTextField>
+            <JFXComboBox layoutX="606.0" layoutY="82.0" prefHeight="30.0" prefWidth="113.0" promptText="Gender" />
+            <Pane layoutX="789.0" layoutY="29.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: ffff;" />
+            <DatePicker layoutX="33.0" layoutY="149.0" prefHeight="30.0" prefWidth="137.0" promptText="Date Of Birth" style="-fx-background-color: #dcdde1;" />
+            <JFXTextField layoutX="143.0" layoutY="82.0" prefHeight="30.0" prefWidth="125.0" promptText="Barcode ID">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </JFXTextField>
+            <JFXTextField layoutX="606.0" layoutY="149.0" prefHeight="30.0" prefWidth="113.0" promptText="Contact">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </JFXTextField>
+            <JFXTextField layoutX="29.0" layoutY="208.0" prefHeight="30.0" prefWidth="540.0" promptText=" Address">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </JFXTextField>
+            <JFXButton buttonType="RAISED" layoutX="853.0" layoutY="238.0" style="-fx-background-color: #B3CAD6; -fx-background-radius: 25;" text="Browser">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </JFXButton>
+            <JFXComboBox layoutX="606.0" layoutY="208.0" prefHeight="30.0" prefWidth="113.0" promptText="Class" />
+            <SwingNode layoutX="170.0" layoutY="407.0" />
+            <CheckBox layoutX="422.0" layoutY="284.0" mnemonicParsing="false" style="-fx-background-color: fffff;" text="Sinhala">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </CheckBox>
+            <CheckBox layoutX="29.0" layoutY="284.0" mnemonicParsing="false" text="Mathematics">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </CheckBox>
+            <CheckBox layoutX="190.0" layoutY="284.0" mnemonicParsing="false" text="Science">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </CheckBox>
+            <CheckBox layoutX="306.0" layoutY="284.0" mnemonicParsing="false" text="English">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </CheckBox>
+            <CheckBox layoutX="538.0" layoutY="284.0" mnemonicParsing="false" style="-fx-background-color: fffff;" text="History">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </CheckBox>
+            <CheckBox layoutX="665.0" layoutY="284.0" mnemonicParsing="false" style="-fx-background-color: fffff;" text="Commerce">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </CheckBox>
+            <CheckBox layoutX="814.0" layoutY="284.0" mnemonicParsing="false" style="-fx-background-color: fffff;" text="IT">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </CheckBox>
+            <CheckBox layoutX="891.0" layoutY="284.0" mnemonicParsing="false" style="-fx-background-color: fffff;" text="Tamil">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </CheckBox>
+            <JFXButton buttonType="RAISED" layoutX="139.0" layoutY="360.0" prefHeight="40.0" prefWidth="109.0" style="-fx-background-color: #7AB6FF; -fx-background-radius: 15;" text="Register">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </JFXButton>
+            <JFXButton buttonType="RAISED" layoutX="299.0" layoutY="360.0" prefHeight="40.0" prefWidth="109.0" style="-fx-background-color: #7AB6FF; -fx-background-radius: 15;" text="Update">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </JFXButton>
+            <JFXButton buttonType="RAISED" layoutX="452.0" layoutY="360.0" prefHeight="40.0" prefWidth="109.0" style="-fx-background-color: #7AB6FF; -fx-background-radius: 15;" text="Delete">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </JFXButton>
+            <JFXButton buttonType="RAISED" layoutX="611.0" layoutY="360.0" prefHeight="40.0" prefWidth="109.0" style="-fx-background-color: #7AB6FF; -fx-background-radius: 15;" text="Print">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </JFXButton>
+            <JFXButton buttonType="RAISED" layoutX="760.0" layoutY="360.0" prefHeight="40.0" prefWidth="109.0" style="-fx-background-color: #7AB6FF; -fx-background-radius: 15;" text="Clear">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </JFXButton>
+            <TableView layoutX="39.0" layoutY="441.0" prefHeight="252.0" prefWidth="935.0">
+              <columns>
+                <TableColumn prefWidth="86.0" text="C1" />
+                <TableColumn prefWidth="104.0" text="C2" />
+                  <TableColumn prefWidth="222.0" text="C2" />
+                  <TableColumn prefWidth="208.0" text="C2" />
+                  <TableColumn prefWidth="166.0" text="C2" />
+                  <TableColumn prefWidth="148.0" text="C2" />
+              </columns>
+            </TableView>
+         </children></AnchorPane>
+    </children>
+</AnchorPane>

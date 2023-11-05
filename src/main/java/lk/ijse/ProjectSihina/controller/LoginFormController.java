@@ -53,7 +53,6 @@ public class LoginFormController {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
 
-
     }
 
     private void showInfoAlert(String title, String message) {
