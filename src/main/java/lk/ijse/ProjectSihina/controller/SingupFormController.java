@@ -9,7 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import lk.ijse.ProjectSihina.dto.SignupDto;
+import lk.ijse.ProjectSihina.dto.UserDto;
 import lk.ijse.ProjectSihina.model.SignUpModel;
 
 import java.io.IOException;
@@ -43,7 +43,7 @@ public class SingupFormController {
 
 
     @FXML
-    void btnRegisterOnAction(ActionEvent event)  {
+    void btnRegisterOnAction(ActionEvent event) throws IOException {
 
         String userId = null;
         try {
@@ -58,14 +58,20 @@ public class SingupFormController {
         String userName = txtUserName.getText();
         String password = txtPassword.getText();
 
-        var dto = new SignupDto(userId, firstName, lastName, Email, NIC, userName, password);
+        var dto = new UserDto(userId, firstName, lastName, Email, NIC, userName, password);
 
         try {
             boolean isRegister = signUpModel.userRegister(dto);
 
             if (isRegister) {
-                new Alert(Alert.AlertType.CONFIRMATION,"Now you registered!").show();
-                clearFields();
+                showInfoAlert( "Registration Successful !!!");
+
+                Parent rootNode = FXMLLoader.load(this.getClass().getResource("/view/Login_Form.fxml"));
+
+                Scene scene = new Scene(rootNode);
+                Stage stage = (Stage) this.rootNode.getScene().getWindow();
+
+                stage.setScene(scene);
             }
         } catch (SQLException e) {
            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
@@ -81,14 +87,6 @@ public class SingupFormController {
         txtPassword.setText("");
     }
 
-    /*public String getUserId() {
-        try {
-          return signUpModel.generateNextUserId();
-        } catch (SQLException e) {
-            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
-        }
-    }*/
-
     @FXML
     void btnSignInOnAction(ActionEvent event) throws IOException {
         Parent rootNode = FXMLLoader.load(this.getClass().getResource("/view/Login_Form.fxml"));
@@ -98,5 +96,13 @@ public class SingupFormController {
 
         stage.setScene(scene);
     }
+
+    private void showInfoAlert(String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
 
 }

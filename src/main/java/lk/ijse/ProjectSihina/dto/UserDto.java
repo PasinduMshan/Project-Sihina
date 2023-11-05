@@ -1,6 +1,6 @@
 package lk.ijse.ProjectSihina.dto;
 
-public class SignupDto {
+public class UserDto {
     private String userId;
     private String firstName;
     private String lastName;
@@ -9,15 +9,20 @@ public class SignupDto {
     private String userName;
     private String password;
 
-    public SignupDto() {
+    public UserDto() {
     }
 
-    public SignupDto(String userId, String firstName, String lastName, String email, String NIC, String userName, String password) {
+    public UserDto(String userId, String firstName, String lastName, String email, String NIC, String userName, String password) {
         this.userId = userId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.Email = email;
         this.NIC = NIC;
+        this.userName = userName;
+        this.password = password;
+    }
+
+    public UserDto(String userName, String password) {
         this.userName = userName;
         this.password = password;
     }

@@ -1,7 +1,7 @@
 package lk.ijse.ProjectSihina.model;
 
 import lk.ijse.ProjectSihina.db.DbConnection;
-import lk.ijse.ProjectSihina.dto.SignupDto;
+import lk.ijse.ProjectSihina.dto.UserDto;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -33,7 +33,7 @@ public class SignUpModel {
         }
     }
 
-    public boolean userRegister(SignupDto dto) throws SQLException {
+    public boolean userRegister(UserDto dto) throws SQLException {
         Connection connection = DbConnection.getInstance().getConnection();
 
         String sql = "INSERT INTO user VALUES(?,?,?,?,?,?,?)";
