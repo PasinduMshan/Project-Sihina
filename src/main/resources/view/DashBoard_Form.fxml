@@ -141,7 +141,7 @@
                   <Font name="System Bold" size="14.0" />
                </font>
             </Label>
-            <Label fx:id="lblTime" layoutX="753.0" layoutY="8.0" textFill="#757579">
+            <Label fx:id="lblTime" layoutX="874.0" layoutY="14.0" textFill="#757579">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>
