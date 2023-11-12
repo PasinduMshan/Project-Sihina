@@ -58,6 +58,12 @@ public class SingupFormController {
         String userName = txtUserName.getText();
         String password = txtPassword.getText();
 
+        if (userId.isEmpty() || firstName.isEmpty() || lastName.isEmpty() || Email.isEmpty() || NIC.isEmpty()
+                || userName.isEmpty() || password.isEmpty() ) {
+            new Alert(Alert.AlertType.ERROR,"Field Not Found!!!").showAndWait();
+            return;
+        }
+
         var dto = new UserDto(userId, firstName, lastName, Email, NIC, userName, password);
 
         try {

@@ -124,7 +124,7 @@
                </image>
             </ImageView>
          </children></AnchorPane>
-      <AnchorPane layoutX="261.0" layoutY="11.0" prefHeight="700.0" prefWidth="1011.0" style="-fx-background-color: #dcdde1; -fx-background-radius: 10;">
+      <AnchorPane fx:id="moveNode" layoutX="261.0" layoutY="11.0" prefHeight="700.0" prefWidth="1011.0" style="-fx-background-color: #dcdde1; -fx-background-radius: 10;">
          <children>
             <Label layoutX="14.0" layoutY="8.0" prefHeight="30.0" prefWidth="116.0" text="Welcme Back!">
                <font>
@@ -141,7 +141,7 @@
                   <Font name="System Bold" size="14.0" />
                </font>
             </Label>
-            <Label fx:id="lblTime" layoutX="874.0" layoutY="14.0" textFill="#757579">
+            <Label fx:id="lblTime" layoutX="880.0" layoutY="14.0" text="hh" textFill="#757579">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>

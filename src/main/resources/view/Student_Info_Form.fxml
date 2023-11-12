@@ -68,16 +68,25 @@
                     <font>
                         <Font name="System Bold" size="16.0" />
                     </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
                 </JFXButton>
                 <JFXButton buttonType="RAISED" layoutX="289.0" layoutY="629.0" onAction="#btnDeleteOnAction" prefHeight="40.0" prefWidth="101.0" style="-fx-background-color: #54a9ff; -fx-background-radius: 15;" text="Delete">
                     <font>
                         <Font name="System Bold" size="16.0" />
                     </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
                 </JFXButton>
                 <JFXButton buttonType="RAISED" layoutX="419.0" layoutY="629.0" onAction="#btnPrintOnAction" prefHeight="40.0" prefWidth="101.0" style="-fx-background-color: #54a9ff; -fx-background-radius: 15;" text="Print">
                     <font>
                         <Font name="System Bold" size="16.0" />
                     </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
                 </JFXButton>
                 <TableView layoutX="562.0" layoutY="56.0" prefHeight="639.0" prefWidth="695.0">
                     <columns>
@@ -107,11 +116,17 @@
                <effect>
                   <ColorAdjust contrast="-0.02" />
                </effect>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </JFXButton>
             <JFXButton buttonType="RAISED" layoutX="29.0" layoutY="124.0" onAction="#btnBrowseOnAction" prefHeight="23.0" prefWidth="60.0" style="-fx-background-color: #B3CAD6; -fx-background-radius: 25;" text="Browse">
                <font>
                   <Font size="12.0" />
                </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </JFXButton>
             <ImageView fitHeight="30.0" fitWidth="32.0" layoutX="1162.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
                <image>

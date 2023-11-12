@@ -24,7 +24,7 @@ public class LoginFormController {
 
     @FXML
     private JFXTextField txtUserName;
-    
+
     private LoginModel loginModel = new LoginModel();
 
     @FXML
@@ -33,12 +33,18 @@ public class LoginFormController {
         String userName = txtUserName.getText();
         String password = txtPassword.getText();
 
+        if (userName.isEmpty() || password.isEmpty()) {
+            new Alert(Alert.AlertType.ERROR,"Field Not Found!!!").showAndWait();
+            return;
+        }
+
         try {
             boolean isLoginSuccess = loginModel.checkCredentials(userName , password);
             if (isLoginSuccess) {
                 showInfoAlert("Login Successful !!!", "Welcome, " + userName);
 
                 Parent rootNode = FXMLLoader.load(this.getClass().getResource("/view/DashBoard_Form.fxml"));
+
 
                 Scene scene = new Scene(rootNode);
                 Stage stage = (Stage) this.rootNode.getScene().getWindow();

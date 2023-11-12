@@ -22,6 +22,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 
 public class DashBoardFormController {
+    @FXML
+    private AnchorPane moveNode;
 
     @FXML
     private AnchorPane rootNode;
@@ -52,6 +54,11 @@ public class DashBoardFormController {
 
     public void initialize() {
         setDateandTime();
+        getUserName();
+    }
+
+    private void getUserName() {
+
     }
 
     private void updateTime() {
@@ -80,13 +87,20 @@ public class DashBoardFormController {
     }
 
     @FXML
-    void btnClassOnAction(ActionEvent event) {
-
+    void btnClassOnAction(ActionEvent event) throws IOException {
+        Parent rootNode = FXMLLoader.load(this.getClass().getResource("/view/Class_Form.fxml"));
+        this.moveNode.getChildren().clear();
+        this.moveNode.getChildren().add(rootNode);
     }
 
     @FXML
-    void btnDashboardOnAction(ActionEvent event) {
+    void btnDashboardOnAction(ActionEvent event) throws IOException {
+        Parent rootNode = FXMLLoader.load(this.getClass().getResource("/view/DashBoard_Form.fxml"));
 
+        Scene scene = new Scene(rootNode);
+        Stage stage = (Stage) this.rootNode.getScene().getWindow();
+
+        stage.setScene(scene);
     }
 
     @FXML
@@ -131,8 +145,10 @@ public class DashBoardFormController {
     }
 
     @FXML
-    void btnTeacherOnAction(ActionEvent event) {
-
+    void btnTeacherOnAction(ActionEvent event) throws IOException {
+        Parent rootNode = FXMLLoader.load(this.getClass().getResource("/view/Teacher_Form.fxml"));
+        this.moveNode.getChildren().clear();
+        this.moveNode.getChildren().add(rootNode);
     }
 
 }
