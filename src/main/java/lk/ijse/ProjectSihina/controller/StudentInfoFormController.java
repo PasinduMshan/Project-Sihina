@@ -4,18 +4,39 @@ import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
-
-import java.io.IOException;
+import javafx.scene.layout.Pane;
 
 public class StudentInfoFormController {
 
     @FXML
+    private TableColumn<?, ?> colBarcodeId;
+
+    @FXML
+    private TableColumn<?, ?> colClass;
+
+    @FXML
+    private TableColumn<?, ?> colContact;
+
+    @FXML
+    private TableColumn<?, ?> colEmail;
+
+    @FXML
+    private TableColumn<?, ?> colID;
+
+    @FXML
+    private TableColumn<?, ?> colName;
+
+    @FXML
+    private Pane paneStudentImage;
+
+    @FXML
     private AnchorPane rootNode;
+
+    @FXML
+    private TableView<?> tblStudent;
 
     @FXML
     private JFXTextField txtAddress;
@@ -48,13 +69,8 @@ public class StudentInfoFormController {
     private JFXTextField txtSubject;
 
     @FXML
-    void btnBackOnAction(ActionEvent event) throws IOException {
-        Parent rootNode = FXMLLoader.load(this.getClass().getResource("/view/DashBoard_Form.fxml"));
+    void btnBackOnAction(ActionEvent event) {
 
-        Scene scene = new Scene(rootNode);
-        Stage stage = (Stage) this.rootNode.getScene().getWindow();
-
-        stage.setScene(scene);
     }
 
     @FXML

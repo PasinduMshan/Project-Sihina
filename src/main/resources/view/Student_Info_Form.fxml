@@ -39,7 +39,7 @@
                     </font>
                 </JFXTextField>
                 <JFXComboBox fx:id="txtGender" layoutX="363.0" layoutY="395.0" prefHeight="30.0" prefWidth="150.0" promptText="Gender" />
-                <Pane layoutX="112.0" layoutY="73.0" prefHeight="125.0" prefWidth="120.0" style="-fx-background-color: ffff;" />
+                <Pane fx:id="paneStudentImage" layoutX="112.0" layoutY="73.0" prefHeight="125.0" prefWidth="120.0" style="-fx-background-color: ffff;" />
                 <JFXTextField fx:id="txtBarcodeID" layoutX="278.0" layoutY="161.0" prefHeight="30.0" prefWidth="233.0" promptText="Barcode ID">
                     <font>
                         <Font size="14.0" />
@@ -88,14 +88,14 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
                 </JFXButton>
-                <TableView layoutX="562.0" layoutY="56.0" prefHeight="639.0" prefWidth="695.0">
+                <TableView fx:id="tblStudent" layoutX="562.0" layoutY="56.0" prefHeight="639.0" prefWidth="695.0">
                     <columns>
-                        <TableColumn prefWidth="86.0" text="ID" />
-                        <TableColumn prefWidth="104.0" text="Barcode ID" />
-                        <TableColumn prefWidth="156.0" text="Name" />
-                        <TableColumn prefWidth="101.0" text="Class" />
-                        <TableColumn prefWidth="127.0" text="E-Mail" />
-                        <TableColumn prefWidth="119.0" text=" Contact No" />
+                        <TableColumn fx:id="colID" prefWidth="86.0" text="ID" />
+                        <TableColumn fx:id="colBarcodeId" prefWidth="104.0" text="Barcode ID" />
+                        <TableColumn fx:id="colName" prefWidth="156.0" text="Name" />
+                        <TableColumn fx:id="colClass" prefWidth="101.0" text="Class" />
+                        <TableColumn fx:id="colEmail" prefWidth="127.0" text="E-Mail" />
+                        <TableColumn fx:id="colContact" prefWidth="119.0" text=" Contact No" />
                     </columns>
                 </TableView>
             <JFXTextField fx:id="txtSubject" layoutX="29.0" layoutY="469.0" prefHeight="30.0" prefWidth="294.0" promptText="Subject">
