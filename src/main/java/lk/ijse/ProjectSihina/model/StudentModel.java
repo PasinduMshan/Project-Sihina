@@ -4,10 +4,7 @@ import lk.ijse.ProjectSihina.db.DbConnection;
 import lk.ijse.ProjectSihina.dto.StudentDto;
 
 import java.io.*;
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class StudentModel {
     public static boolean saveStudent(StudentDto dto, File imageFile) throws SQLException {
@@ -24,9 +21,9 @@ public class StudentModel {
         pstm.setString(9, dto.getStu_Class());
         pstm.setString(10, dto.getSubject());
 
-        byte[] imageBytes = convertFileToBytes(imageFile);
+        Blob imageBlob = convertFileToBytes(imageFile);
 
-        pstm.setBytes(11, imageBytes);
+        pstm.setBlob(11, imageBlob);
 
         String user = "U001";
 
@@ -36,7 +33,7 @@ public class StudentModel {
 
     }
 
-    private static byte[] convertFileToBytes(File imageFile) {
+    private static Blob convertFileToBytes(File imageFile) {
         try {
             FileInputStream fileInputStream = new FileInputStream(imageFile);;
             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
@@ -47,11 +44,21 @@ public class StudentModel {
                 byteArrayOutputStream.write(buffer, 0 ,bytesRead);
             }
             fileInputStream.close();
-            return byteArrayOutputStream.toByteArray();
 
-        } catch (IOException e) {
+            byte[] byteArray = byteArrayOutputStream.toByteArray();
+            return new javax.sql.rowset.serial.SerialBlob(byteArray);
+
+        } catch (IOException | SQLException e) {
             throw new RuntimeException(e);
         }
 
+    }
+
+    public static boolean deleteStudent(String id) throws SQLException {
+        Connection connection = DbConnection.getInstance().getConnection();
+        PreparedStatement pstm = connection.prepareStatement("DELETE FROM Student WHERE Stu_id = ?");
+        pstm.setString(1, id);
+
+        return pstm.executeUpdate() > 0;
     }
 }

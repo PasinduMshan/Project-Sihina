@@ -23,7 +23,7 @@ create table Student (
     Contact varchar(10) not null,
     Class varchar(25) not null ,
     subjects varchar(50) not null,
-    image Blob,
+    image LONGBlob,
     user_id varchar(50),
     constraint foreign key (user_id) references user(user_id) on UPDATE cascade on DELETE cascade
 );
@@ -46,7 +46,7 @@ create table Payment (
 );
 
 create table Class (
-    class_id varchar(50),
+    class_id varchar(50) primary key ,
     Name varchar(50)
 );
 

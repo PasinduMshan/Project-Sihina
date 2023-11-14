@@ -20,7 +20,9 @@ import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.Window;
+import lk.ijse.ProjectSihina.dto.ClassDto;
 import lk.ijse.ProjectSihina.dto.StudentDto;
+import lk.ijse.ProjectSihina.model.ClassModel;
 import lk.ijse.ProjectSihina.model.StudentModel;
 
 import java.io.File;
@@ -28,6 +30,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.ResourceBundle;
 
 
@@ -70,7 +73,7 @@ public class StudentInfoFormController implements Initializable {
     private JFXTextField txtBarcodeID;
 
     @FXML
-    private JFXComboBox<?> cmbClass;
+    private JFXComboBox<String> cmbClass;
 
     @FXML
     private JFXTextField txtContact;
@@ -98,6 +101,23 @@ public class StudentInfoFormController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
        loadGender();
+       loadAllClass();
+    }
+
+    private void loadAllClass() {
+        ObservableList<String> obList = FXCollections.observableArrayList();
+
+        try {
+            List<ClassDto> nameList = ClassModel.getAllClass();
+
+            for (ClassDto dto : nameList) {
+                obList.add(dto.getClassName());
+            }
+
+            cmbClass.setItems(obList);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private void loadGender() {
@@ -138,7 +158,25 @@ public class StudentInfoFormController implements Initializable {
 
     @FXML
     void btnDeleteOnAction(ActionEvent event) {
+        String id = txtID.getText();
 
+        if (id.isEmpty()) {
+            new Alert(Alert.AlertType.ERROR,"Id Field Empty!!").show();
+            return;
+        }
+
+        try {
+            boolean isDeleted = StudentModel.deleteStudent(id);
+
+            if (isDeleted) {
+                new Alert(Alert.AlertType.INFORMATION,"Student Deleted Success!!!").showAndWait();
+            } else {
+                new Alert(Alert.AlertType.ERROR,"Deleted Failed!!!").showAndWait();
+            }
+
+        } catch (SQLException e) {
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        }
     }
 
     @FXML
@@ -171,7 +209,7 @@ public class StudentInfoFormController implements Initializable {
                 new Alert(Alert.AlertType.ERROR, "Save Failed!!1").showAndWait();
             }
         } catch (SQLException e) {
-            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+            throw new RuntimeException(e);
         }
     }
 
