@@ -18,9 +18,12 @@ create table Student (
     Name varchar(55) not null,
     Email varchar(50) not null,
     Address varchar(15) not null,
-    D_O_B varchar(20) not null,
+    D_O_B date not null,
     Gender varchar(20) not null,
     Contact varchar(10) not null,
+    Class varchar(25) not null ,
+    subjects varchar(50) not null,
+    image Blob,
     user_id varchar(50),
     constraint foreign key (user_id) references user(user_id) on UPDATE cascade on DELETE cascade
 );

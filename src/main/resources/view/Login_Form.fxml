@@ -42,13 +42,6 @@
          </children></AnchorPane>
       <AnchorPane layoutX="719.0" layoutY="-3.0" prefHeight="748.0" prefWidth="574.0">
          <children>
-            <Label layoutX="83.0" layoutY="42.0" text="Sign In">
-               <font>
-                  <Font name="System Bold" size="48.0" />
-               </font>
-            </Label>
-            <JFXTextField fx:id="txtUserName" layoutX="80.0" layoutY="160.0" prefHeight="33.0" prefWidth="375.0" promptText="User Name" />
-            <JFXTextField fx:id="txtPassword" layoutX="80.0" layoutY="276.0" prefHeight="33.0" prefWidth="375.0" promptText="Password" />
             <JFXButton alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" layoutX="238.0" layoutY="423.0" onAction="#btnLoginOnAction" prefHeight="33.0" prefWidth="82.0" ripplerFill="BLACK" style="-fx-background-color: #B1A8B9; -fx-background-radius: 10;" text="Login" textFill="#101072">
                <font>
                   <Font name="System Bold" size="18.0" />
@@ -57,6 +50,13 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </JFXButton>
+            <Label layoutX="83.0" layoutY="42.0" text="Sign In">
+               <font>
+                  <Font name="System Bold" size="48.0" />
+               </font>
+            </Label>
+            <JFXTextField fx:id="txtUserName" layoutX="80.0" layoutY="160.0" prefHeight="33.0" prefWidth="375.0" promptText="User Name" />
+            <JFXTextField fx:id="txtPassword" layoutX="80.0" layoutY="276.0" prefHeight="33.0" prefWidth="375.0" promptText="Password" />
             <Line endX="230.0" layoutX="279.0" layoutY="552.0" startX="-230.0" />
             <Label layoutX="133.0" layoutY="575.0" prefHeight="18.0" prefWidth="195.0" text="Don't have an account?">
                <font>

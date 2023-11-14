@@ -38,8 +38,11 @@
                         <Font size="14.0" />
                     </font>
                 </JFXTextField>
-                <JFXComboBox fx:id="txtGender" layoutX="363.0" layoutY="395.0" prefHeight="30.0" prefWidth="150.0" promptText="Gender" />
-                <Pane fx:id="paneStudentImage" layoutX="112.0" layoutY="73.0" prefHeight="125.0" prefWidth="120.0" style="-fx-background-color: ffff;" />
+                <JFXComboBox fx:id="cmbGender" layoutX="363.0" layoutY="395.0" prefHeight="30.0" prefWidth="150.0" promptText="Gender" />
+                <Pane fx:id="paneStudentImage" layoutX="112.0" layoutY="73.0" prefHeight="125.0" prefWidth="120.0" style="-fx-background-color: ffff;">
+               <children>
+                  <ImageView fx:id="imageStudent" fitHeight="125.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true" />
+               </children></Pane>
                 <JFXTextField fx:id="txtBarcodeID" layoutX="278.0" layoutY="161.0" prefHeight="30.0" prefWidth="233.0" promptText="Barcode ID">
                     <font>
                         <Font size="14.0" />
@@ -55,7 +58,7 @@
                         <Font size="14.0" />
                     </font>
                 </JFXTextField>
-                <JFXComboBox fx:id="txtClass" layoutX="363.0" layoutY="469.0" prefHeight="30.0" prefWidth="150.0" promptText="Class" />
+                <JFXComboBox fx:id="cmbClass" layoutX="363.0" layoutY="469.0" prefHeight="30.0" prefWidth="150.0" promptText="Class" />
                 <JFXButton buttonType="RAISED" layoutX="29.0" layoutY="629.0" onAction="#btnRegisterOnAction" prefHeight="40.0" prefWidth="101.0" style="-fx-background-color: #54a9ff; -fx-background-radius: 15;" text="Register">
                     <font>
                         <Font name="System Bold" size="16.0" />
