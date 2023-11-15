@@ -26,12 +26,12 @@
                 <Font size="14.0" />
             </font>
         </JFXTextField>
-        <TableView layoutX="78.0" layoutY="252.0" prefHeight="417.0" prefWidth="686.0">
+        <TableView fx:id="tblClass" layoutX="78.0" layoutY="252.0" prefHeight="417.0" prefWidth="686.0">
             <columns>
-                <TableColumn prefWidth="112.0" text="ID" />
-                <TableColumn prefWidth="156.0" text="Class" />
-                <TableColumn prefWidth="154.0" text="Student Count" />
-                <TableColumn prefWidth="262.0" text="Subjects" />
+                <TableColumn fx:id="colId" prefWidth="112.0" text="ID" />
+                <TableColumn fx:id="colClass" prefWidth="156.0" text="Class" />
+                <TableColumn fx:id="colStuCount" prefWidth="154.0" text="Student Count" />
+                <TableColumn fx:id="colSubject" prefWidth="262.0" text="Subjects" />
             </columns>
         </TableView>
         <JFXButton buttonType="RAISED" layoutX="817.0" layoutY="282.0" onAction="#btnAddOnAction" prefHeight="40.0" prefWidth="108.0" style="-fx-background-color: #54a9ff; -fx-background-radius: 15;" text="Add">

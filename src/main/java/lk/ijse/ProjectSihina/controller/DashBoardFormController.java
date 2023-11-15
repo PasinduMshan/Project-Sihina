@@ -68,7 +68,6 @@ public class DashBoardFormController {
     }
 
     private void setDateandTime() {
-
         Timeline timeline = new Timeline(new KeyFrame(Duration.millis(100), event -> updateTime()));
         timeline.setCycleCount(Animation.INDEFINITE);
         timeline.play();
@@ -82,8 +81,10 @@ public class DashBoardFormController {
         lblDate.setText(year + " : " + month + " : " + datee);
     }
     @FXML
-    void btnAttendanceOnAction(ActionEvent event) {
-
+    void btnAttendanceOnAction(ActionEvent event) throws IOException {
+        Parent rootNode = FXMLLoader.load(this.getClass().getResource("/view/Attendence_Form.fxml"));
+        this.moveNode.getChildren().clear();
+        this.moveNode.getChildren().add(rootNode);
     }
 
     @FXML
@@ -96,32 +97,32 @@ public class DashBoardFormController {
     @FXML
     void btnDashboardOnAction(ActionEvent event) throws IOException {
         Parent rootNode = FXMLLoader.load(this.getClass().getResource("/view/DashBoard_Form.fxml"));
-
         Scene scene = new Scene(rootNode);
         Stage stage = (Stage) this.rootNode.getScene().getWindow();
-
         stage.setScene(scene);
     }
 
     @FXML
-    void btnExamsOnAction(ActionEvent event) {
-
+    void btnExamsOnAction(ActionEvent event) throws IOException {
+        Parent rootNode = FXMLLoader.load(this.getClass().getResource("/view/Exam_Form.fxml"));
+        this.moveNode.getChildren().clear();
+        this.moveNode.getChildren().add(rootNode);
     }
 
     @FXML
     void btnLogOutOnAction(ActionEvent event) throws IOException {
         Parent rootNode = FXMLLoader.load(this.getClass().getResource("/view/Login_Form.fxml"));
-
         Scene scene = new Scene(rootNode);
         Stage stage = (Stage) this.rootNode.getScene().getWindow();
-
         stage.setScene(scene);
 
     }
 
     @FXML
-    void btnPaymentOnAction(ActionEvent event) {
-
+    void btnPaymentOnAction(ActionEvent event) throws IOException {
+        Parent rootNode = FXMLLoader.load(this.getClass().getResource("/view/Payment_Form.fxml"));
+        this.moveNode.getChildren().clear();
+        this.moveNode.getChildren().add(rootNode);
     }
 
     @FXML
@@ -132,16 +133,16 @@ public class DashBoardFormController {
     @FXML
     void btnStudentOnAction(ActionEvent event) throws IOException {
         Parent rootNode = FXMLLoader.load(this.getClass().getResource("/view/Student_Info_Form.fxml"));
-
         Scene scene = new Scene(rootNode);
         Stage stage = (Stage) this.rootNode.getScene().getWindow();
-
         stage.setScene(scene);
     }
 
     @FXML
-    void btnSubjectOnAction(ActionEvent event) {
-
+    void btnSubjectOnAction(ActionEvent event) throws IOException {
+        Parent rootNode = FXMLLoader.load(this.getClass().getResource("/view/Subjects_Form.fxml"));
+        this.moveNode.getChildren().clear();
+        this.moveNode.getChildren().add(rootNode);
     }
 
     @FXML

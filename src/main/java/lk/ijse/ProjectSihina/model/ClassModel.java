@@ -12,6 +12,8 @@ import java.util.List;
 
 public class ClassModel {
 
+
+
     public static boolean savaClass(ClassDto dto) throws SQLException {
         Connection connection = DbConnection.getInstance().getConnection();
 

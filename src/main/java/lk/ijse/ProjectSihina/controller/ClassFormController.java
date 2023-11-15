@@ -3,14 +3,17 @@ package lk.ijse.ProjectSihina.controller;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.layout.AnchorPane;
 import lk.ijse.ProjectSihina.dto.ClassDto;
 import lk.ijse.ProjectSihina.model.ClassModel;
 
+import java.net.URL;
 import java.sql.SQLException;
+import java.util.ResourceBundle;
 
-public class ClassFormController {
+public class ClassFormController implements Initializable {
 
     @FXML
     private AnchorPane moveNode;
@@ -20,6 +23,31 @@ public class ClassFormController {
 
     @FXML
     private JFXTextField txtID;
+
+   /* @FXML
+    private TableColumn<?, ?> colClass;
+
+    @FXML
+    private TableColumn<?, ?> colId;
+
+    @FXML
+    private TableColumn<?, ?> colStuCount;
+
+    @FXML
+    private TableColumn<?, ?> colSubject;
+
+    @FXML
+    private TableView<?> tblClass;
+
+*/
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+     //   setCellValueFactory();
+    }
+
+    private void setCellValueFactory() {
+
+    }
 
     @FXML
     void btnAddOnAction(ActionEvent event) {
@@ -144,4 +172,5 @@ public class ClassFormController {
         txtID.setText("");
         txtClassName.setText("");
     }
+
 }

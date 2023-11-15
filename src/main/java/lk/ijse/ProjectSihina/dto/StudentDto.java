@@ -22,4 +22,14 @@ public class StudentDto {
     String Stu_Class;
     String Subject;
     Image StudentImage;
+
+    public StudentDto(String ID, String barcodeID, String name, String stu_Class, String email,String contact) {
+        this.ID = ID;
+        BarcodeID = barcodeID;
+        Name = name;
+        Email = email;
+        Stu_Class = stu_Class;
+        this.contact = contact;
+    }
+
 }

@@ -13,6 +13,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -22,6 +23,7 @@ import javafx.stage.Stage;
 import javafx.stage.Window;
 import lk.ijse.ProjectSihina.dto.ClassDto;
 import lk.ijse.ProjectSihina.dto.StudentDto;
+import lk.ijse.ProjectSihina.dto.Tm.StudentTM;
 import lk.ijse.ProjectSihina.model.ClassModel;
 import lk.ijse.ProjectSihina.model.StudentModel;
 
@@ -64,7 +66,7 @@ public class StudentInfoFormController implements Initializable {
     private AnchorPane rootNode;
 
     @FXML
-    private TableView<?> tblStudent;
+    private TableView<StudentTM> tblStudent;
 
     @FXML
     private JFXTextField txtAddress;
@@ -102,6 +104,39 @@ public class StudentInfoFormController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
        loadGender();
        loadAllClass();
+       setCellValueFactory();
+       loadAllStudent();
+    }
+
+    private void loadAllStudent() {
+        ObservableList<StudentTM> obList = FXCollections.observableArrayList();
+
+        try {
+            List<StudentDto> dtoList = StudentModel.getAllStudent();
+
+            for (StudentDto dto : dtoList) {
+                obList.add(new StudentTM(
+                        dto.getID(),
+                        dto.getBarcodeID(),
+                        dto.getName(),
+                        dto.getStu_Class(),
+                        dto.getEmail(),
+                        dto.getContact()
+                ));
+            }
+            tblStudent.setItems(obList);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void setCellValueFactory() {
+        colID.setCellValueFactory(new PropertyValueFactory<>("ID"));
+        colBarcodeId.setCellValueFactory(new PropertyValueFactory<>("BarcodeId"));
+        colName.setCellValueFactory(new PropertyValueFactory<>("Name"));
+        colClass.setCellValueFactory(new PropertyValueFactory<>("Stu_Class"));
+        colEmail.setCellValueFactory(new PropertyValueFactory<>("Email"));
+        colContact.setCellValueFactory(new PropertyValueFactory<>("contact"));
     }
 
     private void loadAllClass() {
@@ -170,6 +205,8 @@ public class StudentInfoFormController implements Initializable {
 
             if (isDeleted) {
                 new Alert(Alert.AlertType.INFORMATION,"Student Deleted Success!!!").showAndWait();
+                loadAllStudent();
+                clearFields();
             } else {
                 new Alert(Alert.AlertType.ERROR,"Deleted Failed!!!").showAndWait();
             }
@@ -190,11 +227,11 @@ public class StudentInfoFormController implements Initializable {
         String BarcodeId = txtBarcodeID.getText();
         String Name = txtNameWithInitials.getText();
         String Address = txtAddress.getText();
-        String genderPromptTxt = cmbGender.getPromptText();
+        String genderPromptTxt = cmbGender.getValue();
         String email = txtEmail.getText();
         LocalDate dob = LocalDate.parse(txtDateOfBirth.getText());
         String contact = txtContact.getText();
-        String classPromptTxt = cmbClass.getPromptText();
+        String classPromptTxt = cmbClass.getValue();
         String subjects = txtSubject.getText();
         Image studentImage = imageStudent.getImage();
 
@@ -205,6 +242,8 @@ public class StudentInfoFormController implements Initializable {
 
             if (isSavedStudent) {
                 new Alert(Alert.AlertType.INFORMATION, "Student Save Success!!!").showAndWait();
+                loadAllStudent();
+                clearFields();
             } else {
                 new Alert(Alert.AlertType.ERROR, "Save Failed!!1").showAndWait();
             }
@@ -219,11 +258,11 @@ public class StudentInfoFormController implements Initializable {
         String Bar_id = txtBarcodeID.getText();
         String name = txtNameWithInitials.getText();
         String address = txtAddress.getText();
-        String gender = cmbGender.getPromptText();
+        String gender = cmbGender.getValue();
         String email = txtEmail.getText();
         LocalDate dob = LocalDate.parse(txtDateOfBirth.getText());
         String contact = txtContact.getText();
-        String stu_class = cmbClass.getPromptText();
+        String stu_class = cmbClass.getValue();
         String subject = txtSubject.getText();
         Image studentImage = imageStudent.getImage();
 
@@ -234,6 +273,8 @@ public class StudentInfoFormController implements Initializable {
 
             if (isUpdated) {
                 new Alert(Alert.AlertType.INFORMATION,"Update Success!!!").showAndWait();
+                loadAllStudent();
+                clearFields();
             } else {
                 new Alert(Alert.AlertType.ERROR,"Update Failed!!!").showAndWait();
             }
@@ -263,11 +304,11 @@ public class StudentInfoFormController implements Initializable {
                 txtBarcodeID.setText(dto.getBarcodeID());
                 txtNameWithInitials.setText(dto.getName());
                 txtAddress.setText(dto.getAddress());
-                cmbGender.setPromptText(dto.getGender());
+                cmbGender.setValue(dto.getGender());
                 txtEmail.setText(dto.getEmail());
                 txtDateOfBirth.setText(String.valueOf(dto.getDob()));
                 txtContact.setText(dto.getContact());
-                cmbClass.setPromptText(dto.getStu_Class());
+                cmbClass.setValue(dto.getStu_Class());
                 txtSubject.setText(dto.getSubject());
                 imageStudent.setImage(dto.getStudentImage());
             } else {
@@ -279,5 +320,17 @@ public class StudentInfoFormController implements Initializable {
         }
     }
 
-
+    private void clearFields() {
+        txtID.setText("");
+        txtBarcodeID.setText("");
+        txtNameWithInitials.setText("");
+        txtAddress.setText("");
+        cmbGender.setValue("");
+        txtEmail.setText("");
+        txtDateOfBirth.setText("");
+        txtContact.setText("");
+        cmbClass.setValue("");
+        txtSubject.setText("");
+        imageStudent.setImage(null);
+    }
 }

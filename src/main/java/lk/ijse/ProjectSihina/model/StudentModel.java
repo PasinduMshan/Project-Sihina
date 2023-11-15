@@ -7,6 +7,7 @@ import lk.ijse.ProjectSihina.dto.StudentDto;
 import java.io.*;
 import java.sql.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 public class StudentModel {
@@ -38,7 +39,7 @@ public class StudentModel {
 
     private static Blob convertFileToBytes(File imageFile) {
         try {
-            /*if (imageFile == null || !imageFile.exists()) {
+          /*  if (imageFile == null || !imageFile.exists()) {
                 return null;
             }*/
             FileInputStream fileInputStream = new FileInputStream(imageFile);;
@@ -131,5 +132,27 @@ public class StudentModel {
         }
 
         return dto;
+    }
+
+    public static List<StudentDto> getAllStudent() throws SQLException {
+        Connection connection = DbConnection.getInstance().getConnection();
+        PreparedStatement pstm = connection.prepareStatement("SELECT Stu_id,Barcode_id,Name,Class,Email,Contact FROM Student");
+        ResultSet resultSet = pstm.executeQuery();
+
+        ArrayList<StudentDto> dtoList = new ArrayList<>();
+
+        while (resultSet.next()) {
+            dtoList.add(
+                    new StudentDto(
+                            resultSet.getString(1),
+                            resultSet.getString(2),
+                            resultSet.getString(3),
+                            resultSet.getString(4),
+                            resultSet.getString(5),
+                            resultSet.getString(6)
+                    )
+            );
+        }
+        return dtoList;
     }
 }
