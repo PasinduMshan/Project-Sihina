@@ -215,7 +215,69 @@ public class StudentInfoFormController implements Initializable {
 
     @FXML
     void btnUpdateOnAction(ActionEvent event) {
+        String ID = txtID.getText();
+        String Bar_id = txtBarcodeID.getText();
+        String name = txtNameWithInitials.getText();
+        String address = txtAddress.getText();
+        String gender = cmbGender.getPromptText();
+        String email = txtEmail.getText();
+        LocalDate dob = LocalDate.parse(txtDateOfBirth.getText());
+        String contact = txtContact.getText();
+        String stu_class = cmbClass.getPromptText();
+        String subject = txtSubject.getText();
+        Image studentImage = imageStudent.getImage();
+
+        StudentDto dto = new StudentDto(ID, Bar_id, name, address, gender, email, dob, contact, stu_class, subject, studentImage);
+
+        try {
+            boolean isUpdated = StudentModel.updateStudent(dto , selectedImageFile);
+
+            if (isUpdated) {
+                new Alert(Alert.AlertType.INFORMATION,"Update Success!!!").showAndWait();
+            } else {
+                new Alert(Alert.AlertType.ERROR,"Update Failed!!!").showAndWait();
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @FXML
+    void BarcodeIdSearchOnAction(ActionEvent event) {
 
     }
+
+    @FXML
+    void IdSearchOnAction(ActionEvent event) {
+        String id = txtID.getText();
+
+        if (id.isEmpty()) {
+            new Alert(Alert.AlertType.ERROR,"ID is Empty!!!").showAndWait();
+            return;
+        }
+
+        try {
+            StudentDto dto = StudentModel.searchStudent(id);
+
+            if (dto != null) {
+                txtBarcodeID.setText(dto.getBarcodeID());
+                txtNameWithInitials.setText(dto.getName());
+                txtAddress.setText(dto.getAddress());
+                cmbGender.setPromptText(dto.getGender());
+                txtEmail.setText(dto.getEmail());
+                txtDateOfBirth.setText(String.valueOf(dto.getDob()));
+                txtContact.setText(dto.getContact());
+                cmbClass.setPromptText(dto.getStu_Class());
+                txtSubject.setText(dto.getSubject());
+                imageStudent.setImage(dto.getStudentImage());
+            } else {
+                new Alert(Alert.AlertType.ERROR,"Student Not Found!!!").showAndWait();
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 
 }

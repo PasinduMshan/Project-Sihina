@@ -23,7 +23,7 @@
                         <Font name="System Bold" size="30.0" />
                     </font>
                 </Label>
-                <JFXTextField fx:id="txtID" layoutX="278.0" layoutY="96.0" prefHeight="30.0" prefWidth="233.0" promptText="ID">
+                <JFXTextField fx:id="txtID" layoutX="278.0" layoutY="96.0" onAction="#IdSearchOnAction" prefHeight="30.0" prefWidth="233.0" promptText="ID">
                     <font>
                         <Font size="14.0" />
                     </font>
@@ -43,7 +43,7 @@
                <children>
                   <ImageView fx:id="imageStudent" fitHeight="125.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true" />
                </children></Pane>
-                <JFXTextField fx:id="txtBarcodeID" layoutX="278.0" layoutY="161.0" prefHeight="30.0" prefWidth="233.0" promptText="Barcode ID">
+                <JFXTextField fx:id="txtBarcodeID" layoutX="278.0" layoutY="161.0" onAction="#BarcodeIdSearchOnAction" prefHeight="30.0" prefWidth="233.0" promptText="Barcode ID">
                     <font>
                         <Font size="14.0" />
                     </font>

@@ -1,10 +1,13 @@
 package lk.ijse.ProjectSihina.model;
 
+import javafx.scene.image.Image;
 import lk.ijse.ProjectSihina.db.DbConnection;
 import lk.ijse.ProjectSihina.dto.StudentDto;
 
 import java.io.*;
 import java.sql.*;
+import java.time.LocalDate;
+import java.util.List;
 
 public class StudentModel {
     public static boolean saveStudent(StudentDto dto, File imageFile) throws SQLException {
@@ -35,6 +38,9 @@ public class StudentModel {
 
     private static Blob convertFileToBytes(File imageFile) {
         try {
+            /*if (imageFile == null || !imageFile.exists()) {
+                return null;
+            }*/
             FileInputStream fileInputStream = new FileInputStream(imageFile);;
             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
             byte[] buffer = new byte[4096];
@@ -51,7 +57,20 @@ public class StudentModel {
         } catch (IOException | SQLException e) {
             throw new RuntimeException(e);
         }
+    }
 
+    private static Image convertBlobToImage(Blob blob) {
+
+        try {
+            if (blob == null) {
+                return null;
+            }
+            try (InputStream binaryStream = blob.getBinaryStream()) {
+                return new Image(binaryStream);
+            }
+        } catch (SQLException | IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public static boolean deleteStudent(String id) throws SQLException {
@@ -60,5 +79,57 @@ public class StudentModel {
         pstm.setString(1, id);
 
         return pstm.executeUpdate() > 0;
+    }
+
+    public static boolean updateStudent(StudentDto dto, File imageFile) throws SQLException {
+        Connection connection = DbConnection.getInstance().getConnection();
+        PreparedStatement pstm = connection.prepareStatement("UPDATE Student SET Barcode_id = ?, Name = ?, " +
+                "Email = ?, Address = ?, D_O_B = ?, Gender = ?, Contact = ?, Class = ?, " +
+                "subjects = ?, image = ? WHERE Stu_id = ?");
+
+        pstm.setString(1, dto.getBarcodeID());
+        pstm.setString(2, dto.getName());
+        pstm.setString(3, dto.getEmail());
+        pstm.setString(4, dto.getAddress());
+        pstm.setDate(5, Date.valueOf(dto.getDob()));
+        pstm.setString(6, dto.getGender());
+        pstm.setString(7, dto.getContact());
+        pstm.setString(8, dto.getStu_Class());
+        pstm.setString(9, dto.getSubject());
+
+        Blob imageBlob = convertFileToBytes(imageFile);
+
+        pstm.setBlob(10, imageBlob);
+        pstm.setString(11, dto.getID());
+
+        return pstm.executeUpdate() > 0;
+    }
+
+    public static StudentDto searchStudent(String Id) throws SQLException {
+        Connection connection = DbConnection.getInstance().getConnection();
+        PreparedStatement pstm = connection.prepareStatement("SELECT * FROM Student WHERE Stu_id = ?");
+        pstm.setString(1, Id);
+
+        ResultSet resultSet = pstm.executeQuery();
+
+        StudentDto dto = null;
+
+        if (resultSet.next()) {
+            String id = resultSet.getString(1);
+            String Bar_id = resultSet.getString(2);
+            String name = resultSet.getString(3);
+            String email = resultSet.getString(4);
+            String address = resultSet.getString(5);
+            LocalDate dob = resultSet.getDate(6).toLocalDate();
+            String gender = resultSet.getString(7);
+            String contact = resultSet.getString(8);
+            String stu_class = resultSet.getString(9);
+            String subject = resultSet.getString(10);
+            Image image = convertBlobToImage(resultSet.getBlob(11));
+
+            dto = new StudentDto(id,Bar_id,name,address,gender,email,dob,contact,stu_class,subject,image);
+        }
+
+        return dto;
     }
 }
