@@ -248,7 +248,7 @@ public class StudentInfoFormController implements Initializable {
                 new Alert(Alert.AlertType.ERROR, "Save Failed!!1").showAndWait();
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
         }
     }
 
@@ -279,7 +279,7 @@ public class StudentInfoFormController implements Initializable {
                 new Alert(Alert.AlertType.ERROR,"Update Failed!!!").showAndWait();
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
         }
     }
 

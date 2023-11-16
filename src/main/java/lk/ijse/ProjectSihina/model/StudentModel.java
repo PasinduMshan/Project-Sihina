@@ -42,7 +42,7 @@ public class StudentModel {
           /*  if (imageFile == null || !imageFile.exists()) {
                 return null;
             }*/
-            FileInputStream fileInputStream = new FileInputStream(imageFile);;
+            FileInputStream fileInputStream = new FileInputStream(imageFile);
             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
             byte[] buffer = new byte[4096];
             int bytesRead;

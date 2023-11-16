@@ -90,11 +90,13 @@ create table Exam (
 );
 
 create table Teacher (
-    Teacher_id varchar(50),
+    Teacher_id varchar(50) primary key ,
     Name varchar(50),
     Address varchar(60),
     Email varchar(50),
-    Contact varchar(12)
+    Contact varchar(12),
+    Subject varchar(55),
+    image LONGBLOB
 );
 
 create table Schedule (

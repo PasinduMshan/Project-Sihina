@@ -5,6 +5,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
 import lk.ijse.ProjectSihina.dto.ClassDto;
 import lk.ijse.ProjectSihina.model.ClassModel;
@@ -24,7 +26,7 @@ public class ClassFormController implements Initializable {
     @FXML
     private JFXTextField txtID;
 
-   /* @FXML
+    @FXML
     private TableColumn<?, ?> colClass;
 
     @FXML
@@ -39,7 +41,6 @@ public class ClassFormController implements Initializable {
     @FXML
     private TableView<?> tblClass;
 
-*/
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
      //   setCellValueFactory();
