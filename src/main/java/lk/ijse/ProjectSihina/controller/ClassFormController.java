@@ -1,18 +1,23 @@
 package lk.ijse.ProjectSihina.controller;
 
 import com.jfoenix.controls.JFXTextField;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import lk.ijse.ProjectSihina.dto.ClassDto;
+import lk.ijse.ProjectSihina.dto.Tm.ClassTm;
 import lk.ijse.ProjectSihina.model.ClassModel;
 
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class ClassFormController implements Initializable {
@@ -39,15 +44,37 @@ public class ClassFormController implements Initializable {
     private TableColumn<?, ?> colSubject;
 
     @FXML
-    private TableView<?> tblClass;
+    private TableView<ClassTm> tblClass;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-     //   setCellValueFactory();
+       setCellValueFactory();
+       loadAllClass();
+    }
+
+    private void loadAllClass() {
+        ObservableList<ClassTm> obList = FXCollections.observableArrayList();
+
+        try {
+            List<ClassDto> dtoList = ClassModel.getAllClass();
+
+            for (ClassDto dto : dtoList) {
+                obList.add(new ClassTm(
+                        dto.getClassID(),
+                        dto.getClassName(),
+                        dto.getStu_Count()
+                ));
+            }
+            tblClass.setItems(obList);
+        } catch (SQLException e) {
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        }
     }
 
     private void setCellValueFactory() {
-
+        colId.setCellValueFactory(new PropertyValueFactory<>("Id"));
+        colClass.setCellValueFactory(new PropertyValueFactory<>("StuClass"));
+        colStuCount.setCellValueFactory(new PropertyValueFactory<>("Student_count"));
     }
 
     @FXML

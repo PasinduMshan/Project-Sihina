@@ -11,5 +11,5 @@ public class ClassTm {
     String Id;
     String StuClass;
     String Student_count;
-    String Subject;
+    //String Subject;
 }

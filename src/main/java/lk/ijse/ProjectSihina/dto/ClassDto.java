@@ -10,4 +10,10 @@ import lombok.*;
 public class ClassDto {
     String ClassID;
     String ClassName;
+    String Stu_Count;
+
+    public ClassDto(String classID, String className) {
+        ClassID = classID;
+        ClassName = className;
+    }
 }
