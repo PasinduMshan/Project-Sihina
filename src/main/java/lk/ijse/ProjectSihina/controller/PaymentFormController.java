@@ -139,7 +139,7 @@ public class PaymentFormController implements Initializable {
             for (SubjectDto dto : SubList) {
                 obList.add(dto.getSubject());
             }
-            cmbClass.setItems(obList);
+            cmbSubject.setItems(obList);
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
@@ -251,6 +251,7 @@ public class PaymentFormController implements Initializable {
                 new Alert(Alert.AlertType.INFORMATION,"Payment Success!!").showAndWait();
                 loadAllPayment();
                 clearField();
+                generatePayId();
             } else {
                 new Alert(Alert.AlertType.ERROR, "Payment Failed!!!").showAndWait();
             }
@@ -269,6 +270,7 @@ public class PaymentFormController implements Initializable {
                 new Alert(Alert.AlertType.INFORMATION,"Delete Success!!!").showAndWait();
                 clearField();
                 loadAllPayment();
+                generatePayId();
             } else {
                 new Alert(Alert.AlertType.ERROR,"Delete Failed!!!").showAndWait();
             }
@@ -330,6 +332,7 @@ public class PaymentFormController implements Initializable {
                 new Alert(Alert.AlertType.INFORMATION,"Update Success!!!").showAndWait();
                 clearField();
                 loadAllPayment();
+                generatePayId();
             } else {
                 new Alert(Alert.AlertType.ERROR,"Update Failed!!!").showAndWait();
             }

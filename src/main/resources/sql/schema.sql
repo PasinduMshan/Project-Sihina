@@ -60,16 +60,16 @@ create table Registration (
 
 create table Attendance (
     Att_id varchar(50) primary key ,
-    Description varchar(50),
-    date DATE,
-    Stu_id varchar(50),
+    Stu_id varchar(50) not null ,
+    Bar_id varchar(50) not null ,
+    Stu_Class varchar(50) not null ,
+    Subject VARCHAR(50) not null ,
+    Month VARCHAR(50)not null ,
+    date DATE not null ,
+    time TIME not null ,
+    type VARCHAR(50) not null ,
     constraint foreign key (Stu_id) references Student (Stu_id) on UPDATE cascade on DELETE cascade
 );
-
-
-
-
-
 
 
 create table Subject (
@@ -91,12 +91,13 @@ create table SubjectDetail (
 );
 
 create table Exam (
-    Exam_id varchar(50),
-    date DATE,
-    time TIME,
-    Description varchar(55),
-    class_id varchar(50),
-    Sub_id varchar(50),
+    Exam_id varchar(50) primary key ,
+    date DATE not null ,
+    Start_time TIME not null ,
+    End_time TIME not null ,
+    Description varchar(55) not null ,
+    class_id varchar(50) not null ,
+    Sub_id varchar(50) not null ,
     constraint foreign key (Sub_id) references Subject (Sub_id) on UPDATE cascade on DELETE cascade,
     constraint foreign key (class_id) references Class (class_id) on UPDATE cascade on DELETE cascade
 );
