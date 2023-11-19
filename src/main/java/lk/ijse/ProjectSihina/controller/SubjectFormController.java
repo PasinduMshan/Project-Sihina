@@ -1,39 +1,30 @@
 package lk.ijse.ProjectSihina.controller;
 
-import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import lk.ijse.ProjectSihina.dto.SubjectDto;
+import lk.ijse.ProjectSihina.dto.Tm.SubjectTm;
+import lk.ijse.ProjectSihina.model.SubjectModel;
 
-public class SubjectFormController {
+import java.net.URL;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.ResourceBundle;
 
-    @FXML
-    private JFXCheckBox checkBoxAL;
-
-    @FXML
-    private JFXCheckBox checkBoxGrade10;
-
-    @FXML
-    private JFXCheckBox checkBoxGrade11;
-
-    @FXML
-    private JFXCheckBox checkBoxGrade6;
+public class SubjectFormController implements Initializable {
 
     @FXML
-    private JFXCheckBox checkBoxGrade7;
-
-    @FXML
-    private JFXCheckBox checkBoxGrade8;
-
-    @FXML
-    private JFXCheckBox checkBoxGrade9;
-
-    @FXML
-    private JFXComboBox<?> cmbTeacherName;
+    private JFXComboBox<String> cmbTeacherName;
 
     @FXML
     private TableColumn<?, ?> colClass;
@@ -51,7 +42,10 @@ public class SubjectFormController {
     private AnchorPane moveNode;
 
     @FXML
-    private TableView<?> tblSubject;
+    private TableView<SubjectTm> tblSubject;
+
+    @FXML
+    private JFXTextField txtAvailableClass;
 
     @FXML
     private JFXTextField txtID;
@@ -59,13 +53,94 @@ public class SubjectFormController {
     @FXML
     private JFXTextField txtSubject;
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        setCellValueFactory();
+        loadAllSubject();
+    }
+
+    private void loadAllSubject() {
+        ObservableList<SubjectTm> obList = FXCollections.observableArrayList();
+
+        try {
+            List<SubjectDto> dtoList = SubjectModel.getAllDetails();
+
+            for (SubjectDto dto : dtoList) {
+                obList.add(new SubjectTm(
+                        dto.getId(),
+                        dto.getSubject(),
+                        dto.getTeacherName(),
+                        dto.getAvailableClass()
+                ));
+            }
+            tblSubject.setItems(obList);
+        } catch (SQLException e) {
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        }
+    }
+
+    private void setCellValueFactory() {
+        colId.setCellValueFactory(new PropertyValueFactory<>("Sub_Id"));
+        colSubject.setCellValueFactory(new PropertyValueFactory<>("Subject"));
+        colTeacherName.setCellValueFactory(new PropertyValueFactory<>("TeacherName"));
+        colClass.setCellValueFactory(new PropertyValueFactory<>("AvailableClass"));
+    }
+
     @FXML
     void btnAddOnAction(ActionEvent event) {
+        String id = txtID.getText();
+        String subject = txtSubject.getText();
+        String AvailableClass = txtAvailableClass.getText();
+        String teacherName = (String) cmbTeacherName.getValue();
+
+        if (id.isEmpty() || subject.isEmpty() || AvailableClass.isEmpty() || teacherName.isEmpty()) {
+            new Alert(Alert.AlertType.ERROR,"Empty Fields Found!!!").show();
+            return;
+        }
+
+        SubjectDto dto = new SubjectDto(id, subject, AvailableClass, teacherName);
+
+        try {
+            boolean isSaved = SubjectModel.saveSubject(dto);
+
+            if (isSaved) {
+                new Alert(Alert.AlertType.INFORMATION,"Subject Save Success!!!").showAndWait();
+                loadAllSubject();
+                clearField();
+            } else {
+                new Alert(Alert.AlertType.ERROR,"Subject Save Failed!!!").showAndWait();
+            }
+
+        } catch (SQLException e) {
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        }
+
 
     }
 
     @FXML
     void btnDeleteOnAction(ActionEvent event) {
+        String id = txtID.getText();
+
+        if (id.isEmpty()) {
+            new Alert(Alert.AlertType.ERROR,"Field Not Found!!!").show();
+            return;
+        }
+
+        try {
+            boolean isDeleted = SubjectModel.deleteSubject(id);
+
+            if (isDeleted) {
+                new Alert(Alert.AlertType.INFORMATION,"Subject Delete Success!!!").showAndWait();
+                loadAllSubject();
+                clearField();
+            } else {
+                new Alert(Alert.AlertType.ERROR,"Delete Failed!!!").showAndWait();
+            }
+
+        } catch (SQLException e) {
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        }
 
     }
 
@@ -76,7 +151,64 @@ public class SubjectFormController {
 
     @FXML
     void btnUpdateOnAction(ActionEvent event) {
+        String id = txtID.getText();
+        String subject = txtSubject.getText();
+        String AvailableClass = txtAvailableClass.getText();
+        String teacherName = cmbTeacherName.getValue();
 
+        if (id.isEmpty() || subject.isEmpty() || AvailableClass.isEmpty() || teacherName.isEmpty()) {
+            new Alert(Alert.AlertType.ERROR,"Empty Fields Found!!!").show();
+            return;
+        }
+
+        SubjectDto dto = new SubjectDto(id, subject, AvailableClass, teacherName);
+
+        try {
+            boolean isUpdated = SubjectModel.updateSubject(dto);
+
+            if (isUpdated) {
+                new Alert(Alert.AlertType.INFORMATION,"Update Subject Success!!!").showAndWait();
+                loadAllSubject();
+                clearField();
+            } else {
+                new Alert(Alert.AlertType.ERROR,"Update Failed!!!").showAndWait();
+            }
+        } catch (SQLException e) {
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        }
+
+    }
+
+    public void SearchIdOnAction(ActionEvent actionEvent) {
+        String id = txtID.getText();
+
+        if (id.isEmpty()) {
+            new Alert(Alert.AlertType.ERROR,"Id Field Not Found!!!").show();
+            return;
+        }
+
+        try {
+            SubjectDto dto = SubjectModel.searchSubject(id);
+
+            if (dto != null) {
+                txtID.setText(dto.getId());
+                txtSubject.setText(dto.getSubject());
+                txtAvailableClass.setText(dto.getAvailableClass());
+                cmbTeacherName.setValue(dto.getTeacherName());
+            } else {
+                new Alert(Alert.AlertType.ERROR,"Can't Find Subject!!!").showAndWait();
+            }
+        } catch (SQLException e) {
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        }
+
+    }
+
+    private void clearField() {
+        txtID.setText("");
+        txtSubject.setText("");
+        txtAvailableClass.setText("");
+        cmbTeacherName.setValue("");
     }
 
 }

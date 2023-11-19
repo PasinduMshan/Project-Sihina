@@ -32,4 +32,10 @@ public class StudentDto {
         this.contact = contact;
     }
 
+    public StudentDto(String ID, String name, String Subjects) {
+        this.ID = ID;
+        this.Name = name;
+        this.Subject = Subjects;
+    }
+
 }

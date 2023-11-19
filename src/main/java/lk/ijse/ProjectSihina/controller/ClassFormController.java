@@ -95,6 +95,7 @@ public class ClassFormController implements Initializable {
             if (isSavedClass) {
                 new Alert(Alert.AlertType.INFORMATION,"Class saved success!!!").showAndWait();
                 clearFields();
+                loadAllClass();
             } else {
                 new Alert(Alert.AlertType.ERROR,"Save Failed!!!").showAndWait();
             }
@@ -119,6 +120,7 @@ public class ClassFormController implements Initializable {
             if (isDeleteClass) {
                 new Alert(Alert.AlertType.INFORMATION,"Delete Class Success!!!").showAndWait();
                 clearFields();
+                loadAllClass();
             } else {
                 new Alert(Alert.AlertType.ERROR,"Delete Failed!!!").showAndWait();
             }
@@ -149,6 +151,7 @@ public class ClassFormController implements Initializable {
             if (isUpdated) {
                 new Alert(Alert.AlertType.INFORMATION,"Update Success!!!").showAndWait();
                 clearFields();
+                loadAllClass();
             } else {
                new Alert(Alert.AlertType.ERROR,"Updated Failed!!").showAndWait();
             }

@@ -50,7 +50,7 @@ public class DashBoardFormController {
     private Label lblUserName;
     private Object year;
     private Object month;
-    private Object datee;
+    private Object DATE;
 
     public void initialize() {
         setDateandTime();
@@ -72,13 +72,13 @@ public class DashBoardFormController {
         timeline.setCycleCount(Animation.INDEFINITE);
         timeline.play();
 
-        DateFormat date = new SimpleDateFormat("yyy:MM:dd");
+        DateFormat dateFormat = new SimpleDateFormat("yyy:MM:dd");
         Calendar cal = Calendar.getInstance();
 
         year = cal.get(Calendar.YEAR);
         month = cal.get(Calendar.MONTH);
-        datee = cal.get(Calendar.DATE);
-        lblDate.setText(year + " : " + month + " : " + datee);
+        DATE = cal.get(Calendar.DATE);
+        lblDate.setText(year + " : " + month + " : " + DATE);
     }
     @FXML
     void btnAttendanceOnAction(ActionEvent event) throws IOException {
