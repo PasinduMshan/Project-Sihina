@@ -18,12 +18,12 @@
                 <Font name="System Bold" size="30.0" />
             </font>
         </Label>
-        <JFXTextField fx:id="txtID" layoutX="30.0" layoutY="112.0" prefHeight="30.0" prefWidth="132.0" promptText="ID">
+        <JFXTextField fx:id="txtID" layoutX="30.0" layoutY="112.0" prefHeight="30.0" prefWidth="142.0" promptText="ID">
             <font>
                 <Font size="14.0" />
             </font>
         </JFXTextField>
-        <JFXTextField fx:id="txtDate" layoutX="30.0" layoutY="197.0" prefHeight="30.0" prefWidth="132.0" promptText="Date">
+        <JFXTextField fx:id="txtDate" layoutX="30.0" layoutY="197.0" prefHeight="30.0" prefWidth="142.0" promptText="Date (YYYY-MM-DD)">
             <font>
                 <Font size="14.0" />
             </font>
@@ -35,7 +35,6 @@
                 <TableColumn fx:id="colClass" prefWidth="121.0" text="Class " />
                 <TableColumn fx:id="colSubject" prefWidth="119.0" text="Subject" />
             <TableColumn fx:id="colDate" prefWidth="111.0" text="Date" />
-            <TableColumn fx:id="colDate1" prefWidth="111.0" text="Date" />
             </columns>
         </TableView>
         <JFXButton buttonType="RAISED" layoutX="868.0" layoutY="258.0" onAction="#btnAddOnAction" prefHeight="40.0" prefWidth="108.0" style="-fx-background-color: #54a9ff; -fx-background-radius: 15;" text="Add">

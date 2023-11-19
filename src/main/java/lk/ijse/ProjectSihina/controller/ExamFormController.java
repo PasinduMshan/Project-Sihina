@@ -3,28 +3,44 @@ package lk.ijse.ProjectSihina.controller;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import lk.ijse.ProjectSihina.dto.ClassDto;
+import lk.ijse.ProjectSihina.dto.ExamDto;
+import lk.ijse.ProjectSihina.dto.SubjectDto;
+import lk.ijse.ProjectSihina.dto.Tm.ExamTm;
+import lk.ijse.ProjectSihina.model.ClassModel;
+import lk.ijse.ProjectSihina.model.ExamModel;
+import lk.ijse.ProjectSihina.model.PaymentModel;
 
-public class ExamFormController {
+import java.net.URL;
+import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.List;
+import java.util.ResourceBundle;
+
+public class ExamFormController implements Initializable {
 
     @FXML
-    private JFXComboBox<?> cmbClass;
+    private JFXComboBox<String> cmbClass;
 
     @FXML
-    private JFXComboBox<?> cmbSubject;
+    private JFXComboBox<String> cmbSubject;
 
     @FXML
     private TableColumn<?, ?> colClass;
 
     @FXML
     private TableColumn<?, ?> colDate;
-
-    @FXML
-    private TableColumn<?, ?> colDate1;
 
     @FXML
     private TableColumn<?, ?> colDescription;
@@ -39,7 +55,7 @@ public class ExamFormController {
     private AnchorPane moveNode;
 
     @FXML
-    private TableView<?> tblExam;
+    private TableView<ExamTm> tblExam;
 
     @FXML
     private JFXTextField txtDate;
@@ -56,14 +72,114 @@ public class ExamFormController {
     @FXML
     private JFXTextField txtStartTime;
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        setCellValueFactory();
+        loadAllExamToTable();
+        loadAllClass();
+        loadAllSubject();
+    }
+
+    private void loadAllSubject() {
+        ObservableList<String> obList = FXCollections.observableArrayList();
+        try {
+            List<SubjectDto> SubList = PaymentModel.getAllSubject();
+
+            for (SubjectDto dto : SubList) {
+                obList.add(dto.getSubject());
+            }
+            cmbSubject.setItems(obList);
+        } catch (SQLException e) {
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        }
+    }
+
+    private void loadAllClass() {
+        ObservableList<String> obList = FXCollections.observableArrayList();
+
+        try {
+            List<ClassDto> nameList = ClassModel.getAllClass();
+
+            for (ClassDto dto : nameList) {
+                obList.add(dto.getClassName());
+            }
+            cmbClass.setItems(obList);
+        } catch (SQLException e) {
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        }
+    }
+
+    private void loadAllExamToTable() {
+        ObservableList<ExamTm> obList = FXCollections.observableArrayList();
+
+        try {
+            List<ExamDto> dtoList = ExamModel.getAllExam();
+
+            for (ExamDto dto : dtoList) {
+                obList.add(new ExamTm(
+                        dto.getExamId(),
+                        dto.getDescription(),
+                        dto.getClassName(),
+                        dto.getSubject(),
+                        String.valueOf(dto.getDate())
+                ));
+            }
+            tblExam.setItems(obList);
+        } catch (SQLException e) {
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        }
+    }
+
+    private void setCellValueFactory() {
+        colId.setCellValueFactory(new PropertyValueFactory<>("ExamId"));
+        colDescription.setCellValueFactory(new PropertyValueFactory<>("Description"));
+        colClass.setCellValueFactory(new PropertyValueFactory<>("className"));
+        colSubject.setCellValueFactory(new PropertyValueFactory<>("Subject"));
+        colDate.setCellValueFactory(new PropertyValueFactory<>("Date"));
+    }
+
     @FXML
     void btnAddOnAction(ActionEvent event) {
+        String examId = txtID.getText();
+        String className = cmbClass.getValue();
+        String subject = cmbSubject.getValue();
+        String description = txtDescription.getText();
+        LocalDate date = LocalDate.parse(txtDate.getText());
+        LocalTime Start_time = LocalTime.parse(txtStartTime.getText());
+        LocalTime End_time = LocalTime.parse(txtEndTime.getText());
+
+        ExamDto dto = new ExamDto(examId, className, subject, description, date, Start_time, End_time);
+
+        try {
+            boolean isSaved = ExamModel.AddExam(dto);
+
+            if (isSaved) {
+                new Alert(Alert.AlertType.INFORMATION,"Exam Save Success!!!").showAndWait();
+            } else {
+                new Alert(Alert.AlertType.ERROR,"Exam Save Failed!!!").showAndWait();
+            }
+
+        } catch (SQLException e) {
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        }
+
 
     }
 
     @FXML
     void btnDeleteOnAction(ActionEvent event) {
+        String examId = txtID.getText();
 
+        try {
+            boolean isDeleted = ExamModel.deleteExam(examId);
+            if (isDeleted) {
+                new Alert(Alert.AlertType.INFORMATION,"Delete Success!!!").showAndWait();
+            } else {
+                new Alert(Alert.AlertType.ERROR,"Delete Failed!!!").showAndWait();
+            }
+        } catch (SQLException e) {
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        }
     }
 
     @FXML
@@ -78,12 +194,52 @@ public class ExamFormController {
 
     @FXML
     void btnSearchOnAction(ActionEvent event) {
+        String ExamId = txtID.getText();
+
+        try {
+            ExamDto dto = ExamModel.SearchExam(ExamId);
+            if (dto != null) {
+                txtID.setText(dto.getExamId());
+                cmbClass.setValue(dto.getClassName());
+                cmbSubject.setValue(dto.getSubject());
+                txtDescription.setText(dto.getDescription());
+                txtDate.setText(String.valueOf(dto.getDate()));
+                txtStartTime.setText(String.valueOf(dto.getStartTime()));
+                txtEndTime.setText(String.valueOf(dto.getEndTime()));
+            } else {
+                new Alert(Alert.AlertType.ERROR,"Exam Not Found!!!").showAndWait();
+            }
+        } catch (SQLException e) {
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        }
+
 
     }
 
     @FXML
     void btnUpdateOnAction(ActionEvent event) {
+        String examId = txtID.getText();
+        String className = cmbClass.getValue();
+        String subject = cmbSubject.getValue();
+        String description = txtDescription.getText();
+        LocalDate date = LocalDate.parse(txtDate.getText());
+        LocalTime Start_time = LocalTime.parse(txtStartTime.getText());
+        LocalTime End_time = LocalTime.parse(txtEndTime.getText());
+
+        ExamDto dto = new ExamDto(examId, className, subject, description, date, Start_time, End_time);
+
+        try {
+            boolean isUpdated = ExamModel.updateExam(dto);
+            if (isUpdated) {
+                new Alert(Alert.AlertType.INFORMATION,"Update Success!!!").showAndWait();
+            } else {
+                new Alert(Alert.AlertType.ERROR,"Update Failed!!!").showAndWait();
+            }
+        } catch (SQLException e) {
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        }
 
     }
+
 
 }
