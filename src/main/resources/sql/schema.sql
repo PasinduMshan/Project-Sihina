@@ -47,12 +47,13 @@ create table Class (
 );
 
 create table Registration (
-    Stu_id varchar(50),
-    Pay_id varchar(50),
-    class_id varchar(50),
-    Reg_Fee varchar(50),
-    date DATE,
-    time TIME,
+    Stu_id varchar(50) not null ,
+    Pay_id varchar(50) not null ,
+    Stu_Name varchar(50) not null ,
+    class_id varchar(50) not null ,
+    Reg_Fee double(10,2) not null ,
+    date DATE not null ,
+    time TIME not null ,
     constraint foreign key (Stu_id) references Student (Stu_id) on UPDATE cascade on DELETE cascade,
     constraint foreign key (Pay_id) references Payment (Pay_id) on UPDATE cascade on DELETE cascade,
     constraint foreign key (class_id) references Class (class_id) on UPDATE cascade on DELETE cascade

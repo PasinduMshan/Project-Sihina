@@ -163,8 +163,8 @@ public class PaymentFormController implements Initializable {
 
     private void loadAllType() {
         ObservableList<String> obList = FXCollections.observableArrayList();
-        obList.add("Registration Fee");
-        obList.add("Monthly Fee");
+        obList.add("RegistrationFee");
+        obList.add("MonthlyFee");
         cmbType.setItems(obList);
     }
 
@@ -292,7 +292,7 @@ public class PaymentFormController implements Initializable {
             PaymentDto dto = PaymentModel.SearchPaymontId(PayId);
             if (dto != null) {
                 txtPayId.setText(dto.getPayID());
-                txtID.setText(dto.getStuName());
+                txtID.setText(dto.getStuID());
                 txtBarcodeId.setText(dto.getBarId());
                 txtName.setText(dto.getStuName());
                 cmbType.setValue(dto.getType());

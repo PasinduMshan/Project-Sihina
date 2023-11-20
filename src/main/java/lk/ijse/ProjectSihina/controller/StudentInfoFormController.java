@@ -98,7 +98,9 @@ public class StudentInfoFormController implements Initializable {
     @FXML
     private JFXTextField txtSubject;
 
-    private File selectedImageFile;
+    public static File selectedImageFile;
+
+    public static StudentDto StuDto;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -126,7 +128,7 @@ public class StudentInfoFormController implements Initializable {
             }
             tblStudent.setItems(obList);
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+           new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
     }
 
@@ -148,10 +150,9 @@ public class StudentInfoFormController implements Initializable {
             for (ClassDto dto : nameList) {
                 obList.add(dto.getClassName());
             }
-
             cmbClass.setItems(obList);
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
     }
 
@@ -221,8 +222,7 @@ public class StudentInfoFormController implements Initializable {
 
     }
 
-    @FXML
-    void btnRegisterOnAction(ActionEvent event) {
+    public void getAllValueInField(){
         String Id = txtID.getText();
         String BarcodeId = txtBarcodeID.getText();
         String Name = txtNameWithInitials.getText();
@@ -235,21 +235,16 @@ public class StudentInfoFormController implements Initializable {
         String subjects = txtSubject.getText();
         Image studentImage = imageStudent.getImage();
 
-        StudentDto dto = new StudentDto(Id, BarcodeId, Name, Address, genderPromptTxt, email, dob, contact, classPromptTxt, subjects, studentImage);
+        StuDto = new StudentDto(Id, BarcodeId, Name, Address, genderPromptTxt, email, dob, contact, classPromptTxt, subjects, studentImage);
+    }
 
-        try {
-            boolean isSavedStudent = StudentModel.saveStudent(dto , selectedImageFile);
-
-            if (isSavedStudent) {
-                new Alert(Alert.AlertType.INFORMATION, "Student Save Success!!!").showAndWait();
-                loadAllStudent();
-                clearFields();
-            } else {
-                new Alert(Alert.AlertType.ERROR, "Save Failed!!1").showAndWait();
-            }
-        } catch (SQLException e) {
-            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
-        }
+    @FXML
+    void btnRegisterOnAction(ActionEvent event) throws IOException {
+        Parent rootNode = FXMLLoader.load(this.getClass().getResource("/view/Registration_Pay_Form.fxml"));
+        Scene scene = new Scene(rootNode);
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.show();
     }
 
     @FXML
@@ -296,7 +291,6 @@ public class StudentInfoFormController implements Initializable {
             new Alert(Alert.AlertType.ERROR,"ID is Empty!!!").showAndWait();
             return;
         }
-
         try {
             StudentDto dto = StudentModel.searchStudent(id);
 
@@ -314,9 +308,8 @@ public class StudentInfoFormController implements Initializable {
             } else {
                 new Alert(Alert.AlertType.ERROR,"Student Not Found!!!").showAndWait();
             }
-
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
     }
 
