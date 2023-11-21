@@ -105,20 +105,21 @@ create table Exam (
 
 create table Teacher (
     Teacher_id varchar(50) primary key ,
-    Name varchar(50),
-    Address varchar(60),
-    Email varchar(50),
-    Contact varchar(12),
-    Subject varchar(55),
+    Name varchar(50) not null ,
+    Address varchar(60) not null ,
+    Email varchar(50) not null ,
+    Contact varchar(12) not null ,
+    Subject varchar(55) not null ,
     image LONGBLOB
 );
 
 create table Schedule (
-    class_id varchar(50),
-    Sub_id varchar(50),
-    Teacher_id varchar(50),
-    date DATE,
-    time TIME,
+    class_id varchar(50) primary key ,
+    Sub_id varchar(50) not null ,
+    Teacher_id varchar(50) not null ,
+    Class_day varchar(50) not null ,
+    Start_Time TIME not null ,
+    End_Time TIME not null ,
     constraint foreign key (class_id) references Class (class_id) on UPDATE cascade on DELETE cascade,
     constraint foreign key (Sub_id) references Subject (Sub_id) on UPDATE cascade on DELETE cascade,
     constraint foreign key (Teacher_id) references Teacher (Teacher_id) on UPDATE cascade on DELETE cascade

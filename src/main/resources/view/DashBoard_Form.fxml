@@ -128,20 +128,20 @@
          <children>
             <Label layoutX="14.0" layoutY="8.0" prefHeight="30.0" prefWidth="116.0" text="Welcme Back!">
                <font>
-                  <Font size="14.0" />
+                  <Font name="System Bold" size="14.0" />
                </font>
             </Label>
-            <Label fx:id="lblUserName" layoutX="14.0" layoutY="29.0">
+            <Label fx:id="lblUserName" layoutX="13.0" layoutY="36.0">
                <font>
                   <Font name="System Bold" size="36.0" />
                </font>
             </Label>
-            <Label fx:id="lblDate" layoutX="888.0" layoutY="42.0" textFill="#757579">
+            <Label fx:id="lblDate" layoutX="880.0" layoutY="51.0" textFill="#3b3b40">
                <font>
-                  <Font name="System Bold" size="14.0" />
+                  <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <Label fx:id="lblTime" layoutX="880.0" layoutY="14.0" text="hh" textFill="#757579">
+            <Label fx:id="lblTime" layoutX="880.0" layoutY="14.0" textFill="#01011e">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>
@@ -153,7 +153,7 @@
                         <Font name="System Bold" size="20.0" />
                      </font>
                   </Label>
-                  <Label fx:id="lblStudentCount" layoutX="97.0" layoutY="55.0" prefHeight="44.0" prefWidth="81.0" text="700">
+                  <Label fx:id="lblStudentCount" layoutX="97.0" layoutY="55.0" prefHeight="44.0" prefWidth="81.0">
                      <font>
                         <Font name="System Bold" size="36.0" />
                      </font>
@@ -172,7 +172,7 @@
                         <Font name="System Bold" size="20.0" />
                      </font>
                   </Label>
-                  <Label fx:id="lblTeachersCount" layoutX="97.0" layoutY="55.0" prefHeight="44.0" prefWidth="81.0" text="700">
+                  <Label fx:id="lblTeachersCount" layoutX="97.0" layoutY="55.0" prefHeight="44.0" prefWidth="81.0">
                      <font>
                         <Font name="System Bold" size="36.0" />
                      </font>
@@ -191,7 +191,7 @@
                         <Font name="System Bold" size="20.0" />
                      </font>
                   </Label>
-                  <Label fx:id="lblSubjectsCount" layoutX="97.0" layoutY="55.0" prefHeight="44.0" prefWidth="81.0" text="700">
+                  <Label fx:id="lblSubjectsCount" layoutX="97.0" layoutY="55.0" prefHeight="44.0" prefWidth="81.0">
                      <font>
                         <Font name="System Bold" size="36.0" />
                      </font>
@@ -210,7 +210,7 @@
                         <Font name="System Bold" size="20.0" />
                      </font>
                   </Label>
-                  <Label fx:id="lblTodayIncome" layoutX="97.0" layoutY="55.0" prefHeight="44.0" prefWidth="137.0" text="10000">
+                  <Label fx:id="lblTodayIncome" layoutX="97.0" layoutY="55.0" prefHeight="44.0" prefWidth="137.0">
                      <font>
                         <Font name="System Bold" size="36.0" />
                      </font>
@@ -232,8 +232,9 @@
                   <TableView layoutX="21.0" layoutY="59.0" prefHeight="358.0" prefWidth="416.0" style="-fx-background-color: #D8E8F0;">
                     <columns>
                       <TableColumn prefWidth="75.0" text="Time" />
-                      <TableColumn prefWidth="266.0" text="Program" />
-                        <TableColumn prefWidth="73.0" text="Action" />
+                      <TableColumn text="Grade" />
+                        <TableColumn prefWidth="176.0" text="Subject" />
+                        <TableColumn prefWidth="84.0" text="Type" />
                     </columns>
                   </TableView>
                </children>

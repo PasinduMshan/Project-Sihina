@@ -8,12 +8,15 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import lk.ijse.ProjectSihina.model.DashBordModel;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -55,6 +58,47 @@ public class DashBoardFormController {
     public void initialize() {
         setDateandTime();
         getUserName();
+        setTodayIncome();
+        getStudentCount();
+        getTeacherCount();
+        getSubjectCount();
+    }
+
+    private void getSubjectCount() {
+        try {
+            String subjectCount = DashBordModel.getSubjectCount();
+            lblSubjectsCount.setText(subjectCount);
+        } catch (SQLException e) {
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        }
+    }
+
+    private void getTeacherCount() {
+        try {
+            String teacherCount = DashBordModel.getTeacherCount();
+            lblTeachersCount.setText(teacherCount);
+        } catch (SQLException e) {
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        }
+    }
+
+    private void getStudentCount() {
+        try {
+            String studentCount = DashBordModel.getStudentCount();
+            lblStudentCount.setText(studentCount);
+        } catch (SQLException e) {
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        }
+    }
+
+    private void setTodayIncome() {
+        LocalDate date = LocalDate.parse(lblDate.getText());
+        try {
+            String sumOfAmount = DashBordModel.getSumOfAmount(date);
+            lblTodayIncome.setText(sumOfAmount);
+        } catch (SQLException e) {
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        }
     }
 
     private void getUserName() {
@@ -72,13 +116,13 @@ public class DashBoardFormController {
         timeline.setCycleCount(Animation.INDEFINITE);
         timeline.play();
 
-        DateFormat dateFormat = new SimpleDateFormat("yyy:MM:dd");
+        DateFormat dateFormat = new SimpleDateFormat("yyy-MM-dd");
         Calendar cal = Calendar.getInstance();
 
         year = cal.get(Calendar.YEAR);
         month = cal.get(Calendar.MONTH);
         DATE = cal.get(Calendar.DATE);
-        lblDate.setText(year + " : " + month + " : " + DATE);
+        lblDate.setText(year + "-" + month + "-" + DATE);
     }
     @FXML
     void btnAttendanceOnAction(ActionEvent event) throws IOException {
@@ -126,8 +170,10 @@ public class DashBoardFormController {
     }
 
     @FXML
-    void btnScheduleOnAction(ActionEvent event) {
-
+    void btnScheduleOnAction(ActionEvent event) throws IOException {
+        Parent rootNode = FXMLLoader.load(this.getClass().getResource("/view/Schedule.fxml"));
+        this.moveNode.getChildren().clear();
+        this.moveNode.getChildren().add(rootNode);
     }
 
     @FXML

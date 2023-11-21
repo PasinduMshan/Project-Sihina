@@ -16,4 +16,8 @@ public class TeacherDto {
     String Subjects;
     String ContactNo;
     Image imageTeacher;
+
+    public TeacherDto(String name) {
+        Name = name;
+    }
 }

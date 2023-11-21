@@ -14,6 +14,7 @@ import lk.ijse.ProjectSihina.model.SignUpModel;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.regex.Pattern;
 
 public class SingupFormController {
 
@@ -49,8 +50,9 @@ public class SingupFormController {
         try {
             userId = signUpModel.generateNextUserId();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
         }
+
         String firstName = txtFirstName.getText();
         String lastName = txtLastName.getText();
         String Email = txtEmail.getText();
@@ -58,30 +60,71 @@ public class SingupFormController {
         String userName = txtUserName.getText();
         String password = txtPassword.getText();
 
-        if (userId.isEmpty() || firstName.isEmpty() || lastName.isEmpty() || Email.isEmpty() || NIC.isEmpty()
-                || userName.isEmpty() || password.isEmpty() ) {
-            new Alert(Alert.AlertType.ERROR,"Field Not Found!!!").showAndWait();
-            return;
-        }
+        boolean isValidateUserDetail = validateUserDetail(firstName, lastName, Email, NIC, userName, password);
 
-        var dto = new UserDto(userId, firstName, lastName, Email, NIC, userName, password);
+        if (isValidateUserDetail) {
+            var dto = new UserDto(userId, firstName, lastName, Email, NIC, userName, password);
 
-        try {
-            boolean isRegister = signUpModel.userRegister(dto);
+            try {
+                boolean isRegister = signUpModel.userRegister(dto);
 
-            if (isRegister) {
-                showInfoAlert( "Registration Successful !!!");
+                if (isRegister) {
+                    clearFields();
+                    showInfoAlert("Registration Successful !!!");
 
-                Parent rootNode = FXMLLoader.load(this.getClass().getResource("/view/Login_Form.fxml"));
+                    Parent rootNode = FXMLLoader.load(this.getClass().getResource("/view/Login_Form.fxml"));
 
-                Scene scene = new Scene(rootNode);
-                Stage stage = (Stage) this.rootNode.getScene().getWindow();
+                    Scene scene = new Scene(rootNode);
+                    Stage stage = (Stage) this.rootNode.getScene().getWindow();
 
-                stage.setScene(scene);
+                    stage.setScene(scene);
+                } else {
+                    new Alert(Alert.AlertType.ERROR, "Register Not Success!!!").show();
+                }
+            } catch (SQLException e) {
+                new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
             }
-        } catch (SQLException e) {
-           new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
         }
+    }
+
+    private boolean validateUserDetail(String firstName, String lastName, String email, String NIC, String userName, String password) {
+
+        boolean matches = Pattern.matches("[A-Za-z]+", firstName);
+        if (!matches) {
+            new Alert(Alert.AlertType.ERROR,"Invalid First Name!!").show();
+            return false;
+        }
+
+        boolean matches1 = Pattern.matches("[A-Za-z]+", lastName);
+        if (!matches1) {
+            new Alert(Alert.AlertType.ERROR,"Invalid Last Name!!").show();
+            return false;
+        }
+
+        boolean matches2 = Pattern.matches("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", email);
+        if (!matches2) {
+            new Alert(Alert.AlertType.ERROR,"Invalid Email!!").show();
+            return false;
+        }
+
+        boolean matches3 = Pattern.matches("^(?:19|20)?\\d{2}[0-9]{10}|[0-9]{9}[x|X|v|V]$", NIC);
+        if (!matches3) {
+            new Alert(Alert.AlertType.ERROR,"Invalid NIC!!").show();
+            return false;
+        }
+
+        boolean matches4 = Pattern.matches("[a-zA-Z0-9]{5,13}", userName);
+        if (!matches4) {
+            new Alert(Alert.AlertType.ERROR,"Invalid UserName!!").show();
+            return false;
+        }
+
+        boolean matches5 = Pattern.matches("^[a-zA-Z0-9]{4,}$", password);
+        if (!matches5) {
+            new Alert(Alert.AlertType.ERROR,"Invalid Password!!  Only include(A-Z,a-z,0-9) & (at least 4 characters)").show();
+            return false;
+        }
+        return true;
     }
 
     private void clearFields() {
