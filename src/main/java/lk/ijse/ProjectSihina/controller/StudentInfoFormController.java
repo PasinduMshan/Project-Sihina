@@ -20,14 +20,20 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import lk.ijse.ProjectSihina.db.DbConnection;
 import lk.ijse.ProjectSihina.dto.ClassDto;
 import lk.ijse.ProjectSihina.dto.StudentDto;
 import lk.ijse.ProjectSihina.dto.Tm.StudentTM;
 import lk.ijse.ProjectSihina.model.ClassModel;
 import lk.ijse.ProjectSihina.model.StudentModel;
+import net.sf.jasperreports.engine.*;
+import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
+import net.sf.jasperreports.view.JasperViewer;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -228,7 +234,23 @@ public class StudentInfoFormController implements Initializable {
     }
 
     @FXML
-    void btnPrintOnAction(ActionEvent event) {
+    void btnPrintOnAction(ActionEvent event)  {
+        try {
+            InputStream resourceAsStream = getClass().getResourceAsStream("../report/AllStudentList.jrxml");
+            JasperDesign load = null;
+            load = JRXmlLoader.load(resourceAsStream);
+            JasperReport compileReport = JasperCompileManager.compileReport(load);
+            JasperPrint jasperPrint = JasperFillManager.fillReport(
+                    compileReport,
+                    null,
+                    DbConnection.getInstance().getConnection()
+            );
+            JasperViewer.viewReport(jasperPrint, false);
+        } catch (JRException e) {
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        } catch (SQLException e) {
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        }
 
     }
 

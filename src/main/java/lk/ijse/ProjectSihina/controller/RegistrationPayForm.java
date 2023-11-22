@@ -25,7 +25,12 @@ import lk.ijse.ProjectSihina.dto.Tm.RegisterTm;
 import lk.ijse.ProjectSihina.model.ClassModel;
 import lk.ijse.ProjectSihina.model.PaymentModel;
 import lk.ijse.ProjectSihina.model.RegisterStudentModel;
+import net.sf.jasperreports.engine.*;
+import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
+import net.sf.jasperreports.view.JasperViewer;
 
+import java.io.InputStream;
 import java.net.URL;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
@@ -33,6 +38,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.regex.Pattern;
@@ -286,7 +292,34 @@ public class RegistrationPayForm implements Initializable {
 
     @FXML
     void btnPrintOnAction(ActionEvent event) {
+        try {
+            String payId = txtPayId.getText();
+            String StuId = txtID.getText();
+            String type = lblType.getText();
+            String StuClass = cmbClass.getValue();
+            String month = cmbMonth.getValue();
+            String Amount = txtAmount.getText();
 
+            HashMap hashMap = new HashMap();
+            hashMap.put("Pay_id", payId);
+            hashMap.put("Stu_id" , StuId);
+            hashMap.put("Type", type);
+            hashMap.put("Stu_Class", StuClass);
+            hashMap.put("Pay_Month", month);
+            hashMap.put("Amount", Amount);
+
+            InputStream resourceAsStream = getClass().getResourceAsStream("../report/Payment.jrxml");
+            JasperDesign load = JRXmlLoader.load(resourceAsStream);
+            JasperReport compileReport = JasperCompileManager.compileReport(load);
+            JasperPrint jasperPrint = JasperFillManager.fillReport(
+                    compileReport,
+                    hashMap,
+                    new JREmptyDataSource()
+            );
+            JasperViewer.viewReport(jasperPrint, false);
+        } catch (JRException e) {
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        }
     }
 
     @FXML
