@@ -35,6 +35,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.regex.Pattern;
 
 public class RegistrationPayForm implements Initializable {
 
@@ -209,6 +210,11 @@ public class RegistrationPayForm implements Initializable {
     void btnDeleteOnAction(ActionEvent event) {
         String PayId = txtPayId.getText();
 
+        if (PayId.isEmpty()) {
+            new Alert(Alert.AlertType.ERROR,"Id Field is Empty!!").show();
+            return;
+        }
+
         try {
             boolean isDeleted = PaymentModel.DeletePayment(PayId);
             if (isDeleted) {
@@ -240,12 +246,25 @@ public class RegistrationPayForm implements Initializable {
         String StuId = txtID.getText();
         String StuName = txtName.getText();
         String StuClass = cmbClass.getValue();
+
         double PayAmount = Double.parseDouble(txtAmount.getText());
+        String isAmount = String.valueOf(PayAmount);
+        boolean matches = Pattern.matches("[0-9.]+", isAmount);
+        if (!matches) {
+            new Alert(Alert.AlertType.ERROR,"Invalid Amount!!").show();
+            return;
+        }
+
         String month = cmbMonth.getValue();
         LocalDate date = LocalDate.parse(lblDate.getText());
         LocalTime time = LocalTime.parse(lblTime.getText());
         String type = lblType.getText();
         String BarId = studentDto.getBarcodeID();
+
+        if (PayId.isEmpty() || StuId.isEmpty()|| type.isEmpty() || StuClass.isEmpty() || month.isEmpty() || BarId.isEmpty()) {
+            new Alert(Alert.AlertType.ERROR, "Some Fields Are Empty!!!").showAndWait();
+            return;
+        }
 
         PaymentDto PayDto = new PaymentDto(PayId,StuId,BarId,StuName,type,StuClass,month,Subject,PayAmount,date,time);
 

@@ -78,6 +78,16 @@ public class ExamFormController implements Initializable {
         loadAllExamToTable();
         loadAllClass();
         loadAllSubject();
+        generateExam();
+    }
+
+    private void generateExam() {
+        try {
+            String id = ExamModel.generateExamId();
+            txtID.setText(id);
+        } catch (SQLException e) {
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        }
     }
 
     private void loadAllSubject() {
@@ -155,6 +165,7 @@ public class ExamFormController implements Initializable {
 
             if (isSaved) {
                 new Alert(Alert.AlertType.INFORMATION,"Exam Save Success!!!").showAndWait();
+                clearField();
             } else {
                 new Alert(Alert.AlertType.ERROR,"Exam Save Failed!!!").showAndWait();
             }
@@ -174,6 +185,7 @@ public class ExamFormController implements Initializable {
             boolean isDeleted = ExamModel.deleteExam(examId);
             if (isDeleted) {
                 new Alert(Alert.AlertType.INFORMATION,"Delete Success!!!").showAndWait();
+                clearField();
             } else {
                 new Alert(Alert.AlertType.ERROR,"Delete Failed!!!").showAndWait();
             }
@@ -212,8 +224,6 @@ public class ExamFormController implements Initializable {
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
-
-
     }
 
     @FXML
@@ -232,14 +242,23 @@ public class ExamFormController implements Initializable {
             boolean isUpdated = ExamModel.updateExam(dto);
             if (isUpdated) {
                 new Alert(Alert.AlertType.INFORMATION,"Update Success!!!").showAndWait();
+                clearField();
             } else {
                 new Alert(Alert.AlertType.ERROR,"Update Failed!!!").showAndWait();
             }
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
-
     }
-
+    private void clearField() {
+        txtID.setText("");
+        cmbClass.setValue("");
+        cmbSubject.setValue("");
+        txtDescription.setText("");
+        txtDate.setText("");
+        txtStartTime.setText("");
+        txtEndTime.setText("");
+        generateExam();
+    }
 
 }

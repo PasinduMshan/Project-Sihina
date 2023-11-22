@@ -13,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import lk.ijse.ProjectSihina.User.UserConnection;
 import lk.ijse.ProjectSihina.model.DashBordModel;
 
 import java.io.IOException;
@@ -57,11 +58,12 @@ public class DashBoardFormController {
 
     public void initialize() {
         setDateandTime();
-        getUserName();
+        setUserName();
         setTodayIncome();
         getStudentCount();
         getTeacherCount();
         getSubjectCount();
+
     }
 
     private void getSubjectCount() {
@@ -101,8 +103,9 @@ public class DashBoardFormController {
         }
     }
 
-    private void getUserName() {
-
+    private void setUserName() {
+        String userName = UserConnection.getInstance().getUserName();
+        lblUserName.setText(userName);
     }
 
     private void updateTime() {

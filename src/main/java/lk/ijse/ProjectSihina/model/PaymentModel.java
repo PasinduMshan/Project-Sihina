@@ -174,4 +174,15 @@ public class PaymentModel {
         }
         return dtoList;
     }
+
+    public static String getAllAttendant(String stu_id, String subject, String month, String stu_class) throws SQLException {
+        Connection connection = DbConnection.getInstance().getConnection();
+        PreparedStatement pstm = connection.prepareStatement("SELECT COUNT(Att_id) FROM Attendance WHERE Stu_id = ? AND Subject = ? AND Month = ? AND Stu_Class = ?");
+        ResultSet resultSet = pstm.executeQuery();
+        String Count = null;
+        if (resultSet.next()) {
+             Count = resultSet.getString(1);
+        }
+        return Count;
+    }
 }

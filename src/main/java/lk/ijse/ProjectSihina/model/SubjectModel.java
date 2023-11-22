@@ -76,4 +76,25 @@ public class SubjectModel {
         }
         return dtoList;
     }
+
+    public static String generateSubId() throws SQLException {
+        Connection connection = DbConnection.getInstance().getConnection();
+        PreparedStatement pstm = connection.prepareStatement("SELECT Sub_id FROM Subject ORDER BY Sub_id DESC LIMIT 1");
+        ResultSet resultSet = pstm.executeQuery();
+
+        if (resultSet.next()) {
+            return splitSubId(resultSet.getString(1));
+        }
+        return "SUB001";
+    }
+
+    private static String splitSubId(String CurrentSubId) {
+        if (CurrentSubId != null) {
+            int id = Integer.parseInt(CurrentSubId.substring(1));
+            id++;
+            return "SUB" + String.format("%03d", id);
+        } else {
+            return "SUB001";
+        }
+    }
 }

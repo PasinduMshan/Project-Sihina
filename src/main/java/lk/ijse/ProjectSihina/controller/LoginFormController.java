@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import lk.ijse.ProjectSihina.User.UserConnection;
 import lk.ijse.ProjectSihina.dto.UserDto;
 import lk.ijse.ProjectSihina.model.LoginModel;
 
@@ -43,16 +44,14 @@ public class LoginFormController {
             if (isLoginSuccess) {
                 showInfoAlert("Login Successful !!!", "Welcome, " + userName);
 
+                UserConnection.getInstance().setUserName(userName);
+                UserConnection.getInstance().setPassword(password);
+
                 Parent rootNode = FXMLLoader.load(this.getClass().getResource("/view/DashBoard_Form.fxml"));
-
-
                 Scene scene = new Scene(rootNode);
                 Stage stage = (Stage) this.rootNode.getScene().getWindow();
-
                 stage.setScene(scene);
-
             } else {
-
                showErrorAlert("Login Failed!!!","Invalid User Name or Password ");
             }
         } catch (SQLException e) {

@@ -123,16 +123,12 @@
             <Font size="14.0" />
          </font>
       </JFXTextField>
-      <Label layoutX="795.0" layoutY="182.0" text="Attendant Count :">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Label>
       <JFXButton buttonType="RAISED" layoutX="851.0" layoutY="268.0" onAction="#SearchStudentDetailOnAction" prefHeight="24.0" prefWidth="139.0" style="-fx-background-color: #007AF3; -fx-background-radius: 10;" text="     Student Detail" textFill="#fffdfd" />
       <ImageView fitHeight="24.0" fitWidth="26.0" layoutX="856.0" layoutY="269.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Images/search.png" />
          </image>
       </ImageView>
+      <JFXButton layoutX="776.0" layoutY="178.0" onAction="#AttendantCountOnAction" style="-fx-background-color: #B3CAD6; -fx-background-radius: 10;" text="Attendant Count :" />
     </children>
 </AnchorPane>

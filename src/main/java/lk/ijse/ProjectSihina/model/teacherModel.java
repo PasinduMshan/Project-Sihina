@@ -139,4 +139,24 @@ public class teacherModel {
         }
         return dtoList;
     }
+
+    public static String generateTeacherId() throws SQLException {
+        Connection connection = DbConnection.getInstance().getConnection();
+        PreparedStatement pstm = connection.prepareStatement("SELECT Teacher_id FROM Teacher ORDER BY Teacher_id DESC LIMIT 1");
+        ResultSet resultSet = pstm.executeQuery();
+        if (resultSet.next()) {
+            return splitTeacherId(resultSet.getString(1));
+        }
+        return "T001";
+    }
+
+    private static String splitTeacherId(String currentTeacherId) {
+        if (currentTeacherId != null) {
+            int id = Integer.parseInt(currentTeacherId.substring(1));
+            id++;
+            return "T" + String.format("%03d",id);
+        } else {
+            return "T001";
+        }
+    }
 }

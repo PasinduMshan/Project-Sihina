@@ -1,6 +1,7 @@
 package lk.ijse.ProjectSihina.model;
 
 import javafx.scene.image.Image;
+import lk.ijse.ProjectSihina.User.UserConnection;
 import lk.ijse.ProjectSihina.db.DbConnection;
 import lk.ijse.ProjectSihina.dto.StudentDto;
 
@@ -29,19 +30,25 @@ public class StudentModel {
 
         pstm.setBlob(11, imageBlob);
 
-        String user = "U001";
+        String userName = UserConnection.getInstance().getUserName();
+        String Password = UserConnection.getInstance().getPassword();
+
+        PreparedStatement preparedStatement = connection.prepareStatement("SELECT user_id FROM user WHERE User_Name = ? AND Password = ?");
+        preparedStatement.setString(1,userName);
+        preparedStatement.setString(2, Password);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        String user = null;
+        if (resultSet.next()) {
+             user = resultSet.getString(1);
+        }
 
         pstm.setString(12, user);
-
         return pstm.executeUpdate() > 0;
 
     }
 
     private static Blob convertFileToBytes(File imageFile) {
         try {
-          /*  if (imageFile == null || !imageFile.exists()) {
-                return null;
-            }*/
             FileInputStream fileInputStream = new FileInputStream(imageFile);
             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
             byte[] buffer = new byte[4096];
@@ -154,5 +161,25 @@ public class StudentModel {
             );
         }
         return dtoList;
+    }
+
+    public static String generateStudentId() throws SQLException {
+        Connection connection = DbConnection.getInstance().getConnection();
+        PreparedStatement pstm = connection.prepareStatement("SELECT Stu_id FROM Student ORDER BY Stu_id DESC LIMIT 1");
+        ResultSet resultSet = pstm.executeQuery();
+        if (resultSet.next()) {
+            return splitStuId(resultSet.getString(1));
+        }
+        return "U00001";
+    }
+
+    private static String splitStuId(String currentStuId) {
+        if (currentStuId != null) {
+            int id = Integer.parseInt(currentStuId.substring(1));
+            id++;
+            return "ID" + String.format("%05d",id);
+        } else {
+            return "ID00001";
+        }
     }
 }

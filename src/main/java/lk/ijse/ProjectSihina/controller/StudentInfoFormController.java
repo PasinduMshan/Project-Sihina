@@ -20,7 +20,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import javafx.stage.Window;
 import lk.ijse.ProjectSihina.dto.ClassDto;
 import lk.ijse.ProjectSihina.dto.StudentDto;
 import lk.ijse.ProjectSihina.dto.Tm.StudentTM;
@@ -34,6 +33,7 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.regex.Pattern;
 
 
 public class StudentInfoFormController implements Initializable {
@@ -100,7 +100,7 @@ public class StudentInfoFormController implements Initializable {
 
     public static File selectedImageFile;
 
-    public static StudentDto StuDto;
+    public static StudentDto StuDto ;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -108,6 +108,16 @@ public class StudentInfoFormController implements Initializable {
        loadAllClass();
        setCellValueFactory();
        loadAllStudent();
+       generateStuId();
+    }
+
+    private void generateStuId() {
+        try {
+            String StuId = StudentModel.generateStudentId();
+            txtID.setText(StuId);
+        } catch (SQLException e) {
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        }
     }
 
     private void loadAllStudent() {
@@ -222,7 +232,7 @@ public class StudentInfoFormController implements Initializable {
 
     }
 
-    public void getAllValueInField(){
+    public StudentDto getAllValueInField(){
         String Id = txtID.getText();
         String BarcodeId = txtBarcodeID.getText();
         String Name = txtNameWithInitials.getText();
@@ -235,7 +245,51 @@ public class StudentInfoFormController implements Initializable {
         String subjects = txtSubject.getText();
         Image studentImage = imageStudent.getImage();
 
-        StuDto = new StudentDto(Id, BarcodeId, Name, Address, genderPromptTxt, email, dob, contact, classPromptTxt, subjects, studentImage);
+        if (Id.isEmpty() || BarcodeId.isEmpty() || genderPromptTxt.isEmpty() || classPromptTxt.isEmpty() || subjects.isEmpty() || studentImage == null) {
+            new Alert(Alert.AlertType.ERROR,"Some Fields are empty!!!").showAndWait();
+        }
+        boolean validateDetail = validateStudentDetail(Name, Address, email, dob, contact);
+        StudentDto studentDto = null;
+        if (validateDetail) {
+            studentDto =  new StudentDto(Id, BarcodeId, Name, Address, genderPromptTxt, email, dob, contact, classPromptTxt, subjects, studentImage);
+        }
+        return studentDto;
+    }
+
+    private boolean validateStudentDetail(String name, String address, String email, LocalDate dob, String contact) {
+
+        boolean matches = Pattern.matches("[A-Za-z]+", name);
+        if (!matches) {
+            new Alert(Alert.AlertType.ERROR,"Invalid Name!!").show();
+            return false;
+        }
+
+        boolean matches1 = Pattern.matches("[A-Za-z0-9/,.]+", address);
+        if (!matches1) {
+            new Alert(Alert.AlertType.ERROR,"Invalid Address!!").show();
+            return false;
+        }
+
+        boolean matches2 = Pattern.matches("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", email);
+        if (!matches2) {
+            new Alert(Alert.AlertType.ERROR,"Invalid Email!!").show();
+            return false;
+        }
+
+        String Dob = String.valueOf(dob);
+        boolean matches3 = Pattern.matches("[0-9-]", Dob);
+        if (!matches3) {
+            new Alert(Alert.AlertType.ERROR,"Invalid Date Of Birth!!").show();
+            return false;
+        }
+
+        boolean matches4 = Pattern.matches("^(?:7|0|(?:\\+94))[0-9]{9,10}$", contact);
+        if (!matches4) {
+            new Alert(Alert.AlertType.ERROR,"Invalid Contact!!").show();
+            return false;
+        }
+
+        return true;
     }
 
     @FXML
@@ -245,6 +299,7 @@ public class StudentInfoFormController implements Initializable {
         Stage stage = new Stage();
         stage.setScene(scene);
         stage.show();
+        StuDto = getAllValueInField();
     }
 
     @FXML
@@ -261,20 +316,26 @@ public class StudentInfoFormController implements Initializable {
         String subject = txtSubject.getText();
         Image studentImage = imageStudent.getImage();
 
-        StudentDto dto = new StudentDto(ID, Bar_id, name, address, gender, email, dob, contact, stu_class, subject, studentImage);
+        if (ID.isEmpty() || Bar_id.isEmpty() || gender.isEmpty() || stu_class.isEmpty() || subject.isEmpty() || studentImage == null) {
+            new Alert(Alert.AlertType.ERROR,"Some Fields are empty!!!").showAndWait();
+        }
+        boolean UpdateValidated = validateStudentDetail(name, address, email, dob, contact);
+        if (UpdateValidated) {
+            StudentDto dto = new StudentDto(ID, Bar_id, name, address, gender, email, dob, contact, stu_class, subject, studentImage);
 
-        try {
-            boolean isUpdated = StudentModel.updateStudent(dto , selectedImageFile);
+            try {
+                boolean isUpdated = StudentModel.updateStudent(dto, selectedImageFile);
 
-            if (isUpdated) {
-                new Alert(Alert.AlertType.INFORMATION,"Update Success!!!").showAndWait();
-                loadAllStudent();
-                clearFields();
-            } else {
-                new Alert(Alert.AlertType.ERROR,"Update Failed!!!").showAndWait();
+                if (isUpdated) {
+                    new Alert(Alert.AlertType.INFORMATION, "Update Success!!!").showAndWait();
+                    loadAllStudent();
+                    clearFields();
+                } else {
+                    new Alert(Alert.AlertType.ERROR, "Update Failed!!!").showAndWait();
+                }
+            } catch (SQLException e) {
+                new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
             }
-        } catch (SQLException e) {
-            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
         }
     }
 
@@ -325,5 +386,10 @@ public class StudentInfoFormController implements Initializable {
         cmbClass.setValue("");
         txtSubject.setText("");
         imageStudent.setImage(null);
+        generateStuId();
+    }
+
+    public void btnRefreshOnAction(ActionEvent actionEvent) {
+        clearFields();
     }
 }

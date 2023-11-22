@@ -138,4 +138,24 @@ public class ExamModel {
         }
         return dtoList;
     }
+
+    public static String generateExamId() throws SQLException {
+        Connection connection = DbConnection.getInstance().getConnection();
+        PreparedStatement pstm = connection.prepareStatement("SELECT Exam_id FROM Exam ORDER BY Exam_id DESC LIMIT 1");
+        ResultSet resultSet = pstm.executeQuery();
+        if (resultSet.next()) {
+            return splitExamId(resultSet.getString(1));
+        }
+        return "Ex001";
+    }
+
+    private static String splitExamId(String currentExamId) {
+        if (currentExamId != null) {
+            int id = Integer.parseInt(currentExamId.substring(1));
+            id++;
+            return "Ex" + String.format("%03d",id);
+        } else {
+            return "Ex001";
+        }
+    }
 }

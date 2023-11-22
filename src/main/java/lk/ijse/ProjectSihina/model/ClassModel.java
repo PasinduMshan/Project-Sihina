@@ -84,4 +84,23 @@ public class ClassModel {
         return dtoList;
     }
 
+    public static String generateClassId() throws SQLException {
+        Connection connection = DbConnection.getInstance().getConnection();
+        PreparedStatement pstm = connection.prepareStatement("SELECT class_id FROM Class ORDER BY class_id DESC LIMIT 1");
+        ResultSet resultSet = pstm.executeQuery();
+        if (resultSet.next()) {
+            return splitClassId(resultSet.getString(1));
+        }
+        return "CL001";
+    }
+
+    private static String splitClassId(String currentClassId) {
+        if (currentClassId != null) {
+            int id = Integer.parseInt(currentClassId.substring(1));
+            id++;
+            return "CL" + String.format("%03d",id);
+        } else {
+            return "CL001";
+        }
+    }
 }

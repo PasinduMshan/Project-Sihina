@@ -21,7 +21,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import lk.ijse.ProjectSihina.Enums.Days;
 import lk.ijse.ProjectSihina.Enums.Months;
 import lk.ijse.ProjectSihina.dto.ClassDto;
 import lk.ijse.ProjectSihina.dto.PaymentDto;
@@ -30,7 +29,6 @@ import lk.ijse.ProjectSihina.dto.Tm.PaymentTm;
 import lk.ijse.ProjectSihina.model.ClassModel;
 import lk.ijse.ProjectSihina.model.PaymentModel;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -41,6 +39,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.regex.Pattern;
 
 public class PaymentFormController implements Initializable {
     @FXML
@@ -239,8 +238,21 @@ public class PaymentFormController implements Initializable {
         String month = cmbMonth.getValue();
         String subject = cmbSubject.getValue();
         double amount = Double.parseDouble(txtAmount.getText());
+
+        String isAmount = String.valueOf(amount);
+        boolean matches = Pattern.matches("[0-9.]+", isAmount);
+        if (!matches) {
+            new Alert(Alert.AlertType.ERROR,"Invalid Amount!!").show();
+            return;
+        }
+
         LocalDate date = LocalDate.parse(lblDate.getText());
         LocalTime time = LocalTime.parse(lblTime.getText());
+
+        if (payId.isEmpty() || StuId.isEmpty() || BarId.isEmpty() || StuId.isEmpty() || type.isEmpty() || StuClass.isEmpty() || month.isEmpty() || subject.isEmpty()) {
+            new Alert(Alert.AlertType.ERROR, "Some Fields Are Empty!!!").showAndWait();
+            return;
+        }
 
         PaymentDto dto = new PaymentDto(payId, StuId, BarId, StuName, type, StuClass, month, subject, amount, date, time);
 
@@ -263,6 +275,11 @@ public class PaymentFormController implements Initializable {
     @FXML
     void btnDeleteOnAction(ActionEvent event) {
         String PayId = txtPayId.getText();
+
+        if (PayId.isEmpty()) {
+            new Alert(Alert.AlertType.ERROR,"Id Field is Empty!!!").show();
+            return;
+        }
 
         try {
             boolean isDeleted = PaymentModel.DeletePayment(PayId);
@@ -287,6 +304,10 @@ public class PaymentFormController implements Initializable {
     @FXML
     void btnSearchOnAction(ActionEvent event) {
         String PayId = txtPayId.getText();
+        if (PayId.isEmpty()) {
+            new Alert(Alert.AlertType.ERROR,"Id Field is Empty!!!").show();
+            return;
+        }
 
         try {
             PaymentDto dto = PaymentModel.SearchPaymontId(PayId);
@@ -320,9 +341,23 @@ public class PaymentFormController implements Initializable {
         String StuClass = cmbClass.getValue();
         String month = cmbMonth.getValue();
         String subject = cmbSubject.getValue();
+
         double amount = Double.parseDouble(txtAmount.getText());
+
+        String isAmount = String.valueOf(amount);
+        boolean matches = Pattern.matches("[0-9.]+", isAmount);
+        if (!matches) {
+            new Alert(Alert.AlertType.ERROR,"Invalid Amount!!").show();
+            return;
+        }
+
         LocalDate date = LocalDate.parse(lblDate.getText());
         LocalTime time = LocalTime.parse(lblTime.getText());
+
+        if (payId.isEmpty() || StuId.isEmpty() || BarId.isEmpty() || StuName.isEmpty() || type.isEmpty() || StuClass.isEmpty() || month.isEmpty() || subject.isEmpty()) {
+            new Alert(Alert.AlertType.ERROR, "Some Fields Are Empty!!!").showAndWait();
+            return;
+        }
 
         PaymentDto dto = new PaymentDto(payId, StuId, BarId, StuName, type, StuClass, month, subject, amount, date, time);
 
@@ -362,4 +397,21 @@ public class PaymentFormController implements Initializable {
         txtAttendantCount.setText("");
     }
 
+    public void AttendantCountOnAction(ActionEvent actionEvent) {
+        String Stu_id = txtID.getText();
+        String Subject = cmbSubject.getValue();
+        String month = cmbMonth.getValue();
+        String Stu_class = cmbClass.getValue();
+        if (Stu_id.isEmpty() || Subject.isEmpty() || month.isEmpty() || Stu_class.isEmpty()) {
+            new Alert(Alert.AlertType.ERROR, "Id , Subject, Month , Class  Fields Are Empty!!!").showAndWait();
+            return;
+        }
+
+        try {
+            String allAttendant = PaymentModel.getAllAttendant(Stu_id, Subject, month, Stu_class);
+            txtAttendantCount.setText(allAttendant);
+        } catch (SQLException e) {
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        }
+    }
 }

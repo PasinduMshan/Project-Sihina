@@ -28,6 +28,7 @@ import java.sql.SQLException;
 import java.time.LocalTime;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.regex.Pattern;
 
 public class ScheduleFormController implements Initializable {
 
@@ -171,8 +172,28 @@ public class ScheduleFormController implements Initializable {
         String Subject = cmbSubject.getValue();
         String teacher = cmbTeacherName.getValue();
         String days = cmbDay.getValue();
+
         LocalTime StartTime = LocalTime.parse(txtStartTime.getText());
+        String startTime = String.valueOf(StartTime);
+        boolean matches = Pattern.matches("[0-9:]+", startTime);
+        if (!matches) {
+            new Alert(Alert.AlertType.ERROR,"Invalid Time!!").show();
+            return;
+        }
+
         LocalTime EndTime = LocalTime.parse(txtEndTime.getText());
+        String endTime = String.valueOf(StartTime);
+        boolean matches1 = Pattern.matches("[0-9:]+", endTime);
+        if (!matches1) {
+            new Alert(Alert.AlertType.ERROR,"Invalid Time!!").show();
+            return;
+        }
+
+        if (classValue.isEmpty() || Subject.isEmpty() || teacher.isEmpty() || days.isEmpty()) {
+            new Alert(Alert.AlertType.ERROR, "Some Field are Empty!!").show();
+            return;
+        }
+
 
         ScheduleDto dto = new ScheduleDto(classValue, Subject, teacher, days, StartTime, EndTime);
 
@@ -180,6 +201,7 @@ public class ScheduleFormController implements Initializable {
             boolean isAdd = ScheduleModel.AddSchedule(dto);
             if (isAdd) {
                 new Alert(Alert.AlertType.INFORMATION," Schedule Add Success!!!").showAndWait();
+                clearField();
             } else {
                 new Alert(Alert.AlertType.ERROR,"Schedule Add Failed!!!").showAndWait();
             }
@@ -203,6 +225,7 @@ public class ScheduleFormController implements Initializable {
             boolean isDelete = ScheduleModel.DeleteShedule(dto);
             if (isDelete) {
                 new Alert(Alert.AlertType.INFORMATION, "Delete Success!!!").showAndWait();
+                clearField();
             } else {
                 new Alert(Alert.AlertType.ERROR,"Delete Failed!!!").showAndWait();
             }
@@ -214,6 +237,15 @@ public class ScheduleFormController implements Initializable {
     @FXML
     void btnPrintOnAction(ActionEvent event) {
 
+    }
+
+    private void clearField() {
+        cmbDay.setValue("");
+        cmbClass.setValue("");
+        cmbSubject.setValue("");
+        cmbTeacherName.setValue("");
+        txtStartTime.setText("");
+        txtEndTime.setText("");
     }
 
 }

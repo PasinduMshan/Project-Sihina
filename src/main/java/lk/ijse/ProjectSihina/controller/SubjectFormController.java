@@ -20,6 +20,7 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.regex.Pattern;
 
 public class SubjectFormController implements Initializable {
 
@@ -57,6 +58,16 @@ public class SubjectFormController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         setCellValueFactory();
         loadAllSubject();
+        generateSubjectId();
+    }
+
+    private void generateSubjectId() {
+        try {
+            String id = SubjectModel.generateSubId();
+            txtID.setText(id);
+        } catch (SQLException e) {
+            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
+        }
     }
 
     private void loadAllSubject() {
@@ -89,9 +100,21 @@ public class SubjectFormController implements Initializable {
     @FXML
     void btnAddOnAction(ActionEvent event) {
         String id = txtID.getText();
+
         String subject = txtSubject.getText();
+        boolean matches = Pattern.matches("[A-Za-z]+", subject);
+        if (!matches) {
+            new Alert(Alert.AlertType.ERROR, "Invalid Name!!").show();
+            return;
+        }
+
         String AvailableClass = txtAvailableClass.getText();
-        String teacherName = (String) cmbTeacherName.getValue();
+        boolean matches2 = Pattern.matches("[A-Za-z/,]+", AvailableClass);
+        if (!matches2) {
+            new Alert(Alert.AlertType.ERROR, "Invalid Name!!").show();
+            return;
+        }
+        String teacherName = cmbTeacherName.getValue();
 
         if (id.isEmpty() || subject.isEmpty() || AvailableClass.isEmpty() || teacherName.isEmpty()) {
             new Alert(Alert.AlertType.ERROR,"Empty Fields Found!!!").show();
@@ -152,8 +175,21 @@ public class SubjectFormController implements Initializable {
     @FXML
     void btnUpdateOnAction(ActionEvent event) {
         String id = txtID.getText();
+
         String subject = txtSubject.getText();
+        boolean matches = Pattern.matches("[A-Za-z]+", subject);
+        if (!matches) {
+            new Alert(Alert.AlertType.ERROR, "Invalid Name!!").show();
+            return;
+        }
+
         String AvailableClass = txtAvailableClass.getText();
+        boolean matches2 = Pattern.matches("[A-Za-z/,]+", AvailableClass);
+        if (!matches2) {
+            new Alert(Alert.AlertType.ERROR, "Invalid Name!!").show();
+            return;
+        }
+
         String teacherName = cmbTeacherName.getValue();
 
         if (id.isEmpty() || subject.isEmpty() || AvailableClass.isEmpty() || teacherName.isEmpty()) {

@@ -41,15 +41,23 @@ public class ClassFormController implements Initializable {
     private TableColumn<?, ?> colStuCount;
 
     @FXML
-    private TableColumn<?, ?> colSubject;
-
-    @FXML
     private TableView<ClassTm> tblClass;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
        setCellValueFactory();
        loadAllClass();
+       generateClassId();
+    }
+
+    private void generateClassId() {
+        try {
+            String id = ClassModel.generateClassId();
+            txtID.setText(id);
+        } catch (SQLException e) {
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        }
+
     }
 
     private void loadAllClass() {

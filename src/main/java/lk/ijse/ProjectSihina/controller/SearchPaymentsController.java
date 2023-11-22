@@ -72,6 +72,11 @@ public class SearchPaymentsController implements Initializable {
         String month = txtMonth.getText();
         ObservableList<PaymentTm> obList = FXCollections.observableArrayList();
 
+        if (id.isEmpty() || month.isEmpty()) {
+            new Alert(Alert.AlertType.ERROR,"Some Fields are Empty!!!").show();
+            return;
+        }
+
         try {
             List<PaymentDto> dtoList = PaymentModel.searchStuPays(id,month);
 
@@ -95,6 +100,10 @@ public class SearchPaymentsController implements Initializable {
 
     public void StudentIdSearchOnAction(ActionEvent actionEvent) {
         String id = txtID.getText();
+        if (id.isEmpty()) {
+            new Alert(Alert.AlertType.ERROR, "Id Field is empty!!!").show();
+            return;
+        }
 
         try {
             StudentDto dto = PaymentModel.searchStu(id);

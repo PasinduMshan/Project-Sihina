@@ -25,6 +25,7 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.regex.Pattern;
 
 public class TeacherFormController implements Initializable {
 
@@ -78,6 +79,16 @@ public class TeacherFormController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         setCellValueFactory();
         loadAllTeacher();
+        generateTeacherId();
+    }
+
+    private void generateTeacherId() {
+        try {
+            String id = teacherModel.generateTeacherId();
+            txtID.setText(id);
+        } catch (SQLException e) {
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        }
     }
 
     private void loadAllTeacher() {
@@ -119,26 +130,58 @@ public class TeacherFormController implements Initializable {
         String subjects = txtSubject.getText();
         Image image = imageTeacher.getImage();
 
-        if (teacherId.isEmpty() || teacherName.isEmpty() || address.isEmpty() || email.isEmpty() || contactNo.isEmpty()
-        || subjects.isEmpty() || image == null){
+        if (teacherId.isEmpty() || subjects.isEmpty() || image == null){
             new Alert(Alert.AlertType.ERROR,"Empty Field Catch!!!").show();
             return;
         }
 
-        TeacherDto dto = new TeacherDto(teacherId, teacherName, address, email, subjects, contactNo, image);
+        boolean teacherDetail = validateTeacherDetail(teacherName, address, email, contactNo);
 
-        try {
-            boolean isAdded = teacherModel.addTeacher(dto);
+        if (teacherDetail) {
+            TeacherDto dto = new TeacherDto(teacherId, teacherName, address, email, subjects, contactNo, image);
 
-            if (isAdded) {
-                new Alert(Alert.AlertType.CONFIRMATION,"Teacher save success!!!").showAndWait();
-            } else {
-                new Alert(Alert.AlertType.ERROR,"Save Failed!!!").showAndWait();
+            try {
+                boolean isAdded = teacherModel.addTeacher(dto);
+
+                if (isAdded) {
+                    new Alert(Alert.AlertType.CONFIRMATION, "Teacher save success!!!").showAndWait();
+                } else {
+                    new Alert(Alert.AlertType.ERROR, "Save Failed!!!").showAndWait();
+                }
+
+            } catch (SQLException e) {
+                new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
             }
-
-        } catch (SQLException e) {
-            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
         }
+    }
+
+    private boolean validateTeacherDetail(String name, String address, String email, String contact) {
+
+        boolean matches = Pattern.matches("[A-Za-z]+", name);
+        if (!matches) {
+            new Alert(Alert.AlertType.ERROR, "Invalid Name!!").show();
+            return false;
+        }
+
+        boolean matches1 = Pattern.matches("[A-Za-z0-9/,.]+", address);
+        if (!matches1) {
+            new Alert(Alert.AlertType.ERROR, "Invalid Address!!").show();
+            return false;
+        }
+
+        boolean matches2 = Pattern.matches("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", email);
+        if (!matches2) {
+            new Alert(Alert.AlertType.ERROR, "Invalid Email!!").show();
+            return false;
+        }
+
+        boolean matches4 = Pattern.matches("^(?:7|0|(?:\\+94))[0-9]{9,10}$", contact);
+        if (!matches4) {
+            new Alert(Alert.AlertType.ERROR,"Invalid Contact!!").show();
+            return false;
+        }
+
+        return true;
     }
 
     @FXML
@@ -193,27 +236,28 @@ public class TeacherFormController implements Initializable {
         String subjects = txtSubject.getText();
         Image image = imageTeacher.getImage();
 
-        if (teacherId.isEmpty() || teacherName.isEmpty() || address.isEmpty() || email.isEmpty() || contactNo.isEmpty()
-                || subjects.isEmpty() || image == null){
+        if (teacherId.isEmpty() || subjects.isEmpty() || image == null){
             new Alert(Alert.AlertType.ERROR,"Empty Field Catch!!!").show();
             return;
         }
 
-        TeacherDto dto = new TeacherDto(teacherId, teacherName, address, email, subjects, contactNo, image);
+        boolean validateDetail = validateTeacherDetail(teacherName, address, email, contactNo);
+        if (validateDetail) {
+            TeacherDto dto = new TeacherDto(teacherId, teacherName, address, email, subjects, contactNo, image);
 
-        try {
-            boolean isUpdated = teacherModel.updateTeacher(dto);
+            try {
+                boolean isUpdated = teacherModel.updateTeacher(dto);
 
-            if (isUpdated) {
-                new Alert(Alert.AlertType.INFORMATION,"Update Success!!!").showAndWait();
-            } else {
-                new Alert(Alert.AlertType.ERROR,"Updated Failed!!1").showAndWait();
+                if (isUpdated) {
+                    new Alert(Alert.AlertType.INFORMATION, "Update Success!!!").showAndWait();
+                } else {
+                    new Alert(Alert.AlertType.ERROR, "Updated Failed!!1").showAndWait();
+                }
+
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
             }
-
-        } catch (SQLException e) {
-          throw new RuntimeException(e);
         }
-
     }
 
     @FXML

@@ -208,6 +208,11 @@ public class AttendanceFormController implements Initializable {
         LocalTime time = LocalTime.parse(txtTime.getText());
         String type = "Absent";
 
+        if (AttId.isEmpty() || StuId.isEmpty() || BarId.isEmpty() || StuName.isEmpty() || StuClass.isEmpty() || Month.isEmpty() || Subject.isEmpty()) {
+            new Alert(Alert.AlertType.ERROR,"Some Fields are Empty!!!").show();
+            return;
+        }
+
         AttendantDto dto = new AttendantDto(AttId, StuId, BarId, StuName, StuClass, Month, Subject, date, time,type);
 
         try {
@@ -227,6 +232,11 @@ public class AttendanceFormController implements Initializable {
     @FXML
     void btnDeleteOnAction(ActionEvent event) {
         String AttId = txtID.getText();
+
+        if (AttId.isEmpty()) {
+            new Alert(Alert.AlertType.ERROR, "Id Field is Empty!!").show();
+            return;
+        }
 
         try {
             boolean isDeleted = AttendantModel.deleteAttendant(AttId);
@@ -254,6 +264,11 @@ public class AttendanceFormController implements Initializable {
         LocalDate date = LocalDate.parse(txtDate.getText());
         LocalTime time = LocalTime.parse(txtTime.getText());
         String type = "Present";
+
+        if (AttId.isEmpty() || StuId.isEmpty() || BarId.isEmpty() || StuName.isEmpty() || StuClass.isEmpty() || Month.isEmpty() || Subject.isEmpty()) {
+            new Alert(Alert.AlertType.ERROR,"Some Fields are Empty!!!").show();
+            return;
+        }
 
         AttendantDto dto = new AttendantDto(AttId, StuId, BarId, StuName, StuClass, Month, Subject, date, time,type);
 
@@ -288,6 +303,11 @@ public class AttendanceFormController implements Initializable {
     @FXML
     void btnSearchOnAction(ActionEvent event) {
         String AttId = txtID.getText();
+
+        if (AttId.isEmpty()) {
+            new Alert(Alert.AlertType.ERROR, "Id Field is Empty!!").show();
+            return;
+        }
 
         try {
             AttendantDto dto = AttendantModel.searchAttendant(AttId);
@@ -324,6 +344,11 @@ public class AttendanceFormController implements Initializable {
         LocalDate date = LocalDate.parse(txtDate.getText());
         LocalTime time = LocalTime.parse(txtTime.getText());
         String type = txtType.getText();
+
+        if (AttId.isEmpty() || StuId.isEmpty() || BarId.isEmpty() || StuName.isEmpty() || StuClass.isEmpty() || Month.isEmpty() || Subject.isEmpty() || type.isEmpty()) {
+            new Alert(Alert.AlertType.ERROR,"Some Fields are Empty!!!").show();
+            return;
+        }
 
         AttendantDto dto = new AttendantDto(AttId, StuId, BarId, StuName, StuClass, Month, Subject, date, time,type);
 
