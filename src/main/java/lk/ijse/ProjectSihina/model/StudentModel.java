@@ -170,16 +170,26 @@ public class StudentModel {
         if (resultSet.next()) {
             return splitStuId(resultSet.getString(1));
         }
-        return "U00001";
+        return "ID001";
     }
 
-    private static String splitStuId(String currentStuId) {
-        if (currentStuId != null) {
-            int id = Integer.parseInt(currentStuId.substring(1));
+    private static String splitStuId(String currentId) {
+        if(currentId != null) {
+            String[] strings = currentId.split("ID0");
+            int id = Integer.parseInt(strings[1]);
             id++;
-            return "ID" + String.format("%05d",id);
-        } else {
-            return "ID00001";
+            String ID = String.valueOf(id);
+            int length = ID.length();
+            if (length < 2){
+                return "ID00"+id;
+            }else {
+                if (length < 3){
+                    return "ID0"+id;
+                }else {
+                    return "ID"+id;
+                }
+            }
         }
+        return "ID001";
     }
 }

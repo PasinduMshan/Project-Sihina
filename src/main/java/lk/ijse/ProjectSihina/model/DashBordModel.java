@@ -1,9 +1,12 @@
 package lk.ijse.ProjectSihina.model;
 
 import lk.ijse.ProjectSihina.db.DbConnection;
+import lk.ijse.ProjectSihina.dto.DashBordScheduleDto;
 
 import java.sql.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DashBordModel {
 
@@ -51,4 +54,14 @@ public class DashBordModel {
         }
         return Count;
     }
+
+    /*public static List<DashBordScheduleDto> getTodaySchedule() throws SQLException {
+        Connection connection = DbConnection.getInstance().getConnection();
+        PreparedStatement pstm = connection.prepareStatement("SELECT S.Start_Time , S.End_Time , C.Name , Su.Sub_Name FROM Schedule S JOIN Class C ON S.class_id = C.class_id JOIN Subject Su ON Su.Sub_id = S.Sub_id");
+        ResultSet resultSet = pstm.executeQuery();
+
+        ArrayList<Object> dtoList = new ArrayList<>();
+
+
+    }*/
 }

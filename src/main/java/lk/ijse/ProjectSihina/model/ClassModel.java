@@ -2,6 +2,7 @@ package lk.ijse.ProjectSihina.model;
 
 import lk.ijse.ProjectSihina.db.DbConnection;
 import lk.ijse.ProjectSihina.dto.ClassDto;
+import lk.ijse.ProjectSihina.dto.TeacherDto;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -91,16 +92,27 @@ public class ClassModel {
         if (resultSet.next()) {
             return splitClassId(resultSet.getString(1));
         }
-        return "CL001";
+        return "C001";
     }
 
-    private static String splitClassId(String currentClassId) {
-        if (currentClassId != null) {
-            int id = Integer.parseInt(currentClassId.substring(1));
+    private static String splitClassId(String currentId) {
+        if(currentId != null) {
+            String[] strings = currentId.split("C0");
+            int id = Integer.parseInt(strings[1]);
             id++;
-            return "CL" + String.format("%03d",id);
-        } else {
-            return "CL001";
+            String ID = String.valueOf(id);
+            int length = ID.length();
+            if (length < 2){
+                return "C00"+id;
+            }else {
+                if (length < 3){
+                    return "C0"+id;
+                }else {
+                    return "C"+id;
+                }
+            }
         }
+        return "C001";
     }
+
 }

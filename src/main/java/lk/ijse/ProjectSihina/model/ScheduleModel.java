@@ -28,7 +28,7 @@ public class ScheduleModel {
 
     private static String getTeacherId(String teacher) throws SQLException {
         Connection connection = DbConnection.getInstance().getConnection();
-        PreparedStatement pstm = connection.prepareStatement("SELECT class_id FROM Class WHERE Name = ?");
+        PreparedStatement pstm = connection.prepareStatement("SELECT Teacher_id FROM Teacher WHERE Name = ?");
         pstm.setString(1, teacher);
         ResultSet resultSet = pstm.executeQuery();
         String Teacher_id = null;

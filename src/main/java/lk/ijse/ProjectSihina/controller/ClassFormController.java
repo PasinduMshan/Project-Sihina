@@ -210,6 +210,7 @@ public class ClassFormController implements Initializable {
     private void clearFields() {
         txtID.setText("");
         txtClassName.setText("");
+        generateClassId();
     }
 
 }

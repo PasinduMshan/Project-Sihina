@@ -58,17 +58,27 @@ public class PaymentModel {
         if (resultSet.next()) {
             return splitPayId(resultSet.getString(1));
         }
-        return "P0001";
+        return "P001";
     }
 
-    private static String splitPayId(String CurrentPayId) {
-        if (CurrentPayId != null) {
-            int id = Integer.parseInt(CurrentPayId.substring(1));
+    private static String splitPayId(String currentId) {
+        if(currentId != null) {
+            String[] strings = currentId.split("P0");
+            int id = Integer.parseInt(strings[1]);
             id++;
-            return "P" + String.format("%04d",id);
-        } else {
-            return "P0001";
+            String ID = String.valueOf(id);
+            int length = ID.length();
+            if (length < 2){
+                return "P00"+id;
+            }else {
+                if (length < 3){
+                    return "P0"+id;
+                }else {
+                    return "P"+id;
+                }
+            }
         }
+        return "P001";
     }
 
     public static boolean AddPayment(PaymentDto dto) throws SQLException {

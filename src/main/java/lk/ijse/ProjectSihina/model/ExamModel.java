@@ -146,16 +146,26 @@ public class ExamModel {
         if (resultSet.next()) {
             return splitExamId(resultSet.getString(1));
         }
-        return "Ex001";
+        return "EX001";
     }
 
-    private static String splitExamId(String currentExamId) {
-        if (currentExamId != null) {
-            int id = Integer.parseInt(currentExamId.substring(1));
+    private static String splitExamId(String currentId) {
+        if(currentId != null) {
+            String[] strings = currentId.split("EX0");
+            int id = Integer.parseInt(strings[1]);
             id++;
-            return "Ex" + String.format("%03d",id);
-        } else {
-            return "Ex001";
+            String ID = String.valueOf(id);
+            int length = ID.length();
+            if (length < 2){
+                return "EX00"+id;
+            }else {
+                if (length < 3){
+                    return "Ex0"+id;
+                }else {
+                    return "EX"+id;
+                }
+            }
         }
+        return "EX001";
     }
 }

@@ -23,14 +23,24 @@ public class SignUpModel {
         return "U001";
     }
 
-    private String splitUserId(String currentUserId) {
-        if (currentUserId != null) {
-            int id = Integer.parseInt(currentUserId.substring(1));
+    private static String splitUserId(String currentId) {
+        if(currentId != null) {
+            String[] strings = currentId.split("U0");
+            int id = Integer.parseInt(strings[1]);
             id++;
-            return "U" + String.format("%03d",id);
-        } else {
-            return "U001";
+            String ID = String.valueOf(id);
+            int length = ID.length();
+            if (length < 2){
+                return "U00"+id;
+            }else {
+                if (length < 3){
+                    return "U0"+id;
+                }else {
+                    return "U"+id;
+                }
+            }
         }
+        return "U001";
     }
 
     public boolean userRegister(UserDto dto) throws SQLException {

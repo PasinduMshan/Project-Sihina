@@ -155,7 +155,7 @@ public class AttendanceFormController implements Initializable {
         year = calendar.get(Calendar.YEAR);
         month = calendar.get(Calendar.MONTH);
         DATE = calendar.get(Calendar.DATE);
-        txtDate.setText(year + " : " + month + " : " + DATE);
+        txtDate.setText(year + "-" + month + "-" + DATE);
     }
 
     private void updateTime() {

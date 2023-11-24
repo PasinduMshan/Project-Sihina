@@ -12,8 +12,11 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import lk.ijse.ProjectSihina.dto.ClassDto;
 import lk.ijse.ProjectSihina.dto.SubjectDto;
+import lk.ijse.ProjectSihina.dto.TeacherDto;
 import lk.ijse.ProjectSihina.dto.Tm.SubjectTm;
+import lk.ijse.ProjectSihina.model.ClassModel;
 import lk.ijse.ProjectSihina.model.SubjectModel;
 
 import java.net.URL;
@@ -58,7 +61,24 @@ public class SubjectFormController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         setCellValueFactory();
         loadAllSubject();
+        loadAllTeacher();
         generateSubjectId();
+    }
+
+    private void loadAllTeacher() {
+        ObservableList<String> obList = FXCollections.observableArrayList();
+
+        try {
+            List<TeacherDto> nameList = SubjectModel.getAllTeacher();
+
+            for (TeacherDto dto : nameList) {
+                obList.add(dto.getName());
+            }
+            cmbTeacherName.setItems(obList);
+        } catch (SQLException e) {
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        }
+
     }
 
     private void generateSubjectId() {
@@ -109,9 +129,9 @@ public class SubjectFormController implements Initializable {
         }
 
         String AvailableClass = txtAvailableClass.getText();
-        boolean matches2 = Pattern.matches("[A-Za-z/,]+", AvailableClass);
+        boolean matches2 = Pattern.matches("[A-Za-z0-9/,]+", AvailableClass);
         if (!matches2) {
-            new Alert(Alert.AlertType.ERROR, "Invalid Name!!").show();
+            new Alert(Alert.AlertType.ERROR, "Invalid AvailableClass!!").show();
             return;
         }
         String teacherName = cmbTeacherName.getValue();
@@ -130,6 +150,7 @@ public class SubjectFormController implements Initializable {
                 new Alert(Alert.AlertType.INFORMATION,"Subject Save Success!!!").showAndWait();
                 loadAllSubject();
                 clearField();
+                generateSubjectId();
             } else {
                 new Alert(Alert.AlertType.ERROR,"Subject Save Failed!!!").showAndWait();
             }
@@ -157,6 +178,7 @@ public class SubjectFormController implements Initializable {
                 new Alert(Alert.AlertType.INFORMATION,"Subject Delete Success!!!").showAndWait();
                 loadAllSubject();
                 clearField();
+                generateSubjectId();
             } else {
                 new Alert(Alert.AlertType.ERROR,"Delete Failed!!!").showAndWait();
             }
@@ -206,6 +228,7 @@ public class SubjectFormController implements Initializable {
                 new Alert(Alert.AlertType.INFORMATION,"Update Subject Success!!!").showAndWait();
                 loadAllSubject();
                 clearField();
+                generateSubjectId();
             } else {
                 new Alert(Alert.AlertType.ERROR,"Update Failed!!!").showAndWait();
             }

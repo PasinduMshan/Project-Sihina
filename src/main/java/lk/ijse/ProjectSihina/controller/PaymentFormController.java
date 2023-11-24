@@ -225,7 +225,7 @@ public class PaymentFormController implements Initializable {
         year = calendar.get(Calendar.YEAR);
         month = calendar.get(Calendar.MONTH);
         DATE = calendar.get(Calendar.DATE);
-        lblDate.setText(year + " : " + month + " : " + DATE);
+        lblDate.setText(year + "-" + month + "-" + DATE);
     }
 
     private void updateTime() {

@@ -36,7 +36,7 @@ public class WelcomeFormController implements Initializable {
                         progressBar.setProgress(progress);
                         lblPercentage.setText(Math.round(progress * 100) + "%");
                     }),
-                    new KeyFrame(Duration.millis(50))
+                    new KeyFrame(Duration.millis(20))
             );
             timeline.setCycleCount(100);
             timeline.play();

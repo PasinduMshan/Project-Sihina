@@ -133,7 +133,7 @@
             </Label>
             <Label fx:id="lblUserName" layoutX="13.0" layoutY="36.0">
                <font>
-                  <Font name="System Bold" size="36.0" />
+                  <Font name="System Bold" size="34.0" />
                </font>
             </Label>
             <Label fx:id="lblDate" layoutX="880.0" layoutY="51.0" textFill="#3b3b40">
@@ -229,23 +229,23 @@
                         <Font name="System Bold" size="26.0" />
                      </font>
                   </Label>
-                  <TableView layoutX="39.0" layoutY="61.0" prefHeight="358.0" prefWidth="550.0" style="-fx-background-color: #D8E8F0;">
+                  <TableView fx:id="tblSchedule" layoutX="39.0" layoutY="61.0" prefHeight="358.0" prefWidth="550.0" style="-fx-background-color: #D8E8F0;">
                     <columns>
-                      <TableColumn prefWidth="96.0" text="Start Time" />
-                      <TableColumn prefWidth="102.0" text="End Time" />
-                        <TableColumn prefWidth="76.0" text="Grade" />
-                        <TableColumn prefWidth="200.0" text="Subject" />
-                        <TableColumn prefWidth="75.0" text="Type" />
+                      <TableColumn fx:id="colStartTime" prefWidth="96.0" text="Start Time" />
+                      <TableColumn fx:id="colEndTime" prefWidth="102.0" text="End Time" />
+                        <TableColumn fx:id="colGrade" prefWidth="76.0" text="Grade" />
+                        <TableColumn fx:id="colSubject" prefWidth="200.0" text="Subject" />
+                        <TableColumn fx:id="colType" prefWidth="75.0" text="Type" />
                     </columns>
                   </TableView>
                </children>
             </AnchorPane>
-            <JFXButton buttonType="RAISED" layoutX="771.0" layoutY="304.0" prefHeight="93.0" prefWidth="137.0" style="-fx-background-color: #DDF4FF; -fx-background-radius: 10;" text="                                                                              User  Setting" textAlignment="CENTER" wrapText="true">
+            <JFXButton buttonType="RAISED" layoutX="771.0" layoutY="304.0" onAction="#btnUserSettingOnAction" prefHeight="93.0" prefWidth="137.0" style="-fx-background-color: #DDF4FF; -fx-background-radius: 10;" text="                                                                              User  Setting" textAlignment="CENTER" wrapText="true">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
             </JFXButton>
-            <JFXButton buttonType="RAISED" layoutX="772.0" layoutY="437.0" prefHeight="93.0" prefWidth="137.0" style="-fx-background-color: #DDF4FF; -fx-background-radius: 10;" text="                                                                               Email" textAlignment="CENTER" wrapText="true">
+            <JFXButton buttonType="RAISED" layoutX="772.0" layoutY="437.0" onAction="#btnEmailOnAction" prefHeight="93.0" prefWidth="137.0" style="-fx-background-color: #DDF4FF; -fx-background-radius: 10;" text="                                                                               Email" textAlignment="CENTER" wrapText="true">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
@@ -260,7 +260,7 @@
                   <Image url="@../Images/setting.png" />
                </image>
             </ImageView>
-            <JFXButton buttonType="RAISED" layoutX="774.0" layoutY="570.0" prefHeight="93.0" prefWidth="137.0" style="-fx-background-color: #DDF4FF; -fx-background-radius: 10;" text="                                                                            About Us" textAlignment="CENTER" wrapText="true">
+            <JFXButton buttonType="RAISED" layoutX="774.0" layoutY="570.0" onAction="#btnAboutOnAction" prefHeight="93.0" prefWidth="137.0" style="-fx-background-color: #DDF4FF; -fx-background-radius: 10;" text="                                                                            About Us" textAlignment="CENTER" wrapText="true">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
@@ -270,6 +270,11 @@
                   <Image url="@../Images/about-us.png" />
                </image>
             </ImageView>
+            <Label fx:id="lblUserName1" layoutX="23.0" layoutY="46.0">
+               <font>
+                  <Font name="System Bold" size="34.0" />
+               </font>
+            </Label>
          </children></AnchorPane>
    </children>
 </AnchorPane>

@@ -202,6 +202,7 @@ public class ScheduleFormController implements Initializable {
             if (isAdd) {
                 new Alert(Alert.AlertType.INFORMATION," Schedule Add Success!!!").showAndWait();
                 clearField();
+                loadAllSchedule();
             } else {
                 new Alert(Alert.AlertType.ERROR,"Schedule Add Failed!!!").showAndWait();
             }
@@ -226,6 +227,7 @@ public class ScheduleFormController implements Initializable {
             if (isDelete) {
                 new Alert(Alert.AlertType.INFORMATION, "Delete Success!!!").showAndWait();
                 clearField();
+                loadAllSchedule();
             } else {
                 new Alert(Alert.AlertType.ERROR,"Delete Failed!!!").showAndWait();
             }

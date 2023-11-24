@@ -132,7 +132,7 @@
 	<detail>
 		<band height="55" splitType="Stretch">
 			<textField>
-				<reportElement x="0" y="0" width="90" height="20" uuid="0164a7bd-efdd-4fe2-ab4b-32225e6c3934">
+				<reportElement x="0" y="0" width="90" height="40" uuid="0164a7bd-efdd-4fe2-ab4b-32225e6c3934">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="2c05c1fe-32f2-490c-9c69-b189b9472d0c"/>
 				</reportElement>
 				<textElement>
@@ -141,7 +141,7 @@
 				<textFieldExpression><![CDATA[$F{Stu_id}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="110" y="0" width="90" height="20" uuid="f5ba355e-e1e1-43e6-9c61-8b7f37721c0b">
+				<reportElement x="110" y="0" width="90" height="40" uuid="f5ba355e-e1e1-43e6-9c61-8b7f37721c0b">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="cccdfde9-2555-4279-8a87-826a8e9ed1b5"/>
 				</reportElement>
 				<textElement>
@@ -150,7 +150,7 @@
 				<textFieldExpression><![CDATA[$F{Name}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="220" y="0" width="80" height="20" uuid="b99eea7b-1013-4829-80a1-c229296966d1">
+				<reportElement x="220" y="0" width="80" height="40" uuid="b99eea7b-1013-4829-80a1-c229296966d1">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c5a80a35-b99b-4aeb-b715-ecf2b7014b7d"/>
 				</reportElement>
 				<textElement>
@@ -159,7 +159,7 @@
 				<textFieldExpression><![CDATA[$F{Class}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="320" y="0" width="100" height="20" uuid="c87a5fc1-1019-4a8b-86c5-1a45a230046a">
+				<reportElement x="320" y="0" width="100" height="40" uuid="c87a5fc1-1019-4a8b-86c5-1a45a230046a">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="b0667e85-3d92-4848-bdff-793bc52d6f7d"/>
 				</reportElement>
 				<textElement>
@@ -168,7 +168,7 @@
 				<textFieldExpression><![CDATA[$F{Email}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="440" y="0" width="90" height="20" uuid="cd88caae-a860-4f4b-b057-777a92ac98b4">
+				<reportElement x="440" y="0" width="90" height="40" uuid="cd88caae-a860-4f4b-b057-777a92ac98b4">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="bed119e9-5a4b-49ae-9622-ee244370b03a"/>
 				</reportElement>
 				<textElement>

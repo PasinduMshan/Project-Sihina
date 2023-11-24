@@ -147,16 +147,26 @@ public class teacherModel {
         if (resultSet.next()) {
             return splitTeacherId(resultSet.getString(1));
         }
-        return "T001";
+        return "TID001";
     }
 
-    private static String splitTeacherId(String currentTeacherId) {
-        if (currentTeacherId != null) {
-            int id = Integer.parseInt(currentTeacherId.substring(1));
+    private static String splitTeacherId(String currentId) {
+        if(currentId != null) {
+            String[] strings = currentId.split("TID0");
+            int id = Integer.parseInt(strings[1]);
             id++;
-            return "T" + String.format("%03d",id);
-        } else {
-            return "T001";
+            String ID = String.valueOf(id);
+            int length = ID.length();
+            if (length < 2){
+                return "TID00"+id;
+            }else {
+                if (length < 3){
+                    return "TID0"+id;
+                }else {
+                    return "TID"+id;
+                }
+            }
         }
+        return "TID001";
     }
 }

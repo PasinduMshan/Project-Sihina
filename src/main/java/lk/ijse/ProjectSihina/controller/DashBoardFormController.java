@@ -3,6 +3,8 @@ package lk.ijse.ProjectSihina.controller;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,10 +12,12 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import lk.ijse.ProjectSihina.User.UserConnection;
+import lk.ijse.ProjectSihina.dto.Tm.DashBoardScheduleTm;
 import lk.ijse.ProjectSihina.model.DashBordModel;
 
 import java.io.IOException;
@@ -56,6 +60,21 @@ public class DashBoardFormController {
     private Object month;
     private Object DATE;
 
+    @FXML
+    private TableColumn<?, ?> colEndTime;
+
+    @FXML
+    private TableColumn<?, ?> colGrade;
+
+    @FXML
+    private TableColumn<?, ?> colStartTime;
+
+    @FXML
+    private TableColumn<?, ?> colSubject;
+
+    @FXML
+    private TableColumn<?, ?> colType;
+
     public void initialize() {
         setDateandTime();
         setUserName();
@@ -63,8 +82,14 @@ public class DashBoardFormController {
         getStudentCount();
         getTeacherCount();
         getSubjectCount();
-
+        //loadAllDetail();
     }
+
+    /*private void loadAllDetail() {
+        ObservableList<DashBoardScheduleTm> obList = FXCollections.observableArrayList();
+
+       // DashBordModel.getTodaySchedule();
+    }*/
 
     private void getSubjectCount() {
         try {
@@ -201,4 +226,19 @@ public class DashBoardFormController {
         this.moveNode.getChildren().add(rootNode);
     }
 
+    public void btnAboutOnAction(ActionEvent actionEvent) {
+
+    }
+
+    public void btnEmailOnAction(ActionEvent actionEvent) throws IOException {
+        Parent rootNode = FXMLLoader.load(this.getClass().getResource("/view/Email_Form.fxml"));
+        Scene scene = new Scene(rootNode);
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public void btnUserSettingOnAction(ActionEvent actionEvent) {
+
+    }
 }

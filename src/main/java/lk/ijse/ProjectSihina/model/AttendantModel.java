@@ -18,17 +18,27 @@ public class AttendantModel {
         if (resultSet.next()) {
             return splitAttId(resultSet.getString(1));
         }
-        return "Att0001";
+        return "At001";
     }
 
-    private static String splitAttId(String CurrentAttId) {
-        if (CurrentAttId != null) {
-            int id = Integer.parseInt(CurrentAttId.substring(1));
+    private static String splitAttId(String currentId) {
+        if(currentId != null) {
+            String[] strings = currentId.split("At0");
+            int id = Integer.parseInt(strings[1]);
             id++;
-            return "Att" + String.format("%04d", id);
-        } else {
-            return "Att0001";
+            String ID = String.valueOf(id);
+            int length = ID.length();
+            if (length < 2){
+                return "At00"+id;
+            }else {
+                if (length < 3){
+                    return "At0"+id;
+                }else {
+                    return "At"+id;
+                }
+            }
         }
+        return "At001";
     }
 
     public static boolean AddAttendant(AttendantDto dto) throws SQLException {

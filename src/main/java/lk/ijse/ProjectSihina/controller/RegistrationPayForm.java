@@ -30,6 +30,7 @@ import net.sf.jasperreports.engine.design.JasperDesign;
 import net.sf.jasperreports.engine.xml.JRXmlLoader;
 import net.sf.jasperreports.view.JasperViewer;
 
+import java.io.File;
 import java.io.InputStream;
 import java.net.URL;
 import java.sql.SQLException;
@@ -97,6 +98,7 @@ public class RegistrationPayForm implements Initializable {
     private JFXTextField txtPayId;
 
     private StudentDto studentDto;
+    private File selectedImageFile;
 
     private Object year;
     private Object month;
@@ -114,6 +116,11 @@ public class RegistrationPayForm implements Initializable {
         loadAllClass();
         loadAllRegistrations();
         lblType.setText(Type);
+    }
+
+    public void initialData(StudentDto dto, File selectedImageFile) {
+        this.studentDto = dto;
+        this.selectedImageFile = selectedImageFile;
     }
 
     private void setCellValueFactory() {
@@ -176,13 +183,13 @@ public class RegistrationPayForm implements Initializable {
         timeline.setCycleCount(Animation.INDEFINITE);
         timeline.play();
 
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy:MM:dd");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Calendar calendar = Calendar.getInstance();
 
         year = calendar.get(Calendar.YEAR);
         month = calendar.get(Calendar.MONTH);
         DATE = calendar.get(Calendar.DATE);
-        lblDate.setText(year + " : " + month + " : " + DATE);
+        lblDate.setText(year + "-" + month + "-" + DATE);
     }
 
     private void updateTime() {
@@ -192,8 +199,7 @@ public class RegistrationPayForm implements Initializable {
     }
 
     private void generateFieldInRegisterForm() {
-        if (StudentInfoFormController.StuDto != null) {
-            studentDto = StudentInfoFormController.StuDto;
+        if (studentDto != null) {
             txtID.setText(studentDto.getID());
             txtName.setText(studentDto.getName());
             cmbClass.setValue(studentDto.getStu_Class());
@@ -275,7 +281,7 @@ public class RegistrationPayForm implements Initializable {
         PaymentDto PayDto = new PaymentDto(PayId,StuId,BarId,StuName,type,StuClass,month,Subject,PayAmount,date,time);
 
         try {
-            boolean isRegisterStudent = RegisterStudentModel.SaveStudentRegisterAndPayment(studentDto, PayDto);
+            boolean isRegisterStudent = RegisterStudentModel.SaveStudentRegisterAndPayment(studentDto, PayDto,selectedImageFile);
             if (isRegisterStudent) {
                 new Alert(Alert.AlertType.INFORMATION, "Student Register Success!!").showAndWait();
                 loadAllRegistrations();
@@ -308,7 +314,7 @@ public class RegistrationPayForm implements Initializable {
             hashMap.put("Pay_Month", month);
             hashMap.put("Amount", Amount);
 
-            InputStream resourceAsStream = getClass().getResourceAsStream("../report/Payment.jrxml");
+            InputStream resourceAsStream = getClass().getResourceAsStream("/report/Payment.jrxml");
             JasperDesign load = JRXmlLoader.load(resourceAsStream);
             JasperReport compileReport = JasperCompileManager.compileReport(load);
             JasperPrint jasperPrint = JasperFillManager.fillReport(

@@ -5,23 +5,25 @@ import lk.ijse.ProjectSihina.controller.StudentInfoFormController;
 import lk.ijse.ProjectSihina.db.DbConnection;
 import lk.ijse.ProjectSihina.dto.PaymentDto;
 import lk.ijse.ProjectSihina.dto.StudentDto;
-import lk.ijse.ProjectSihina.dto.Tm.RegisterTm;
 
+import java.io.File;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class RegisterStudentModel {
-    public static boolean SaveStudentRegisterAndPayment(StudentDto studentDto, PaymentDto payDto) throws SQLException {
+    public static boolean SaveStudentRegisterAndPayment(StudentDto studentDto, PaymentDto payDto, File selectedImageFile) throws SQLException {
         Connection connection = null;
-
         try {
             connection= DbConnection.getInstance().getConnection();
             connection.setAutoCommit(false);
-            boolean isSaved = StudentModel.saveStudent(studentDto, StudentInfoFormController.selectedImageFile);
+            boolean isSaved = StudentModel.saveStudent(studentDto,selectedImageFile);
+            System.out.println(1);
             if (isSaved) {
+                System.out.println(2);
                 boolean isAddPayment = PaymentModel.AddPayment(payDto);
                 if (isAddPayment) {
+                    System.out.println(3);
                     boolean isSaveRegistration = saveDetailRegistration(studentDto, payDto);
                     if (isSaveRegistration) {
                         connection.commit();
@@ -51,10 +53,11 @@ public class RegisterStudentModel {
         pstm.setString(2, payDto.getPayID());
         pstm.setString(3, studentDto.getName());
 
-        String ClassId = null;
-        PreparedStatement pstm1 = connection.prepareStatement("SELECT class_id FROM Class WHERE Class_id = ?");
+
+        PreparedStatement pstm1 = connection.prepareStatement("SELECT class_id FROM Class WHERE Name = ?");
         pstm1.setString(1, studentDto.getStu_Class());
         ResultSet resultSet = pstm1.executeQuery();
+        String ClassId = null;
         if (resultSet.next()){
             ClassId = resultSet.getString(1);
         }
@@ -70,7 +73,7 @@ public class RegisterStudentModel {
 
     public static List<PaymentDto> getAllRegisterPayment(String type) throws SQLException {
         Connection connection = DbConnection.getInstance().getConnection();
-        PreparedStatement pstm = connection.prepareStatement("SELECT * FROM Payment WHERE Type = ? ORDER BY Pay_id DESC");
+        PreparedStatement pstm = connection.prepareStatement("SELECT P.Pay_id , P.Stu_id, S.Name, P.Stu_Class, P.date, P.Amount FROM Payment P JOIN Student S ON P.Stu_id = S.Stu_id WHERE P.Type = ? ORDER BY P.Pay_id DESC");
         pstm.setString(1, type);
         ResultSet resultSet = pstm.executeQuery();
 
@@ -82,13 +85,8 @@ public class RegisterStudentModel {
                     resultSet.getString(2),
                     resultSet.getString(3),
                     resultSet.getString(4),
-                    resultSet.getString(5),
-                    resultSet.getString(6),
-                    resultSet.getString(7),
-                    resultSet.getString(8),
-                    resultSet.getDouble(9),
-                    resultSet.getDate(10).toLocalDate(),
-                    resultSet.getTime(11).toLocalTime()
+                    resultSet.getDate(5).toLocalDate(),
+                    resultSet.getDouble(6)
             ));
         }
         return dtoList;

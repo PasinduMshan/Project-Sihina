@@ -1,7 +1,12 @@
 package lk.ijse.ProjectSihina.model;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.control.Alert;
 import lk.ijse.ProjectSihina.db.DbConnection;
+import lk.ijse.ProjectSihina.dto.ClassDto;
 import lk.ijse.ProjectSihina.dto.SubjectDto;
+import lk.ijse.ProjectSihina.dto.TeacherDto;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -88,13 +93,38 @@ public class SubjectModel {
         return "SUB001";
     }
 
-    private static String splitSubId(String CurrentSubId) {
-        if (CurrentSubId != null) {
-            int id = Integer.parseInt(CurrentSubId.substring(1));
+    private static String splitSubId(String currentId) {
+        if(currentId != null) {
+            String[] strings = currentId.split("SUB0");
+            int id = Integer.parseInt(strings[1]);
             id++;
-            return "SUB" + String.format("%03d", id);
-        } else {
-            return "SUB001";
+            String ID = String.valueOf(id);
+            int length = ID.length();
+            if (length < 2){
+                return "SUB00"+id;
+            }else {
+                if (length < 3){
+                    return "SUB0"+id;
+                }else {
+                    return "SUB"+id;
+                }
+            }
         }
+        return "SUB001";
+    }
+
+    public static List<TeacherDto> getAllTeacher() throws SQLException {
+        Connection connection = DbConnection.getInstance().getConnection();
+        PreparedStatement pstm = connection.prepareStatement("SELECT Name FROM Teacher");
+        ResultSet resultSet = pstm.executeQuery();
+
+        ArrayList<TeacherDto> dtoList = new ArrayList<>();
+
+        while (resultSet.next()){
+            dtoList.add(new TeacherDto(
+                    resultSet.getString(1)
+            ));
+        }
+        return dtoList;
     }
 }

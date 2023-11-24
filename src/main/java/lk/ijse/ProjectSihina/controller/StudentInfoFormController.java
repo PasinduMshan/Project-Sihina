@@ -106,7 +106,6 @@ public class StudentInfoFormController implements Initializable {
 
     public static File selectedImageFile;
 
-    public static StudentDto StuDto ;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -236,9 +235,8 @@ public class StudentInfoFormController implements Initializable {
     @FXML
     void btnPrintOnAction(ActionEvent event)  {
         try {
-            InputStream resourceAsStream = getClass().getResourceAsStream("../report/AllStudentList.jrxml");
-            JasperDesign load = null;
-            load = JRXmlLoader.load(resourceAsStream);
+            InputStream resourceAsStream = getClass().getResourceAsStream("/report/allStudentList.jrxml");
+            JasperDesign load = JRXmlLoader.load(resourceAsStream);
             JasperReport compileReport = JasperCompileManager.compileReport(load);
             JasperPrint jasperPrint = JasperFillManager.fillReport(
                     compileReport,
@@ -256,23 +254,36 @@ public class StudentInfoFormController implements Initializable {
 
     public StudentDto getAllValueInField(){
         String Id = txtID.getText();
+        System.out.println(Id);
         String BarcodeId = txtBarcodeID.getText();
+        System.out.println(BarcodeId);
         String Name = txtNameWithInitials.getText();
+        System.out.println(Name);
         String Address = txtAddress.getText();
+        System.out.println(Address);
         String genderPromptTxt = cmbGender.getValue();
+        System.out.println(genderPromptTxt);
         String email = txtEmail.getText();
+        System.out.println(email);
         LocalDate dob = LocalDate.parse(txtDateOfBirth.getText());
+        System.out.println(dob);
         String contact = txtContact.getText();
+        System.out.println(contact);
         String classPromptTxt = cmbClass.getValue();
+        System.out.println(classPromptTxt);
         String subjects = txtSubject.getText();
+        System.out.println(subjects);
         Image studentImage = imageStudent.getImage();
+        System.out.println(studentImage);
 
-        if (Id.isEmpty() || BarcodeId.isEmpty() || genderPromptTxt.isEmpty() || classPromptTxt.isEmpty() || subjects.isEmpty() || studentImage == null) {
+        if (Id.isEmpty() || BarcodeId.isEmpty() || genderPromptTxt.isEmpty() || classPromptTxt.isEmpty() || subjects.isEmpty()) {
             new Alert(Alert.AlertType.ERROR,"Some Fields are empty!!!").showAndWait();
+
         }
         boolean validateDetail = validateStudentDetail(Name, Address, email, dob, contact);
         StudentDto studentDto = null;
         if (validateDetail) {
+
             studentDto =  new StudentDto(Id, BarcodeId, Name, Address, genderPromptTxt, email, dob, contact, classPromptTxt, subjects, studentImage);
         }
         return studentDto;
@@ -280,7 +291,7 @@ public class StudentInfoFormController implements Initializable {
 
     private boolean validateStudentDetail(String name, String address, String email, LocalDate dob, String contact) {
 
-        boolean matches = Pattern.matches("[A-Za-z]+", name);
+        boolean matches = Pattern.matches("[A-Za-z\\s]+", name);
         if (!matches) {
             new Alert(Alert.AlertType.ERROR,"Invalid Name!!").show();
             return false;
@@ -299,7 +310,7 @@ public class StudentInfoFormController implements Initializable {
         }
 
         String Dob = String.valueOf(dob);
-        boolean matches3 = Pattern.matches("[0-9-]", Dob);
+        boolean matches3 = Pattern.matches("[0-9-]+", Dob);
         if (!matches3) {
             new Alert(Alert.AlertType.ERROR,"Invalid Date Of Birth!!").show();
             return false;
@@ -316,12 +327,14 @@ public class StudentInfoFormController implements Initializable {
 
     @FXML
     void btnRegisterOnAction(ActionEvent event) throws IOException {
-        Parent rootNode = FXMLLoader.load(this.getClass().getResource("/view/Registration_Pay_Form.fxml"));
+        FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/view/Registration_Pay_Form.fxml"));
+        Parent rootNode = loader.load();
+        RegistrationPayForm registrationPayForm = loader.getController();
+        registrationPayForm.initialData(getAllValueInField(), selectedImageFile);
         Scene scene = new Scene(rootNode);
         Stage stage = new Stage();
         stage.setScene(scene);
         stage.show();
-        StuDto = getAllValueInField();
     }
 
     @FXML
@@ -338,7 +351,7 @@ public class StudentInfoFormController implements Initializable {
         String subject = txtSubject.getText();
         Image studentImage = imageStudent.getImage();
 
-        if (ID.isEmpty() || Bar_id.isEmpty() || gender.isEmpty() || stu_class.isEmpty() || subject.isEmpty() || studentImage == null) {
+        if (ID.isEmpty() || Bar_id.isEmpty() || gender.isEmpty() || stu_class.isEmpty() || subject.isEmpty()) {
             new Alert(Alert.AlertType.ERROR,"Some Fields are empty!!!").showAndWait();
         }
         boolean UpdateValidated = validateStudentDetail(name, address, email, dob, contact);

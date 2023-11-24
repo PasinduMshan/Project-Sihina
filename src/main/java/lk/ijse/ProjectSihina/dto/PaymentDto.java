@@ -36,4 +36,13 @@ public class PaymentDto {
         PayMonth = payMonth;
         Amount = amount;
     }
+
+    public PaymentDto(String payID, String stuID, String stuName, String stuClass, LocalDate date, double amount) {
+        PayID = payID;
+        StuID = stuID;
+        StuName = stuName;
+        StuClass = stuClass;
+        Amount = amount;
+        this.date = date;
+    }
 }
