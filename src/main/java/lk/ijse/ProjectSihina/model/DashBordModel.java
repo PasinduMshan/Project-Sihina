@@ -12,7 +12,7 @@ public class DashBordModel {
 
     public static String getSumOfAmount(LocalDate date) throws SQLException {
         Connection connection = DbConnection.getInstance().getConnection();
-        PreparedStatement pstm = connection.prepareStatement("SELECT COUNT(Amount) FROM Payment WHERE date = ?");
+        PreparedStatement pstm = connection.prepareStatement("SELECT SUM(Amount) FROM Payment WHERE date = ?");
         pstm.setDate(1, Date.valueOf(date));
         ResultSet resultSet = pstm.executeQuery();
         String count = null;
@@ -55,13 +55,48 @@ public class DashBordModel {
         return Count;
     }
 
-    /*public static List<DashBordScheduleDto> getTodaySchedule() throws SQLException {
+    public static List<DashBordScheduleDto> getTodaySchedule() throws SQLException {
         Connection connection = DbConnection.getInstance().getConnection();
-        PreparedStatement pstm = connection.prepareStatement("SELECT S.Start_Time , S.End_Time , C.Name , Su.Sub_Name FROM Schedule S JOIN Class C ON S.class_id = C.class_id JOIN Subject Su ON Su.Sub_id = S.Sub_id");
+        PreparedStatement pstm = connection.prepareStatement("SELECT S.Start_Time , S.End_Time , C.Name , Su.Sub_Name " +
+                "FROM Schedule S JOIN Class C ON S.class_id = C.class_id JOIN Subject Su ON Su.Sub_id = S.Sub_id");
         ResultSet resultSet = pstm.executeQuery();
 
-        ArrayList<Object> dtoList = new ArrayList<>();
+        ArrayList<DashBordScheduleDto> dtoList = new ArrayList<>();
 
+        String type = "Today Class";
 
-    }*/
+        while (resultSet.next()) {
+            dtoList.add(new DashBordScheduleDto(
+                    resultSet.getTime(1).toLocalTime(),
+                    resultSet.getTime(2).toLocalTime(),
+                    resultSet.getString(3),
+                    resultSet.getString(4),
+                    type
+            ));
+        }
+        return dtoList;
+    }
+
+    public static List<DashBordScheduleDto> getTodayExams(LocalDate date) throws SQLException {
+        Connection connection = DbConnection.getInstance().getConnection();
+        PreparedStatement pstm = connection.prepareStatement("SELECT E.Start_time, E.End_time, C.Name, Su.Sub_Name " +
+                "FROM Exam E JOIN Class C ON E.class_id = C.class_id JOIN Subject Su ON E.Sub_id = Su.Sub_id WHERE E.date = ?");
+        pstm.setString(1, String.valueOf(date));
+        ResultSet resultSet = pstm.executeQuery();
+
+        ArrayList<DashBordScheduleDto> dtoList = new ArrayList<>();
+
+        String type = "Exam";
+
+        while (resultSet.next()) {
+            dtoList.add(new DashBordScheduleDto(
+                    resultSet.getTime(1).toLocalTime(),
+                    resultSet.getTime(2).toLocalTime(),
+                    resultSet.getString(3),
+                    resultSet.getString(4),
+                    type
+            ));
+        }
+        return dtoList;
+    }
 }

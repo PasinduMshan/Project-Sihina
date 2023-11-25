@@ -13,10 +13,13 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import lk.ijse.ProjectSihina.User.UserConnection;
+import lk.ijse.ProjectSihina.dto.DashBordScheduleDto;
 import lk.ijse.ProjectSihina.dto.Tm.DashBoardScheduleTm;
 import lk.ijse.ProjectSihina.model.DashBordModel;
 
@@ -28,6 +31,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
+import java.util.List;
 
 public class DashBoardFormController {
     @FXML
@@ -75,6 +79,9 @@ public class DashBoardFormController {
     @FXML
     private TableColumn<?, ?> colType;
 
+    @FXML
+    private TableView<DashBoardScheduleTm> tblSchedule;
+
     public void initialize() {
         setDateandTime();
         setUserName();
@@ -82,14 +89,52 @@ public class DashBoardFormController {
         getStudentCount();
         getTeacherCount();
         getSubjectCount();
-        //loadAllDetail();
+        setCellValueFactory();
+        loadAllDetail();
     }
 
-    /*private void loadAllDetail() {
+    private void setCellValueFactory() {
+        colStartTime.setCellValueFactory(new PropertyValueFactory<>("StartTime"));
+        colEndTime.setCellValueFactory(new PropertyValueFactory<>("EndTime"));
+        colGrade.setCellValueFactory(new PropertyValueFactory<>("Stu_Class"));
+        colSubject.setCellValueFactory(new PropertyValueFactory<>("Subject"));
+        colType.setCellValueFactory(new PropertyValueFactory<>("Type"));
+    }
+
+    private void loadAllDetail() {
         ObservableList<DashBoardScheduleTm> obList = FXCollections.observableArrayList();
 
-       // DashBordModel.getTodaySchedule();
-    }*/
+        try {
+            List<DashBordScheduleDto> dtoList = DashBordModel.getTodaySchedule();
+
+            for (DashBordScheduleDto dto : dtoList) {
+                obList.add(new DashBoardScheduleTm(
+                        dto.getStartTime(),
+                        dto.getEndTime(),
+                        dto.getStu_Class(),
+                        dto.getSubject(),
+                        dto.getType()
+                ));
+            }
+            LocalDate date = LocalDate.parse(lblDate.getText());
+            List<DashBordScheduleDto> todayExams = DashBordModel.getTodayExams(date);
+
+            for (DashBordScheduleDto dtoEx : todayExams) {
+                obList.add(new DashBoardScheduleTm(
+                        dtoEx.getStartTime(),
+                        dtoEx.getEndTime(),
+                        dtoEx.getStu_Class(),
+                        dtoEx.getSubject(),
+                        dtoEx.getType()
+                ));
+            }
+
+            tblSchedule.setItems(obList);
+        } catch (SQLException e) {
+            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
+        }
+
+    }
 
     private void getSubjectCount() {
         try {

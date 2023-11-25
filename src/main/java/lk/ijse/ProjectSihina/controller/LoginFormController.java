@@ -7,10 +7,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import lk.ijse.ProjectSihina.User.UserConnection;
-import lk.ijse.ProjectSihina.dto.UserDto;
 import lk.ijse.ProjectSihina.model.LoginModel;
 
 import java.io.IOException;
@@ -78,10 +78,34 @@ public class LoginFormController {
     @FXML
     void btnSignUpOnAction(ActionEvent event) throws IOException {
         Parent rootNode = FXMLLoader.load(this.getClass().getResource("/view/Singup_Form.fxml"));
-
         Scene scene = new Scene(rootNode);
         Stage stage = (Stage) this.rootNode.getScene().getWindow();
-
         stage.setScene(scene);
     }
+
+    public static void switchTextFieldOnArrowPress(JFXTextField textField, JFXTextField nextTextField) {
+        textField.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
+            switch (event.getCode()) {
+                case DOWN:
+                    nextTextField.requestFocus();
+                    event.consume();
+                    break;
+                case UP:
+                    nextTextField.requestFocus();
+                    break;
+            }
+        });
+    }
+
+    @FXML
+    void PasswordOnAction(ActionEvent event) throws IOException {
+        switchTextFieldOnArrowPress(txtPassword,txtUserName);
+        btnLoginOnAction(event);
+    }
+
+    @FXML
+    void userNameOnAction(ActionEvent event) {
+        switchTextFieldOnArrowPress(txtUserName,txtPassword);
+    }
+
 }

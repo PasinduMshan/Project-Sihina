@@ -42,8 +42,8 @@
          </children></AnchorPane>
       <AnchorPane layoutX="719.0" layoutY="-3.0" prefHeight="748.0" prefWidth="574.0">
          <children>
-            <JFXTextField fx:id="txtUserName" layoutX="80.0" layoutY="160.0" prefHeight="33.0" prefWidth="375.0" promptText="User Name" />
-            <JFXTextField fx:id="txtPassword" layoutX="80.0" layoutY="276.0" prefHeight="33.0" prefWidth="375.0" promptText="Password" />
+            <JFXTextField fx:id="txtUserName" layoutX="80.0" layoutY="160.0" onAction="#userNameOnAction" prefHeight="33.0" prefWidth="375.0" promptText="User Name" />
+            <JFXTextField fx:id="txtPassword" layoutX="80.0" layoutY="276.0" onAction="#PasswordOnAction" prefHeight="33.0" prefWidth="375.0" promptText="Password" />
             <JFXButton alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" layoutX="238.0" layoutY="423.0" onAction="#btnLoginOnAction" prefHeight="33.0" prefWidth="82.0" ripplerFill="BLACK" style="-fx-background-color: #B1A8B9; -fx-background-radius: 10;" text="Login" textFill="#101072">
                <font>
                   <Font name="System Bold" size="18.0" />

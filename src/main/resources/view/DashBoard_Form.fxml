@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -27,51 +28,81 @@
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </JFXButton>
             <JFXButton alignment="CENTER" buttonType="RAISED" layoutX="27.0" layoutY="169.0" onAction="#btnStudentOnAction" prefHeight="40.0" prefWidth="191.0" style="-fx-background-color: #a29bfe; -fx-background-radius: 10;" text="     Students">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </JFXButton>
             <JFXButton alignment="CENTER" buttonType="RAISED" layoutX="27.0" layoutY="225.0" onAction="#btnTeacherOnAction" prefHeight="40.0" prefWidth="191.0" style="-fx-background-color: #a29bfe; -fx-background-radius: 10;" text="     Teachers">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </JFXButton>
             <JFXButton alignment="CENTER" buttonType="RAISED" layoutX="27.0" layoutY="281.0" onAction="#btnClassOnAction" prefHeight="40.0" prefWidth="191.0" style="-fx-background-color: #a29bfe; -fx-background-radius: 10;" text="Class">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </JFXButton>
             <JFXButton alignment="CENTER" buttonType="RAISED" layoutX="27.0" layoutY="565.0" onAction="#btnPaymentOnAction" prefHeight="40.0" prefWidth="191.0" style="-fx-background-color: #a29bfe; -fx-background-radius: 10;" text="     Payment">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </JFXButton>
             <JFXButton alignment="CENTER" buttonType="RAISED" layoutX="27.0" layoutY="394.0" onAction="#btnSubjectOnAction" prefHeight="40.0" prefWidth="191.0" style="-fx-background-color: #a29bfe; -fx-background-radius: 10;" text="     Subjects">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </JFXButton>
             <JFXButton alignment="CENTER" buttonType="RAISED" layoutX="27.0" layoutY="451.0" onAction="#btnScheduleOnAction" prefHeight="40.0" prefWidth="191.0" style="-fx-background-color: #a29bfe; -fx-background-radius: 10;" text="      Schedule">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </JFXButton>
             <JFXButton alignment="CENTER" buttonType="RAISED" layoutX="27.0" layoutY="338.0" onAction="#btnAttendanceOnAction" prefHeight="40.0" prefWidth="191.0" style="-fx-background-color: #a29bfe; -fx-background-radius: 10;" text="          Attendance">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </JFXButton>
             <JFXButton alignment="CENTER" buttonType="RAISED" layoutX="27.0" layoutY="510.0" onAction="#btnExamsOnAction" prefHeight="40.0" prefWidth="191.0" style="-fx-background-color: #a29bfe; -fx-background-radius: 10;" text="  Exams">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </JFXButton>
             <JFXButton alignment="CENTER" buttonType="RAISED" layoutX="50.0" layoutY="646.0" onAction="#btnLogOutOnAction" prefHeight="40.0" prefWidth="146.0" style="-fx-background-color: #a29bfe; -fx-background-radius: 10;" text="     Log out">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </JFXButton>
             <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="46.0" layoutY="116.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -131,9 +162,9 @@
                   <Font name="System Bold" size="14.0" />
                </font>
             </Label>
-            <Label fx:id="lblUserName" layoutX="13.0" layoutY="36.0">
+            <Label fx:id="lblUserName" layoutX="13.0" layoutY="36.0" textFill="#65686b">
                <font>
-                  <Font name="System Bold" size="34.0" />
+                  <Font name="System Bold" size="32.0" />
                </font>
             </Label>
             <Label fx:id="lblDate" layoutX="880.0" layoutY="51.0" textFill="#3b3b40">
@@ -148,7 +179,7 @@
             </Label>
             <AnchorPane layoutX="32.0" layoutY="113.0" prefHeight="125.0" prefWidth="215.0" style="-fx-background-color: #00BEDC; -fx-background-radius: 10;">
                <children>
-                  <Label layoutX="20.0" layoutY="14.0" text="Students Count" textFill="#fffafa">
+                  <Label layoutX="20.0" layoutY="14.0" text="Students Count">
                      <font>
                         <Font name="System Bold" size="20.0" />
                      </font>
@@ -240,36 +271,51 @@
                   </TableView>
                </children>
             </AnchorPane>
-            <JFXButton buttonType="RAISED" layoutX="771.0" layoutY="304.0" onAction="#btnUserSettingOnAction" prefHeight="93.0" prefWidth="137.0" style="-fx-background-color: #DDF4FF; -fx-background-radius: 10;" text="                                                                              User  Setting" textAlignment="CENTER" wrapText="true">
+            <JFXButton buttonType="RAISED" layoutX="772.0" layoutY="281.0" onAction="#btnUserSettingOnAction" prefHeight="93.0" prefWidth="137.0" style="-fx-background-color: #DDF4FF; -fx-background-radius: 10;" text="User  Setting" textAlignment="CENTER" wrapText="true">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
+               <graphic>
+                  <ImageView fitHeight="41.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Images/setting.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </JFXButton>
-            <JFXButton buttonType="RAISED" layoutX="772.0" layoutY="437.0" onAction="#btnEmailOnAction" prefHeight="93.0" prefWidth="137.0" style="-fx-background-color: #DDF4FF; -fx-background-radius: 10;" text="                                                                               Email" textAlignment="CENTER" wrapText="true">
+            <JFXButton buttonType="RAISED" layoutX="772.0" layoutY="416.0" onAction="#btnEmailOnAction" prefHeight="93.0" prefWidth="137.0" style="-fx-background-color: #DDF4FF; -fx-background-radius: 10;" text="   Email" textAlignment="CENTER" wrapText="true">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
+               <graphic>
+                  <ImageView fitHeight="40.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Images/Email.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </JFXButton>
-            <ImageView fitHeight="44.0" fitWidth="52.0" layoutX="820.0" layoutY="448.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../Images/Email.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="55.0" fitWidth="52.0" layoutX="814.0" layoutY="312.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../Images/setting.png" />
-               </image>
-            </ImageView>
-            <JFXButton buttonType="RAISED" layoutX="774.0" layoutY="570.0" onAction="#btnAboutOnAction" prefHeight="93.0" prefWidth="137.0" style="-fx-background-color: #DDF4FF; -fx-background-radius: 10;" text="                                                                            About Us" textAlignment="CENTER" wrapText="true">
+            <JFXButton buttonType="RAISED" layoutX="772.0" layoutY="552.0" onAction="#btnAboutOnAction" prefHeight="93.0" prefWidth="137.0" style="-fx-background-color: #DDF4FF; -fx-background-radius: 10;" text="About Us &amp; Contact" textAlignment="CENTER" wrapText="true">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
+               <graphic>
+                  <ImageView fitHeight="46.0" fitWidth="57.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Images/about-us.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </JFXButton>
-            <ImageView fitHeight="44.0" fitWidth="44.0" layoutX="820.0" layoutY="584.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../Images/about-us.png" />
-               </image>
-            </ImageView>
             <Label fx:id="lblUserName1" layoutX="23.0" layoutY="46.0">
                <font>
                   <Font name="System Bold" size="34.0" />

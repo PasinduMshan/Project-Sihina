@@ -30,20 +30,20 @@ create table Student (
 
 create table Payment (
     Pay_id varchar(50) primary key,
-    Stu_id varchar(50),
-    Type varchar(50),
-    Stu_Class varchar(50),
-    Subject varchar(50),
-    Pay_Month varchar(15),
-    date DATE,
-    time TIME,
+    Stu_id varchar(50) not null ,
+    Type varchar(50) not null ,
+    Stu_Class varchar(50) not null ,
+    Subject varchar(50) not null ,
+    Pay_Month varchar(15) not null ,
+    date DATE not null ,
+    time TIME not null ,
     Amount double(15,2),
     constraint foreign key (Stu_id) references Student (Stu_id) on UPDATE cascade on DELETE cascade
 );
 
 create table Class (
     class_id varchar(50) primary key ,
-    Name varchar(50)
+    Name varchar(50) not null
 );
 
 create table Registration (
@@ -75,18 +75,18 @@ create table Attendance (
 
 create table Subject (
     Sub_id varchar(50) primary key ,
-    Sub_Name varchar(30),
-    AvailableClass varchar(45),
-    teacherName varchar(40)
+    Sub_Name varchar(30) not null ,
+    AvailableClass varchar(45) not null ,
+    teacherName varchar(40) not null
 
 );
 
 create table SubjectDetail (
-    Sub_id varchar(50),
-    class_id varchar(50),
-    date DATE,
-    Start_Time TIME,
-    End_Time TIME,
+    Sub_id varchar(50) not null ,
+    class_id varchar(50) not null ,
+    date DATE not null ,
+    Start_Time TIME not null ,
+    End_Time TIME not null ,
     constraint foreign key (Sub_id) references Subject (Sub_id) on UPDATE cascade on DELETE cascade,
     constraint foreign key (class_id) references Class (class_id) on UPDATE cascade on DELETE cascade
 );
