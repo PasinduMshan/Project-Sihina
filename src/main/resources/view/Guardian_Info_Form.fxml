@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="moveNode" prefHeight="700.0" prefWidth="1011.0" style="-fx-background-color: #dcdde1; -fx-background-radius: 10;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.ProjectSihina.controller.GuardianInfoFormController">
+    <children>
+        <JFXTextField fx:id="txtGuardianName" layoutX="334.0" layoutY="109.0" prefHeight="30.0" prefWidth="241.0" promptText="Guardian Name">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </JFXTextField>
+        <Label layoutX="42.0" layoutY="23.0" text="Guardian Infomation">
+            <font>
+                <Font name="System Bold" size="30.0" />
+            </font>
+        </Label>
+        <JFXTextField fx:id="txtGuardianID" layoutX="88.0" layoutY="109.0" onAction="#btnGuardianIDSearchOnAction" prefHeight="30.0" prefWidth="159.0" promptText="Guardian ID">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </JFXTextField>
+        <TableView fx:id="tblGuardian" layoutX="63.0" layoutY="297.0" prefHeight="379.0" prefWidth="886.0">
+            <columns>
+                <TableColumn fx:id="colGuardianId" prefWidth="99.0" text="GuardianID" />
+                <TableColumn fx:id="colStuId" prefWidth="94.0" text="Student ID" />
+                <TableColumn fx:id="colGuardianName" prefWidth="151.0" text="Guardian Name" />
+            <TableColumn fx:id="colOccupation" prefWidth="188.0" text="Occupation" />
+            <TableColumn fx:id="colContact" prefWidth="145.0" text="Contact No" />
+            <TableColumn fx:id="colEmail" prefWidth="207.0" text="E-Mail" />
+            </columns>
+        </TableView>
+        <JFXButton buttonType="RAISED" layoutX="139.0" layoutY="231.0" onAction="#btnAddOnAction" prefHeight="40.0" prefWidth="108.0" style="-fx-background-color: #54a9ff; -fx-background-radius: 15;" text="Add">
+            <font>
+                <Font name="System Bold" size="16.0" />
+            </font>
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+        </JFXButton>
+        <JFXButton buttonType="RAISED" layoutX="293.0" layoutY="231.0" onAction="#btnUpdateOnAction" prefHeight="40.0" prefWidth="108.0" style="-fx-background-color: #54a9ff; -fx-background-radius: 15;" text="Update">
+            <font>
+                <Font name="System Bold" size="16.0" />
+            </font>
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+        </JFXButton>
+        <JFXButton buttonType="RAISED" layoutX="452.0" layoutY="231.0" onAction="#btnDeleteOnAction" prefHeight="40.0" prefWidth="108.0" style="-fx-background-color: #ff5454; -fx-background-radius: 15;" text="Delete">
+            <font>
+                <Font name="System Bold" size="16.0" />
+            </font>
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+        </JFXButton>
+        <JFXButton buttonType="RAISED" layoutX="612.0" layoutY="231.0" onAction="#btnSearchOnAction" prefHeight="40.0" prefWidth="108.0" style="-fx-background-color: #54a9ff; -fx-background-radius: 15;" text="Search">
+            <font>
+                <Font name="System Bold" size="16.0" />
+            </font>
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+        </JFXButton>
+        <JFXButton buttonType="RAISED" layoutX="765.0" layoutY="231.0" onAction="#btnPrintOnAction" prefHeight="40.0" prefWidth="108.0" style="-fx-background-color: #54a9ff; -fx-background-radius: 15;" text="Print">
+            <font>
+                <Font name="System Bold" size="16.0" />
+            </font>
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+        </JFXButton>
+      <JFXTextField fx:id="txtStudentId" layoutX="88.0" layoutY="165.0" onAction="#btnStudentGuardianSearchOnAction" prefHeight="30.0" prefWidth="159.0" promptText="Student ID">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </JFXTextField>
+      <JFXTextField fx:id="txtEmail" layoutX="672.0" layoutY="165.0" prefHeight="30.0" prefWidth="241.0" promptText="E-mail Address">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </JFXTextField>
+      <JFXTextField fx:id="txtContactNo" layoutX="672.0" layoutY="109.0" onAction="#btnGuardianContactSearchOnAction" prefHeight="30.0" prefWidth="241.0" promptText="Contact No">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </JFXTextField>
+      <JFXTextField fx:id="txtOccupation" layoutX="335.0" layoutY="165.0" prefHeight="30.0" prefWidth="241.0" promptText="Occupation">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </JFXTextField>
+    </children>
+</AnchorPane>

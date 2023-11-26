@@ -19,6 +19,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
 import lk.ijse.ProjectSihina.Enums.Months;
 import lk.ijse.ProjectSihina.dto.ClassDto;
+import lk.ijse.ProjectSihina.dto.GuardianDto;
 import lk.ijse.ProjectSihina.dto.PaymentDto;
 import lk.ijse.ProjectSihina.dto.StudentDto;
 import lk.ijse.ProjectSihina.dto.Tm.RegisterTm;
@@ -99,6 +100,7 @@ public class RegistrationPayForm implements Initializable {
 
     private StudentDto studentDto;
     private File selectedImageFile;
+    private GuardianDto guardianDto;
 
     private Object year;
     private Object month;
@@ -118,9 +120,10 @@ public class RegistrationPayForm implements Initializable {
         lblType.setText(Type);
     }
 
-    public void initialData(StudentDto dto, File selectedImageFile) {
+    public void initialData(StudentDto dto, File selectedImageFile, GuardianDto guardianDto) {
         this.studentDto = dto;
         this.selectedImageFile = selectedImageFile;
+        this.guardianDto = guardianDto;
     }
 
     private void setCellValueFactory() {
@@ -281,7 +284,7 @@ public class RegistrationPayForm implements Initializable {
         PaymentDto PayDto = new PaymentDto(PayId,StuId,BarId,StuName,type,StuClass,month,Subject,PayAmount,date,time);
 
         try {
-            boolean isRegisterStudent = RegisterStudentModel.SaveStudentRegisterAndPayment(studentDto, PayDto,selectedImageFile);
+            boolean isRegisterStudent = RegisterStudentModel.SaveStudentRegisterAndPayment(studentDto, PayDto,selectedImageFile, guardianDto);
             if (isRegisterStudent) {
                 new Alert(Alert.AlertType.INFORMATION, "Student Register Success!!").showAndWait();
                 loadAllRegistrations();
@@ -292,7 +295,6 @@ public class RegistrationPayForm implements Initializable {
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
-
 
     }
 

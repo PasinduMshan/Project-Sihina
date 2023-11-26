@@ -254,44 +254,33 @@ public class StudentInfoFormController implements Initializable {
 
     public StudentDto getAllValueInField(){
         String Id = txtID.getText();
-        System.out.println(Id);
         String BarcodeId = txtBarcodeID.getText();
-        System.out.println(BarcodeId);
         String Name = txtNameWithInitials.getText();
-        System.out.println(Name);
         String Address = txtAddress.getText();
-        System.out.println(Address);
         String genderPromptTxt = cmbGender.getValue();
-        System.out.println(genderPromptTxt);
         String email = txtEmail.getText();
-        System.out.println(email);
-        LocalDate dob = LocalDate.parse(txtDateOfBirth.getText());
-        System.out.println(dob);
+        String dob = txtDateOfBirth.getText();
         String contact = txtContact.getText();
-        System.out.println(contact);
         String classPromptTxt = cmbClass.getValue();
-        System.out.println(classPromptTxt);
         String subjects = txtSubject.getText();
-        System.out.println(subjects);
         Image studentImage = imageStudent.getImage();
-        System.out.println(studentImage);
 
         if (Id.isEmpty() || BarcodeId.isEmpty() || genderPromptTxt.isEmpty() || classPromptTxt.isEmpty() || subjects.isEmpty()) {
             new Alert(Alert.AlertType.ERROR,"Some Fields are empty!!!").showAndWait();
 
         }
-        boolean validateDetail = validateStudentDetail(Name, Address, email, dob, contact);
+        boolean validateDetail = validateStudentDetail(Name, Address, email,dob, contact);
         StudentDto studentDto = null;
         if (validateDetail) {
-
-            studentDto =  new StudentDto(Id, BarcodeId, Name, Address, genderPromptTxt, email, dob, contact, classPromptTxt, subjects, studentImage);
+            LocalDate date = LocalDate.parse(dob);
+            studentDto =  new StudentDto(Id, BarcodeId, Name, Address, genderPromptTxt, email, date, contact, classPromptTxt, subjects, studentImage);
         }
         return studentDto;
     }
 
-    private boolean validateStudentDetail(String name, String address, String email, LocalDate dob, String contact) {
+    private boolean validateStudentDetail(String name, String address, String email, String dob, String contact) {
 
-        boolean matches = Pattern.matches("[A-Za-z\\s]+", name);
+        boolean matches = Pattern.matches("[A-Za-z\\s.]+", name);
         if (!matches) {
             new Alert(Alert.AlertType.ERROR,"Invalid Name!!").show();
             return false;
@@ -327,14 +316,20 @@ public class StudentInfoFormController implements Initializable {
 
     @FXML
     void btnRegisterOnAction(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/view/Registration_Pay_Form.fxml"));
-        Parent rootNode = loader.load();
-        RegistrationPayForm registrationPayForm = loader.getController();
-        registrationPayForm.initialData(getAllValueInField(), selectedImageFile);
-        Scene scene = new Scene(rootNode);
-        Stage stage = new Stage();
-        stage.setScene(scene);
-        stage.show();
+        if ((getAllValueInField() != null) && (selectedImageFile != null)) {
+            FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/view/Guardian_Info_Form.fxml"));
+            Parent rootNode = loader.load();
+            GuardianInfoFormController guardianInfoFormController = loader.getController();
+            guardianInfoFormController.initialData(getAllValueInField(), selectedImageFile);
+            Scene scene = new Scene(rootNode);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.show();
+        } else {
+            new Alert(Alert.AlertType.ERROR,"First You Should Input Details Clearly!!!").show();
+            return;
+        }
+        System.out.println("");
     }
 
     @FXML
@@ -345,7 +340,7 @@ public class StudentInfoFormController implements Initializable {
         String address = txtAddress.getText();
         String gender = cmbGender.getValue();
         String email = txtEmail.getText();
-        LocalDate dob = LocalDate.parse(txtDateOfBirth.getText());
+        String dob = txtDateOfBirth.getText();
         String contact = txtContact.getText();
         String stu_class = cmbClass.getValue();
         String subject = txtSubject.getText();
@@ -356,7 +351,8 @@ public class StudentInfoFormController implements Initializable {
         }
         boolean UpdateValidated = validateStudentDetail(name, address, email, dob, contact);
         if (UpdateValidated) {
-            StudentDto dto = new StudentDto(ID, Bar_id, name, address, gender, email, dob, contact, stu_class, subject, studentImage);
+            LocalDate date = LocalDate.parse(dob);
+            StudentDto dto = new StudentDto(ID, Bar_id, name, address, gender, email, date, contact, stu_class, subject, studentImage);
 
             try {
                 boolean isUpdated = StudentModel.updateStudent(dto, selectedImageFile);
@@ -426,5 +422,14 @@ public class StudentInfoFormController implements Initializable {
 
     public void btnRefreshOnAction(ActionEvent actionEvent) {
         clearFields();
+    }
+
+    @FXML
+    void btnGuardianOnAction(ActionEvent event) throws IOException {
+        Parent rootNode = FXMLLoader.load(this.getClass().getResource("/view/Guardian_Info_Form.fxml"));
+        Scene scene = new Scene(rootNode);
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.show();
     }
 }

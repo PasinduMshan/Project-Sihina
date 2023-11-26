@@ -157,7 +157,7 @@
          </children></AnchorPane>
       <AnchorPane fx:id="moveNode" layoutX="261.0" layoutY="11.0" prefHeight="700.0" prefWidth="1011.0" style="-fx-background-color: #dcdde1; -fx-background-radius: 10;">
          <children>
-            <Label layoutX="14.0" layoutY="8.0" prefHeight="30.0" prefWidth="116.0" text="Welcme Back!">
+            <Label layoutX="14.0" layoutY="8.0" prefHeight="30.0" prefWidth="124.0" text="Welcome Back!">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>

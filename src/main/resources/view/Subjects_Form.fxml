@@ -27,12 +27,13 @@
                 <Font size="14.0" />
             </font>
         </JFXTextField>
-        <TableView fx:id="tblSubject" layoutX="109.0" layoutY="321.0" prefHeight="358.0" prefWidth="794.0">
+        <TableView fx:id="tblSubject" layoutX="42.0" layoutY="321.0" prefHeight="358.0" prefWidth="896.0">
             <columns>
                 <TableColumn fx:id="colId" prefWidth="117.0" text="ID" />
                 <TableColumn fx:id="colSubject" prefWidth="130.0" text="Subject" />
-                <TableColumn fx:id="colTeacherName" prefWidth="169.0" text="Teacher Name" />
-            <TableColumn fx:id="colClass" prefWidth="376.0" text="Class" />
+                <TableColumn fx:id="colTeacherName" prefWidth="176.0" text="Teacher Name" />
+            <TableColumn fx:id="colClass" prefWidth="333.0" text="Class" />
+            <TableColumn fx:id="colMonthlyAmount" prefWidth="138.0" text="Monthly Amount" />
             </columns>
         </TableView>
         <JFXButton buttonType="RAISED" layoutX="210.0" layoutY="258.0" onAction="#btnAddOnAction" prefHeight="40.0" prefWidth="108.0" style="-fx-background-color: #54a9ff; -fx-background-radius: 15;" text="Add">
@@ -68,7 +69,12 @@
             </cursor>
         </JFXButton>
       <JFXComboBox fx:id="cmbTeacherName" layoutX="684.0" layoutY="118.0" prefHeight="30.0" prefWidth="208.0" promptText="Teacher" />
-      <JFXTextField fx:id="txtAvailableClass" layoutX="105.0" layoutY="185.0" prefHeight="30.0" prefWidth="484.0" promptText="Subject Available Classes">
+      <JFXTextField fx:id="txtAvailableClass" layoutX="106.0" layoutY="185.0" prefHeight="30.0" prefWidth="487.0" promptText="Subject Available Classes">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </JFXTextField>
+      <JFXTextField fx:id="txtMonthlyAmount" layoutX="684.0" layoutY="185.0" prefHeight="30.0" prefWidth="208.0" promptText="Monthly  Amount">
          <font>
             <Font size="14.0" />
          </font>

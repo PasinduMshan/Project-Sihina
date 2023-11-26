@@ -1,8 +1,8 @@
 package lk.ijse.ProjectSihina.model;
 
 import javafx.scene.control.Alert;
-import lk.ijse.ProjectSihina.controller.StudentInfoFormController;
 import lk.ijse.ProjectSihina.db.DbConnection;
+import lk.ijse.ProjectSihina.dto.GuardianDto;
 import lk.ijse.ProjectSihina.dto.PaymentDto;
 import lk.ijse.ProjectSihina.dto.StudentDto;
 
@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RegisterStudentModel {
-    public static boolean SaveStudentRegisterAndPayment(StudentDto studentDto, PaymentDto payDto, File selectedImageFile) throws SQLException {
+    public static boolean SaveStudentRegisterAndPayment(StudentDto studentDto, PaymentDto payDto, File selectedImageFile, GuardianDto guardianDto) throws SQLException {
         Connection connection = null;
         try {
             connection= DbConnection.getInstance().getConnection();
@@ -21,13 +21,20 @@ public class RegisterStudentModel {
             System.out.println(1);
             if (isSaved) {
                 System.out.println(2);
-                boolean isAddPayment = PaymentModel.AddPayment(payDto);
-                if (isAddPayment) {
+                boolean isAddGuard = GuardianModel.AddGuard(guardianDto);
+                if (isAddGuard) {
                     System.out.println(3);
-                    boolean isSaveRegistration = saveDetailRegistration(studentDto, payDto);
-                    if (isSaveRegistration) {
-                        connection.commit();
-                        return true;
+                    boolean isAddPayment = PaymentModel.AddPayment(payDto);
+                    if (isAddPayment) {
+                        System.out.println(4);
+                        boolean isSaveRegistration = saveDetailRegistration(studentDto, payDto);
+                        if (isSaveRegistration) {
+                            System.out.println(5);
+                            connection.commit();
+                            return true;
+                        } else {
+                            connection.rollback();
+                        }
                     } else {
                         connection.rollback();
                     }

@@ -33,7 +33,7 @@ public class AttendantModel {
             }else {
                 if (length < 3){
                     return "At0"+id;
-                }else {
+                } else {
                     return "At"+id;
                 }
             }

@@ -29,7 +29,7 @@
                 <Font size="14.0" />
             </font>
         </JFXTextField>
-        <TableView fx:id="tblPayment" layoutX="30.0" layoutY="252.0" prefHeight="434.0" prefWidth="794.0">
+        <TableView fx:id="tblPayment" layoutX="30.0" layoutY="233.0" prefHeight="434.0" prefWidth="794.0">
             <columns>
                 <TableColumn fx:id="colID" prefWidth="100.0" text="ID" />
                 <TableColumn fx:id="colName" prefWidth="173.0" text="Name" />
@@ -130,5 +130,18 @@
          </image>
       </ImageView>
       <JFXButton layoutX="776.0" layoutY="178.0" onAction="#AttendantCountOnAction" style="-fx-background-color: #B3CAD6; -fx-background-radius: 10;" text="Attendant Count :" />
+      <Label layoutX="384.0" layoutY="673.0" text="If you want to go Registration Payment Page :-">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Label>
+      <JFXButton layoutX="730.0" layoutY="670.0" onAction="#btnRegisterPayOnAction" text="Click here.." textFill="#24429a">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
     </children>
 </AnchorPane>

@@ -448,4 +448,12 @@ public class PaymentFormController implements Initializable {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
     }
+    @FXML
+    void btnRegisterPayOnAction(ActionEvent event) throws IOException {
+        Parent rootNode = FXMLLoader.load(this.getClass().getResource("/view/Registration_Pay_Form.fxml"));
+        Scene scene = new Scene(rootNode);
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.show();
+    }
 }
