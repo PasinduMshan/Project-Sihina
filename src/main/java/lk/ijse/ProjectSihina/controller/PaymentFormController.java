@@ -22,13 +22,13 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import lk.ijse.ProjectSihina.Enums.Months;
-import lk.ijse.ProjectSihina.db.DbConnection;
 import lk.ijse.ProjectSihina.dto.ClassDto;
 import lk.ijse.ProjectSihina.dto.PaymentDto;
 import lk.ijse.ProjectSihina.dto.SubjectDto;
 import lk.ijse.ProjectSihina.dto.Tm.PaymentTm;
 import lk.ijse.ProjectSihina.model.ClassModel;
 import lk.ijse.ProjectSihina.model.PaymentModel;
+import lk.ijse.ProjectSihina.model.SubjectModel;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.design.JasperDesign;
 import net.sf.jasperreports.engine.xml.JRXmlLoader;
@@ -99,9 +99,6 @@ public class PaymentFormController implements Initializable {
 
     @FXML
     private JFXTextField txtAttendantCount;
-
-    @FXML
-    private JFXTextField txtBarcodeId;
 
     @FXML
     private JFXTextField txtID;
@@ -238,14 +235,12 @@ public class PaymentFormController implements Initializable {
     void btnAddOnAction(ActionEvent event) {
         String payId = txtPayId.getText();
         String StuId = txtID.getText();
-        String BarId = txtBarcodeId.getText();
         String StuName = txtName.getText();
         String type = cmbType.getValue();
         String StuClass = cmbClass.getValue();
         String month = cmbMonth.getValue();
         String subject = cmbSubject.getValue();
         double amount = Double.parseDouble(txtAmount.getText());
-
         String isAmount = String.valueOf(amount);
         boolean matches = Pattern.matches("[0-9.]+", isAmount);
         if (!matches) {
@@ -256,12 +251,12 @@ public class PaymentFormController implements Initializable {
         LocalDate date = LocalDate.parse(lblDate.getText());
         LocalTime time = LocalTime.parse(lblTime.getText());
 
-        if (payId.isEmpty() || StuId.isEmpty() || BarId.isEmpty() || StuId.isEmpty() || type.isEmpty() || StuClass.isEmpty() || month.isEmpty() || subject.isEmpty()) {
+        if (payId.isEmpty() || StuId.isEmpty() || StuId.isEmpty() || type.isEmpty() || StuClass.isEmpty() || month.isEmpty() || subject.isEmpty()) {
             new Alert(Alert.AlertType.ERROR, "Some Fields Are Empty!!!").showAndWait();
             return;
         }
 
-        PaymentDto dto = new PaymentDto(payId, StuId, BarId, StuName, type, StuClass, month, subject, amount, date, time);
+        PaymentDto dto = new PaymentDto(payId, StuId, StuName, type, StuClass, month, subject, amount, date, time);
 
         try {
             boolean isAdd = PaymentModel.AddPayment(dto);
@@ -321,7 +316,7 @@ public class PaymentFormController implements Initializable {
             hashMap.put("Pay_Month", month);
             hashMap.put("Amount", Amount);
 
-            InputStream resourceAsStream = getClass().getResourceAsStream("../report/Payment.jrxml");
+            InputStream resourceAsStream = getClass().getResourceAsStream("/report/Payment.jrxml");
             JasperDesign load = JRXmlLoader.load(resourceAsStream);
             JasperReport compileReport = JasperCompileManager.compileReport(load);
             JasperPrint jasperPrint = JasperFillManager.fillReport(
@@ -348,7 +343,6 @@ public class PaymentFormController implements Initializable {
             if (dto != null) {
                 txtPayId.setText(dto.getPayID());
                 txtID.setText(dto.getStuID());
-                txtBarcodeId.setText(dto.getBarId());
                 txtName.setText(dto.getStuName());
                 cmbType.setValue(dto.getType());
                 cmbClass.setValue(dto.getStuClass());
@@ -369,7 +363,6 @@ public class PaymentFormController implements Initializable {
     void btnUpdateOnAction(ActionEvent event) {
         String payId = txtPayId.getText();
         String StuId = txtID.getText();
-        String BarId = txtBarcodeId.getText();
         String StuName = txtName.getText();
         String type = cmbType.getValue();
         String StuClass = cmbClass.getValue();
@@ -388,12 +381,12 @@ public class PaymentFormController implements Initializable {
         LocalDate date = LocalDate.parse(lblDate.getText());
         LocalTime time = LocalTime.parse(lblTime.getText());
 
-        if (payId.isEmpty() || StuId.isEmpty() || BarId.isEmpty() || StuName.isEmpty() || type.isEmpty() || StuClass.isEmpty() || month.isEmpty() || subject.isEmpty()) {
+        if (payId.isEmpty() || StuId.isEmpty() ||  StuName.isEmpty() || type.isEmpty() || StuClass.isEmpty() || month.isEmpty() || subject.isEmpty()) {
             new Alert(Alert.AlertType.ERROR, "Some Fields Are Empty!!!").showAndWait();
             return;
         }
 
-        PaymentDto dto = new PaymentDto(payId, StuId, BarId, StuName, type, StuClass, month, subject, amount, date, time);
+        PaymentDto dto = new PaymentDto(payId, StuId, StuName, type, StuClass, month, subject, amount, date, time);
 
         try {
             boolean isUpdated = PaymentModel.updatePayment(dto);
@@ -421,7 +414,6 @@ public class PaymentFormController implements Initializable {
     private void clearField() {
         txtPayId.setText("");
         txtID.setText("");
-        txtBarcodeId.setText("");
         txtName.setText("");
         cmbType.setValue("");
         cmbClass.setValue("");
@@ -456,4 +448,34 @@ public class PaymentFormController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
+
+    @FXML
+    void btnQRCodeReaderOnAction(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/view/QR_Code_Reader_Form.fxml"));
+        Parent rootNode = loader.load();
+        QRCodeReaderFormController qrCodeReaderFormController = loader.getController();
+        qrCodeReaderFormController.setPaymentFormController(this);
+        Scene scene = new Scene(rootNode);
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    @FXML
+    void btnSubjectOnAction(ActionEvent event) {
+        String subject = cmbSubject.getValue();
+        if (subject != null) {
+            try {
+                double amountINSubject = SubjectModel.getAmountINSubject(subject);
+                txtAmount.setText(String.valueOf(amountINSubject));
+            } catch (SQLException e) {
+                new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+            }
+        }
+    }
+
+    public void updateTxtID(String newID) {
+        txtID.setText(newID);
+    }
+
 }

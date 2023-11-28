@@ -116,7 +116,7 @@
          </font>
       </JFXTextField>
       <JFXPasswordField fx:id="txtConfirmPassword" layoutX="585.0" layoutY="638.0" prefHeight="28.0" prefWidth="173.0" promptText="Password" />
-      <JFXButton buttonType="RAISED" layoutX="868.0" layoutY="632.0" onAction="#btnChangeCredentialsOnAction" prefHeight="40.0" prefWidth="108.0" style="-fx-background-color: #54a9ff; -fx-background-radius: 15;" text="Change">
+      <JFXButton buttonType="RAISED" layoutX="868.0" layoutY="632.0" onAction="#btnChangeCredentialsOnAction" prefHeight="40.0" prefWidth="108.0" style="-fx-background-color: #41c643; -fx-background-radius: 15;" text="Change">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>

@@ -106,7 +106,7 @@ public class PaymentModel {
 
     public static PaymentDto SearchPaymontId(String payId) throws SQLException {
         Connection connection = DbConnection.getInstance().getConnection();
-        PreparedStatement pstm = connection.prepareStatement("SELECT P.Pay_id,P.Stu_id,S.Barcode_id,S.Name,P.Type," +
+        PreparedStatement pstm = connection.prepareStatement("SELECT P.Pay_id,P.Stu_id, S.Name,P.Type," +
                 "P.Stu_Class,P.Pay_Month,P.Subject,P.Amount,P.date,P.time FROM Payment P JOIN Student S ON P.Stu_id" +
                 " = S.Stu_id WHERE Pay_id = ?");
         pstm.setString(1, payId);
@@ -117,17 +117,16 @@ public class PaymentModel {
         if (resultSet.next()) {
             String PayID = resultSet.getString(1);
             String StuId = resultSet.getString(2);
-            String BarId = resultSet.getString(3);
-            String name = resultSet.getString(4);
-            String type = resultSet.getString(5);
-            String StuClass = resultSet.getString(6);
-            String PayMonth = resultSet.getString(7);
-            String Subject = resultSet.getString(8);
-            double Amount = resultSet.getDouble(9);
-            LocalDate date = resultSet.getDate(10).toLocalDate();
-            LocalTime time = resultSet.getTime(11).toLocalTime();
+            String name = resultSet.getString(3);
+            String type = resultSet.getString(4);
+            String StuClass = resultSet.getString(5);
+            String PayMonth = resultSet.getString(6);
+            String Subject = resultSet.getString(7);
+            double Amount = resultSet.getDouble(8);
+            LocalDate date = resultSet.getDate(9).toLocalDate();
+            LocalTime time = resultSet.getTime(10).toLocalTime();
 
-            dto = new PaymentDto(PayID,StuId,BarId,name,type,StuClass,PayMonth,Subject,Amount,date,time);
+            dto = new PaymentDto(PayID,StuId,name,type,StuClass,PayMonth,Subject,Amount,date,time);
         }
         return dto;
     }

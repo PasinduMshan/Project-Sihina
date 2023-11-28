@@ -20,6 +20,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import lk.ijse.ProjectSihina.Barcode.QRCodeGenerator;
 import lk.ijse.ProjectSihina.db.DbConnection;
 import lk.ijse.ProjectSihina.dto.ClassDto;
 import lk.ijse.ProjectSihina.dto.StudentDto;
@@ -43,9 +44,6 @@ import java.util.regex.Pattern;
 
 
 public class StudentInfoFormController implements Initializable {
-
-    @FXML
-    private TableColumn<?, ?> colBarcodeId;
 
     @FXML
     private TableColumn<?, ?> colClass;
@@ -76,9 +74,6 @@ public class StudentInfoFormController implements Initializable {
 
     @FXML
     private JFXTextField txtAddress;
-
-    @FXML
-    private JFXTextField txtBarcodeID;
 
     @FXML
     private JFXComboBox<String> cmbClass;
@@ -134,7 +129,6 @@ public class StudentInfoFormController implements Initializable {
             for (StudentDto dto : dtoList) {
                 obList.add(new StudentTM(
                         dto.getID(),
-                        dto.getBarcodeID(),
                         dto.getName(),
                         dto.getStu_Class(),
                         dto.getEmail(),
@@ -149,7 +143,6 @@ public class StudentInfoFormController implements Initializable {
 
     private void setCellValueFactory() {
         colID.setCellValueFactory(new PropertyValueFactory<>("ID"));
-        colBarcodeId.setCellValueFactory(new PropertyValueFactory<>("BarcodeId"));
         colName.setCellValueFactory(new PropertyValueFactory<>("Name"));
         colClass.setCellValueFactory(new PropertyValueFactory<>("Stu_Class"));
         colEmail.setCellValueFactory(new PropertyValueFactory<>("Email"));
@@ -254,7 +247,6 @@ public class StudentInfoFormController implements Initializable {
 
     public StudentDto getAllValueInField(){
         String Id = txtID.getText();
-        String BarcodeId = txtBarcodeID.getText();
         String Name = txtNameWithInitials.getText();
         String Address = txtAddress.getText();
         String genderPromptTxt = cmbGender.getValue();
@@ -265,7 +257,7 @@ public class StudentInfoFormController implements Initializable {
         String subjects = txtSubject.getText();
         Image studentImage = imageStudent.getImage();
 
-        if (Id.isEmpty() || BarcodeId.isEmpty() || genderPromptTxt.isEmpty() || classPromptTxt.isEmpty() || subjects.isEmpty()) {
+        if (Id.isEmpty() || genderPromptTxt.isEmpty() || classPromptTxt.isEmpty() || subjects.isEmpty()) {
             new Alert(Alert.AlertType.ERROR,"Some Fields are empty!!!").showAndWait();
 
         }
@@ -273,7 +265,7 @@ public class StudentInfoFormController implements Initializable {
         StudentDto studentDto = null;
         if (validateDetail) {
             LocalDate date = LocalDate.parse(dob);
-            studentDto =  new StudentDto(Id, BarcodeId, Name, Address, genderPromptTxt, email, date, contact, classPromptTxt, subjects, studentImage);
+            studentDto =  new StudentDto(Id, Name, Address, genderPromptTxt, email, date, contact, classPromptTxt, subjects, studentImage);
         }
         return studentDto;
     }
@@ -335,7 +327,6 @@ public class StudentInfoFormController implements Initializable {
     @FXML
     void btnUpdateOnAction(ActionEvent event) {
         String ID = txtID.getText();
-        String Bar_id = txtBarcodeID.getText();
         String name = txtNameWithInitials.getText();
         String address = txtAddress.getText();
         String gender = cmbGender.getValue();
@@ -346,13 +337,13 @@ public class StudentInfoFormController implements Initializable {
         String subject = txtSubject.getText();
         Image studentImage = imageStudent.getImage();
 
-        if (ID.isEmpty() || Bar_id.isEmpty() || gender.isEmpty() || stu_class.isEmpty() || subject.isEmpty()) {
+        if (ID.isEmpty() || gender.isEmpty() || stu_class.isEmpty() || subject.isEmpty()) {
             new Alert(Alert.AlertType.ERROR,"Some Fields are empty!!!").showAndWait();
         }
         boolean UpdateValidated = validateStudentDetail(name, address, email, dob, contact);
         if (UpdateValidated) {
             LocalDate date = LocalDate.parse(dob);
-            StudentDto dto = new StudentDto(ID, Bar_id, name, address, gender, email, date, contact, stu_class, subject, studentImage);
+            StudentDto dto = new StudentDto(ID, name, address, gender, email, date, contact, stu_class, subject, studentImage);
 
             try {
                 boolean isUpdated = StudentModel.updateStudent(dto, selectedImageFile);
@@ -371,11 +362,6 @@ public class StudentInfoFormController implements Initializable {
     }
 
     @FXML
-    void BarcodeIdSearchOnAction(ActionEvent event) {
-
-    }
-
-    @FXML
     void IdSearchOnAction(ActionEvent event) {
         String id = txtID.getText();
 
@@ -387,7 +373,6 @@ public class StudentInfoFormController implements Initializable {
             StudentDto dto = StudentModel.searchStudent(id);
 
             if (dto != null) {
-                txtBarcodeID.setText(dto.getBarcodeID());
                 txtNameWithInitials.setText(dto.getName());
                 txtAddress.setText(dto.getAddress());
                 cmbGender.setValue(dto.getGender());
@@ -407,7 +392,6 @@ public class StudentInfoFormController implements Initializable {
 
     private void clearFields() {
         txtID.setText("");
-        txtBarcodeID.setText("");
         txtNameWithInitials.setText("");
         txtAddress.setText("");
         cmbGender.setValue("");
@@ -431,5 +415,15 @@ public class StudentInfoFormController implements Initializable {
         Stage stage = new Stage();
         stage.setScene(scene);
         stage.show();
+    }
+
+    @FXML
+    void btcGenerateQROnAction(ActionEvent event) {
+        String StuId = txtID.getText();
+        String name = txtNameWithInitials.getText();
+        String qrCodeData = StuId;
+        String outputFilePath ="/home/pasindu/Desktop/Final Project Semester 01/QRCode png/" + name + "_" + StuId + ".png";
+
+        QRCodeGenerator.generateQRCode(qrCodeData, outputFilePath);
     }
 }

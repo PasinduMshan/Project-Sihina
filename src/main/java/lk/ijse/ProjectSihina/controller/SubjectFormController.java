@@ -43,6 +43,9 @@ public class SubjectFormController implements Initializable {
     private TableColumn<?, ?> colTeacherName;
 
     @FXML
+    private TableColumn<?, ?> colMonthlyAmount;
+
+    @FXML
     private AnchorPane moveNode;
 
     @FXML
@@ -56,6 +59,10 @@ public class SubjectFormController implements Initializable {
 
     @FXML
     private JFXTextField txtSubject;
+
+    @FXML
+    private JFXTextField txtMonthlyAmount;
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -101,7 +108,8 @@ public class SubjectFormController implements Initializable {
                         dto.getId(),
                         dto.getSubject(),
                         dto.getTeacherName(),
-                        dto.getAvailableClass()
+                        dto.getAvailableClass(),
+                        dto.getMonthlyAmount()
                 ));
             }
             tblSubject.setItems(obList);
@@ -115,6 +123,7 @@ public class SubjectFormController implements Initializable {
         colSubject.setCellValueFactory(new PropertyValueFactory<>("Subject"));
         colTeacherName.setCellValueFactory(new PropertyValueFactory<>("TeacherName"));
         colClass.setCellValueFactory(new PropertyValueFactory<>("AvailableClass"));
+        colMonthlyAmount.setCellValueFactory(new PropertyValueFactory<>("MonthlyAmount"));
     }
 
     @FXML
@@ -134,14 +143,23 @@ public class SubjectFormController implements Initializable {
             new Alert(Alert.AlertType.ERROR, "Invalid AvailableClass!!").show();
             return;
         }
+        String monthlyAmount = txtMonthlyAmount.getText();
+        boolean matches3 = Pattern.matches("[0-9.]+", monthlyAmount);
+        if (!matches3) {
+            new Alert(Alert.AlertType.ERROR,"Invalid Amount!!").show();
+            return;
+        }
+
         String teacherName = cmbTeacherName.getValue();
 
-        if (id.isEmpty() || subject.isEmpty() || AvailableClass.isEmpty() || teacherName.isEmpty()) {
+        if (id.isEmpty() || subject.isEmpty() || AvailableClass.isEmpty() || teacherName.isEmpty() || monthlyAmount.isEmpty()) {
             new Alert(Alert.AlertType.ERROR,"Empty Fields Found!!!").show();
             return;
         }
 
-        SubjectDto dto = new SubjectDto(id, subject, AvailableClass, teacherName);
+        double amount = Double.parseDouble(monthlyAmount);
+
+        SubjectDto dto = new SubjectDto(id, subject, AvailableClass, teacherName,amount);
 
         try {
             boolean isSaved = SubjectModel.saveSubject(dto);
@@ -212,14 +230,23 @@ public class SubjectFormController implements Initializable {
             return;
         }
 
+        String monthlyAmount = txtMonthlyAmount.getText();
+        boolean matches3 = Pattern.matches("[0-9.]+", monthlyAmount);
+        if (!matches3) {
+            new Alert(Alert.AlertType.ERROR,"Invalid Amount!!").show();
+            return;
+        }
+
         String teacherName = cmbTeacherName.getValue();
 
-        if (id.isEmpty() || subject.isEmpty() || AvailableClass.isEmpty() || teacherName.isEmpty()) {
+        if (id.isEmpty() || subject.isEmpty() || AvailableClass.isEmpty() || teacherName.isEmpty() || monthlyAmount.isEmpty()) {
             new Alert(Alert.AlertType.ERROR,"Empty Fields Found!!!").show();
             return;
         }
 
-        SubjectDto dto = new SubjectDto(id, subject, AvailableClass, teacherName);
+        double amount = Double.parseDouble(monthlyAmount);
+
+        SubjectDto dto = new SubjectDto(id, subject, AvailableClass, teacherName,amount);
 
         try {
             boolean isUpdated = SubjectModel.updateSubject(dto);
@@ -254,6 +281,7 @@ public class SubjectFormController implements Initializable {
                 txtSubject.setText(dto.getSubject());
                 txtAvailableClass.setText(dto.getAvailableClass());
                 cmbTeacherName.setValue(dto.getTeacherName());
+                txtMonthlyAmount.setText(String.valueOf(dto.getMonthlyAmount()));
             } else {
                 new Alert(Alert.AlertType.ERROR,"Can't Find Subject!!!").showAndWait();
             }
@@ -268,6 +296,7 @@ public class SubjectFormController implements Initializable {
         txtSubject.setText("");
         txtAvailableClass.setText("");
         cmbTeacherName.setValue("");
+        txtMonthlyAmount.setText("");
     }
 
 }

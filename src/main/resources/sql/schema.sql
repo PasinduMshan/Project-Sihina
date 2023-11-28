@@ -14,7 +14,6 @@ create table user (
 
 create table Student (
     Stu_id     varchar(50) primary key,
-    Barcode_id varchar(50) not null,
     Name       varchar(55) not null,
     Email      varchar(50) not null,
     Address    varchar(15) not null,
@@ -71,66 +70,65 @@ create table Registration (
 );
 
 create table Attendance (
-    Att_id varchar(50) primary key ,
-    Stu_id varchar(50) not null ,
-    Bar_id varchar(50) not null ,
-    Stu_Class varchar(50) not null ,
-    Subject VARCHAR(50) not null ,
-    Month VARCHAR(50)not null ,
-    date DATE not null ,
-    time TIME not null ,
-    type VARCHAR(50) not null ,
+    Att_id    varchar(50) primary key,
+    Stu_id    varchar(50) not null,
+    Stu_Class varchar(50) not null,
+    Subject   VARCHAR(50) not null,
+    Month     VARCHAR(50) not null,
+    date      DATE        not null,
+    time      TIME        not null,
+    type      VARCHAR(50) not null,
     constraint foreign key (Stu_id) references Student (Stu_id) on UPDATE cascade on DELETE cascade
 );
 
 
 create table Subject (
-    Sub_id varchar(50) primary key ,
-    Sub_Name varchar(30) not null ,
-    AvailableClass varchar(45) not null ,
-    teacherName varchar(40) not null
-
+    Sub_id         varchar(50) primary key,
+    Sub_Name       varchar(30) not null,
+    AvailableClass varchar(45) not null,
+    teacherName    varchar(40) not null,
+    MonthlyAmount  double (10,2)
 );
 
 create table SubjectDetail (
-    Sub_id varchar(50) not null ,
-    class_id varchar(50) not null ,
-    date DATE not null ,
-    Start_Time TIME not null ,
-    End_Time TIME not null ,
+    Sub_id     varchar(50) not null,
+    class_id   varchar(50) not null,
+    date       DATE        not null,
+    Start_Time TIME        not null,
+    End_Time   TIME        not null,
     constraint foreign key (Sub_id) references Subject (Sub_id) on UPDATE cascade on DELETE cascade,
     constraint foreign key (class_id) references Class (class_id) on UPDATE cascade on DELETE cascade
 );
 
 create table Exam (
-    Exam_id varchar(50) primary key ,
-    date DATE not null ,
-    Start_time TIME not null ,
-    End_time TIME not null ,
-    Description varchar(55) not null ,
-    class_id varchar(50) not null ,
-    Sub_id varchar(50) not null ,
+    Exam_id     varchar(50) primary key,
+    date        DATE        not null,
+    Start_time  TIME        not null,
+    End_time    TIME        not null,
+    Description varchar(55) not null,
+    class_id    varchar(50) not null,
+    Sub_id      varchar(50) not null,
     constraint foreign key (Sub_id) references Subject (Sub_id) on UPDATE cascade on DELETE cascade,
     constraint foreign key (class_id) references Class (class_id) on UPDATE cascade on DELETE cascade
 );
 
 create table Teacher (
-    Teacher_id varchar(50) primary key ,
-    Name varchar(50) not null ,
-    Address varchar(60) not null ,
-    Email varchar(50) not null ,
-    Contact varchar(12) not null ,
-    Subject varchar(55) not null ,
-    image LONGBLOB
+    Teacher_id varchar(50) primary key,
+    Name       varchar(50) not null,
+    Address    varchar(60) not null,
+    Email      varchar(50) not null,
+    Contact    varchar(12) not null,
+    Subject    varchar(55) not null,
+    image      LONGBLOB
 );
 
 create table Schedule (
-    class_id varchar(50) primary key ,
-    Sub_id varchar(50) not null ,
-    Teacher_id varchar(50) not null ,
-    Class_day varchar(50) not null ,
-    Start_Time TIME not null ,
-    End_Time TIME not null ,
+    class_id   varchar(50) primary key,
+    Sub_id     varchar(50) not null,
+    Teacher_id varchar(50) not null,
+    Class_day  varchar(50) not null,
+    Start_Time TIME        not null,
+    End_Time   TIME        not null,
     constraint foreign key (class_id) references Class (class_id) on UPDATE cascade on DELETE cascade,
     constraint foreign key (Sub_id) references Subject (Sub_id) on UPDATE cascade on DELETE cascade,
     constraint foreign key (Teacher_id) references Teacher (Teacher_id) on UPDATE cascade on DELETE cascade

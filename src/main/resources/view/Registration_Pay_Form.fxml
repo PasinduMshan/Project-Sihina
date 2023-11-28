@@ -37,7 +37,7 @@
                 <TableColumn fx:id="colAmount" prefWidth="181.0" text="Amount" />
             </columns>
         </TableView>
-        <JFXButton buttonType="RAISED" layoutX="866.0" layoutY="330.0" onAction="#btnPayOnAction" prefHeight="40.0" prefWidth="108.0" style="-fx-background-color: #54a9ff; -fx-background-radius: 15;" text="Pay">
+        <JFXButton buttonType="RAISED" layoutX="866.0" layoutY="330.0" onAction="#btnPayOnAction" prefHeight="40.0" prefWidth="108.0" style="-fx-background-color: #41c643; -fx-background-radius: 15;" text="Pay">
             <font>
                 <Font name="System Bold" size="16.0" />
             </font>
@@ -45,7 +45,7 @@
                 <Cursor fx:constant="HAND" />
             </cursor>
         </JFXButton>
-        <JFXButton buttonType="RAISED" layoutX="866.0" layoutY="491.0" onAction="#btnDeleteOnAction" prefHeight="40.0" prefWidth="108.0" style="-fx-background-color: #54a9ff; -fx-background-radius: 15;" text="Delete">
+        <JFXButton buttonType="RAISED" layoutX="866.0" layoutY="491.0" onAction="#btnDeleteOnAction" prefHeight="40.0" prefWidth="108.0" style="-fx-background-color: #ff5454; -fx-background-radius: 15;" text="Delete">
             <font>
                 <Font name="System Bold" size="16.0" />
             </font>

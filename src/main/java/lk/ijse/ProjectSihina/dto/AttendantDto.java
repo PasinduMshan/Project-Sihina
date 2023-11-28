@@ -12,7 +12,6 @@ import java.time.LocalTime;
 public class AttendantDto {
     String Att_id;
     String StudentId;
-    String BarcodeId;
     String StudentName;
     String ClassName;
     String Month;

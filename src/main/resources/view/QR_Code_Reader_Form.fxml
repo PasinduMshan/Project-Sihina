@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane fx:id="rootNode" prefHeight="797.0" prefWidth="463.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.ProjectSihina.controller.QRCodeReaderFormController">
+   <children>
+      <AnchorPane layoutX="8.0" layoutY="8.0" prefHeight="781.0" prefWidth="447.0" style="-fx-background-color: #eeeeee; -fx-background-radius: 10;">
+         <children>
+            <AnchorPane fx:id="miniPanel" layoutX="77.0" layoutY="91.0" prefHeight="231.0" prefWidth="294.0" style="-fx-background-color: #FDF7FF; -fx-border-color: #7C7484; -fx-border-radius: 15;" />
+            <Label layoutX="120.0" layoutY="27.0" text="QR Code Readre">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
+            <JFXButton buttonType="RAISED" layoutX="114.0" layoutY="360.0" onAction="#btnStartOnAction" prefHeight="39.0" prefWidth="94.0" style="-fx-background-color: #2bd1ff; -fx-background-radius: 15;" text="Start">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </JFXButton>
+            <JFXButton buttonType="RAISED" layoutX="246.0" layoutY="360.0" onAction="#btnPauseOnAction" prefHeight="39.0" prefWidth="94.0" style="-fx-background-color: #aaaaff; -fx-background-radius: 15;" text="Pause">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </JFXButton>
+            <Separator layoutX="26.0" layoutY="433.0" prefHeight="11.0" prefWidth="409.0" />
+            <JFXTextArea fx:id="txtDateInsertArea" layoutX="19.0" layoutY="514.0" prefHeight="218.0" prefWidth="409.0" promptText="Embedded data in QR code" style="-fx-background-color: #e5fff8;" />
+            <JFXButton buttonType="RAISED" layoutX="26.0" layoutY="464.0" onAction="#btnClearOnAction" prefHeight="24.0" prefWidth="78.0" style="-fx-background-color: #dadada; -fx-background-radius: 10;" text="Clear All" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

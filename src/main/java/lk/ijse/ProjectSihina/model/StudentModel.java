@@ -14,21 +14,20 @@ import java.util.List;
 public class StudentModel {
     public static boolean saveStudent(StudentDto dto, File imageFile) throws SQLException {
         Connection connection = DbConnection.getInstance().getConnection();
-        PreparedStatement pstm = connection.prepareStatement("INSERT INTO Student VALUES (?,?,?,?,?,?,?,?,?,?,?,?)");
+        PreparedStatement pstm = connection.prepareStatement("INSERT INTO Student VALUES (?,?,?,?,?,?,?,?,?,?,?)");
         pstm.setString(1, dto.getID());
-        pstm.setString(2, dto.getBarcodeID());
-        pstm.setString(3, dto.getName());
-        pstm.setString(4, dto.getEmail());
-        pstm.setString(5, dto.getAddress());
-        pstm.setDate(6, Date.valueOf(dto.getDob()));
-        pstm.setString(7, dto.getGender());
-        pstm.setString(8, dto.getContact());
-        pstm.setString(9, dto.getStu_Class());
-        pstm.setString(10, dto.getSubject());
+        pstm.setString(2, dto.getName());
+        pstm.setString(3, dto.getEmail());
+        pstm.setString(4, dto.getAddress());
+        pstm.setDate(5, Date.valueOf(dto.getDob()));
+        pstm.setString(6, dto.getGender());
+        pstm.setString(7, dto.getContact());
+        pstm.setString(8, dto.getStu_Class());
+        pstm.setString(9, dto.getSubject());
 
         Blob imageBlob = convertFileToBytes(imageFile);
 
-        pstm.setBlob(11, imageBlob);
+        pstm.setBlob(10, imageBlob);
 
         String userName = UserConnection.getInstance().getUserName();
         String Password = UserConnection.getInstance().getPassword();
@@ -42,7 +41,7 @@ public class StudentModel {
              user = resultSet.getString(1);
         }
 
-        pstm.setString(12, user);
+        pstm.setString(11, user);
         return pstm.executeUpdate() > 0;
 
     }
@@ -91,11 +90,9 @@ public class StudentModel {
 
     public static boolean updateStudent(StudentDto dto, File imageFile) throws SQLException {
         Connection connection = DbConnection.getInstance().getConnection();
-        PreparedStatement pstm = connection.prepareStatement("UPDATE Student SET Barcode_id = ?, Name = ?, " +
+        PreparedStatement pstm = connection.prepareStatement("UPDATE Student SET Name = ?, " +
                 "Email = ?, Address = ?, D_O_B = ?, Gender = ?, Contact = ?, Class = ?, " +
                 "subjects = ?, image = ? WHERE Stu_id = ?");
-
-        pstm.setString(1, dto.getBarcodeID());
         pstm.setString(2, dto.getName());
         pstm.setString(3, dto.getEmail());
         pstm.setString(4, dto.getAddress());
@@ -124,7 +121,6 @@ public class StudentModel {
 
         if (resultSet.next()) {
             String id = resultSet.getString(1);
-            String Bar_id = resultSet.getString(2);
             String name = resultSet.getString(3);
             String email = resultSet.getString(4);
             String address = resultSet.getString(5);
@@ -135,7 +131,7 @@ public class StudentModel {
             String subject = resultSet.getString(10);
             Image image = convertBlobToImage(resultSet.getBlob(11));
 
-            dto = new StudentDto(id,Bar_id,name,address,gender,email,dob,contact,stu_class,subject,image);
+            dto = new StudentDto(id,name,address,gender,email,dob,contact,stu_class,subject,image);
         }
 
         return dto;
@@ -143,7 +139,7 @@ public class StudentModel {
 
     public static List<StudentDto> getAllStudent() throws SQLException {
         Connection connection = DbConnection.getInstance().getConnection();
-        PreparedStatement pstm = connection.prepareStatement("SELECT Stu_id,Barcode_id,Name,Class,Email,Contact FROM Student");
+        PreparedStatement pstm = connection.prepareStatement("SELECT Stu_id,Name,Class,Email,Contact FROM Student");
         ResultSet resultSet = pstm.executeQuery();
 
         ArrayList<StudentDto> dtoList = new ArrayList<>();
@@ -155,8 +151,7 @@ public class StudentModel {
                             resultSet.getString(2),
                             resultSet.getString(3),
                             resultSet.getString(4),
-                            resultSet.getString(5),
-                            resultSet.getString(6)
+                            resultSet.getString(5)
                     )
             );
         }

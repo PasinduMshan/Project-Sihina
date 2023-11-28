@@ -23,12 +23,7 @@
                         <Font name="System Bold" size="30.0" />
                     </font>
                 </Label>
-                <JFXTextField fx:id="txtBarcodeID" layoutX="278.0" layoutY="161.0" onAction="#BarcodeIdSearchOnAction" prefHeight="30.0" prefWidth="233.0" promptText="Barcode ID">
-                    <font>
-                        <Font size="14.0" />
-                    </font>
-                </JFXTextField>
-                <JFXTextField fx:id="txtID" layoutX="278.0" layoutY="96.0" onAction="#IdSearchOnAction" prefHeight="30.0" prefWidth="233.0" promptText="ID">
+                <JFXTextField fx:id="txtID" layoutX="278.0" layoutY="129.0" onAction="#IdSearchOnAction" prefHeight="30.0" prefWidth="233.0" promptText="ID">
                     <font>
                         <Font size="14.0" />
                     </font>
@@ -59,7 +54,7 @@
                     </font>
                 </JFXTextField>
                 <JFXComboBox fx:id="cmbClass" layoutX="363.0" layoutY="469.0" prefHeight="30.0" prefWidth="150.0" promptText="Class" />
-                <JFXButton buttonType="RAISED" layoutX="29.0" layoutY="629.0" onAction="#btnRegisterOnAction" prefHeight="40.0" prefWidth="101.0" style="-fx-background-color: #54a9ff; -fx-background-radius: 15;" text="Register">
+                <JFXButton buttonType="RAISED" layoutX="29.0" layoutY="629.0" onAction="#btnRegisterOnAction" prefHeight="40.0" prefWidth="101.0" style="-fx-background-color: #41c643; -fx-background-radius: 15;" text="Register">
                     <font>
                         <Font name="System Bold" size="16.0" />
                     </font>
@@ -75,7 +70,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
                 </JFXButton>
-                <JFXButton buttonType="RAISED" layoutX="289.0" layoutY="629.0" onAction="#btnDeleteOnAction" prefHeight="40.0" prefWidth="101.0" style="-fx-background-color: #54a9ff; -fx-background-radius: 15;" text="Delete">
+                <JFXButton buttonType="RAISED" layoutX="289.0" layoutY="629.0" onAction="#btnDeleteOnAction" prefHeight="40.0" prefWidth="101.0" style="-fx-background-color: #ff5454; -fx-background-radius: 15;" text="Delete">
                     <font>
                         <Font name="System Bold" size="16.0" />
                     </font>
@@ -93,12 +88,11 @@
                 </JFXButton>
                 <TableView fx:id="tblStudent" layoutX="562.0" layoutY="56.0" prefHeight="639.0" prefWidth="695.0">
                     <columns>
-                        <TableColumn fx:id="colID" prefWidth="86.0" text="ID" />
-                        <TableColumn fx:id="colBarcodeId" prefWidth="104.0" text="Barcode ID" />
-                        <TableColumn fx:id="colName" prefWidth="156.0" text="Name" />
-                        <TableColumn fx:id="colClass" prefWidth="101.0" text="Class" />
-                        <TableColumn fx:id="colEmail" prefWidth="127.0" text="E-Mail" />
-                        <TableColumn fx:id="colContact" prefWidth="119.0" text=" Contact No" />
+                        <TableColumn fx:id="colID" prefWidth="95.0" text="ID" />
+                        <TableColumn fx:id="colName" prefWidth="171.0" text="Name" />
+                        <TableColumn fx:id="colClass" prefWidth="107.0" text="Class" />
+                        <TableColumn fx:id="colEmail" prefWidth="197.0" text="E-Mail" />
+                        <TableColumn fx:id="colContact" prefWidth="124.0" text=" Contact No" />
                     </columns>
                 </TableView>
             <JFXTextField fx:id="txtSubject" layoutX="29.0" layoutY="469.0" prefHeight="30.0" prefWidth="294.0" promptText="Subject">
@@ -111,7 +105,7 @@
                   <Font size="14.0" />
                </font>
             </JFXTextField>
-            <JFXButton buttonType="RAISED" layoutX="1050.0" layoutY="14.0" onAction="#btnBackOnAction" prefHeight="30.0" prefWidth="94.0" style="-fx-background-color: #a29bfe; -fx-background-radius: 15;" text="     Back">
+            <JFXButton buttonType="RAISED" layoutX="1157.0" layoutY="14.0" onAction="#btnBackOnAction" prefHeight="15.0" prefWidth="94.0" style="-fx-background-color: #a29bfe; -fx-background-radius: 15;" text="Back">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font>
@@ -121,6 +115,13 @@
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
+               <graphic>
+                  <ImageView fitHeight="23.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Images/BackButton.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
             </JFXButton>
             <JFXButton buttonType="RAISED" layoutX="29.0" layoutY="124.0" onAction="#btnBrowseOnAction" prefHeight="23.0" prefWidth="60.0" style="-fx-background-color: #B3CAD6; -fx-background-radius: 25;" text="Browse">
                <font>
@@ -130,22 +131,28 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </JFXButton>
-            <ImageView fitHeight="30.0" fitWidth="32.0" layoutX="1058.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../Images/BackButton.png" />
-               </image>
-            </ImageView>
-            <JFXButton buttonType="RAISED" layoutX="1176.0" layoutY="14.0" onAction="#btnRefreshOnAction" prefHeight="30.0" prefWidth="69.0" style="-fx-background-color: #B3CAD6; -fx-background-radius: 20;" text="Refresh">
+            <JFXButton buttonType="RAISED" layoutX="875.0" layoutY="14.0" onAction="#btnRefreshOnAction" prefHeight="30.0" prefWidth="76.0" style="-fx-background-color: #B3CAD6; -fx-background-radius: 20;" text="Refresh">
                <cursor>
                   <Cursor fx:constant="HAND" />
-               </cursor></JFXButton>
-            <JFXButton layoutX="137.0" layoutY="550.0" onAction="#btnGuardianOnAction" prefHeight="28.0" prefWidth="283.0" style="-fx-background-color: #B3CAD6; -fx-background-radius: 10;" text="Click here to go to guardian page" textFill="#0f0fda">
+               </cursor>
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font></JFXButton>
+            <JFXButton layoutX="562.0" layoutY="15.0" onAction="#btnGuardianOnAction" prefHeight="28.0" prefWidth="283.0" style="-fx-background-color: #B3CAD6; -fx-background-radius: 10;" text="Click here to go to guardian page" textFill="#0f0fda">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
+            </JFXButton>
+            <JFXButton buttonType="RAISED" layoutX="162.0" layoutY="538.0" onAction="#btcGenerateQROnAction" prefHeight="23.0" prefWidth="233.0" style="-fx-background-color: #B3CAD6; -fx-background-radius: 10;" text="Generate QR Code">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
             </JFXButton>
             </children></AnchorPane>
     </children>

@@ -1,10 +1,6 @@
 package lk.ijse.ProjectSihina.model;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.scene.control.Alert;
 import lk.ijse.ProjectSihina.db.DbConnection;
-import lk.ijse.ProjectSihina.dto.ClassDto;
 import lk.ijse.ProjectSihina.dto.SubjectDto;
 import lk.ijse.ProjectSihina.dto.TeacherDto;
 
@@ -19,11 +15,12 @@ public class SubjectModel {
 
     public static boolean saveSubject(SubjectDto dto) throws SQLException {
         Connection connection = DbConnection.getInstance().getConnection();
-        PreparedStatement pstm = connection.prepareStatement("INSERT INTO Subject VALUES (?,?,?,?)");
+        PreparedStatement pstm = connection.prepareStatement("INSERT INTO Subject VALUES (?,?,?,?,?)");
         pstm.setString(1, dto.getId());
         pstm.setString(2, dto.getSubject());
         pstm.setString(3, dto.getAvailableClass());
         pstm.setString(4, dto.getTeacherName());
+        pstm.setString(5, String.valueOf(dto.getMonthlyAmount()));
         return pstm.executeUpdate() > 0;
     }
 
@@ -37,11 +34,12 @@ public class SubjectModel {
     public static boolean updateSubject(SubjectDto dto) throws SQLException {
         Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement("UPDATE Subject SET Sub_Name = ?, AvailableClass = ?," +
-                " teacherName = ? WHERE Sub_id = ?");
+                " teacherName = ?, MonthlyAmount = ? WHERE Sub_id = ?");
         pstm.setString(1, dto.getSubject());
         pstm.setString(2, dto.getAvailableClass());
         pstm.setString(3, dto.getTeacherName());
-        pstm.setString(4, dto.getId());
+        pstm.setString(4, String.valueOf(dto.getMonthlyAmount()));
+        pstm.setString(5, dto.getId());
         return pstm.executeUpdate() > 0;
     }
 
@@ -58,8 +56,9 @@ public class SubjectModel {
             String S_Name = resultSet.getString(2);
             String AvailableClass = resultSet.getString(3);
             String Teacher = resultSet.getString(4);
+            double Amount = Double.parseDouble(resultSet.getString(5));
 
-            dto = new SubjectDto(S_id, S_Name, AvailableClass, Teacher);
+            dto = new SubjectDto(S_id, S_Name, AvailableClass, Teacher, Amount);
         }
         return dto;
     }
@@ -76,7 +75,8 @@ public class SubjectModel {
                     resultSet.getString(1),
                     resultSet.getString(2),
                     resultSet.getString(3),
-                    resultSet.getString(4)
+                    resultSet.getString(4),
+                    resultSet.getDouble(5)
             ));
         }
         return dtoList;
@@ -126,5 +126,17 @@ public class SubjectModel {
             ));
         }
         return dtoList;
+    }
+
+    public static double getAmountINSubject(String subject) throws SQLException {
+        Connection connection = DbConnection.getInstance().getConnection();
+        PreparedStatement pstm = connection.prepareStatement("SELECT MonthlyAmount FROM Subject WHERE Sub_Name = ?");
+        pstm.setString(1, subject);
+        ResultSet resultSet = pstm.executeQuery();
+        double amount = 0;
+        if (resultSet.next()) {
+            amount = resultSet.getDouble(1);
+        }
+        return amount;
     }
 }

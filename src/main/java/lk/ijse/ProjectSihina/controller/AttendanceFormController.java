@@ -9,12 +9,16 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 import lk.ijse.ProjectSihina.Enums.Months;
 import lk.ijse.ProjectSihina.dto.AttendantDto;
@@ -25,6 +29,7 @@ import lk.ijse.ProjectSihina.model.AttendantModel;
 import lk.ijse.ProjectSihina.model.ClassModel;
 import lk.ijse.ProjectSihina.model.PaymentModel;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
@@ -70,9 +75,6 @@ public class AttendanceFormController implements Initializable {
 
     @FXML
     private TableView<AttendantTm> tblAttendance;
-
-    @FXML
-    private JFXTextField txtBarcodeId;
 
     @FXML
     private JFXTextField txtDate;
@@ -199,7 +201,6 @@ public class AttendanceFormController implements Initializable {
     void btnAbsentOnAction(ActionEvent event) {
         String AttId = txtID.getText();
         String StuId = txtStuId.getText();
-        String BarId = txtBarcodeId.getText();
         String StuName = txtStudentName.getText();
         String StuClass = cmbClass.getValue();
         String Month = cmbMonth.getValue();
@@ -208,12 +209,12 @@ public class AttendanceFormController implements Initializable {
         LocalTime time = LocalTime.parse(txtTime.getText());
         String type = "Absent";
 
-        if (AttId.isEmpty() || StuId.isEmpty() || BarId.isEmpty() || StuName.isEmpty() || StuClass.isEmpty() || Month.isEmpty() || Subject.isEmpty()) {
+        if (AttId.isEmpty() || StuId.isEmpty() || StuName.isEmpty() || StuClass.isEmpty() || Month.isEmpty() || Subject.isEmpty()) {
             new Alert(Alert.AlertType.ERROR,"Some Fields are Empty!!!").show();
             return;
         }
 
-        AttendantDto dto = new AttendantDto(AttId, StuId, BarId, StuName, StuClass, Month, Subject, date, time,type);
+        AttendantDto dto = new AttendantDto(AttId, StuId, StuName, StuClass, Month, Subject, date, time,type);
 
         try {
             boolean isAdd = AttendantModel.AddAttendant(dto);
@@ -256,7 +257,6 @@ public class AttendanceFormController implements Initializable {
     void btnPresentOnAction(ActionEvent event) {
         String AttId = txtID.getText();
         String StuId = txtStuId.getText();
-        String BarId = txtBarcodeId.getText();
         String StuName = txtStudentName.getText();
         String StuClass = cmbClass.getValue();
         String Month = cmbMonth.getValue();
@@ -265,12 +265,12 @@ public class AttendanceFormController implements Initializable {
         LocalTime time = LocalTime.parse(txtTime.getText());
         String type = "Present";
 
-        if (AttId.isEmpty() || StuId.isEmpty() || BarId.isEmpty() || StuName.isEmpty() || StuClass.isEmpty() || Month.isEmpty() || Subject.isEmpty()) {
+        if (AttId.isEmpty() || StuId.isEmpty() || StuName.isEmpty() || StuClass.isEmpty() || Month.isEmpty() || Subject.isEmpty()) {
             new Alert(Alert.AlertType.ERROR,"Some Fields are Empty!!!").show();
             return;
         }
 
-        AttendantDto dto = new AttendantDto(AttId, StuId, BarId, StuName, StuClass, Month, Subject, date, time,type);
+        AttendantDto dto = new AttendantDto(AttId, StuId, StuName, StuClass, Month, Subject, date, time,type);
 
         try {
             boolean isAdd = AttendantModel.AddAttendant(dto);
@@ -315,7 +315,6 @@ public class AttendanceFormController implements Initializable {
             if(dto != null) {
                 txtID.setText(dto.getAtt_id());
                 txtStuId.setText(dto.getStudentId());
-                txtBarcodeId.setText(dto.getBarcodeId());
                 txtStudentName.setText(dto.getStudentName());
                 cmbClass.setValue(dto.getClassName());
                 cmbSubject.setValue(dto.getSubject());
@@ -336,7 +335,6 @@ public class AttendanceFormController implements Initializable {
     void btnUpdateOnAction(ActionEvent event) {
         String AttId = txtID.getText();
         String StuId = txtStuId.getText();
-        String BarId = txtBarcodeId.getText();
         String StuName = txtStudentName.getText();
         String StuClass = cmbClass.getValue();
         String Month = cmbMonth.getValue();
@@ -345,12 +343,12 @@ public class AttendanceFormController implements Initializable {
         LocalTime time = LocalTime.parse(txtTime.getText());
         String type = txtType.getText();
 
-        if (AttId.isEmpty() || StuId.isEmpty() || BarId.isEmpty() || StuName.isEmpty() || StuClass.isEmpty() || Month.isEmpty() || Subject.isEmpty() || type.isEmpty()) {
+        if (AttId.isEmpty() || StuId.isEmpty() ||  StuName.isEmpty() || StuClass.isEmpty() || Month.isEmpty() || Subject.isEmpty() || type.isEmpty()) {
             new Alert(Alert.AlertType.ERROR,"Some Fields are Empty!!!").show();
             return;
         }
 
-        AttendantDto dto = new AttendantDto(AttId, StuId, BarId, StuName, StuClass, Month, Subject, date, time,type);
+        AttendantDto dto = new AttendantDto(AttId, StuId, StuName, StuClass, Month, Subject, date, time,type);
 
         try {
             boolean isUpdated = AttendantModel.UpdateAttendent(dto);
@@ -369,7 +367,6 @@ public class AttendanceFormController implements Initializable {
     public void btnClearOnAction(ActionEvent actionEvent) {
         txtID.setText("");
         txtStuId.setText("");
-        txtBarcodeId.setText("");
         txtStudentName.setText("");
         cmbClass.setValue("");
         cmbSubject.setValue("");
@@ -382,9 +379,43 @@ public class AttendanceFormController implements Initializable {
 
     private void clearFields() {
         txtStuId.setText("");
-        txtBarcodeId.setText("");
         txtStudentName.setText("");
         txtType.setText("");
     }
 
+    @FXML
+    void btnQRCodeReaderOnAction(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/view/QR_Code_Reader_Form.fxml"));
+        Parent rootNode = loader.load();
+        QRCodeReaderFormController qrCodeReaderFormController = loader.getController();
+        qrCodeReaderFormController.setAttendanceFormController(this);
+        Scene scene = new Scene(rootNode);
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public void updateTxtID(String newStuID) {
+        txtStuId.setText(newStuID);
+    }
+
+    @FXML
+    void btnStudentIdOnAction(ActionEvent event) {
+        String stuId = txtStuId.getText();
+        if (stuId.isEmpty()) {
+            new Alert(Alert.AlertType.ERROR,"Student ID Not Found!!!").show();
+            return;
+        }
+        try {
+            String StuName = AttendantModel.searctStudent(stuId);
+            txtStudentName.setText(StuName);
+        } catch (SQLException e) {
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        }
+
+    }
+
+    public void btnStuNameOnAction(ActionEvent actionEvent) {
+        btnPresentOnAction(actionEvent);
+    }
 }

@@ -274,14 +274,13 @@ public class RegistrationPayForm implements Initializable {
         LocalDate date = LocalDate.parse(lblDate.getText());
         LocalTime time = LocalTime.parse(lblTime.getText());
         String type = lblType.getText();
-        String BarId = studentDto.getBarcodeID();
 
-        if (PayId.isEmpty() || StuId.isEmpty()|| type.isEmpty() || StuClass.isEmpty() || month.isEmpty() || BarId.isEmpty()) {
+        if (PayId.isEmpty() || StuId.isEmpty()|| type.isEmpty() || StuClass.isEmpty() || month.isEmpty()) {
             new Alert(Alert.AlertType.ERROR, "Some Fields Are Empty!!!").showAndWait();
             return;
         }
 
-        PaymentDto PayDto = new PaymentDto(PayId,StuId,BarId,StuName,type,StuClass,month,Subject,PayAmount,date,time);
+        PaymentDto PayDto = new PaymentDto(PayId,StuId, StuName,type,StuClass,month,Subject,PayAmount,date,time);
 
         try {
             boolean isRegisterStudent = RegisterStudentModel.SaveStudentRegisterAndPayment(studentDto, PayDto,selectedImageFile, guardianDto);

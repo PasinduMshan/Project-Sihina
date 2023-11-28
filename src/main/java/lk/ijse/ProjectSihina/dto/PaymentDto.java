@@ -12,7 +12,6 @@ import java.time.LocalTime;
 public class PaymentDto {
     String PayID;
     String StuID;
-    String BarId;
     String StuName;
     String type;
     String StuClass;

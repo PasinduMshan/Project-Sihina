@@ -27,7 +27,7 @@
                 <Font size="14.0" />
             </font>
         </JFXTextField>
-        <TableView fx:id="tblSubject" layoutX="42.0" layoutY="321.0" prefHeight="358.0" prefWidth="896.0">
+        <TableView fx:id="tblSubject" layoutX="56.0" layoutY="321.0" prefHeight="358.0" prefWidth="896.0">
             <columns>
                 <TableColumn fx:id="colId" prefWidth="117.0" text="ID" />
                 <TableColumn fx:id="colSubject" prefWidth="130.0" text="Subject" />
@@ -36,7 +36,7 @@
             <TableColumn fx:id="colMonthlyAmount" prefWidth="138.0" text="Monthly Amount" />
             </columns>
         </TableView>
-        <JFXButton buttonType="RAISED" layoutX="210.0" layoutY="258.0" onAction="#btnAddOnAction" prefHeight="40.0" prefWidth="108.0" style="-fx-background-color: #54a9ff; -fx-background-radius: 15;" text="Add">
+        <JFXButton buttonType="RAISED" layoutX="210.0" layoutY="258.0" onAction="#btnAddOnAction" prefHeight="40.0" prefWidth="108.0" style="-fx-background-color: #41c643; -fx-background-radius: 15;" text="Add">
             <font>
                 <Font name="System Bold" size="16.0" />
             </font>

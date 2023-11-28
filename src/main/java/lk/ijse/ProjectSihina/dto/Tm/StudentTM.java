@@ -9,7 +9,6 @@ import lombok.*;
 @ToString
 public class StudentTM {
     String ID;
-    String BarcodeId;
     String Name;
     String Stu_Class;
     String email;

@@ -69,7 +69,7 @@
             <TableColumn fx:id="colSubjects" prefWidth="253.0" text="Contact" />
          </columns>
       </TableView>
-      <JFXButton buttonType="RAISED" layoutX="210.0" layoutY="319.0" onAction="#btnAddOnAction" prefHeight="40.0" prefWidth="108.0" style="-fx-background-color: #54a9ff; -fx-background-radius: 15;" text="Add">
+      <JFXButton buttonType="RAISED" layoutX="210.0" layoutY="319.0" onAction="#btnAddOnAction" prefHeight="40.0" prefWidth="108.0" style="-fx-background-color: #41c643; -fx-background-radius: 15;" text="Add">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
@@ -85,7 +85,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-      <JFXButton buttonType="RAISED" layoutX="532.0" layoutY="319.0" onAction="#btnDeleteOnAction" prefHeight="40.0" prefWidth="108.0" style="-fx-background-color: #54a9ff; -fx-background-radius: 15;" text="Delete">
+      <JFXButton buttonType="RAISED" layoutX="532.0" layoutY="319.0" onAction="#btnDeleteOnAction" prefHeight="40.0" prefWidth="108.0" style="-fx-background-color: #ff5454; -fx-background-radius: 15;" text="Delete">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>

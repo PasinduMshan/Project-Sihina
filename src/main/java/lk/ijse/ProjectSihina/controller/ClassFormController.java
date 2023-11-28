@@ -48,6 +48,7 @@ public class ClassFormController implements Initializable {
        setCellValueFactory();
        loadAllClass();
        generateClassId();
+       tableListener();
     }
 
     private void generateClassId() {
@@ -211,6 +212,14 @@ public class ClassFormController implements Initializable {
         txtID.setText("");
         txtClassName.setText("");
         generateClassId();
+    }
+    private void tableListener(){
+        tblClass.getSelectionModel()
+                .selectedItemProperty()
+                .addListener((observableValue, classTm, t1) -> {
+                    txtID.setText(t1.getId());
+                    txtClassName.setText(t1.getStuClass());
+                });
     }
 
 }

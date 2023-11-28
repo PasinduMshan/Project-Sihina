@@ -12,4 +12,5 @@ public class SubjectTm {
     String Subject;
     String TeacherName;
     String AvailableClass;
+    double MonthlyAmount;
 }

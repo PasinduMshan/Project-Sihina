@@ -43,16 +43,15 @@ public class AttendantModel {
 
     public static boolean AddAttendant(AttendantDto dto) throws SQLException {
         Connection connection = DbConnection.getInstance().getConnection();
-        PreparedStatement pstm = connection.prepareStatement("INSERT INTO Attendance VALUES (?,?,?,?,?,?,?,?,?)");
+        PreparedStatement pstm = connection.prepareStatement("INSERT INTO Attendance VALUES (?,?,?,?,?,?,?,?)");
         pstm.setString(1, dto.getAtt_id());
         pstm.setString(2, dto.getStudentId());
-        pstm.setString(3, dto.getBarcodeId());
-        pstm.setString(4, dto.getClassName());
-        pstm.setString(5, dto.getSubject());
-        pstm.setString(6, dto.getMonth());
-        pstm.setDate(7, Date.valueOf(dto.getDate()));
-        pstm.setTime(8, Time.valueOf(dto.getTime()));
-        pstm.setString(9, dto.getType());
+        pstm.setString(3, dto.getClassName());
+        pstm.setString(4, dto.getSubject());
+        pstm.setString(5, dto.getMonth());
+        pstm.setDate(6, Date.valueOf(dto.getDate()));
+        pstm.setTime(7, Time.valueOf(dto.getTime()));
+        pstm.setString(8, dto.getType());
         return pstm.executeUpdate() > 0;
     }
 
@@ -65,17 +64,16 @@ public class AttendantModel {
 
     public static boolean UpdateAttendent(AttendantDto dto) throws SQLException {
         Connection connection = DbConnection.getInstance().getConnection();
-        PreparedStatement pstm = connection.prepareStatement("UPDATE Attendance SET Stu_id = ?, Bar_id = ?, " +
+        PreparedStatement pstm = connection.prepareStatement("UPDATE Attendance SET Stu_id = ?, " +
                 "Stu_Class = ?, Subject = ?, Month = ?, date = ?, time = ?, type = ? WHERE Att_id = ?");
         pstm.setString(1, dto.getStudentId());
-        pstm.setString(2, dto.getBarcodeId());
-        pstm.setString(3, dto.getClassName());
-        pstm.setString(4, dto.getSubject());
-        pstm.setString(5, dto.getMonth());
-        pstm.setDate(6, Date.valueOf(dto.getDate()));
-        pstm.setTime(7, Time.valueOf(dto.getTime()));
-        pstm.setString(8, dto.getType());
-        pstm.setString(1, dto.getAtt_id());
+        pstm.setString(2, dto.getClassName());
+        pstm.setString(3, dto.getSubject());
+        pstm.setString(4, dto.getMonth());
+        pstm.setDate(5, Date.valueOf(dto.getDate()));
+        pstm.setTime(6, Time.valueOf(dto.getTime()));
+        pstm.setString(7, dto.getType());
+        pstm.setString(8, dto.getAtt_id());
         return pstm.executeUpdate() > 0;
     }
 
@@ -91,13 +89,12 @@ public class AttendantModel {
         if (resultSet.next()) {
             String AttId = resultSet.getString(1);
             String StuId = resultSet.getString(2);
-            String BarId = resultSet.getString(3);
-            String StuClass = resultSet.getString(4);
-            String subject = resultSet.getString(5);
-            String month = resultSet.getString(6);
-            LocalDate date = resultSet.getDate(7).toLocalDate();
-            LocalTime time = resultSet.getTime(8).toLocalTime();
-            String type = resultSet.getString(9);
+            String StuClass = resultSet.getString(3);
+            String subject = resultSet.getString(4);
+            String month = resultSet.getString(5);
+            LocalDate date = resultSet.getDate(6).toLocalDate();
+            LocalTime time = resultSet.getTime(7).toLocalTime();
+            String type = resultSet.getString(8);
             String StuName = null;
 
             pstm1.setString(1,StuId);
@@ -106,7 +103,7 @@ public class AttendantModel {
                  StuName = resultSet1.getString(1);
             }
 
-            dto = new AttendantDto(AttId,StuId,BarId,StuName,StuClass,month,subject,date,time,type);
+            dto = new AttendantDto(AttId,StuId,StuName,StuClass,month,subject,date,time,type);
         }
         return dto;
     }
@@ -140,5 +137,17 @@ public class AttendantModel {
             Name = resultSet.getString(1);
         }
         return Name;
+    }
+
+    public static String searctStudent(String stuId) throws SQLException {
+        Connection connection = DbConnection.getInstance().getConnection();
+        PreparedStatement pstm = connection.prepareStatement("SELECT Name FROM Student WHERE Stu_id = ?");
+        pstm.setString(1, stuId);
+        ResultSet resultSet = pstm.executeQuery();
+        String StuName = null;
+        if (resultSet.next()) {
+            StuName = resultSet.getString(1);
+        }
+        return StuName;
     }
 }

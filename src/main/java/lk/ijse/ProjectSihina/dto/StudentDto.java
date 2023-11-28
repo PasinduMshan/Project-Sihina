@@ -12,7 +12,6 @@ import java.time.LocalDate;
 @ToString
 public class StudentDto {
     String ID;
-    String BarcodeID;
     String Name;
     String Address;
     String Gender;
@@ -23,9 +22,8 @@ public class StudentDto {
     String Subject;
     Image StudentImage;
 
-    public StudentDto(String ID, String barcodeID, String name, String stu_Class, String email,String contact) {
+    public StudentDto(String ID, String name, String stu_Class, String email,String contact) {
         this.ID = ID;
-        BarcodeID = barcodeID;
         Name = name;
         Email = email;
         Stu_Class = stu_Class;

@@ -4,19 +4,23 @@ import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import lk.ijse.ProjectSihina.dto.UserDto;
 import lk.ijse.ProjectSihina.model.SignUpModel;
 
 import java.io.IOException;
+import java.net.URL;
 import java.sql.SQLException;
+import java.util.ResourceBundle;
 import java.util.regex.Pattern;
 
-public class SingupFormController {
+public class SingupFormController implements Initializable {
 
     @FXML
     private AnchorPane rootNode;
@@ -153,5 +157,56 @@ public class SingupFormController {
         alert.showAndWait();
     }
 
+    public static void switchTextFieldOnArrowPress(JFXTextField textField, JFXTextField nextTextField) {
+        textField.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
+            switch (event.getCode()) {
+                case DOWN:
+                    nextTextField.requestFocus();
+                    event.consume();
+                    break;
+            }
+        });
+    }
+    public static void switchTextFieldOnArrowPressLeftRight(JFXTextField textField, JFXTextField nextTextField) {
+        textField.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
+            switch (event.getCode()) {
+                case RIGHT:
+                    nextTextField.requestFocus();
+                    event.consume();
+                    break;
+                case LEFT:
+                    nextTextField.requestFocus();
+                    event.consume();
+                    break;
+            }
+        });
+    }
+    public static void switchTextFieldOnArrowPressUP(JFXTextField textField, JFXTextField nextTextField) {
+        textField.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
+            switch (event.getCode()) {
+                case UP:
+                    nextTextField.requestFocus();
+                    event.consume();
+                    break;
+            }
+        });
+    }
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        switchTextFieldOnArrowPress(txtFirstName,txtLastName);
+        switchTextFieldOnArrowPress(txtLastName,txtEmail);
+        switchTextFieldOnArrowPress(txtEmail,txtNIC);
+        switchTextFieldOnArrowPress(txtNIC,txtUserName);
+        switchTextFieldOnArrowPress(txtUserName,txtPassword);
+
+        switchTextFieldOnArrowPressUP(txtPassword,txtUserName);
+        switchTextFieldOnArrowPressUP(txtUserName,txtNIC);
+        switchTextFieldOnArrowPressUP(txtNIC,txtEmail);
+        switchTextFieldOnArrowPressUP(txtEmail,txtLastName);
+        switchTextFieldOnArrowPressUP(txtLastName,txtFirstName);
+
+        switchTextFieldOnArrowPressLeftRight(txtLastName,txtFirstName);
+        switchTextFieldOnArrowPressLeftRight(txtFirstName,txtLastName);
+    }
 }

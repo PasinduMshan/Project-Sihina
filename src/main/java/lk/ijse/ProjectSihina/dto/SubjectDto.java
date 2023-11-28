@@ -12,6 +12,7 @@ public class SubjectDto {
     String subject;
     String AvailableClass;
     String teacherName;
+    double MonthlyAmount;
 
     public SubjectDto(String subject) {
         this.subject = subject;
