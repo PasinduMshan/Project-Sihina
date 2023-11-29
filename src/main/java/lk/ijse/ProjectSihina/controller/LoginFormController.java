@@ -11,6 +11,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import lk.ijse.ProjectSihina.Other.ArrowKeyPress;
 import lk.ijse.ProjectSihina.User.UserConnection;
 import lk.ijse.ProjectSihina.model.LoginModel;
 
@@ -86,20 +87,6 @@ public class LoginFormController implements Initializable {
         stage.setScene(scene);
     }
 
-    public static void switchTextFieldOnArrowPress(JFXTextField textField, JFXTextField nextTextField) {
-        textField.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
-            switch (event.getCode()) {
-                case DOWN:
-                    nextTextField.requestFocus();
-                    event.consume();
-                    break;
-                case UP:
-                    nextTextField.requestFocus();
-                    break;
-            }
-        });
-    }
-
     @FXML
     void PasswordOnAction(ActionEvent event) throws IOException {
         btnLoginOnAction(event);
@@ -112,7 +99,7 @@ public class LoginFormController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        switchTextFieldOnArrowPress(txtUserName,txtPassword);
-        switchTextFieldOnArrowPress(txtPassword,txtUserName);
+        ArrowKeyPress.switchTextFieldOnArrowPressDown(txtUserName,txtPassword);
+        ArrowKeyPress.switchTextFieldOnArrowPressUP(txtPassword,txtUserName);
     }
 }

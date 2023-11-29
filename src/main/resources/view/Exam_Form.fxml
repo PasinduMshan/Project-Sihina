@@ -98,5 +98,13 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
+      <JFXButton buttonType="RAISED" layoutX="879.0" layoutY="23.0" onAction="#btnRefreshOnAction" prefHeight="24.0" prefWidth="87.0" style="-fx-background-color: #B3CAD6; -fx-background-radius: 10;" text="Refresh">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </JFXButton>
     </children>
 </AnchorPane>

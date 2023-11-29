@@ -16,11 +16,13 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import lk.ijse.ProjectSihina.Barcode.QRCodeGenerator;
+import lk.ijse.ProjectSihina.Other.ArrowKeyPress;
 import lk.ijse.ProjectSihina.db.DbConnection;
 import lk.ijse.ProjectSihina.dto.ClassDto;
 import lk.ijse.ProjectSihina.dto.StudentDto;
@@ -101,7 +103,6 @@ public class StudentInfoFormController implements Initializable {
 
     public static File selectedImageFile;
 
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
        loadGender();
@@ -109,7 +110,24 @@ public class StudentInfoFormController implements Initializable {
        setCellValueFactory();
        loadAllStudent();
        generateStuId();
+       ArrowKeyPress.switchTextFieldOnArrowPressDown(txtID,txtNameWithInitials);
+       ArrowKeyPress.switchTextFieldOnArrowPressDown(txtNameWithInitials,txtEmail);
+       ArrowKeyPress.switchTextFieldOnArrowPressDown(txtEmail,txtAddress);
+       ArrowKeyPress.switchTextFieldOnArrowPressDown(txtAddress,txtSubject);
+       ArrowKeyPress.switchTextFieldOnArrowPressDown(txtDateOfBirth,txtContact);
+       ArrowKeyPress.switchTextFieldOnArrowPressRight(txtNameWithInitials,txtDateOfBirth);
+       ArrowKeyPress.switchTextFieldOnArrowPressLeft(txtDateOfBirth,txtNameWithInitials);
+       ArrowKeyPress.switchTextFieldOnArrowPressRight(txtEmail,txtContact);
+       ArrowKeyPress.switchTextFieldOnArrowPressLeft(txtContact,txtEmail);
+       ArrowKeyPress.switchTextFieldOnArrowPressUP(txtSubject,txtAddress);
+       ArrowKeyPress.switchTextFieldOnArrowPressUP(txtAddress,txtEmail);
+       ArrowKeyPress.switchTextFieldOnArrowPressUP(txtEmail,txtNameWithInitials);
+       ArrowKeyPress.switchTextFieldOnArrowPressUP(txtNameWithInitials,txtID);
+       ArrowKeyPress.switchTextFieldOnArrowPressUP(txtContact,txtDateOfBirth);
+       ArrowKeyPress.switchTextFieldOnArrowPressUP(txtDateOfBirth,txtID);
     }
+
+
 
     private void generateStuId() {
         try {

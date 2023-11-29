@@ -11,6 +11,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import lk.ijse.ProjectSihina.Other.ArrowKeyPress;
 import lk.ijse.ProjectSihina.dto.UserDto;
 import lk.ijse.ProjectSihina.model.SignUpModel;
 
@@ -194,19 +195,17 @@ public class SingupFormController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        switchTextFieldOnArrowPress(txtFirstName,txtLastName);
-        switchTextFieldOnArrowPress(txtLastName,txtEmail);
-        switchTextFieldOnArrowPress(txtEmail,txtNIC);
-        switchTextFieldOnArrowPress(txtNIC,txtUserName);
-        switchTextFieldOnArrowPress(txtUserName,txtPassword);
-
-        switchTextFieldOnArrowPressUP(txtPassword,txtUserName);
-        switchTextFieldOnArrowPressUP(txtUserName,txtNIC);
-        switchTextFieldOnArrowPressUP(txtNIC,txtEmail);
-        switchTextFieldOnArrowPressUP(txtEmail,txtLastName);
-        switchTextFieldOnArrowPressUP(txtLastName,txtFirstName);
-
-        switchTextFieldOnArrowPressLeftRight(txtLastName,txtFirstName);
-        switchTextFieldOnArrowPressLeftRight(txtFirstName,txtLastName);
+        ArrowKeyPress.switchTextFieldOnArrowPressDown(txtLastName,txtEmail);
+        ArrowKeyPress.switchTextFieldOnArrowPressDown(txtFirstName,txtEmail);
+        ArrowKeyPress.switchTextFieldOnArrowPressDown(txtEmail,txtNIC);
+        ArrowKeyPress.switchTextFieldOnArrowPressDown(txtNIC,txtUserName);
+        ArrowKeyPress.switchTextFieldOnArrowPressDown(txtUserName,txtPassword);
+        ArrowKeyPress.switchTextFieldOnArrowPressUP(txtPassword,txtUserName);
+        ArrowKeyPress.switchTextFieldOnArrowPressUP(txtUserName,txtNIC);
+        ArrowKeyPress.switchTextFieldOnArrowPressUP(txtNIC,txtEmail);
+        ArrowKeyPress.switchTextFieldOnArrowPressUP(txtEmail,txtLastName);
+        ArrowKeyPress.switchTextFieldOnArrowPressUP(txtLastName,txtFirstName);
+        ArrowKeyPress.switchTextFieldOnArrowPressLeft(txtLastName,txtFirstName);
+        ArrowKeyPress.switchTextFieldOnArrowPressRight(txtFirstName,txtLastName);
     }
 }

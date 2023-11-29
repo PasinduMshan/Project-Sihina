@@ -11,16 +11,16 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
-import lk.ijse.ProjectSihina.Enums.Days;
-import lk.ijse.ProjectSihina.Enums.Months;
+import lk.ijse.ProjectSihina.Other.ArrowKeyPress;
+import lk.ijse.ProjectSihina.Other.Days;
 import lk.ijse.ProjectSihina.dto.ClassDto;
 import lk.ijse.ProjectSihina.dto.ScheduleDto;
 import lk.ijse.ProjectSihina.dto.SubjectDto;
 import lk.ijse.ProjectSihina.dto.TeacherDto;
 import lk.ijse.ProjectSihina.dto.Tm.ScheduleTm;
 import lk.ijse.ProjectSihina.model.ClassModel;
-import lk.ijse.ProjectSihina.model.PaymentModel;
 import lk.ijse.ProjectSihina.model.ScheduleModel;
 
 import java.net.URL;
@@ -82,6 +82,8 @@ public class ScheduleFormController implements Initializable {
         loadAllSubject();
         loadAllTeacher();
         loadAllDay();
+        ArrowKeyPress.switchTextFieldOnArrowPressRight(txtStartTime,txtEndTime);
+        ArrowKeyPress.switchTextFieldOnArrowPressLeft(txtEndTime,txtStartTime);
     }
 
     private void loadAllDay() {
@@ -250,4 +252,7 @@ public class ScheduleFormController implements Initializable {
         txtEndTime.setText("");
     }
 
+    public void btnRefreshOnAction(ActionEvent actionEvent) {
+        clearField();
+    }
 }

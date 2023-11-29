@@ -10,7 +10,9 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
+import lk.ijse.ProjectSihina.Other.ArrowKeyPress;
 import lk.ijse.ProjectSihina.dto.ClassDto;
 import lk.ijse.ProjectSihina.dto.Tm.ClassTm;
 import lk.ijse.ProjectSihina.model.ClassModel;
@@ -49,6 +51,8 @@ public class ClassFormController implements Initializable {
        loadAllClass();
        generateClassId();
        tableListener();
+       ArrowKeyPress.switchTextFieldOnArrowPressDown(txtID,txtClassName);
+       ArrowKeyPress.switchTextFieldOnArrowPressUP(txtClassName,txtID);
     }
 
     private void generateClassId() {
@@ -222,4 +226,7 @@ public class ClassFormController implements Initializable {
                 });
     }
 
+    public void btnRefreshOnAction(ActionEvent actionEvent) {
+        clearFields();
+    }
 }

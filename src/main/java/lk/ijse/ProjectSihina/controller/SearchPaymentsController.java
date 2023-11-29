@@ -1,5 +1,6 @@
 package lk.ijse.ProjectSihina.controller;
 
+import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -10,6 +11,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import lk.ijse.ProjectSihina.Other.ArrowKeyPress;
+import lk.ijse.ProjectSihina.Other.Months;
 import lk.ijse.ProjectSihina.dto.PaymentDto;
 import lk.ijse.ProjectSihina.dto.StudentDto;
 import lk.ijse.ProjectSihina.dto.Tm.PaymentTm;
@@ -38,7 +41,7 @@ public class SearchPaymentsController implements Initializable {
     private JFXTextField txtID;
 
     @FXML
-    private JFXTextField txtMonth;
+    private JFXComboBox<String> cmbMonth;
 
     @FXML
     private JFXTextField txtName;
@@ -49,6 +52,19 @@ public class SearchPaymentsController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         setCellValueFactory();
+        loadAllMonth();
+        ArrowKeyPress.switchTextFieldOnArrowPressDown(txtID,txtName);
+        ArrowKeyPress.switchTextFieldOnArrowPressDown(txtName,txtSubject);
+        ArrowKeyPress.switchTextFieldOnArrowPressUP(txtName,txtID);
+        ArrowKeyPress.switchTextFieldOnArrowPressUP(txtSubject,txtName);
+    }
+    private void loadAllMonth() {
+        ObservableList<String> obList = FXCollections.observableArrayList();
+        Months[] months = Months.values();
+        for (Months month : months){
+            obList.add(String.valueOf(month));
+        }
+        cmbMonth.setItems(obList);
     }
 
     private void setCellValueFactory() {
@@ -63,13 +79,13 @@ public class SearchPaymentsController implements Initializable {
         txtID.setText("");
         txtName.setText("");
         txtSubject.setText("");
-        txtMonth.setText("");
+        cmbMonth.setValue("");
     }
 
     @FXML
     void SearchMonthDeatilOnAction(ActionEvent event) {
         String id = txtID.getText();
-        String month = txtMonth.getText();
+        String month =cmbMonth.getValue();
         ObservableList<PaymentTm> obList = FXCollections.observableArrayList();
 
         if (id.isEmpty() || month.isEmpty()) {

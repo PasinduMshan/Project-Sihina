@@ -17,10 +17,12 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import lk.ijse.ProjectSihina.Enums.Months;
+import lk.ijse.ProjectSihina.Other.ArrowKeyPress;
+import lk.ijse.ProjectSihina.Other.Months;
 import lk.ijse.ProjectSihina.dto.AttendantDto;
 import lk.ijse.ProjectSihina.dto.ClassDto;
 import lk.ijse.ProjectSihina.dto.SubjectDto;
@@ -98,6 +100,41 @@ public class AttendanceFormController implements Initializable {
     private Object month;
     private Object DATE;
 
+    public static void switchTextFieldOnArrowPressLeftRight(JFXTextField textField, JFXTextField nextTextField) {
+        textField.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
+            switch (event.getCode()) {
+                case RIGHT:
+                    nextTextField.requestFocus();
+                    event.consume();
+                    break;
+                case LEFT:
+                    nextTextField.requestFocus();
+                    event.consume();
+                    break;
+            }
+        });
+    }
+    public static void switchTextFieldOnArrowPressUP(JFXTextField textField, JFXTextField nextTextField) {
+        textField.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
+            switch (event.getCode()) {
+                case UP:
+                    nextTextField.requestFocus();
+                    event.consume();
+                    break;
+            }
+        });
+    }
+    public static void switchTextFieldOnArrowPress(JFXTextField textField, JFXTextField nextTextField) {
+        textField.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
+            switch (event.getCode()) {
+                case DOWN:
+                    nextTextField.requestFocus();
+                    event.consume();
+                    break;
+            }
+        });
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         generateAttId();
@@ -107,6 +144,10 @@ public class AttendanceFormController implements Initializable {
         loadAllClass();
         loadAllSubject();
         loadAllMonth();
+        ArrowKeyPress.switchTextFieldOnArrowPressDown(txtStuId,txtStudentName);
+        ArrowKeyPress.switchTextFieldOnArrowPressUP(txtStudentName,txtStuId);
+        ArrowKeyPress.switchTextFieldOnArrowPressRight(txtID,txtStuId);
+        ArrowKeyPress.switchTextFieldOnArrowPressLeft(txtStuId,txtID);
     }
     private void loadAllMonth() {
         ObservableList<String> obList = FXCollections.observableArrayList();
@@ -375,6 +416,7 @@ public class AttendanceFormController implements Initializable {
         txtTime.setText("");
         txtType.setText("");
         generateAttId();
+        setDateAndTime();
     }
 
     private void clearFields() {

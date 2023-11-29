@@ -17,7 +17,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
-import lk.ijse.ProjectSihina.Enums.Months;
+import lk.ijse.ProjectSihina.Other.ArrowKeyPress;
+import lk.ijse.ProjectSihina.Other.Months;
 import lk.ijse.ProjectSihina.dto.ClassDto;
 import lk.ijse.ProjectSihina.dto.GuardianDto;
 import lk.ijse.ProjectSihina.dto.PaymentDto;
@@ -118,6 +119,14 @@ public class RegistrationPayForm implements Initializable {
         loadAllClass();
         loadAllRegistrations();
         lblType.setText(Type);
+        ArrowKeyPress.switchTextFieldOnArrowPressRight(txtPayId,txtID);
+        ArrowKeyPress.switchTextFieldOnArrowPressRight(txtID,txtName);
+        ArrowKeyPress.switchTextFieldOnArrowPressLeft(txtName,txtID);
+        ArrowKeyPress.switchTextFieldOnArrowPressLeft(txtID,txtPayId);
+        ArrowKeyPress.switchTextFieldOnArrowPressDown(txtID,txtAmount);
+        ArrowKeyPress.switchTextFieldOnArrowPressDown(txtPayId,txtAmount);
+        ArrowKeyPress.switchTextFieldOnArrowPressDown(txtName,txtAmount);
+        ArrowKeyPress.switchTextFieldOnArrowPressUP(txtAmount,txtID);
     }
 
     public void initialData(StudentDto dto, File selectedImageFile, GuardianDto guardianDto) {
@@ -236,7 +245,6 @@ public class RegistrationPayForm implements Initializable {
                 new Alert(Alert.AlertType.INFORMATION,"Delete Success!!!").showAndWait();
                 clearField();
                 loadAllRegistrations();
-                generatePayId();
             } else {
                 new Alert(Alert.AlertType.ERROR,"Delete Failed!!!").showAndWait();
             }
@@ -252,6 +260,7 @@ public class RegistrationPayForm implements Initializable {
         txtAmount.setText("");
         cmbMonth.setValue("");
         lblType.setText(Type);
+        generatePayId();
     }
 
     @FXML
@@ -287,7 +296,6 @@ public class RegistrationPayForm implements Initializable {
             if (isRegisterStudent) {
                 new Alert(Alert.AlertType.INFORMATION, "Student Register Success!!").showAndWait();
                 loadAllRegistrations();
-                generatePayId();
             } else {
                 new Alert(Alert.AlertType.ERROR,"Student Register Failed!!!").showAndWait();
             }
@@ -352,4 +360,7 @@ public class RegistrationPayForm implements Initializable {
         }
     }
 
+    public void btnRefreshOnAction(ActionEvent actionEvent) throws SQLException {
+        clearField();
+    }
 }

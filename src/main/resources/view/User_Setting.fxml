@@ -21,6 +21,9 @@
             <font>
                 <Font size="14.0" />
             </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
         </JFXTextField>
         <JFXTextField fx:id="txtFirstName" layoutX="196.0" layoutY="109.0" prefHeight="30.0" prefWidth="143.0" promptText="First Name">
             <font>
@@ -60,7 +63,7 @@
                 <Cursor fx:constant="HAND" />
             </cursor>
         </JFXButton>
-        <JFXButton buttonType="RAISED" layoutX="744.0" layoutY="23.0" onAction="#btnHelpOnAction" prefHeight="18.0" prefWidth="249.0" style="-fx-background-color: #B1A8B9; -fx-background-radius: 15;" text="Help &amp; About System">
+        <JFXButton buttonType="RAISED" layoutX="744.0" layoutY="23.0" onAction="#btnHelpOnAction" prefHeight="18.0" prefWidth="249.0" style="-fx-background-color: #B3CAD6; -fx-background-radius: 15;" text="Help &amp; About System">
             <font>
                 <Font name="System Bold" size="13.0" />
             </font>
@@ -134,5 +137,13 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
+      <JFXButton buttonType="RAISED" layoutX="628.0" layoutY="23.0" onAction="#btnRefreshOnAction" prefHeight="24.0" prefWidth="87.0" style="-fx-background-color: #B3CAD6; -fx-background-radius: 10;" text="Refresh">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </JFXButton>
     </children>
 </AnchorPane>

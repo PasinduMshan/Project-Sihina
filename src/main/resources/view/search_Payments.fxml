@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
@@ -36,7 +37,6 @@
             <JFXTextField fx:id="txtID" layoutX="173.0" layoutY="18.0" onAction="#StudentIdSearchOnAction" prefHeight="24.0" prefWidth="181.0" />
             <JFXTextField fx:id="txtName" layoutX="173.0" layoutY="59.0" prefHeight="24.0" prefWidth="181.0" />
             <JFXTextField fx:id="txtSubject" layoutX="173.0" layoutY="95.0" prefHeight="24.0" prefWidth="181.0" />
-            <JFXTextField fx:id="txtMonth" layoutX="173.0" layoutY="136.0" onAction="#SearchMonthDeatilOnAction" prefHeight="24.0" prefWidth="181.0" />
             <TableView fx:id="tblPayDetail" layoutX="45.0" layoutY="237.0" prefHeight="277.0" prefWidth="580.0">
               <columns>
                 <TableColumn fx:id="colPayId" prefWidth="111.0" text="Pay_Id" />
@@ -59,6 +59,7 @@
                   <Font name="System Bold" size="13.0" />
                </font>
             </JFXButton>
+            <JFXComboBox fx:id="cmbMonth" layoutX="173.0" layoutY="135.0" prefHeight="24.0" prefWidth="181.0" />
          </children>
       </Pane>
    </children>

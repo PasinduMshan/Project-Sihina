@@ -15,6 +15,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import lk.ijse.ProjectSihina.Other.ArrowKeyPress;
 import lk.ijse.ProjectSihina.dto.GuardianDto;
 import lk.ijse.ProjectSihina.dto.StudentDto;
 import lk.ijse.ProjectSihina.dto.Tm.GuardianTm;
@@ -81,7 +82,20 @@ public class GuardianInfoFormController implements Initializable {
         generateGuardianID();
         setCellValueFactory();
         loadAllGuardian();
-
+        ArrowKeyPress.switchTextFieldOnArrowPressRight(txtGuardianID,txtGuardianName);
+        ArrowKeyPress.switchTextFieldOnArrowPressRight(txtGuardianName,txtContactNo);
+        ArrowKeyPress.switchTextFieldOnArrowPressRight(txtStudentId,txtOccupation);
+        ArrowKeyPress.switchTextFieldOnArrowPressRight(txtOccupation,txtEmail);
+        ArrowKeyPress.switchTextFieldOnArrowPressLeft(txtEmail,txtOccupation);
+        ArrowKeyPress.switchTextFieldOnArrowPressLeft(txtOccupation,txtStudentId);
+        ArrowKeyPress.switchTextFieldOnArrowPressLeft(txtContactNo,txtGuardianName);
+        ArrowKeyPress.switchTextFieldOnArrowPressLeft(txtGuardianName,txtGuardianID);
+        ArrowKeyPress.switchTextFieldOnArrowPressDown(txtGuardianID,txtStudentId);
+        ArrowKeyPress.switchTextFieldOnArrowPressUP(txtStudentId,txtGuardianID);
+        ArrowKeyPress.switchTextFieldOnArrowPressDown(txtGuardianName,txtOccupation);
+        ArrowKeyPress.switchTextFieldOnArrowPressUP(txtOccupation,txtGuardianName);
+        ArrowKeyPress.switchTextFieldOnArrowPressDown(txtContactNo,txtEmail);
+        ArrowKeyPress.switchTextFieldOnArrowPressUP(txtEmail,txtContactNo);
     }
 
     private void setCellValueFactory() {
@@ -338,6 +352,7 @@ public class GuardianInfoFormController implements Initializable {
                 boolean updateGuardian = GuardianModel.updateGuardian(dto);
                 if (updateGuardian) {
                     new Alert(Alert.AlertType.INFORMATION,"Update Success!!!").showAndWait();
+                    clearField();
                 } else {
                     new Alert(Alert.AlertType.ERROR,"Update Failed!!!").showAndWait();
                 }
@@ -345,5 +360,19 @@ public class GuardianInfoFormController implements Initializable {
                 new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
             }
         }
+    }
+
+    private void clearField() {
+        txtGuardianID.setText("");
+        txtStudentId.setText("");
+        txtContactNo.setText("");
+        txtGuardianName.setText("");
+        txtOccupation.setText("");
+        txtEmail.setText("");
+        generateGuardianID();
+    }
+
+    public void btnRefreshOnAction(ActionEvent actionEvent) {
+        clearField();
     }
 }

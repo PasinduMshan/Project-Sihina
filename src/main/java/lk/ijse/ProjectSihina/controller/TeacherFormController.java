@@ -12,10 +12,12 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import lk.ijse.ProjectSihina.Other.ArrowKeyPress;
 import lk.ijse.ProjectSihina.dto.TeacherDto;
 import lk.ijse.ProjectSihina.dto.Tm.TeacherTm;
 import lk.ijse.ProjectSihina.model.teacherModel;
@@ -75,11 +77,26 @@ public class TeacherFormController implements Initializable {
     private ImageView imageTeacher;
 
     private File selectedImageFile;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         setCellValueFactory();
         loadAllTeacher();
         generateTeacherId();
+        ArrowKeyPress.switchTextFieldOnArrowPressRight(txtID,txtNameWithInitials);
+        ArrowKeyPress.switchTextFieldOnArrowPressRight(txtNameWithInitials,txtContactNo);
+        ArrowKeyPress.switchTextFieldOnArrowPressRight(txtAdderss,txtEmail);
+        ArrowKeyPress.switchTextFieldOnArrowPressLeft(txtContactNo,txtNameWithInitials);
+        ArrowKeyPress.switchTextFieldOnArrowPressLeft(txtNameWithInitials,txtID);
+        ArrowKeyPress.switchTextFieldOnArrowPressLeft(txtEmail,txtAdderss);
+        ArrowKeyPress.switchTextFieldOnArrowPressDown(txtID,txtAdderss);
+        ArrowKeyPress.switchTextFieldOnArrowPressDown(txtAdderss,txtSubject);
+        ArrowKeyPress.switchTextFieldOnArrowPressDown(txtContactNo,txtEmail);
+        ArrowKeyPress.switchTextFieldOnArrowPressDown(txtEmail,txtSubject);
+        ArrowKeyPress.switchTextFieldOnArrowPressDown(txtAdderss,txtSubject);
+        ArrowKeyPress.switchTextFieldOnArrowPressUP(txtSubject,txtAdderss);
+        ArrowKeyPress.switchTextFieldOnArrowPressUP(txtAdderss,txtID);
+        ArrowKeyPress.switchTextFieldOnArrowPressUP(txtEmail,txtContactNo);
     }
 
     private void generateTeacherId() {
@@ -145,6 +162,7 @@ public class TeacherFormController implements Initializable {
 
                 if (isAdded) {
                     new Alert(Alert.AlertType.CONFIRMATION, "Teacher save success!!!").showAndWait();
+                    clearField();
                 } else {
                     new Alert(Alert.AlertType.ERROR, "Save Failed!!!").showAndWait();
                 }
@@ -217,6 +235,7 @@ public class TeacherFormController implements Initializable {
 
             if (isDeleted) {
                 new Alert(Alert.AlertType.INFORMATION,"Teacher Delete Success!!!").showAndWait();
+                clearField();
             } else {
                 new Alert(Alert.AlertType.ERROR,"Delete Failed!!!").showAndWait();
             }
@@ -250,6 +269,7 @@ public class TeacherFormController implements Initializable {
 
                 if (isUpdated) {
                     new Alert(Alert.AlertType.INFORMATION, "Update Success!!!").showAndWait();
+                    clearField();
                 } else {
                     new Alert(Alert.AlertType.ERROR, "Updated Failed!!1").showAndWait();
                 }
@@ -262,9 +282,24 @@ public class TeacherFormController implements Initializable {
 
     @FXML
     void btnPrintOnAction(ActionEvent event) {
-
+        txtID.setText("");
+        txtNameWithInitials.setText("");
+        txtContactNo.setText("");
+        txtAdderss.setText("");
+        txtEmail.setText("");
+        txtSubject.setText("");
+        generateTeacherId();
     }
 
+    private void clearField() {
+        txtID.setText("");
+        txtNameWithInitials.setText("");
+        txtContactNo.setText("");
+        txtAdderss.setText("");
+        txtEmail.setText("");
+        txtSubject.setText("");
+        generateTeacherId();
+    }
 
     public void SearchTeacherOnAction(ActionEvent actionEvent) {
         String id = txtID.getText();
@@ -295,4 +330,7 @@ public class TeacherFormController implements Initializable {
     }
 
 
+    public void btnRefreshOnAction(ActionEvent actionEvent) {
+        clearField();
+    }
 }

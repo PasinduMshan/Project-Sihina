@@ -12,7 +12,9 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
+import lk.ijse.ProjectSihina.Other.ArrowKeyPress;
 import lk.ijse.ProjectSihina.dto.ClassDto;
 import lk.ijse.ProjectSihina.dto.ExamDto;
 import lk.ijse.ProjectSihina.dto.SubjectDto;
@@ -79,6 +81,14 @@ public class ExamFormController implements Initializable {
         loadAllClass();
         loadAllSubject();
         generateExam();
+        ArrowKeyPress.switchTextFieldOnArrowPressDown(txtID,txtDate);
+        ArrowKeyPress.switchTextFieldOnArrowPressUP(txtDate,txtID);
+        ArrowKeyPress.switchTextFieldOnArrowPressRight(txtDate,txtStartTime);
+        ArrowKeyPress.switchTextFieldOnArrowPressRight(txtStartTime,txtEndTime);
+        ArrowKeyPress.switchTextFieldOnArrowPressRIGHT(txtEndTime,txtDescription);
+        ArrowKeyPress.switchTextFieldOnArrowPressLEFT(txtDescription,txtEndTime);
+        ArrowKeyPress.switchTextFieldOnArrowPressLeft(txtEndTime,txtStartTime);
+        ArrowKeyPress.switchTextFieldOnArrowPressLeft(txtStartTime,txtDate);
     }
 
     private void generateExam() {
@@ -261,4 +271,7 @@ public class ExamFormController implements Initializable {
         generateExam();
     }
 
+    public void btnRefreshOnAction(ActionEvent actionEvent) {
+        clearField();
+    }
 }

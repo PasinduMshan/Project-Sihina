@@ -11,7 +11,9 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
+import lk.ijse.ProjectSihina.Other.ArrowKeyPress;
 import lk.ijse.ProjectSihina.dto.ClassDto;
 import lk.ijse.ProjectSihina.dto.SubjectDto;
 import lk.ijse.ProjectSihina.dto.TeacherDto;
@@ -63,13 +65,20 @@ public class SubjectFormController implements Initializable {
     @FXML
     private JFXTextField txtMonthlyAmount;
 
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         setCellValueFactory();
         loadAllSubject();
         loadAllTeacher();
         generateSubjectId();
+        ArrowKeyPress.switchTextFieldOnArrowPressDown(txtID,txtAvailableClass);
+        ArrowKeyPress.switchTextFieldOnArrowPressDown(txtSubject,txtMonthlyAmount);
+        ArrowKeyPress.switchTextFieldOnArrowPressUP(txtAvailableClass,txtID);
+        ArrowKeyPress.switchTextFieldOnArrowPressUP(txtMonthlyAmount,txtSubject);
+        ArrowKeyPress.switchTextFieldOnArrowPressRight(txtID,txtSubject);
+        ArrowKeyPress.switchTextFieldOnArrowPressLeft(txtSubject,txtID);
+        ArrowKeyPress.switchTextFieldOnArrowPressRight(txtAvailableClass,txtMonthlyAmount);
+        ArrowKeyPress.switchTextFieldOnArrowPressLeft(txtMonthlyAmount,txtAvailableClass);
     }
 
     private void loadAllTeacher() {
@@ -299,4 +308,8 @@ public class SubjectFormController implements Initializable {
         txtMonthlyAmount.setText("");
     }
 
+    public void btnRefreshOnAction(ActionEvent actionEvent) {
+        clearField();
+        generateSubjectId();
+    }
 }

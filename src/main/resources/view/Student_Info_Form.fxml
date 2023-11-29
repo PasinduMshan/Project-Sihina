@@ -18,17 +18,17 @@
     <children>
         <AnchorPane layoutX="7.0" layoutY="11.0" prefHeight="700.0" prefWidth="1265.0" style="-fx-background-color: #dcdde1; -fx-background-radius: 10;">
             <children>
+                <JFXTextField fx:id="txtNameWithInitials" layoutX="27.0" layoutY="243.0" prefHeight="30.0" prefWidth="294.0" promptText="Name with Initials">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </JFXTextField>
                 <Label layoutX="14.0" layoutY="14.0" text="Student Information">
                     <font>
                         <Font name="System Bold" size="30.0" />
                     </font>
                 </Label>
                 <JFXTextField fx:id="txtID" layoutX="278.0" layoutY="129.0" onAction="#IdSearchOnAction" prefHeight="30.0" prefWidth="233.0" promptText="ID">
-                    <font>
-                        <Font size="14.0" />
-                    </font>
-                </JFXTextField>
-                <JFXTextField fx:id="txtNameWithInitials" layoutX="27.0" layoutY="243.0" prefHeight="30.0" prefWidth="294.0" promptText="Name with Initials">
                     <font>
                         <Font size="14.0" />
                     </font>
@@ -105,7 +105,7 @@
                   <Font size="14.0" />
                </font>
             </JFXTextField>
-            <JFXButton buttonType="RAISED" layoutX="1157.0" layoutY="14.0" onAction="#btnBackOnAction" prefHeight="15.0" prefWidth="94.0" style="-fx-background-color: #a29bfe; -fx-background-radius: 15;" text="Back">
+            <JFXButton buttonType="RAISED" layoutX="1157.0" layoutY="14.0" onAction="#btnBackOnAction" prefHeight="15.0" prefWidth="94.0" style="-fx-background-color: #B3CAD6; -fx-background-radius: 15;" text="Back">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font>
@@ -131,14 +131,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </JFXButton>
-            <JFXButton buttonType="RAISED" layoutX="875.0" layoutY="14.0" onAction="#btnRefreshOnAction" prefHeight="30.0" prefWidth="76.0" style="-fx-background-color: #B3CAD6; -fx-background-radius: 20;" text="Refresh">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-               <font>
-                  <Font name="System Bold" size="13.0" />
-               </font></JFXButton>
-            <JFXButton layoutX="562.0" layoutY="15.0" onAction="#btnGuardianOnAction" prefHeight="28.0" prefWidth="283.0" style="-fx-background-color: #B3CAD6; -fx-background-radius: 10;" text="Click here to go to guardian page" textFill="#0f0fda">
+            <JFXButton buttonType="RAISED" layoutX="562.0" layoutY="15.0" onAction="#btnGuardianOnAction" prefHeight="28.0" prefWidth="283.0" style="-fx-background-color: #B3CAD6; -fx-background-radius: 10;" text="Click here to go to guardian page" textFill="#0f0fda">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
@@ -152,6 +145,14 @@
                </cursor>
                <font>
                   <Font name="System Bold" size="14.0" />
+               </font>
+            </JFXButton>
+            <JFXButton buttonType="RAISED" layoutX="863.0" layoutY="14.0" onAction="#btnRefreshOnAction" prefHeight="30.0" prefWidth="94.0" style="-fx-background-color: #B3CAD6; -fx-background-radius: 10;" text="Refresh">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <font>
+                  <Font name="System Bold" size="13.0" />
                </font>
             </JFXButton>
             </children></AnchorPane>

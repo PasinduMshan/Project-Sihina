@@ -273,8 +273,10 @@ public class DashBoardFormController {
 
     public void btnAboutOnAction(ActionEvent actionEvent) throws IOException {
         Parent rootNode = FXMLLoader.load(this.getClass().getResource("/view/About_Us_Form.fxml"));
-        this.moveNode.getChildren().clear();
-        this.moveNode.getChildren().add(rootNode);
+        Scene scene = new Scene(rootNode);
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.show();
     }
 
     public void btnEmailOnAction(ActionEvent actionEvent) throws IOException {
@@ -287,7 +289,9 @@ public class DashBoardFormController {
 
     public void btnUserSettingOnAction(ActionEvent actionEvent) throws IOException {
         Parent rootNode = FXMLLoader.load(this.getClass().getResource("/view/User_Setting.fxml"));
-        this.moveNode.getChildren().clear();
-        this.moveNode.getChildren().add(rootNode);
+        Scene scene = new Scene(rootNode);
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.show();
     }
 }

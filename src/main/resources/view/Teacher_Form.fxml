@@ -13,17 +13,17 @@
 
 <AnchorPane fx:id="moveNode" prefHeight="700.0" prefWidth="1011.0" style="-fx-background-color: #dcdde1; -fx-background-radius: 10;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.ProjectSihina.controller.TeacherFormController">
    <children>
+      <JFXTextField fx:id="txtNameWithInitials" layoutX="222.0" layoutY="112.0" prefHeight="30.0" prefWidth="277.0" promptText="Name With Initials">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </JFXTextField>
       <Label layoutX="30.0" layoutY="23.0" text="Teacher Information">
          <font>
             <Font name="System Bold" size="30.0" />
          </font>
       </Label>
       <JFXTextField fx:id="txtID" layoutX="30.0" layoutY="112.0" onAction="#SearchTeacherOnAction" prefHeight="30.0" prefWidth="120.0" promptText="ID">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </JFXTextField>
-      <JFXTextField fx:id="txtNameWithInitials" layoutX="222.0" layoutY="112.0" prefHeight="30.0" prefWidth="277.0" promptText="Name With Initials">
          <font>
             <Font size="14.0" />
          </font>
@@ -100,6 +100,14 @@
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
+      </JFXButton>
+      <JFXButton buttonType="RAISED" layoutX="737.0" layoutY="20.0" onAction="#btnRefreshOnAction" prefHeight="24.0" prefWidth="87.0" style="-fx-background-color: #B3CAD6; -fx-background-radius: 10;" text="Refresh">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
       </JFXButton>
    </children>
 </AnchorPane>

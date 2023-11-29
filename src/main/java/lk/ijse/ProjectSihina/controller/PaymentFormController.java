@@ -21,7 +21,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import lk.ijse.ProjectSihina.Enums.Months;
+import lk.ijse.ProjectSihina.Other.ArrowKeyPress;
+import lk.ijse.ProjectSihina.Other.Months;
 import lk.ijse.ProjectSihina.dto.ClassDto;
 import lk.ijse.ProjectSihina.dto.PaymentDto;
 import lk.ijse.ProjectSihina.dto.SubjectDto;
@@ -123,6 +124,15 @@ public class PaymentFormController implements Initializable {
         loadAllClass();
         loadAllSubject();
         loadAllMonth();
+        ArrowKeyPress.switchTextFieldOnArrowPressRight(txtPayId,txtID);
+        ArrowKeyPress.switchTextFieldOnArrowPressRight(txtID,txtName);
+        ArrowKeyPress.switchTextFieldOnArrowPressRight(txtAmount,txtAttendantCount);
+        ArrowKeyPress.switchTextFieldOnArrowPressRight(txtName,txtAmount);
+        ArrowKeyPress.switchTextFieldOnArrowPressLeft(txtAttendantCount,txtAmount);
+        ArrowKeyPress.switchTextFieldOnArrowPressLeft(txtName,txtID);
+        ArrowKeyPress.switchTextFieldOnArrowPressLeft(txtID,txtPayId);
+        ArrowKeyPress.switchTextFieldOnArrowPressUP(txtAmount,txtName);
+        ArrowKeyPress.switchTextFieldOnArrowPressDown(txtName,txtAmount);
     }
 
     private void loadAllMonth() {
@@ -265,7 +275,6 @@ public class PaymentFormController implements Initializable {
                 new Alert(Alert.AlertType.INFORMATION,"Payment Success!!").showAndWait();
                 loadAllPayment();
                 clearField();
-                generatePayId();
             } else {
                 new Alert(Alert.AlertType.ERROR, "Payment Failed!!!").showAndWait();
             }
@@ -289,7 +298,6 @@ public class PaymentFormController implements Initializable {
                 new Alert(Alert.AlertType.INFORMATION,"Delete Success!!!").showAndWait();
                 clearField();
                 loadAllPayment();
-                generatePayId();
             } else {
                 new Alert(Alert.AlertType.ERROR,"Delete Failed!!!").showAndWait();
             }
@@ -394,7 +402,6 @@ public class PaymentFormController implements Initializable {
                 new Alert(Alert.AlertType.INFORMATION,"Update Success!!!").showAndWait();
                 clearField();
                 loadAllPayment();
-                generatePayId();
             } else {
                 new Alert(Alert.AlertType.ERROR,"Update Failed!!!").showAndWait();
             }
@@ -421,6 +428,7 @@ public class PaymentFormController implements Initializable {
         cmbSubject.setValue("");
         txtAmount.setText("");
         txtAttendantCount.setText("");
+        generatePayId();
     }
 
     public void AttendantCountOnAction(ActionEvent actionEvent) {
@@ -478,4 +486,7 @@ public class PaymentFormController implements Initializable {
         txtID.setText(newID);
     }
 
+    public void btnRefreshOnAction(ActionEvent actionEvent) {
+        clearField();
+    }
 }

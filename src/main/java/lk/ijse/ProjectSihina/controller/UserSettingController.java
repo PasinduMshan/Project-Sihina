@@ -12,6 +12,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import lk.ijse.ProjectSihina.Other.ArrowKeyPress;
 import lk.ijse.ProjectSihina.dto.Tm.userTm;
 import lk.ijse.ProjectSihina.dto.UserDto;
 import lk.ijse.ProjectSihina.model.SignUpModel;
@@ -85,6 +86,30 @@ public class UserSettingController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         setCellValueFactory();
         loadAllUser();
+        ArrowKeyPress.switchTextFieldOnArrowPressRight(txtUserId,txtFirstName);
+        ArrowKeyPress.switchTextFieldOnArrowPressRight(txtFirstName,txtLastName);
+        ArrowKeyPress.switchTextFieldOnArrowPressRight(txtLastName,txtEmail);
+        ArrowKeyPress.switchTextFieldOnArrowPressRight(txtEmail,txtNIC);
+        ArrowKeyPress.switchTextFieldOnArrowPressLeft(txtNIC,txtEmail);
+        ArrowKeyPress.switchTextFieldOnArrowPressLeft(txtEmail,txtLastName);
+        ArrowKeyPress.switchTextFieldOnArrowPressLeft(txtLastName,txtFirstName);
+        ArrowKeyPress.switchTextFieldOnArrowPressLeft(txtFirstName,txtUserId);
+        ArrowKeyPress.switchTextFieldOnArrowPressDown(txtNIC,txtNICTOChange);
+
+        ArrowKeyPress.switchTextFieldOnArrowPressRight(txtNICTOChange,txtNowUserName);
+        ArrowKeyPress.switchTextFieldOnArrowPressRightToPassword(txtNowUserName,txtNowPassword);
+        ArrowKeyPress.switchTextFieldOnArrowPressDownToPassword(txtNowPassword,txtNewUserName);
+        ArrowKeyPress.switchTextFieldOnArrowPressUPToPassword(txtNewUserName,txtNowPassword);
+        ArrowKeyPress.switchTextFieldOnArrowPressLeftToPassword(txtNowPassword,txtNowUserName);
+        ArrowKeyPress.switchTextFieldOnArrowPressLeft(txtNowUserName,txtNICTOChange);
+
+        ArrowKeyPress.switchTextFieldOnArrowPressRightToPassword(txtNewUserName,txtNewPassword);
+        ArrowKeyPress.switchTextFieldOnArrowPressLeftToPassword(txtNewPassword,txtNewUserName);
+        ArrowKeyPress.switchTextFieldOnArrowPressDownToPassword(txtNewPassword,txtConfirmUserName);
+        ArrowKeyPress.switchTextFieldOnArrowPressUPToPassword(txtConfirmUserName,txtNewPassword);
+
+        ArrowKeyPress.switchTextFieldOnArrowPressRightToPassword(txtConfirmUserName,txtConfirmPassword);
+        ArrowKeyPress.switchTextFieldOnArrowPressLeftToPassword(txtConfirmPassword,txtConfirmUserName);
     }
 
     private void loadAllUser() {
@@ -283,4 +308,22 @@ public class UserSettingController implements Initializable {
         return true;
     }
 
+    private void clearField() {
+        txtUserId.setText("");
+        txtFirstName.setText("");
+        txtLastName.setText("");
+        txtEmail.setText("");
+        txtNIC.setText("");
+        txtNICTOChange.setText("");
+        txtNowUserName.setText("");
+        txtNowPassword.setText("");
+        txtNewUserName.setText("");
+        txtNewPassword.setText("");
+        txtConfirmUserName.setText("");
+        txtConfirmPassword.setText("");
+    }
+
+    public void btnRefreshOnAction(ActionEvent actionEvent) {
+        clearField();
+    }
 }
