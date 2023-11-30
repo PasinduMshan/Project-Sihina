@@ -30,9 +30,9 @@
         <TableView fx:id="tblSubject" layoutX="56.0" layoutY="321.0" prefHeight="358.0" prefWidth="896.0">
             <columns>
                 <TableColumn fx:id="colId" prefWidth="117.0" text="ID" />
-                <TableColumn fx:id="colSubject" prefWidth="130.0" text="Subject" />
-                <TableColumn fx:id="colTeacherName" prefWidth="176.0" text="Teacher Name" />
-            <TableColumn fx:id="colClass" prefWidth="333.0" text="Class" />
+                <TableColumn fx:id="colSubject" prefWidth="259.0" text="Subject" />
+                <TableColumn fx:id="colTeacherName" prefWidth="152.0" text="Teacher Name" />
+            <TableColumn fx:id="colClass" prefWidth="228.0" text="Class" />
             <TableColumn fx:id="colMonthlyAmount" prefWidth="138.0" text="Monthly Amount" />
             </columns>
         </TableView>

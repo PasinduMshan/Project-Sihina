@@ -110,11 +110,13 @@ public class StudentInfoFormController implements Initializable {
        setCellValueFactory();
        loadAllStudent();
        generateStuId();
+       tableListener();
        ArrowKeyPress.switchTextFieldOnArrowPressDown(txtID,txtNameWithInitials);
        ArrowKeyPress.switchTextFieldOnArrowPressDown(txtNameWithInitials,txtEmail);
        ArrowKeyPress.switchTextFieldOnArrowPressDown(txtEmail,txtAddress);
        ArrowKeyPress.switchTextFieldOnArrowPressDown(txtAddress,txtSubject);
        ArrowKeyPress.switchTextFieldOnArrowPressDown(txtDateOfBirth,txtContact);
+       ArrowKeyPress.switchTextFieldOnArrowPressDown(txtContact,txtAddress);
        ArrowKeyPress.switchTextFieldOnArrowPressRight(txtNameWithInitials,txtDateOfBirth);
        ArrowKeyPress.switchTextFieldOnArrowPressLeft(txtDateOfBirth,txtNameWithInitials);
        ArrowKeyPress.switchTextFieldOnArrowPressRight(txtEmail,txtContact);
@@ -296,7 +298,7 @@ public class StudentInfoFormController implements Initializable {
             return false;
         }
 
-        boolean matches1 = Pattern.matches("[A-Za-z0-9/,.]+", address);
+        boolean matches1 = Pattern.matches("[A-Za-z0-9/,.\\s]+", address);
         if (!matches1) {
             new Alert(Alert.AlertType.ERROR,"Invalid Address!!").show();
             return false;
@@ -326,15 +328,16 @@ public class StudentInfoFormController implements Initializable {
 
     @FXML
     void btnRegisterOnAction(ActionEvent event) throws IOException {
-        if ((getAllValueInField() != null) && (selectedImageFile != null)) {
+        if ((getAllValueInField() != null)) {
             FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/view/Guardian_Info_Form.fxml"));
             Parent rootNode = loader.load();
             GuardianInfoFormController guardianInfoFormController = loader.getController();
-            guardianInfoFormController.initialData(getAllValueInField(), selectedImageFile);
+            guardianInfoFormController.initialData(getAllValueInField());
             Scene scene = new Scene(rootNode);
             Stage stage = new Stage();
             stage.setScene(scene);
             stage.show();
+            clearFields();
         } else {
             new Alert(Alert.AlertType.ERROR,"First You Should Input Details Clearly!!!").show();
             return;
@@ -364,7 +367,7 @@ public class StudentInfoFormController implements Initializable {
             StudentDto dto = new StudentDto(ID, name, address, gender, email, date, contact, stu_class, subject, studentImage);
 
             try {
-                boolean isUpdated = StudentModel.updateStudent(dto, selectedImageFile);
+                boolean isUpdated = StudentModel.updateStudent(dto);
 
                 if (isUpdated) {
                     new Alert(Alert.AlertType.INFORMATION, "Update Success!!!").showAndWait();
@@ -387,9 +390,9 @@ public class StudentInfoFormController implements Initializable {
             new Alert(Alert.AlertType.ERROR,"ID is Empty!!!").showAndWait();
             return;
         }
+
         try {
             StudentDto dto = StudentModel.searchStudent(id);
-
             if (dto != null) {
                 txtNameWithInitials.setText(dto.getName());
                 txtAddress.setText(dto.getAddress());
@@ -404,8 +407,9 @@ public class StudentInfoFormController implements Initializable {
                 new Alert(Alert.AlertType.ERROR,"Student Not Found!!!").showAndWait();
             }
         } catch (SQLException e) {
-            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+            throw new RuntimeException(e);
         }
+
     }
 
     private void clearFields() {
@@ -443,5 +447,30 @@ public class StudentInfoFormController implements Initializable {
         String outputFilePath ="/home/pasindu/Desktop/Final Project Semester 01/QRCode png/" + name + "_" + StuId + ".png";
 
         QRCodeGenerator.generateQRCode(qrCodeData, outputFilePath);
+    }
+
+    private void tableListener(){
+        tblStudent.getSelectionModel()
+                .selectedItemProperty()
+                .addListener((observableValue, StudentTm, t1) -> {
+                    try {
+                        StudentDto dto = StudentModel.searchStudent(t1.getID());
+                        if (dto != null) {
+                            txtID.setText(dto.getID());
+                            txtNameWithInitials.setText(dto.getName());
+                            txtAddress.setText(dto.getAddress());
+                            cmbGender.setValue(dto.getGender());
+                            txtEmail.setText(dto.getEmail());
+                            txtDateOfBirth.setText(String.valueOf(dto.getDob()));
+                            txtContact.setText(dto.getContact());
+                            cmbClass.setValue(dto.getStu_Class());
+                            txtSubject.setText(dto.getSubject());
+                            imageStudent.setImage(dto.getStudentImage());
+                        }
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    }
+
+                });
     }
 }

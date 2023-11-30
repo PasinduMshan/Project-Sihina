@@ -14,7 +14,7 @@ import java.util.List;
 public class PaymentModel {
     public static List<PaymentDto> searchStuPays(String id, String Month) throws SQLException {
         Connection connection = DbConnection.getInstance().getConnection();
-        PreparedStatement pstm = connection.prepareStatement("SELECT Pay_id, Subject , Pay_Month FROM Payment WHERE Stu_id = ? AND Pay_Month = ?");
+        PreparedStatement pstm = connection.prepareStatement("SELECT Pay_id, Subject , Amount  FROM Payment WHERE Stu_id = ? AND Pay_Month = ?");
         pstm.setString(1, id);
         pstm.setString(2, Month);
         ResultSet resultSet = pstm.executeQuery();
@@ -27,6 +27,7 @@ public class PaymentModel {
                    resultSet.getString(2),
                    resultSet.getDouble(3)
            ));
+            System.out.println(resultSet.getString(2));
         }
         return dtoList;
     }
@@ -41,11 +42,10 @@ public class PaymentModel {
         StudentDto dto = null;
 
         if (resultSet.next()) {
-            String Stu_id = resultSet.getString(1);
-            String name = resultSet.getString(2);
-            String subject = resultSet.getString(3);
+            String name = resultSet.getString(1);
+            String subject = resultSet.getString(2);
 
-            dto = new StudentDto(Stu_id,name,subject);
+            dto = new StudentDto(name,subject);
         }
         return dto;
     }
@@ -134,7 +134,7 @@ public class PaymentModel {
     public static boolean updatePayment(PaymentDto dto) throws SQLException {
         Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement("UPDATE Payment SET Stu_id = ?, Type = ?, Stu_Class = ?, Subject = ?, " +
-                "Pay_Month = ?, date = ?, time = ? WHERE Pay_id = ?");
+                "Pay_Month = ?, date = ?, time = ? , Amount = ? WHERE Pay_id = ?");
         pstm.setString(1, dto.getStuID());
         pstm.setString(2, dto.getType());
         pstm.setString(3, dto.getStuClass());
@@ -186,12 +186,33 @@ public class PaymentModel {
 
     public static String getAllAttendant(String stu_id, String subject, String month, String stu_class) throws SQLException {
         Connection connection = DbConnection.getInstance().getConnection();
-        PreparedStatement pstm = connection.prepareStatement("SELECT COUNT(Att_id) FROM Attendance WHERE Stu_id = ? AND Subject = ? AND Month = ? AND Stu_Class = ?");
+        PreparedStatement pstm = connection.prepareStatement("SELECT COUNT(Att_id) FROM Attendance WHERE Stu_id = ? " +
+                "AND Subject = ? AND Month = ? AND Stu_Class = ?");
+        pstm.setString(1, stu_id);
+        pstm.setString(2, subject);
+        pstm.setString(3, month);
+        pstm.setString(4, stu_class);
         ResultSet resultSet = pstm.executeQuery();
         String Count = null;
         if (resultSet.next()) {
              Count = resultSet.getString(1);
         }
         return Count;
+    }
+
+    public static StudentDto getStudentNameClass(String id) throws SQLException {
+        Connection connection = DbConnection.getInstance().getConnection();
+        PreparedStatement pstm = connection.prepareStatement("SELECT Name , Class FROM Student WHERE Stu_id = ?");
+        pstm.setString(1, id);
+        ResultSet resultSet = pstm.executeQuery();
+        StudentDto dto = null;
+
+        if (resultSet.next()) {
+            String name = resultSet.getString(1);
+            String Class = resultSet.getString(2);
+
+            dto = new StudentDto(id , name, Class);
+        }
+        return dto;
     }
 }

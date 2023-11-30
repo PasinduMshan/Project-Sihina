@@ -100,7 +100,7 @@ public class RegistrationPayForm implements Initializable {
     private JFXTextField txtPayId;
 
     private StudentDto studentDto;
-    private File selectedImageFile;
+
     private GuardianDto guardianDto;
 
     private Object year;
@@ -119,6 +119,7 @@ public class RegistrationPayForm implements Initializable {
         loadAllClass();
         loadAllRegistrations();
         lblType.setText(Type);
+        tableListener();
         ArrowKeyPress.switchTextFieldOnArrowPressRight(txtPayId,txtID);
         ArrowKeyPress.switchTextFieldOnArrowPressRight(txtID,txtName);
         ArrowKeyPress.switchTextFieldOnArrowPressLeft(txtName,txtID);
@@ -129,10 +130,12 @@ public class RegistrationPayForm implements Initializable {
         ArrowKeyPress.switchTextFieldOnArrowPressUP(txtAmount,txtID);
     }
 
-    public void initialData(StudentDto dto, File selectedImageFile, GuardianDto guardianDto) {
+    public void initialData(StudentDto dto, GuardianDto guardianDto) {
         this.studentDto = dto;
-        this.selectedImageFile = selectedImageFile;
         this.guardianDto = guardianDto;
+        txtID.setText(dto.getID());
+        txtName.setText(dto.getName());
+        cmbClass.setValue(dto.getStu_Class());
     }
 
     private void setCellValueFactory() {
@@ -261,6 +264,7 @@ public class RegistrationPayForm implements Initializable {
         cmbMonth.setValue("");
         lblType.setText(Type);
         generatePayId();
+        setDateAndTime();
     }
 
     @FXML
@@ -292,9 +296,10 @@ public class RegistrationPayForm implements Initializable {
         PaymentDto PayDto = new PaymentDto(PayId,StuId, StuName,type,StuClass,month,Subject,PayAmount,date,time);
 
         try {
-            boolean isRegisterStudent = RegisterStudentModel.SaveStudentRegisterAndPayment(studentDto, PayDto,selectedImageFile, guardianDto);
+            boolean isRegisterStudent = RegisterStudentModel.SaveStudentRegisterAndPayment(studentDto, PayDto, guardianDto);
             if (isRegisterStudent) {
                 new Alert(Alert.AlertType.INFORMATION, "Student Register Success!!").showAndWait();
+                clearField();
                 loadAllRegistrations();
             } else {
                 new Alert(Alert.AlertType.ERROR,"Student Register Failed!!!").showAndWait();
@@ -362,5 +367,28 @@ public class RegistrationPayForm implements Initializable {
 
     public void btnRefreshOnAction(ActionEvent actionEvent) throws SQLException {
         clearField();
+    }
+
+    private void tableListener(){
+        tblPayment.getSelectionModel()
+                .selectedItemProperty()
+                .addListener((observableValue, PaymentTm, t1) -> {
+                    try {
+                        PaymentDto dto = PaymentModel.SearchPaymontId(t1.getPayId());
+                        if (dto != null) {
+                            txtPayId.setText(dto.getPayID());
+                            txtID.setText(dto.getStuID());
+                            txtName.setText(dto.getStuName());
+                            cmbClass.setValue(dto.getStuClass());
+                            txtAmount.setText(String.valueOf(dto.getAmount()));
+                            cmbMonth.setValue(dto.getPayMonth());
+                            lblDate.setText(String.valueOf(dto.getDate()));
+                            lblTime.setText(String.valueOf(dto.getTime()));
+                            lblType.setText(Type);
+                        }
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    }
+                });
     }
 }

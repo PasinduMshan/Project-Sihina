@@ -66,9 +66,9 @@ public class ClassModel {
 
     public static List<ClassDto> getAllClass() throws SQLException {
         Connection connection = DbConnection.getInstance().getConnection();
-        PreparedStatement pstm = connection.prepareStatement("SELECT c.class_id, c.Name AS class_name, " +
-                "COUNT(s.Stu_id) AS student_count FROM Class c LEFT JOIN Student s ON c.class_id = s.Class GROUP BY " +
-                "c.class_id, c.Name ORDER BY c.class_id");
+        PreparedStatement pstm = connection.prepareStatement("SELECT c.class_id, c.Name, COUNT(s.Stu_id) AS " +
+                "student_count FROM Class c LEFT JOIN Registration r ON c.class_id = r.class_id LEFT JOIN Student s ON " +
+                "r.Stu_id = s.Stu_id GROUP BY c.class_id, c.Name ORDER BY c.class_id;");
         ResultSet resultSet = pstm.executeQuery();
 
         ArrayList<ClassDto> dtoList = new ArrayList<>();

@@ -16,10 +16,13 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import lk.ijse.ProjectSihina.Other.ArrowKeyPress;
+import lk.ijse.ProjectSihina.dto.ExamDto;
 import lk.ijse.ProjectSihina.dto.GuardianDto;
 import lk.ijse.ProjectSihina.dto.StudentDto;
 import lk.ijse.ProjectSihina.dto.Tm.GuardianTm;
+import lk.ijse.ProjectSihina.model.ExamModel;
 import lk.ijse.ProjectSihina.model.GuardianModel;
+import lk.ijse.ProjectSihina.controller.RegistrationPayForm;
 
 import java.io.File;
 import java.io.IOException;
@@ -75,13 +78,12 @@ public class GuardianInfoFormController implements Initializable {
     private JFXTextField txtStudentId;
 
     private StudentDto studentDto;
-    private File selectedImageFile;
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         generateGuardianID();
         setCellValueFactory();
         loadAllGuardian();
+        tableListener();
         ArrowKeyPress.switchTextFieldOnArrowPressRight(txtGuardianID,txtGuardianName);
         ArrowKeyPress.switchTextFieldOnArrowPressRight(txtGuardianName,txtContactNo);
         ArrowKeyPress.switchTextFieldOnArrowPressRight(txtStudentId,txtOccupation);
@@ -129,9 +131,9 @@ public class GuardianInfoFormController implements Initializable {
         }
     }
 
-    public void initialData(StudentDto dto, File selectedImageFile) {
+    public void initialData(StudentDto dto) {
         this.studentDto = dto;
-        this.selectedImageFile = selectedImageFile;
+        txtStudentId.setText(dto.getID());
     }
 
     private void generateGuardianID() {
@@ -160,10 +162,10 @@ public class GuardianInfoFormController implements Initializable {
         boolean isValidate = validateStudentDetail(Name, contactNo, email, occupation);
         if (isValidate) {
             GuardianDto dto = new GuardianDto(GuardId, Name, contactNo, email, occupation, StuId);
-            FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/view/Guardian_Info_Form.fxml"));
+            FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/view/Registration_Pay_Form.fxml"));
             Parent rootNode = loader.load();
             RegistrationPayForm registrationPayForm = loader.getController();
-            registrationPayForm.initialData(studentDto, selectedImageFile,dto);
+            registrationPayForm.initialData(studentDto,dto);
             Scene scene = new Scene(rootNode);
             Stage stage = new Stage();
             stage.setScene(scene);
@@ -213,6 +215,7 @@ public class GuardianInfoFormController implements Initializable {
             boolean isDelete = GuardianModel.deleteGuard(ID);
             if (isDelete) {
                 new Alert(Alert.AlertType.INFORMATION,"Guardian Delete Success!!!").showAndWait();
+                loadAllGuardian();
             } else {
                 new Alert(Alert.AlertType.ERROR,"Guardian Delete Failed!!!").showAndWait();
             }
@@ -352,6 +355,7 @@ public class GuardianInfoFormController implements Initializable {
                 boolean updateGuardian = GuardianModel.updateGuardian(dto);
                 if (updateGuardian) {
                     new Alert(Alert.AlertType.INFORMATION,"Update Success!!!").showAndWait();
+                    loadAllGuardian();
                     clearField();
                 } else {
                     new Alert(Alert.AlertType.ERROR,"Update Failed!!!").showAndWait();
@@ -374,5 +378,25 @@ public class GuardianInfoFormController implements Initializable {
 
     public void btnRefreshOnAction(ActionEvent actionEvent) {
         clearField();
+    }
+
+    private void tableListener(){
+        tblGuardian.getSelectionModel()
+                .selectedItemProperty()
+                .addListener((observableValue, GuardianTm, t1) -> {
+                    try {
+                        GuardianDto dto = GuardianModel.SearchGuardianFromId(t1.getGuardId());
+                        if (dto != null) {
+                            txtGuardianID.setText(dto.getGuardId());
+                            txtGuardianName.setText(dto.getName());
+                            txtContactNo.setText(dto.getContact());
+                            txtEmail.setText(dto.getEmail());
+                            txtOccupation.setText(dto.getOccupation());
+                            txtStudentId.setText(dto.getStuId());
+                        }
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    }
+                });
     }
 }

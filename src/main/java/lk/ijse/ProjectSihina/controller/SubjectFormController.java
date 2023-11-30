@@ -15,10 +15,12 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import lk.ijse.ProjectSihina.Other.ArrowKeyPress;
 import lk.ijse.ProjectSihina.dto.ClassDto;
+import lk.ijse.ProjectSihina.dto.StudentDto;
 import lk.ijse.ProjectSihina.dto.SubjectDto;
 import lk.ijse.ProjectSihina.dto.TeacherDto;
 import lk.ijse.ProjectSihina.dto.Tm.SubjectTm;
 import lk.ijse.ProjectSihina.model.ClassModel;
+import lk.ijse.ProjectSihina.model.StudentModel;
 import lk.ijse.ProjectSihina.model.SubjectModel;
 
 import java.net.URL;
@@ -71,6 +73,7 @@ public class SubjectFormController implements Initializable {
         loadAllSubject();
         loadAllTeacher();
         generateSubjectId();
+        tableListener();
         ArrowKeyPress.switchTextFieldOnArrowPressDown(txtID,txtAvailableClass);
         ArrowKeyPress.switchTextFieldOnArrowPressDown(txtSubject,txtMonthlyAmount);
         ArrowKeyPress.switchTextFieldOnArrowPressUP(txtAvailableClass,txtID);
@@ -140,14 +143,14 @@ public class SubjectFormController implements Initializable {
         String id = txtID.getText();
 
         String subject = txtSubject.getText();
-        boolean matches = Pattern.matches("[A-Za-z]+", subject);
+        boolean matches = Pattern.matches("[A-Za-z.\\s&]+", subject);
         if (!matches) {
             new Alert(Alert.AlertType.ERROR, "Invalid Name!!").show();
             return;
         }
 
         String AvailableClass = txtAvailableClass.getText();
-        boolean matches2 = Pattern.matches("[A-Za-z0-9/,]+", AvailableClass);
+        boolean matches2 = Pattern.matches("[A-Za-z0-9/,\\s]+", AvailableClass);
         if (!matches2) {
             new Alert(Alert.AlertType.ERROR, "Invalid AvailableClass!!").show();
             return;
@@ -226,16 +229,16 @@ public class SubjectFormController implements Initializable {
         String id = txtID.getText();
 
         String subject = txtSubject.getText();
-        boolean matches = Pattern.matches("[A-Za-z]+", subject);
+        boolean matches = Pattern.matches("[A-Za-z.\\s]+", subject);
         if (!matches) {
             new Alert(Alert.AlertType.ERROR, "Invalid Name!!").show();
             return;
         }
 
         String AvailableClass = txtAvailableClass.getText();
-        boolean matches2 = Pattern.matches("[A-Za-z/,]+", AvailableClass);
+        boolean matches2 = Pattern.matches("[A-Za-z0-9/,\\s]+", AvailableClass);
         if (!matches2) {
-            new Alert(Alert.AlertType.ERROR, "Invalid Name!!").show();
+            new Alert(Alert.AlertType.ERROR, "Invalid Available Class!!").show();
             return;
         }
 
@@ -269,7 +272,7 @@ public class SubjectFormController implements Initializable {
                 new Alert(Alert.AlertType.ERROR,"Update Failed!!!").showAndWait();
             }
         } catch (SQLException e) {
-            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+            throw new RuntimeException(e);
         }
 
     }
@@ -311,5 +314,25 @@ public class SubjectFormController implements Initializable {
     public void btnRefreshOnAction(ActionEvent actionEvent) {
         clearField();
         generateSubjectId();
+    }
+    private void tableListener(){
+        tblSubject.getSelectionModel()
+                .selectedItemProperty()
+                .addListener((observableValue, SubjectTm, t1) -> {
+                    try {
+                        SubjectDto dto = SubjectModel.searchSubject(t1.getSub_Id());
+
+                        if (dto != null) {
+                            txtID.setText(dto.getId());
+                            txtSubject.setText(dto.getSubject());
+                            txtAvailableClass.setText(dto.getAvailableClass());
+                            cmbTeacherName.setValue(dto.getTeacherName());
+                            txtMonthlyAmount.setText(String.valueOf(dto.getMonthlyAmount()));
+                        }
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    }
+
+                });
     }
 }

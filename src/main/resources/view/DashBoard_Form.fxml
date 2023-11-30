@@ -241,12 +241,12 @@
                         <Font name="System Bold" size="20.0" />
                      </font>
                   </Label>
-                  <Label fx:id="lblTodayIncome" layoutX="97.0" layoutY="55.0" prefHeight="44.0" prefWidth="137.0">
+                  <Label fx:id="lblTodayIncome" layoutX="87.0" layoutY="54.0" prefHeight="44.0" prefWidth="146.0">
                      <font>
-                        <Font name="System Bold" size="36.0" />
+                        <Font name="System Bold" size="26.0" />
                      </font>
                   </Label>
-                  <ImageView fitHeight="44.0" fitWidth="44.0" layoutX="36.0" layoutY="55.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="44.0" fitWidth="44.0" layoutX="31.0" layoutY="55.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../Images/IncomeDashBoard.png" />
                      </image>
@@ -262,11 +262,11 @@
                   </Label>
                   <TableView fx:id="tblSchedule" layoutX="39.0" layoutY="61.0" prefHeight="358.0" prefWidth="550.0" style="-fx-background-color: #D8E8F0;">
                     <columns>
-                      <TableColumn fx:id="colStartTime" prefWidth="96.0" text="Start Time" />
-                      <TableColumn fx:id="colEndTime" prefWidth="102.0" text="End Time" />
-                        <TableColumn fx:id="colGrade" prefWidth="76.0" text="Grade" />
-                        <TableColumn fx:id="colSubject" prefWidth="200.0" text="Subject" />
-                        <TableColumn fx:id="colType" prefWidth="75.0" text="Type" />
+                      <TableColumn fx:id="colStartTime" prefWidth="87.0" text="Start Time" />
+                      <TableColumn fx:id="colEndTime" prefWidth="83.0" text="End Time" />
+                        <TableColumn fx:id="colGrade" prefWidth="95.0" text="Grade" />
+                        <TableColumn fx:id="colSubject" prefWidth="163.0" text="Subject" />
+                        <TableColumn fx:id="colType" prefWidth="121.0" text="Type" />
                     </columns>
                   </TableView>
                </children>

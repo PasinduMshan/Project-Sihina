@@ -79,7 +79,8 @@ public class AttendantModel {
 
     public static AttendantDto searchAttendant(String attId) throws SQLException {
         Connection connection = DbConnection.getInstance().getConnection();
-        PreparedStatement pstm = connection.prepareStatement("SELECT * FROM Attendance");
+        PreparedStatement pstm = connection.prepareStatement("SELECT * FROM Attendance WHERE Att_id = ?");
+        pstm.setString(1,attId);
         ResultSet resultSet = pstm.executeQuery();
         
         AttendantDto dto = null;
@@ -120,9 +121,9 @@ public class AttendantModel {
                     resultSet.getString(1),
                     getStudentName(resultSet.getString(2)),
                     resultSet.getString(3),
-                    resultSet.getDate(4).toLocalDate(),
                     resultSet.getString(5),
-                    resultSet.getString(6)
+                    resultSet.getDate(6).toLocalDate(),
+                    resultSet.getString(8)
             ));
         }
         return  dtoList;

@@ -30,11 +30,11 @@
         <TableView fx:id="tblPayment" layoutX="30.0" layoutY="252.0" prefHeight="434.0" prefWidth="794.0">
             <columns>
                 <TableColumn fx:id="colID" prefWidth="100.0" text="Payment ID" />
-                <TableColumn fx:id="colStu_Id" prefWidth="173.0" text="Student ID" />
-                <TableColumn fx:id="colName" prefWidth="111.0" text="Name" />
+                <TableColumn fx:id="colStu_Id" prefWidth="111.0" text="Student ID" />
+                <TableColumn fx:id="colName" prefWidth="173.0" text="Name" />
                 <TableColumn fx:id="colClass" prefWidth="111.0" text="Class" />
-                <TableColumn fx:id="colDate" prefWidth="117.0" text="Date" />
-                <TableColumn fx:id="colAmount" prefWidth="181.0" text="Amount" />
+                <TableColumn fx:id="colDate" prefWidth="171.0" text="Date" />
+                <TableColumn fx:id="colAmount" prefWidth="127.0" text="Amount" />
             </columns>
         </TableView>
         <JFXButton buttonType="RAISED" layoutX="866.0" layoutY="330.0" onAction="#btnPayOnAction" prefHeight="40.0" prefWidth="108.0" style="-fx-background-color: #41c643; -fx-background-radius: 15;" text="Pay">

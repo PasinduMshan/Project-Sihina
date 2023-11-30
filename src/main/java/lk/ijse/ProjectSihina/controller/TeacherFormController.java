@@ -83,6 +83,7 @@ public class TeacherFormController implements Initializable {
         setCellValueFactory();
         loadAllTeacher();
         generateTeacherId();
+        tableListener();
         ArrowKeyPress.switchTextFieldOnArrowPressRight(txtID,txtNameWithInitials);
         ArrowKeyPress.switchTextFieldOnArrowPressRight(txtNameWithInitials,txtContactNo);
         ArrowKeyPress.switchTextFieldOnArrowPressRight(txtAdderss,txtEmail);
@@ -163,6 +164,7 @@ public class TeacherFormController implements Initializable {
                 if (isAdded) {
                     new Alert(Alert.AlertType.CONFIRMATION, "Teacher save success!!!").showAndWait();
                     clearField();
+                    loadAllTeacher();
                 } else {
                     new Alert(Alert.AlertType.ERROR, "Save Failed!!!").showAndWait();
                 }
@@ -175,13 +177,13 @@ public class TeacherFormController implements Initializable {
 
     private boolean validateTeacherDetail(String name, String address, String email, String contact) {
 
-        boolean matches = Pattern.matches("[A-Za-z]+", name);
+        boolean matches = Pattern.matches("[A-Za-z\\s.]+", name);
         if (!matches) {
             new Alert(Alert.AlertType.ERROR, "Invalid Name!!").show();
             return false;
         }
 
-        boolean matches1 = Pattern.matches("[A-Za-z0-9/,.]+", address);
+        boolean matches1 = Pattern.matches("[A-Za-z0-9/,.\\s]+", address);
         if (!matches1) {
             new Alert(Alert.AlertType.ERROR, "Invalid Address!!").show();
             return false;
@@ -236,6 +238,7 @@ public class TeacherFormController implements Initializable {
             if (isDeleted) {
                 new Alert(Alert.AlertType.INFORMATION,"Teacher Delete Success!!!").showAndWait();
                 clearField();
+                loadAllTeacher();
             } else {
                 new Alert(Alert.AlertType.ERROR,"Delete Failed!!!").showAndWait();
             }
@@ -270,6 +273,7 @@ public class TeacherFormController implements Initializable {
                 if (isUpdated) {
                     new Alert(Alert.AlertType.INFORMATION, "Update Success!!!").showAndWait();
                     clearField();
+                    loadAllTeacher();
                 } else {
                     new Alert(Alert.AlertType.ERROR, "Updated Failed!!1").showAndWait();
                 }
@@ -282,13 +286,7 @@ public class TeacherFormController implements Initializable {
 
     @FXML
     void btnPrintOnAction(ActionEvent event) {
-        txtID.setText("");
-        txtNameWithInitials.setText("");
-        txtContactNo.setText("");
-        txtAdderss.setText("");
-        txtEmail.setText("");
-        txtSubject.setText("");
-        generateTeacherId();
+
     }
 
     private void clearField() {
@@ -298,6 +296,7 @@ public class TeacherFormController implements Initializable {
         txtAdderss.setText("");
         txtEmail.setText("");
         txtSubject.setText("");
+        imageTeacher.setImage(null);
         generateTeacherId();
     }
 
@@ -332,5 +331,27 @@ public class TeacherFormController implements Initializable {
 
     public void btnRefreshOnAction(ActionEvent actionEvent) {
         clearField();
+    }
+
+    private void tableListener(){
+        tblTeacher.getSelectionModel()
+                .selectedItemProperty()
+                .addListener((observableValue, classTm, t1) -> {
+                    //txtID.setText(t1.getID());
+                    try {
+                        TeacherDto dto = teacherModel.searchTeacher(t1.getID());
+                        if (dto != null) {
+                            txtID.setText(dto.getId());
+                            txtNameWithInitials.setText(dto.getName());
+                            txtAdderss.setText(dto.getAddress());
+                            txtEmail.setText(dto.getEmail());
+                            txtSubject.setText(dto.getSubjects());
+                            txtContactNo.setText(dto.getContactNo());
+                            imageTeacher.setImage(dto.getImageTeacher());
+                        }
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    }
+                });
     }
 }

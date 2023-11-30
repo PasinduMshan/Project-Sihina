@@ -81,6 +81,7 @@ public class ExamFormController implements Initializable {
         loadAllClass();
         loadAllSubject();
         generateExam();
+        tableListener();
         ArrowKeyPress.switchTextFieldOnArrowPressDown(txtID,txtDate);
         ArrowKeyPress.switchTextFieldOnArrowPressUP(txtDate,txtID);
         ArrowKeyPress.switchTextFieldOnArrowPressRight(txtDate,txtStartTime);
@@ -175,6 +176,7 @@ public class ExamFormController implements Initializable {
 
             if (isSaved) {
                 new Alert(Alert.AlertType.INFORMATION,"Exam Save Success!!!").showAndWait();
+                loadAllExamToTable();
                 clearField();
             } else {
                 new Alert(Alert.AlertType.ERROR,"Exam Save Failed!!!").showAndWait();
@@ -195,6 +197,7 @@ public class ExamFormController implements Initializable {
             boolean isDeleted = ExamModel.deleteExam(examId);
             if (isDeleted) {
                 new Alert(Alert.AlertType.INFORMATION,"Delete Success!!!").showAndWait();
+                loadAllExamToTable();
                 clearField();
             } else {
                 new Alert(Alert.AlertType.ERROR,"Delete Failed!!!").showAndWait();
@@ -252,6 +255,7 @@ public class ExamFormController implements Initializable {
             boolean isUpdated = ExamModel.updateExam(dto);
             if (isUpdated) {
                 new Alert(Alert.AlertType.INFORMATION,"Update Success!!!").showAndWait();
+                loadAllExamToTable();
                 clearField();
             } else {
                 new Alert(Alert.AlertType.ERROR,"Update Failed!!!").showAndWait();
@@ -273,5 +277,25 @@ public class ExamFormController implements Initializable {
 
     public void btnRefreshOnAction(ActionEvent actionEvent) {
         clearField();
+    }
+    private void tableListener(){
+        tblExam.getSelectionModel()
+                .selectedItemProperty()
+                .addListener((observableValue, ExamTm, t1) -> {
+                    try {
+                        ExamDto dto = ExamModel.SearchExam(t1.getExamId());
+                        if (dto != null) {
+                            txtID.setText(dto.getExamId());
+                            cmbClass.setValue(dto.getClassName());
+                            cmbSubject.setValue(dto.getSubject());
+                            txtDescription.setText(dto.getDescription());
+                            txtDate.setText(String.valueOf(dto.getDate()));
+                            txtStartTime.setText(String.valueOf(dto.getStartTime()));
+                            txtEndTime.setText(String.valueOf(dto.getEndTime()));
+                        }
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    }
+                });
     }
 }

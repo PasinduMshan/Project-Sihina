@@ -19,7 +19,7 @@
                 <Font name="System Bold" size="30.0" />
             </font>
         </Label>
-        <JFXTextField fx:id="txtID" layoutX="171.0" layoutY="112.0" prefHeight="30.0" prefWidth="139.0" promptText="Student ID">
+        <JFXTextField fx:id="txtID" layoutX="171.0" layoutY="112.0" onAction="#btnStudentSearchOnAction" prefHeight="30.0" prefWidth="139.0" promptText="Student ID">
             <font>
                 <Font size="14.0" />
             </font>
@@ -31,12 +31,12 @@
         </JFXTextField>
         <TableView fx:id="tblPayment" layoutX="30.0" layoutY="233.0" prefHeight="434.0" prefWidth="794.0">
             <columns>
-                <TableColumn fx:id="colID" prefWidth="100.0" text="ID" />
-                <TableColumn fx:id="colName" prefWidth="173.0" text="Name" />
-                <TableColumn fx:id="colClass" prefWidth="111.0" text="Class" />
-            <TableColumn fx:id="colSubject" prefWidth="111.0" text="Subject" />
-                <TableColumn fx:id="colMonth" prefWidth="117.0" text="Month" />
-            <TableColumn fx:id="colAmount" prefWidth="181.0" text="Amount" />
+                <TableColumn fx:id="colID" prefWidth="73.0" text="ID" />
+                <TableColumn fx:id="colName" prefWidth="188.0" text="Name" />
+                <TableColumn fx:id="colClass" prefWidth="94.0" text="Class" />
+            <TableColumn fx:id="colSubject" prefWidth="194.0" text="Subject" />
+                <TableColumn fx:id="colMonth" prefWidth="105.0" text="Month" />
+            <TableColumn fx:id="colAmount" prefWidth="139.0" text="Amount" />
             </columns>
         </TableView>
         <JFXButton buttonType="RAISED" layoutX="866.0" layoutY="337.0" onAction="#btnAddOnAction" prefHeight="40.0" prefWidth="108.0" style="-fx-background-color: #41c643; -fx-background-radius: 15;" text="Pay">

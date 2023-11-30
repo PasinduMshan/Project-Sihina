@@ -23,11 +23,10 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import lk.ijse.ProjectSihina.Other.ArrowKeyPress;
 import lk.ijse.ProjectSihina.Other.Months;
-import lk.ijse.ProjectSihina.dto.ClassDto;
-import lk.ijse.ProjectSihina.dto.PaymentDto;
-import lk.ijse.ProjectSihina.dto.SubjectDto;
+import lk.ijse.ProjectSihina.dto.*;
 import lk.ijse.ProjectSihina.dto.Tm.PaymentTm;
 import lk.ijse.ProjectSihina.model.ClassModel;
+import lk.ijse.ProjectSihina.model.GuardianModel;
 import lk.ijse.ProjectSihina.model.PaymentModel;
 import lk.ijse.ProjectSihina.model.SubjectModel;
 import net.sf.jasperreports.engine.*;
@@ -124,6 +123,7 @@ public class PaymentFormController implements Initializable {
         loadAllClass();
         loadAllSubject();
         loadAllMonth();
+        tableListener();
         ArrowKeyPress.switchTextFieldOnArrowPressRight(txtPayId,txtID);
         ArrowKeyPress.switchTextFieldOnArrowPressRight(txtID,txtName);
         ArrowKeyPress.switchTextFieldOnArrowPressRight(txtAmount,txtAttendantCount);
@@ -429,6 +429,7 @@ public class PaymentFormController implements Initializable {
         txtAmount.setText("");
         txtAttendantCount.setText("");
         generatePayId();
+        setDateAndTime();
     }
 
     public void AttendantCountOnAction(ActionEvent actionEvent) {
@@ -488,5 +489,43 @@ public class PaymentFormController implements Initializable {
 
     public void btnRefreshOnAction(ActionEvent actionEvent) {
         clearField();
+    }
+
+    private void tableListener(){
+        tblPayment.getSelectionModel()
+                .selectedItemProperty()
+                .addListener((observableValue, PaymentTm, t1) -> {
+                    try {
+                        PaymentDto dto = PaymentModel.SearchPaymontId(t1.getPay_id());
+                        if (dto != null) {
+                            txtPayId.setText(dto.getPayID());
+                            txtID.setText(dto.getStuID());
+                            txtName.setText(dto.getStuName());
+                            cmbType.setValue(dto.getType());
+                            cmbClass.setValue(dto.getStuClass());
+                            cmbMonth.setValue(dto.getPayMonth());
+                            cmbSubject.setValue(dto.getSubject());
+                            txtAmount.setText(String.valueOf(dto.getAmount()));
+                            lblDate.setText(String.valueOf(dto.getDate()));
+                            lblTime.setText(String.valueOf(dto.getTime()));
+                        }
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    }
+                });
+    }
+
+    public void btnStudentSearchOnAction(ActionEvent actionEvent) {
+        String id = txtID.getText();
+        try {
+            StudentDto dto = PaymentModel.getStudentNameClass(id);
+
+            if (dto != null) {
+                txtName.setText(dto.getName());
+                cmbClass.setValue(dto.getStu_Class());
+            }
+        } catch (SQLException e) {
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        }
     }
 }

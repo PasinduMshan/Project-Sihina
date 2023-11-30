@@ -16,7 +16,7 @@ create table Student (
     Stu_id     varchar(50) primary key,
     Name       varchar(55) not null,
     Email      varchar(50) not null,
-    Address    varchar(15) not null,
+    Address    varchar(50) not null,
     D_O_B      date        not null,
     Gender     varchar(20) not null,
     Contact    varchar(10) not null,

@@ -38,7 +38,7 @@
                         <Font size="14.0" />
                     </font>
                 </JFXTextField>
-                <JFXComboBox fx:id="cmbGender" layoutX="363.0" layoutY="395.0" prefHeight="30.0" prefWidth="150.0" promptText="Gender" />
+                <JFXComboBox fx:id="cmbGender" layoutX="363.0" layoutY="389.0" prefHeight="30.0" prefWidth="150.0" promptText="Gender" />
                 <Pane fx:id="paneStudentImage" layoutX="112.0" layoutY="73.0" prefHeight="125.0" prefWidth="120.0" style="-fx-background-color: ffff;">
                <children>
                   <ImageView fx:id="imageStudent" fitHeight="125.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true" />
@@ -100,7 +100,7 @@
                   <Font size="14.0" />
                </font>
             </JFXTextField>
-            <JFXTextField fx:id="txtDateOfBirth" layoutX="363.0" layoutY="243.0" prefHeight="30.0" prefWidth="150.0" promptText="Date Of Birth">
+            <JFXTextField fx:id="txtDateOfBirth" layoutX="363.0" layoutY="243.0" prefHeight="30.0" prefWidth="150.0" promptText="D_O_B(YYYY-MM-DD)">
                <font>
                   <Font size="14.0" />
                </font>

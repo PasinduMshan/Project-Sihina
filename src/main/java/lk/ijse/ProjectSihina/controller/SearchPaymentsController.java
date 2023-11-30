@@ -69,7 +69,7 @@ public class SearchPaymentsController implements Initializable {
 
     private void setCellValueFactory() {
         colPayId.setCellValueFactory(new PropertyValueFactory<>("Pay_id"));
-        colSubject.setCellValueFactory(new PropertyValueFactory<>("Name"));
+        colSubject.setCellValueFactory(new PropertyValueFactory<>("Stu_Subject"));
         colAmount.setCellValueFactory(new PropertyValueFactory<>("Amount"));
     }
 
@@ -97,6 +97,7 @@ public class SearchPaymentsController implements Initializable {
             List<PaymentDto> dtoList = PaymentModel.searchStuPays(id,month);
 
             for (PaymentDto PayDto : dtoList) {
+                System.out.println(PayDto.getSubject());
                 obList.add(new PaymentTm(
                         PayDto.getPayID(),
                         PayDto.getSubject(),
@@ -125,7 +126,6 @@ public class SearchPaymentsController implements Initializable {
             StudentDto dto = PaymentModel.searchStu(id);
 
             if (dto != null) {
-                txtID.setText(dto.getID());
                 txtName.setText(dto.getName());
                 txtSubject.setText(dto.getSubject());
             } else {

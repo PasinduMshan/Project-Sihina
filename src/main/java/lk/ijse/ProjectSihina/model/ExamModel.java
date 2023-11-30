@@ -52,7 +52,8 @@ public class ExamModel {
 
     public static ExamDto SearchExam(String examId) throws SQLException {
         Connection connection = DbConnection.getInstance().getConnection();
-        PreparedStatement pstm = connection.prepareStatement("SELECT * FROM Exam");
+        PreparedStatement pstm = connection.prepareStatement("SELECT * FROM Exam WHERE Exam_id = ?");
+        pstm.setString(1, examId);
         ResultSet resultSet = pstm.executeQuery();
 
         PreparedStatement pstm1 = connection.prepareStatement("SELECT Name FROM Class WHERE class_id = ?");
@@ -126,14 +127,31 @@ public class ExamModel {
         ArrayList<ExamDto> dtoList = new ArrayList<>();
 
         while (resultSet.next()) {
-            dtoList.add(new ExamDto(
+            PreparedStatement pstm1 = connection.prepareStatement("SELECT Name FROM Class WHERE class_id = ?");
+            pstm1.setString(1, resultSet.getString(6));
+            ResultSet resultSet1 = pstm1.executeQuery();
+            String ClassName = null;
+            if (resultSet1.next()) {
+                ClassName = resultSet1.getString(1);
+            }
+
+            PreparedStatement pstm2 = connection.prepareStatement("SELECT Sub_Name FROM Subject WHERE Sub_id = ?");
+            pstm2.setString(1, resultSet.getString(7));
+            ResultSet resultSet2 = pstm2.executeQuery();
+            String Subject = null;
+            if (resultSet2.next()) {
+                Subject = resultSet2.getString(1);
+            }
+
+            dtoList.add(
+                    new ExamDto(
                     resultSet.getString(1),
-                    resultSet.getString(2),
-                    resultSet.getString(3),
-                    resultSet.getString(4),
-                    resultSet.getDate(5).toLocalDate(),
-                    resultSet.getTime(6).toLocalTime(),
-                    resultSet.getTime(7).toLocalTime()
+                    ClassName,
+                    Subject,
+                    resultSet.getString(5),
+                    resultSet.getDate(2).toLocalDate(),
+                    resultSet.getTime(3).toLocalTime(),
+                    resultSet.getTime(4).toLocalTime()
             ));
         }
         return dtoList;

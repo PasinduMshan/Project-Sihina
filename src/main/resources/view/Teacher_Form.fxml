@@ -64,9 +64,9 @@
          <columns>
             <TableColumn fx:id="colID" prefWidth="100.0" text="ID" />
             <TableColumn fx:id="colName" prefWidth="193.0" text="Name" />
-            <TableColumn fx:id="colEmail" prefWidth="204.0" text="Email" />
-            <TableColumn fx:id="colContact" prefWidth="123.0" text="Subject" />
-            <TableColumn fx:id="colSubjects" prefWidth="253.0" text="Contact" />
+            <TableColumn fx:id="colEmail" prefWidth="221.0" text="Email" />
+            <TableColumn fx:id="colContact" prefWidth="221.0" text="Subject" />
+            <TableColumn fx:id="colSubjects" prefWidth="138.0" text="Contact" />
          </columns>
       </TableView>
       <JFXButton buttonType="RAISED" layoutX="210.0" layoutY="319.0" onAction="#btnAddOnAction" prefHeight="40.0" prefWidth="108.0" style="-fx-background-color: #41c643; -fx-background-radius: 15;" text="Add">

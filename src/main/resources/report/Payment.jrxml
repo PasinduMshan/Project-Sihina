@@ -14,129 +14,198 @@
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="79" splitType="Stretch">
-			<staticText>
-				<reportElement x="200" y="29" width="160" height="21" uuid="8e8ba0ad-5bd0-4116-9d17-419bfa5a50dc"/>
-				<textElement textAlignment="Center">
-					<font size="16"/>
-				</textElement>
-				<text><![CDATA[Payment Receipt]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="160" y="0" width="240" height="30" uuid="66548645-4367-4946-be2a-32f946942eef"/>
-				<textElement>
-					<font size="22"/>
-				</textElement>
-				<text><![CDATA[INSTITUTE OF SIHINA]]></text>
-			</staticText>
-			<textField pattern="MMMMM dd, yyyy">
-				<reportElement x="420" y="20" width="115" height="20" uuid="fb2b409b-39fa-497e-a21c-ceaeff450c91"/>
-				<textElement>
-					<font size="11"/>
-				</textElement>
-				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
-			</textField>
-			<textField pattern="HH:mm">
-				<reportElement x="420" y="50" width="115" height="18" uuid="22dec0da-c1e4-4e56-873d-6223e0e18b2b"/>
-				<textElement>
-					<font size="11"/>
-				</textElement>
-				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
-			</textField>
+		<band height="80" splitType="Stretch">
+			<frame>
+				<reportElement x="-3" y="0" width="560" height="80" uuid="dd56121f-06b8-4e8a-813b-1607592592ed"/>
+				<box>
+					<pen lineWidth="1.75"/>
+				</box>
+				<staticText>
+					<reportElement x="201" y="49" width="160" height="21" uuid="8e8ba0ad-5bd0-4116-9d17-419bfa5a50dc"/>
+					<textElement textAlignment="Center">
+						<font fontName="Times New Roman" size="16" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Payment Receipt]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="161" y="11" width="250" height="30" uuid="66548645-4367-4946-be2a-32f946942eef"/>
+					<textElement>
+						<font fontName="Times New Roman" size="22" isBold="true"/>
+					</textElement>
+					<text><![CDATA[INSTITUTE OF SIHINA]]></text>
+				</staticText>
+				<textField pattern="MMMMM dd, yyyy">
+					<reportElement x="423" y="31" width="115" height="20" uuid="fb2b409b-39fa-497e-a21c-ceaeff450c91"/>
+					<textElement>
+						<font size="11"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+				<textField pattern="HH:mm">
+					<reportElement x="501" y="52" width="57" height="18" uuid="22dec0da-c1e4-4e56-873d-6223e0e18b2b"/>
+					<textElement>
+						<font size="11"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+			</frame>
 		</band>
 	</title>
 	<columnHeader>
-		<band height="26" splitType="Stretch"/>
+		<band height="28" splitType="Stretch"/>
 	</columnHeader>
 	<detail>
-		<band height="250" splitType="Stretch">
+		<band height="460" splitType="Stretch">
 			<textField>
-				<reportElement x="290" y="0" width="81" height="30" uuid="d652e92a-7512-4baa-85d0-087fc10119b5"/>
+				<reportElement x="347" y="0" width="120" height="30" uuid="d652e92a-7512-4baa-85d0-087fc10119b5"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{Pay_id}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="290" y="40" width="80" height="30" uuid="d736f04b-58df-46d6-841c-428b0b6780f1"/>
+				<reportElement x="347" y="50" width="120" height="30" uuid="d736f04b-58df-46d6-841c-428b0b6780f1"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{Stu_id}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="291" y="80" width="80" height="30" uuid="459cb28a-8d28-4c99-8688-523777879f7d"/>
+				<reportElement x="346" y="100" width="120" height="30" uuid="459cb28a-8d28-4c99-8688-523777879f7d"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{Type}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="292" y="120" width="79" height="30" uuid="3642d3b9-e90b-4908-9829-21186d3d188f"/>
+				<reportElement x="345" y="150" width="120" height="30" uuid="3642d3b9-e90b-4908-9829-21186d3d188f"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{Stu_Class}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="290" y="160" width="81" height="30" uuid="e07af414-50c6-4a17-96dc-f8a8df503e98"/>
+				<reportElement x="344" y="200" width="120" height="30" uuid="e07af414-50c6-4a17-96dc-f8a8df503e98"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{Pay_Month}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="290" y="210" width="80" height="29" uuid="012fd2cf-8483-4380-951f-b09eaa6a131d"/>
+				<reportElement x="344" y="266" width="100" height="23" uuid="012fd2cf-8483-4380-951f-b09eaa6a131d"/>
 				<textElement textAlignment="Left">
 					<font size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{Amount}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="180" y="0" width="100" height="30" uuid="c5618ccf-f43b-44b1-ab48-7ba923b812cb"/>
+				<reportElement x="100" y="0" width="200" height="30" uuid="c5618ccf-f43b-44b1-ab48-7ba923b812cb"/>
 				<textElement>
-					<font size="14"/>
+					<font fontName="Times New Roman" size="14" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Payment ID :]]></text>
+				<text><![CDATA[Payment ID                               :]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="180" y="40" width="100" height="30" uuid="9f0bc9f2-bda3-45e0-8e43-1fb2ed9e2d0d"/>
+				<reportElement x="100" y="50" width="200" height="30" uuid="9f0bc9f2-bda3-45e0-8e43-1fb2ed9e2d0d"/>
 				<textElement>
-					<font size="14"/>
+					<font fontName="Times New Roman" size="14" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Student ID   :]]></text>
+				<text><![CDATA[Student ID                                 :]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="180" y="80" width="100" height="30" uuid="e94c0fb6-e1fe-48df-8c98-41725139a195"/>
+				<reportElement x="100" y="100" width="200" height="30" uuid="e94c0fb6-e1fe-48df-8c98-41725139a195"/>
 				<textElement>
-					<font size="14"/>
+					<font fontName="Times New Roman" size="14" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Type            :]]></text>
+				<text><![CDATA[Type                                           :]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="180" y="120" width="100" height="30" uuid="579206bf-2402-49fb-ac26-6354ca64e848"/>
+				<reportElement x="100" y="150" width="200" height="30" uuid="579206bf-2402-49fb-ac26-6354ca64e848"/>
 				<textElement>
-					<font size="14"/>
+					<font fontName="Times New Roman" size="14" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Class            :]]></text>
+				<text><![CDATA[Class                                          :]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="180" y="160" width="100" height="30" uuid="66b86209-7fbb-4215-8f27-2a99f6b64cc0"/>
+				<reportElement x="100" y="200" width="200" height="30" uuid="66b86209-7fbb-4215-8f27-2a99f6b64cc0"/>
 				<textElement>
-					<font size="14"/>
+					<font fontName="Times New Roman" size="14" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Month          :]]></text>
+				<text><![CDATA[Month                                        :]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="180" y="210" width="100" height="30" uuid="ad2b7f68-ba09-4751-90d9-736e21ae4590"/>
+				<reportElement x="100" y="267" width="200" height="30" uuid="ad2b7f68-ba09-4751-90d9-736e21ae4590"/>
 				<textElement>
-					<font size="14"/>
+					<font fontName="Times New Roman" size="14" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Amount        :]]></text>
+				<text><![CDATA[Payment                                     :]]></text>
+			</staticText>
+			<line>
+				<reportElement x="340" y="257" width="100" height="1" uuid="e9f1dda9-c727-4078-8c7a-6b1b526ae837"/>
+				<graphicElement>
+					<pen lineWidth="1.0" lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="340" y="300" width="100" height="1" uuid="8d7c6cbc-a310-42cf-80a9-fd306c9648b0"/>
+				<graphicElement>
+					<pen lineWidth="1.0" lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="340" y="295" width="100" height="1" uuid="d82a302c-ba0c-439c-b397-f400142d86fe"/>
+				<graphicElement>
+					<pen lineWidth="1.0" lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="198" y="357" width="160" height="40" uuid="0a2eaa46-7704-4bd2-a0fd-83a490ab700f"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="24" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Thank you!!!]]></text>
+			</staticText>
+			<line>
+				<reportElement x="-3" y="339" width="560" height="1" uuid="945a148e-9252-43c4-b039-3ef496785628"/>
+			</line>
+			<line>
+				<reportElement x="-3" y="419" width="560" height="1" uuid="18add6ed-ccbe-4331-924d-f6da13dbc46d"/>
+			</line>
+			<staticText>
+				<reportElement x="447" y="369" width="110" height="20" uuid="154b1fe1-f901-4d58-902e-9fe7dd274591"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[+94 717030640]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="447" y="354" width="100" height="15" uuid="44b94b65-bc65-4133-a4d0-ae4ef9544e1e"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Contact :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="447" y="389" width="110" height="17" uuid="e1be90a3-b844-44b4-aa39-6b3fad8c8db0"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[+94 774430647]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2" y="355" width="100" height="15" uuid="02f1ec08-462e-43c6-a9b2-f8c579d851ce"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Address :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2" y="376" width="156" height="34" uuid="b4df64c2-9916-4454-8309-2ead7da6317a"/>
+				<textElement>
+					<font size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[148, Kimbulwilla waththa, Dompe.]]></text>
 			</staticText>
 		</band>
 	</detail>
-	<summary>
-		<band height="42" splitType="Stretch"/>
-	</summary>
 </jasperReport>

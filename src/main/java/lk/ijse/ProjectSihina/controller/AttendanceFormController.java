@@ -100,41 +100,6 @@ public class AttendanceFormController implements Initializable {
     private Object month;
     private Object DATE;
 
-    public static void switchTextFieldOnArrowPressLeftRight(JFXTextField textField, JFXTextField nextTextField) {
-        textField.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
-            switch (event.getCode()) {
-                case RIGHT:
-                    nextTextField.requestFocus();
-                    event.consume();
-                    break;
-                case LEFT:
-                    nextTextField.requestFocus();
-                    event.consume();
-                    break;
-            }
-        });
-    }
-    public static void switchTextFieldOnArrowPressUP(JFXTextField textField, JFXTextField nextTextField) {
-        textField.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
-            switch (event.getCode()) {
-                case UP:
-                    nextTextField.requestFocus();
-                    event.consume();
-                    break;
-            }
-        });
-    }
-    public static void switchTextFieldOnArrowPress(JFXTextField textField, JFXTextField nextTextField) {
-        textField.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
-            switch (event.getCode()) {
-                case DOWN:
-                    nextTextField.requestFocus();
-                    event.consume();
-                    break;
-            }
-        });
-    }
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         generateAttId();
@@ -144,6 +109,7 @@ public class AttendanceFormController implements Initializable {
         loadAllClass();
         loadAllSubject();
         loadAllMonth();
+        tableListener();
         ArrowKeyPress.switchTextFieldOnArrowPressDown(txtStuId,txtStudentName);
         ArrowKeyPress.switchTextFieldOnArrowPressUP(txtStudentName,txtStuId);
         ArrowKeyPress.switchTextFieldOnArrowPressRight(txtID,txtStuId);
@@ -225,7 +191,7 @@ public class AttendanceFormController implements Initializable {
             }
             tblAttendance.setItems(obList);
         } catch (SQLException e) {
-            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+            throw new RuntimeException(e);
         }
     }
 
@@ -262,6 +228,7 @@ public class AttendanceFormController implements Initializable {
             if (isAdd) {
                 new Alert(Alert.AlertType.INFORMATION,"Add Success!!!").show();
                 clearFields();
+                loadAllAttendance();
                 generateAttId();
             } else {
                 new Alert(Alert.AlertType.ERROR, "Add Failed!!!").showAndWait();
@@ -285,6 +252,7 @@ public class AttendanceFormController implements Initializable {
             if (isDeleted) {
                 new Alert(Alert.AlertType.INFORMATION,"Delete Success!!!").showAndWait();
                 btnClearOnAction(event);
+                loadAllAttendance();
                 generateAttId();
             } else {
                 new Alert(Alert.AlertType.ERROR,"Delete Failed!!").showAndWait();
@@ -319,6 +287,7 @@ public class AttendanceFormController implements Initializable {
                 new Alert(Alert.AlertType.INFORMATION,"Add Success!!!").show();
                 clearFields();
                 generateAttId();
+                loadAllAttendance();
             } else {
                 new Alert(Alert.AlertType.ERROR, "Add Failed!!!").showAndWait();
             }
@@ -397,6 +366,7 @@ public class AttendanceFormController implements Initializable {
                 new Alert(Alert.AlertType.INFORMATION,"Update Success!!!").showAndWait();
                 btnClearOnAction(event);
                 generateAttId();
+                loadAllAttendance();
             } else {
                 new Alert(Alert.AlertType.ERROR,"Update Failed").showAndWait();
             }
@@ -459,5 +429,27 @@ public class AttendanceFormController implements Initializable {
 
     public void btnStuNameOnAction(ActionEvent actionEvent) {
         btnPresentOnAction(actionEvent);
+    }
+    private void tableListener(){
+        tblAttendance.getSelectionModel()
+                .selectedItemProperty()
+                .addListener((observableValue, AttendantTm, t1) -> {
+                    try {
+                        AttendantDto dto = AttendantModel.searchAttendant(t1.getAttendantId());
+                        if(dto != null) {
+                            txtID.setText(dto.getAtt_id());
+                            txtStuId.setText(dto.getStudentId());
+                            txtStudentName.setText(dto.getStudentName());
+                            cmbClass.setValue(dto.getClassName());
+                            cmbSubject.setValue(dto.getSubject());
+                            cmbMonth.setValue(dto.getMonth());
+                            txtDate.setText(String.valueOf(dto.getDate()));
+                            txtTime.setText(String.valueOf(dto.getTime()));
+                            txtType.setText(dto.getType());
+                        }
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    }
+                });
     }
 }

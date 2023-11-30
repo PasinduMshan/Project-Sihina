@@ -13,9 +13,11 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import lk.ijse.ProjectSihina.Other.ArrowKeyPress;
+import lk.ijse.ProjectSihina.dto.SubjectDto;
 import lk.ijse.ProjectSihina.dto.Tm.userTm;
 import lk.ijse.ProjectSihina.dto.UserDto;
 import lk.ijse.ProjectSihina.model.SignUpModel;
+import lk.ijse.ProjectSihina.model.SubjectModel;
 
 import java.net.URL;
 import java.sql.SQLException;
@@ -325,5 +327,25 @@ public class UserSettingController implements Initializable {
 
     public void btnRefreshOnAction(ActionEvent actionEvent) {
         clearField();
+    }
+
+    private void tableListener(){
+        tblUser.getSelectionModel()
+                .selectedItemProperty()
+                .addListener((observableValue, userTm, t1) -> {
+                    try {
+                        UserDto userDto = SignUpModel.searchUser(t1.getUserId());
+                        if (userDto != null) {
+                            txtUserId.setText(userDto.getUserId());
+                            txtFirstName.setText(userDto.getFirstName());
+                            txtLastName.setText(userDto.getLastName());
+                            txtEmail.setText(userDto.getEmail());
+                            txtNIC.setText(userDto.getNIC());
+                        }
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    }
+
+                });
     }
 }

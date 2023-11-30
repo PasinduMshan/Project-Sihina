@@ -82,10 +82,35 @@ public class ScheduleModel {
         ArrayList<ScheduleDto> dtoList = new ArrayList<>();
 
         while (resultSet.next()) {
-            dtoList.add(new ScheduleDto(
-                    resultSet.getString(1),
-                    resultSet.getString(2),
-                    resultSet.getString(3),
+            PreparedStatement pstm = connection.prepareStatement("SELECT Name FROM Class WHERE class_id = ?");
+            pstm.setString(1, resultSet.getString(1));
+            ResultSet resultSet1 = pstm.executeQuery();
+            String ClassName = null;
+            if (resultSet1.next()) {
+                ClassName = resultSet1.getString(1);
+            }
+
+            PreparedStatement pstm2 = connection.prepareStatement("SELECT Sub_Name FROM Subject WHERE Sub_id = ?");
+            pstm2.setString(1, resultSet.getString(2));
+            ResultSet resultSet2 = pstm2.executeQuery();
+            String Subject = null;
+            if (resultSet2.next()) {
+                Subject = resultSet2.getString(1);
+            }
+
+            PreparedStatement pstm3 = connection.prepareStatement("SELECT Name FROM Teacher WHERE Teacher_id = ?");
+            pstm3.setString(1, resultSet.getString(3));
+            ResultSet resultSet3 = pstm3.executeQuery();
+            String Teacher = null;
+            if (resultSet3.next()) {
+                Teacher = resultSet3.getString(1);
+            }
+
+            dtoList.add(
+                    new ScheduleDto(
+                    ClassName,
+                    Subject,
+                    Teacher,
                     resultSet.getString(4),
                     resultSet.getTime(5).toLocalTime(),
                     resultSet.getTime(6).toLocalTime()

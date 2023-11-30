@@ -37,6 +37,7 @@ public class QRCodeReaderFormController {
     private WebcamPanel webcamPanel;
     private boolean isReading = false;
     private PaymentFormController payForm;
+    private boolean flag = false;
 
     private AttendanceFormController attForm;
 
@@ -47,6 +48,7 @@ public class QRCodeReaderFormController {
 
     public void setAttendanceFormController(AttendanceFormController attendanceFormController) {
         this.attForm = attendanceFormController;
+        flag = true;
     }
 
     @FXML
@@ -101,8 +103,11 @@ public class QRCodeReaderFormController {
                                     stopWebcam();
                                     txtDateInsertArea.appendText(result.getText() + "\n");
                                     new Alert(Alert.AlertType.INFORMATION, "Data Scanned Successfully!").show();
-                                    payForm.updateTxtID(result.getText());
-                                    attForm.updateTxtID(result.getText());
+                                    if(flag){
+                                        attForm.updateTxtID(result.getText());
+                                    } else {
+                                        payForm.updateTxtID(result.getText());
+                                    }
                                 } else {
                                     new Alert(Alert.AlertType.ERROR, "No Data Found!").showAndWait();
                                 }

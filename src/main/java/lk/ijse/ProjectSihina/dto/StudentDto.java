@@ -30,10 +30,14 @@ public class StudentDto {
         this.contact = contact;
     }
 
-    public StudentDto(String ID, String name, String Subjects) {
-        this.ID = ID;
+    public StudentDto( String name, String Subjects) {
         this.Name = name;
         this.Subject = Subjects;
+    }
+    public StudentDto( String ID , String name, String Stu_Class) {
+        this.ID = ID;
+        this.Name = name;
+        this.Stu_Class = Stu_Class;
     }
 
 }

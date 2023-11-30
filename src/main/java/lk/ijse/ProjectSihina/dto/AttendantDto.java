@@ -20,7 +20,7 @@ public class AttendantDto {
     LocalTime Time;
     String Type;
 
-    public AttendantDto(String att_id, String studentName, String className, LocalDate date, String month, String type) {
+    public AttendantDto(String att_id, String studentName, String className, String month, LocalDate date,  String type) {
         Att_id = att_id;
         StudentName = studentName;
         ClassName = className;

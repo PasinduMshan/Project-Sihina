@@ -41,19 +41,15 @@ public class teacherModel {
             }
 
             ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-            // Choose an appropriate image format based on your application (e.g., "png", "jpg")
             String format = "png";
 
-            // Convert JavaFX Image to BufferedImage
             java.awt.image.BufferedImage bufferedImage = SwingFXUtils.fromFXImage(image, null);
 
-            // Write BufferedImage to output stream
             ImageIO.write(bufferedImage, format, outputStream);
 
             byte[] imageBytes = outputStream.toByteArray();
             return new SerialBlob(imageBytes);
         } catch (IOException | SQLException e) {
-            //Error converting Image to Blob
             throw new RuntimeException(e);
         }
     }
@@ -68,7 +64,7 @@ public class teacherModel {
     public static boolean updateTeacher(TeacherDto dto) throws SQLException {
         Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement("UPDATE Teacher SET Name = ?, Address = ?, Email = ?, " +
-                "Contact = ?, Subject = ? ,TeacherImage = ? WHERE Teacher_id = ?");
+                "Contact = ?, Subject = ? ,image = ? WHERE Teacher_id = ?");
 
 
         pstm.setString(1, dto.getName());
@@ -76,7 +72,11 @@ public class teacherModel {
         pstm.setString(3, dto.getEmail());
         pstm.setString(4, dto.getContactNo());
         pstm.setString(5, dto.getSubjects());
-        pstm.setBlob(6, convertImageToBlob(dto.getImageTeacher()));
+
+        Blob blob = convertImageToBlob(dto.getImageTeacher());
+
+        pstm.setBlob(6, blob);
+
         pstm.setString(7, dto.getId());
 
         return pstm.executeUpdate() > 0;

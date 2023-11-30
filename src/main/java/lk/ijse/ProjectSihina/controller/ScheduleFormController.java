@@ -82,6 +82,7 @@ public class ScheduleFormController implements Initializable {
         loadAllSubject();
         loadAllTeacher();
         loadAllDay();
+        tableListener();
         ArrowKeyPress.switchTextFieldOnArrowPressRight(txtStartTime,txtEndTime);
         ArrowKeyPress.switchTextFieldOnArrowPressLeft(txtEndTime,txtStartTime);
     }
@@ -254,5 +255,17 @@ public class ScheduleFormController implements Initializable {
 
     public void btnRefreshOnAction(ActionEvent actionEvent) {
         clearField();
+    }
+    private void tableListener(){
+        tblSchedule.getSelectionModel()
+                .selectedItemProperty()
+                .addListener((observableValue, scheduleTm, t1) -> {
+                    cmbClass.setValue(t1.getStu_Class());
+                    cmbSubject.setValue(t1.getSubject());
+                    cmbTeacherName.setValue(t1.getTeacher());
+                    cmbDay.setValue(t1.getDay());
+                    txtStartTime.setText(String.valueOf(t1.getStartTime()));
+                    txtEndTime.setText(String.valueOf(t1.getEndTime()));
+                });
     }
 }

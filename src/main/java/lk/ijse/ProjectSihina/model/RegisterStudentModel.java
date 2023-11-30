@@ -12,12 +12,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RegisterStudentModel {
-    public static boolean SaveStudentRegisterAndPayment(StudentDto studentDto, PaymentDto payDto, File selectedImageFile, GuardianDto guardianDto) throws SQLException {
+    public static boolean SaveStudentRegisterAndPayment(StudentDto studentDto, PaymentDto payDto, GuardianDto guardianDto) throws SQLException {
         Connection connection = null;
         try {
             connection= DbConnection.getInstance().getConnection();
             connection.setAutoCommit(false);
-            boolean isSaved = StudentModel.saveStudent(studentDto,selectedImageFile);
+            boolean isSaved = StudentModel.saveStudent(studentDto);
             System.out.println(1);
             if (isSaved) {
                 System.out.println(2);
@@ -31,6 +31,7 @@ public class RegisterStudentModel {
                         if (isSaveRegistration) {
                             System.out.println(5);
                             connection.commit();
+
                             return true;
                         } else {
                             connection.rollback();

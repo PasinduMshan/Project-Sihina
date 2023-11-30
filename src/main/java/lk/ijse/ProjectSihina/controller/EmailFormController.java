@@ -6,12 +6,16 @@ import com.jfoenix.controls.JFXTextField;
 import jakarta.mail.*;
 import jakarta.mail.internet.InternetAddress;
 import jakarta.mail.internet.MimeMessage;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
+import lk.ijse.ProjectSihina.dto.ClassDto;
+import lk.ijse.ProjectSihina.model.ClassModel;
 import lk.ijse.ProjectSihina.model.MailModel;
 
 import java.net.URL;
@@ -49,7 +53,30 @@ public class EmailFormController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        loadAllClasses();
+        loadAllTeachOrStu();
+    }
 
+    private void loadAllTeachOrStu() {
+        ObservableList<String> obList = FXCollections.observableArrayList();
+        obList.add("Student");
+        obList.add("Teacher");
+        cmbStuOrTea.setItems(obList);
+    }
+
+    private void loadAllClasses() {
+        ObservableList<String> obList = FXCollections.observableArrayList();
+
+        try {
+            List<ClassDto> nameList = ClassModel.getAllClass();
+
+            for (ClassDto dto : nameList) {
+                obList.add(dto.getClassName());
+            }
+            cmbGrades.setItems(obList);
+        } catch (SQLException e) {
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        }
     }
 
     private void getAllEmailTeacherOrStudent() {
@@ -132,7 +159,7 @@ public class EmailFormController implements Initializable {
         }
 
         public boolean outMail(String recipient) throws MessagingException {
-            String from = "mrgreen6013@gmail.com"; //sender's email address
+            String from = "institutesihina@gmail.com"; //sender's email address
             String host = "localhost";
 
             Properties properties = new Properties();
@@ -142,15 +169,15 @@ public class EmailFormController implements Initializable {
             properties.put("mail.smtp.port", 587);
             Session session = Session.getInstance(properties, new Authenticator() {
                 protected PasswordAuthentication getPasswordAuthentication() {
-                    return new PasswordAuthentication("mrgreen6013@gmail.com", "xutb ijio dfed riin");  // have to change some settings in SMTP
+                    return new PasswordAuthentication("institutesihina@gmail.com", "bzga kpfg ixpa cnir");
                 }
             });
 
             MimeMessage mimeMessage = new MimeMessage(session);
             mimeMessage.setFrom(new InternetAddress(from));
             mimeMessage.addRecipient(Message.RecipientType.TO, new InternetAddress(recipient));
-            mimeMessage.setSubject("Your Email Subject");
-            mimeMessage.setText("Your Email Content");
+            mimeMessage.setSubject(this.subject);
+            mimeMessage.setText(this.msg);
 
             Transport.send(mimeMessage);
             return true;
