@@ -88,6 +88,7 @@ public class UserSettingController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         setCellValueFactory();
         loadAllUser();
+        tableListener();
         ArrowKeyPress.switchTextFieldOnArrowPressRight(txtUserId,txtFirstName);
         ArrowKeyPress.switchTextFieldOnArrowPressRight(txtFirstName,txtLastName);
         ArrowKeyPress.switchTextFieldOnArrowPressRight(txtLastName,txtEmail);
@@ -156,31 +157,39 @@ public class UserSettingController implements Initializable {
         boolean isValidate = validationCredentials(userNameNow, passwordNow);
         if (isValidate) {
             try {
-                boolean isMatch = SignUpModel.checkCredentials(userNameNow, passwordNow, NIC);
-                if (isMatch) {
-                    String newUserName = txtNewUserName.getText();
-                    String newPassword = txtNewPassword.getText();
-                    boolean isValidatedNew = validationCredentials(newUserName, newPassword);
-                    if (isValidatedNew) {
-                        String confirmUserName = txtConfirmUserName.getText();
-                        String confirmPassword = txtConfirmPassword.getText();
-                        boolean isValidatedConfirm = validationCredentials(confirmUserName, confirmPassword);
-                        if (isValidatedConfirm) {
-                            if (newUserName.equals(confirmUserName) && newPassword.equals(confirmPassword)) {
-                                boolean ChangeCredentials = SignUpModel.updateCredentials(newUserName, newPassword, NIC);
-                                if (ChangeCredentials) {
-                                    new Alert(Alert.AlertType.INFORMATION, "Change Credentials Success!!!").showAndWait();
+                boolean isMatchedNIC = SignUpModel.checkNIC(NIC);
+                if (isMatchedNIC) {
+                    boolean isMatch = SignUpModel.checkCredentials(userNameNow, passwordNow, NIC);
+                    if (isMatch) {
+                        String newUserName = txtNewUserName.getText();
+                        String newPassword = txtNewPassword.getText();
+                        boolean isValidatedNew = validationCredentials(newUserName, newPassword);
+                        if (isValidatedNew) {
+                            String confirmUserName = txtConfirmUserName.getText();
+                            String confirmPassword = txtConfirmPassword.getText();
+                            boolean isValidatedConfirm = validationCredentials(confirmUserName, confirmPassword);
+                            if (isValidatedConfirm) {
+                                if (newUserName.equals(confirmUserName) && newPassword.equals(confirmPassword)) {
+                                    boolean ChangeCredentials = SignUpModel.updateCredentials(newUserName, newPassword, NIC);
+                                    if (ChangeCredentials) {
+                                        new Alert(Alert.AlertType.INFORMATION, "Change Credentials Success!!!").showAndWait();
+                                        clearField();
+                                    } else {
+                                        new Alert(Alert.AlertType.ERROR, "Change Credentials Failed!!!").showAndWait();
+                                    }
                                 } else {
-                                    new Alert(Alert.AlertType.ERROR,"Change Credentials Failed!!!").showAndWait();
+                                    new Alert(Alert.AlertType.ERROR, "Your New UserName & Password Not Match with Confirm UserName & Password. Please Check..").show();
                                 }
-                            } else {
-                                new Alert(Alert.AlertType.ERROR,"Your New UserName & Password Not Match with Confirm UserName & Password. Please Check..").show();
                             }
                         }
+                    } else {
+                        new Alert(Alert.AlertType.ERROR, "Your UserName & Password Not Matched!!!").show();
                     }
                 } else {
-                    new Alert(Alert.AlertType.ERROR,"Your UserName & Password Not Matched!!!");
+                    new Alert(Alert.AlertType.ERROR, "Your NIC Number Not Matched!!!").showAndWait();
+                    return;
                 }
+                System.out.println();
             } catch (SQLException e) {
                 new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
             }
@@ -199,6 +208,8 @@ public class UserSettingController implements Initializable {
             boolean isDeleted = SignUpModel.deleteUser(UserId);
             if (isDeleted) {
                 new Alert(Alert.AlertType.INFORMATION,"User Delete Success!!!").showAndWait();
+                loadAllUser();
+                clearField();
             } else {
                 new Alert(Alert.AlertType.ERROR,"User Delete Failed!!!").showAndWait();
             }
@@ -256,6 +267,7 @@ public class UserSettingController implements Initializable {
                 boolean isUpdated = SignUpModel.updateUser(userDto);
                 if (isUpdated) {
                     new Alert(Alert.AlertType.INFORMATION,"User Update Success!!!").showAndWait();
+                    loadAllUser();
                 } else {
                     new Alert(Alert.AlertType.ERROR,"User Update Failed!!!").showAndWait();
                 }
@@ -333,19 +345,11 @@ public class UserSettingController implements Initializable {
         tblUser.getSelectionModel()
                 .selectedItemProperty()
                 .addListener((observableValue, userTm, t1) -> {
-                    try {
-                        UserDto userDto = SignUpModel.searchUser(t1.getUserId());
-                        if (userDto != null) {
-                            txtUserId.setText(userDto.getUserId());
-                            txtFirstName.setText(userDto.getFirstName());
-                            txtLastName.setText(userDto.getLastName());
-                            txtEmail.setText(userDto.getEmail());
-                            txtNIC.setText(userDto.getNIC());
-                        }
-                    } catch (SQLException e) {
-                        throw new RuntimeException(e);
-                    }
-
+                    txtUserId.setText(t1.getUserId());
+                    txtFirstName.setText(t1.getFirstName());
+                    txtLastName.setText(t1.getLastName());
+                    txtEmail.setText(t1.getEmail());
+                    txtNIC.setText(t1.getNIC());
                 });
     }
 }

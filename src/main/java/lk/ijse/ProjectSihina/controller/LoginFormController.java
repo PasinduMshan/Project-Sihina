@@ -1,5 +1,6 @@
 package lk.ijse.ProjectSihina.controller;
 
+import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -25,10 +26,10 @@ public class LoginFormController implements Initializable {
     private AnchorPane rootNode;
 
     @FXML
-    private JFXTextField txtPassword;
+    private JFXTextField txtUserName;
 
     @FXML
-    private JFXTextField txtUserName;
+    private JFXPasswordField txtPasswordField;
 
     private LoginModel loginModel = new LoginModel();
 
@@ -36,7 +37,7 @@ public class LoginFormController implements Initializable {
     void btnLoginOnAction(ActionEvent event) throws IOException {
 
         String userName = txtUserName.getText();
-        String password = txtPassword.getText();
+        String password = txtPasswordField.getText();
 
         if (userName.isEmpty() || password.isEmpty()) {
             new Alert(Alert.AlertType.ERROR,"Field Not Found!!!").showAndWait();
@@ -88,7 +89,7 @@ public class LoginFormController implements Initializable {
     }
 
     @FXML
-    void PasswordOnAction(ActionEvent event) throws IOException {
+    void btnPasswordOnAction(ActionEvent event) throws IOException {
         btnLoginOnAction(event);
     }
 
@@ -99,7 +100,8 @@ public class LoginFormController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        ArrowKeyPress.switchTextFieldOnArrowPressDown(txtUserName,txtPassword);
-        ArrowKeyPress.switchTextFieldOnArrowPressUP(txtPassword,txtUserName);
+        ArrowKeyPress.switchTextFieldOnArrowPressDOWN(txtUserName,txtPasswordField);
+        ArrowKeyPress.switchTextFieldOnArrowPressup(txtPasswordField,txtUserName);
     }
+
 }

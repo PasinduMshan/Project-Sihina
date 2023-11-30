@@ -42,6 +42,21 @@ public class SignUpModel {
         return dtoList;
     }
 
+    public static boolean checkNIC(String nic) throws SQLException {
+        Connection connection = DbConnection.getInstance().getConnection();
+        PreparedStatement pstm = connection.prepareStatement("SELECT NIC FROM user WHERE NIC = ?");
+        pstm.setString(1, nic);
+        ResultSet resultSet = pstm.executeQuery();
+        if (resultSet.next()) {
+            String NIC = resultSet.getString(1);
+
+            if (NIC.equals(nic)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public String generateNextUserId() throws SQLException {
         Connection connection = DbConnection.getInstance().getConnection();
 
@@ -141,15 +156,13 @@ public class SignUpModel {
         ResultSet resultSet = pstm.executeQuery();
         String U_Name = null;
         String Password = null;
-        boolean flag = false;
-
         if (resultSet.next()) {
             U_Name = resultSet.getString(1);
             Password = resultSet.getString(2);
         }
         if (U_Name.equals(userNameNow) && Password.equals(passwordNow)) {
-            flag = true;
+            return true;
         }
-        return flag;
+        return false;
     }
 }

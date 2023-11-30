@@ -60,6 +60,18 @@ public class ArrowKeyPress {
             }
         });
     }
+
+    public static void switchTextFieldOnArrowPressup(JFXPasswordField textField, JFXTextField nextTextField) {
+        textField.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
+            switch (event.getCode()) {
+                case UP:
+                    nextTextField.requestFocus();
+                    event.consume();
+                    break;
+            }
+        });
+    }
+
     public static void switchTextFieldOnArrowPressUPToPassword(JFXTextField textField, JFXPasswordField nextTextField) {
         textField.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
             switch (event.getCode()) {
@@ -72,6 +84,16 @@ public class ArrowKeyPress {
     }
 
     public static void switchTextFieldOnArrowPressDown(JFXTextField textField, JFXTextField nextTextField) {
+        textField.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
+            switch (event.getCode()) {
+                case DOWN:
+                    nextTextField.requestFocus();
+                    event.consume();
+                    break;
+            }
+        });
+    }
+    public static void switchTextFieldOnArrowPressDOWN(JFXTextField textField, JFXPasswordField nextTextField) {
         textField.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
             switch (event.getCode()) {
                 case DOWN:

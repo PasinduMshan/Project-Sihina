@@ -68,7 +68,7 @@
                </font>
             </Label>
             <JFXComboBox fx:id="cmbStuOrTea" layoutX="131.0" layoutY="256.0" prefHeight="24.0" prefWidth="185.0" />
-            <Label layoutX="562.0" layoutY="709.0">
+            <Label layoutX="569.0" layoutY="709.0" text="Sended">
                <font>
                   <Font size="14.0" />
                </font>
