@@ -26,13 +26,13 @@
         </JFXButton>
       <ImageView fitHeight="798.0" fitWidth="512.0" layoutX="23.0" layoutY="68.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../../../../Picture4.png" />
+            <Image url="@../Images/Picture4.png" />
          </image>
       </ImageView>
       <Line endX="-108.0" endY="489.0" layoutX="689.0" layoutY="335.0" startX="-108.0" startY="-270.0" />
       <ImageView fitHeight="771.0" fitWidth="674.0" layoutX="615.0" layoutY="68.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../../../../../Picture5.png" />
+            <Image url="@../Images/Picture5.png" />
          </image>
       </ImageView>
     </children>

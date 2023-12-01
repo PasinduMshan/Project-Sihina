@@ -18,18 +18,13 @@ public class RegisterStudentModel {
             connection= DbConnection.getInstance().getConnection();
             connection.setAutoCommit(false);
             boolean isSaved = StudentModel.saveStudent(studentDto);
-            System.out.println(1);
             if (isSaved) {
-                System.out.println(2);
                 boolean isAddGuard = GuardianModel.AddGuard(guardianDto);
                 if (isAddGuard) {
-                    System.out.println(3);
                     boolean isAddPayment = PaymentModel.AddPayment(payDto);
                     if (isAddPayment) {
-                        System.out.println(4);
                         boolean isSaveRegistration = saveDetailRegistration(studentDto, payDto);
                         if (isSaveRegistration) {
-                            System.out.println(5);
                             connection.commit();
 
                             return true;

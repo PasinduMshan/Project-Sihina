@@ -25,12 +25,12 @@
         </JFXButton>
       <ImageView fitHeight="691.0" fitWidth="1235.0" layoutX="57.0" layoutY="91.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../assets/Picture6.png" />
+            <Image url="@../Images/Picture6.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="154.0" fitWidth="301.0" layoutX="788.0" layoutY="375.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../assets/Picture7.png" />
+            <Image url="@../Images/Picture7.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="140.0" fitWidth="286.0" layoutX="814.0" layoutY="218.0" opacity="0.78" pickOnBounds="true" preserveRatio="true">
