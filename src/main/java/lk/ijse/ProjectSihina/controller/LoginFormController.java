@@ -98,6 +98,15 @@ public class LoginFormController implements Initializable {
 
     }
 
+    @FXML
+    void btnForgotPasswordOnAction(ActionEvent event) throws IOException {
+        Parent rootNode = FXMLLoader.load(this.getClass().getResource("/view/Forget_Password_Form.fxml"));
+        Scene scene = new Scene(rootNode);
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.show();
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         ArrowKeyPress.switchTextFieldOnArrowPressDOWN(txtUserName,txtPasswordField);

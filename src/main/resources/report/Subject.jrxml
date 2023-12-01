@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.20.6.final using JasperReports Library version 6.20.6-5c96b6aa8a39ac1dc6b6bea4b81168e16dd39231  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Subject" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="0c352b2d-0494-4ee6-baae-8c43b845314b">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Sihina Adapter"/>
+	<queryString language="SQL">
+		<![CDATA[select * from Subject]]>
+	</queryString>
+	<field name="Sub_id" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="Sub_id"/>
+		<property name="com.jaspersoft.studio.field.label" value="Sub_id"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Subject"/>
+	</field>
+	<field name="Sub_Name" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="Sub_Name"/>
+		<property name="com.jaspersoft.studio.field.label" value="Sub_Name"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Subject"/>
+	</field>
+	<field name="AvailableClass" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="AvailableClass"/>
+		<property name="com.jaspersoft.studio.field.label" value="AvailableClass"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Subject"/>
+	</field>
+	<field name="teacherName" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="teacherName"/>
+		<property name="com.jaspersoft.studio.field.label" value="teacherName"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Subject"/>
+	</field>
+	<field name="MonthlyAmount" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.name" value="MonthlyAmount"/>
+		<property name="com.jaspersoft.studio.field.label" value="MonthlyAmount"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Subject"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="119" splitType="Stretch">
+			<frame>
+				<reportElement x="0" y="1" width="560" height="99" uuid="e87328ee-324f-4261-b6d8-29c66a7b879b"/>
+				<box>
+					<pen lineWidth="1.75"/>
+				</box>
+				<staticText>
+					<reportElement x="141" y="34" width="338" height="30" uuid="88ae08b8-5e1b-4eab-b715-fc27cf2d256e"/>
+					<textElement textAlignment="Center">
+						<font fontName="Times New Roman" size="24" isBold="true"/>
+					</textElement>
+					<text><![CDATA[INSTITUTE OF SIHINA]]></text>
+				</staticText>
+				<image>
+					<reportElement x="6" y="20" width="58" height="57" uuid="9005e9ad-6ae5-4119-9350-3aec3e62a722"/>
+					<imageExpression><![CDATA["/home/pasindu/Downloads/Untitled_design__1_-removebg-preview.png"]]></imageExpression>
+				</image>
+				<image>
+					<reportElement x="65" y="35" width="72" height="31" uuid="a63d51a5-64bf-412d-bc2c-e2889e08b792"/>
+					<imageExpression><![CDATA["/home/pasindu/Desktop/Final Project Semester 01/Name logo/5-removebg-preview.png"]]></imageExpression>
+				</image>
+			</frame>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="44" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="80" height="30" uuid="48638e8f-82d2-4bb3-bdfe-3c3162e9dd15">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="fedc1362-35fc-4ba8-825f-f10ee48f4497"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Times New Roman" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Subject ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="124" y="0" width="67" height="30" uuid="b6d05b4d-ab53-4da3-83c8-9618f4320fd4">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="6e2893e5-fc58-4cc9-90d7-0a6baca097a4"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Times New Roman" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Subject]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="243" y="0" width="75" height="30" uuid="6699cd47-9ea8-41f2-84e6-56c3cab8a42a">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="dccabb53-9b63-42ce-8b59-c90ebed3b8ed"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Times New Roman" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Teacher]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="358" y="0" width="79" height="30" uuid="e3cb1785-96f1-41ae-bbe0-e6a5b1a2c37c">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="7dbefb17-b054-4b30-b2b1-d2dce39f2a9a"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Times New Roman" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Available Classes]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="455" y="0" width="115" height="30" uuid="f5736c75-559e-480d-97f2-dd337eeb8644">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="de64c254-d8e0-445b-a50e-3ed5794d10dc"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Times New Roman" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Monthly Amount]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="45" splitType="Stretch">
+			<textField>
+				<reportElement x="10" y="10" width="70" height="30" uuid="b91939a6-7c07-4b8d-8b9b-45ab5c4b77ba">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="fedc1362-35fc-4ba8-825f-f10ee48f4497"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Sub_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="112" y="10" width="100" height="30" uuid="e412be89-857f-4103-a8c4-fed2f2a2fca5">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="6e2893e5-fc58-4cc9-90d7-0a6baca097a4"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Sub_Name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="235" y="9" width="100" height="30" uuid="5d38036a-93e3-487c-b702-6976de01fa48">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="dccabb53-9b63-42ce-8b59-c90ebed3b8ed"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{teacherName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="351" y="10" width="100" height="29" uuid="915bb7d1-8893-4ecc-87d4-0ba7394bed02">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="7dbefb17-b054-4b30-b2b1-d2dce39f2a9a"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{AvailableClass}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="483" y="10" width="100" height="30" uuid="71bc7362-6e71-49ca-96d6-a5b39748d3df">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="de64c254-d8e0-445b-a50e-3ed5794d10dc"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{MonthlyAmount}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+</jasperReport>

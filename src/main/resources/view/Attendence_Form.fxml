@@ -58,7 +58,7 @@
             <TableColumn fx:id="colAttendance" prefWidth="121.0" text="Attendence" />
             </columns>
         </TableView>
-        <JFXButton buttonType="RAISED" layoutX="836.0" layoutY="348.0" onAction="#btnSearchOnAction" prefHeight="40.0" prefWidth="108.0" style="-fx-background-color: #54a9ff; -fx-background-radius: 15;" text="Search">
+        <JFXButton buttonType="RAISED" layoutX="836.0" layoutY="373.0" onAction="#btnSearchOnAction" prefHeight="40.0" prefWidth="108.0" style="-fx-background-color: #54a9ff; -fx-background-radius: 15;" text="Search">
             <font>
                 <Font name="System Bold" size="16.0" />
             </font>
@@ -66,7 +66,7 @@
                 <Cursor fx:constant="HAND" />
             </cursor>
         </JFXButton>
-        <JFXButton buttonType="RAISED" layoutX="836.0" layoutY="416.0" onAction="#btnUpdateOnAction" prefHeight="40.0" prefWidth="108.0" style="-fx-background-color: #54a9ff; -fx-background-radius: 15;" text="Update">
+        <JFXButton buttonType="RAISED" layoutX="836.0" layoutY="449.0" onAction="#btnUpdateOnAction" prefHeight="40.0" prefWidth="108.0" style="-fx-background-color: #54a9ff; -fx-background-radius: 15;" text="Update">
             <font>
                 <Font name="System Bold" size="16.0" />
             </font>
@@ -74,15 +74,7 @@
                 <Cursor fx:constant="HAND" />
             </cursor>
         </JFXButton>
-        <JFXButton buttonType="RAISED" layoutX="836.0" layoutY="487.0" onAction="#btnDeleteOnAction" prefHeight="40.0" prefWidth="108.0" style="-fx-background-color: #ff5454; -fx-background-radius: 15;" text="Delete">
-            <font>
-                <Font name="System Bold" size="16.0" />
-            </font>
-            <cursor>
-                <Cursor fx:constant="HAND" />
-            </cursor>
-        </JFXButton>
-        <JFXButton buttonType="RAISED" layoutX="836.0" layoutY="632.0" onAction="#btnPrintOnAction" prefHeight="40.0" prefWidth="108.0" style="-fx-background-color: #54a9ff; -fx-background-radius: 15;" text="Print">
+        <JFXButton buttonType="RAISED" layoutX="836.0" layoutY="525.0" onAction="#btnDeleteOnAction" prefHeight="40.0" prefWidth="108.0" style="-fx-background-color: #ff5454; -fx-background-radius: 15;" text="Delete">
             <font>
                 <Font name="System Bold" size="16.0" />
             </font>
@@ -115,7 +107,7 @@
          </font>
       </JFXTextField>
       <JFXComboBox fx:id="cmbSubject" layoutX="222.0" layoutY="163.0" prefHeight="30.0" prefWidth="205.0" promptText="Subject" />
-      <JFXButton buttonType="RAISED" layoutX="836.0" layoutY="560.0" onAction="#btnClearOnAction" prefHeight="40.0" prefWidth="108.0" style="-fx-background-color: #54a9ff; -fx-background-radius: 15;" text="Clear">
+      <JFXButton buttonType="RAISED" layoutX="836.0" layoutY="599.0" onAction="#btnClearOnAction" prefHeight="40.0" prefWidth="108.0" style="-fx-background-color: #54a9ff; -fx-background-radius: 15;" text="Clear">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
@@ -124,7 +116,7 @@
          </cursor>
       </JFXButton>
       <JFXTextField fx:id="txtType" layoutX="815.0" layoutY="223.0" />
-      <JFXButton buttonType="RAISED" layoutX="795.0" layoutY="276.0" onAction="#btnQRCodeReaderOnAction" prefHeight="28.0" prefWidth="190.0" style="-fx-background-color: #B3CAD6; -fx-background-radius: 10;" text="QR Code Reader">
+      <JFXButton buttonType="RAISED" layoutX="795.0" layoutY="291.0" onAction="#btnQRCodeReaderOnAction" prefHeight="28.0" prefWidth="190.0" style="-fx-background-color: #B3CAD6; -fx-background-radius: 10;" text="QR Code Reader">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>

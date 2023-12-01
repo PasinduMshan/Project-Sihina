@@ -55,10 +55,18 @@ public class DashBordModel {
         return Count;
     }
 
-    public static List<DashBordScheduleDto> getTodaySchedule() throws SQLException {
+    public static List<DashBordScheduleDto> getTodaySchedule(LocalDate date) throws SQLException {
         Connection connection = DbConnection.getInstance().getConnection();
+        PreparedStatement pstm1 = connection.prepareStatement("SELECT DAYNAME(NOW()) AS current_day");
+        ResultSet resultSet1 = pstm1.executeQuery();
+        String day  = null;
+        if (resultSet1.next()) {
+            day  = resultSet1.getString(1);
+        }
+
         PreparedStatement pstm = connection.prepareStatement("SELECT S.Start_Time , S.End_Time , C.Name , Su.Sub_Name " +
-                "FROM Schedule S JOIN Class C ON S.class_id = C.class_id JOIN Subject Su ON Su.Sub_id = S.Sub_id");
+                "FROM Schedule S JOIN Class C ON S.class_id = C.class_id JOIN Subject Su ON Su.Sub_id = S.Sub_id WHERE S.Class_day = ?");
+        pstm.setString(1, day);
         ResultSet resultSet = pstm.executeQuery();
 
         ArrayList<DashBordScheduleDto> dtoList = new ArrayList<>();

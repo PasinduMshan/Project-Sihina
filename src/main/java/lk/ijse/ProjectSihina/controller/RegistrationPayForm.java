@@ -198,13 +198,7 @@ public class RegistrationPayForm implements Initializable {
         timeline.setCycleCount(Animation.INDEFINITE);
         timeline.play();
 
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        Calendar calendar = Calendar.getInstance();
-
-        year = calendar.get(Calendar.YEAR);
-        month = calendar.get(Calendar.MONTH);
-        DATE = calendar.get(Calendar.DATE);
-        lblDate.setText(year + "-" + month + "-" + DATE);
+        lblDate.setText(String.valueOf(LocalDate.now()));
     }
 
     private void updateTime() {

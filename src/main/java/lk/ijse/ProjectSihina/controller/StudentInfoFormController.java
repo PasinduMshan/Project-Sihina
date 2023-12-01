@@ -248,7 +248,7 @@ public class StudentInfoFormController implements Initializable {
     @FXML
     void btnPrintOnAction(ActionEvent event)  {
         try {
-            InputStream resourceAsStream = getClass().getResourceAsStream("/report/allStudentList.jrxml");
+            InputStream resourceAsStream = getClass().getResourceAsStream("/report/StudentDetails.jrxml");
             JasperDesign load = JRXmlLoader.load(resourceAsStream);
             JasperReport compileReport = JasperCompileManager.compileReport(load);
             JasperPrint jasperPrint = JasperFillManager.fillReport(

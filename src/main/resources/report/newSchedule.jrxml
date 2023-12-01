@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.20.6.final using JasperReports Library version 6.20.6-5c96b6aa8a39ac1dc6b6bea4b81168e16dd39231  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="newSchedule" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="884eadca-4d2f-42b6-8edc-e2bc0b2b3862">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Sihina Adapter"/>
+	<queryString language="SQL">
+		<![CDATA[select c.Name, s.Sub_Name, t.Name, sc.Class_day, sc.Start_Time, sc.End_Time from Schedule sc join Class c on sc.class_id = c.class_id join Subject s on sc.Sub_id = s.Sub_id join Teacher t on sc.Teacher_id = t.Teacher_id;]]>
+	</queryString>
+	<field name="Name" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="Name"/>
+		<property name="com.jaspersoft.studio.field.label" value="Name"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Class"/>
+	</field>
+	<field name="Sub_Name" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="Sub_Name"/>
+		<property name="com.jaspersoft.studio.field.label" value="Sub_Name"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Subject"/>
+	</field>
+	<field name="COLUMN_3" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="Name"/>
+		<property name="com.jaspersoft.studio.field.label" value="Name"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Teacher"/>
+	</field>
+	<field name="Class_day" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="Class_day"/>
+		<property name="com.jaspersoft.studio.field.label" value="Class_day"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Schedule"/>
+	</field>
+	<field name="Start_Time" class="java.sql.Time">
+		<property name="com.jaspersoft.studio.field.name" value="Start_Time"/>
+		<property name="com.jaspersoft.studio.field.label" value="Start_Time"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Schedule"/>
+	</field>
+	<field name="End_Time" class="java.sql.Time">
+		<property name="com.jaspersoft.studio.field.name" value="End_Time"/>
+		<property name="com.jaspersoft.studio.field.label" value="End_Time"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Schedule"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="144" splitType="Stretch">
+			<frame>
+				<reportElement x="0" y="1" width="560" height="110" uuid="fb986d62-6ab0-486c-a7e5-4cb8a735bb9a"/>
+				<box>
+					<pen lineWidth="1.75"/>
+				</box>
+				<staticText>
+					<reportElement x="112" y="11" width="338" height="30" uuid="12c17e5c-3105-45ac-acbc-ce56c8951746"/>
+					<textElement textAlignment="Center">
+						<font fontName="Times New Roman" size="24" isBold="true"/>
+					</textElement>
+					<text><![CDATA[INSTITUTE OF SIHINA]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="197" y="61" width="169" height="30" uuid="42b15edb-798e-4c61-9cc5-c4bbddd8f44a"/>
+					<textElement textAlignment="Center">
+						<font fontName="Times New Roman" size="24" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Shedule]]></text>
+				</staticText>
+				<image>
+					<reportElement x="6" y="30" width="58" height="57" uuid="be0b3abc-9478-46e5-becc-df8b914abe95"/>
+					<imageExpression><![CDATA["/home/pasindu/Downloads/Untitled_design__1_-removebg-preview.png"]]></imageExpression>
+				</image>
+				<image>
+					<reportElement x="65" y="49" width="72" height="31" uuid="a9ddfbc5-9b16-4fb4-a926-790220052a02"/>
+					<imageExpression><![CDATA["/home/pasindu/Desktop/Final Project Semester 01/Name logo/5-removebg-preview.png"]]></imageExpression>
+				</image>
+			</frame>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="39" splitType="Stretch">
+			<staticText>
+				<reportElement x="17" y="0" width="63" height="30" uuid="403dc3ab-8a9c-4e8b-ad0f-6c4c42a8490f">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="58b00ece-5dab-40fc-886f-268be4017fbf"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Times New Roman" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Grade]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="100" y="0" width="82" height="30" uuid="984fe42b-d884-4f71-a9bf-3fc5a8f6ca6a">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="9d0a1585-8026-404a-8bc3-f79bd5711a0c"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Times New Roman" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Subject]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="199" y="0" width="80" height="30" uuid="ccde20a2-0bf4-4687-8a71-5f383b40553f">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="74308b57-c4f9-4103-bc6a-5ce2ba9a0a42"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Times New Roman" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Teacher]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="315" y="0" width="84" height="30" uuid="b110ea53-38f3-4712-8382-7ccd5736702a">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="789d3a35-8006-4368-ab1d-a5c2f1a50673"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Times New Roman" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="407" y="1" width="69" height="30" uuid="6b2dd1a7-501a-450a-b407-7d7c61616e8e">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="ec36ae3f-2c4e-4ad6-87c7-021b21471dd9"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Times New Roman" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Start Time]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="499" y="0" width="60" height="30" uuid="4cc938fa-7a62-4f6d-b8f1-6a6fdf21a550">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="87e56e60-382d-4899-b30f-ce27a6f493f5"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Times New Roman" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[End Time]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="61" splitType="Stretch">
+			<textField>
+				<reportElement x="15" y="21" width="65" height="30" uuid="44bc4c27-67d4-4af3-80ce-77a328fd5ae4">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="58b00ece-5dab-40fc-886f-268be4017fbf"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="104" y="21" width="80" height="30" uuid="66f4606e-32de-4466-81cf-fb5132c42b73">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="9d0a1585-8026-404a-8bc3-f79bd5711a0c"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Sub_Name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="195" y="20" width="80" height="30" uuid="b90beff0-a6c0-4897-88f6-b1861eeb71a8">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="74308b57-c4f9-4103-bc6a-5ce2ba9a0a42"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{COLUMN_3}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="306" y="20" width="84" height="30" uuid="a2579dcc-e194-4bc2-88e3-94c8a569f9d4">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="789d3a35-8006-4368-ab1d-a5c2f1a50673"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Class_day}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="405" y="20" width="78" height="30" uuid="128b4d86-6ec2-4329-88a0-cdf861f6e992">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="ec36ae3f-2c4e-4ad6-87c7-021b21471dd9"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Times New Roman"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Start_Time}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="497" y="17" width="85" height="30" uuid="951f9d43-d440-4196-bc1d-8f5b86d396ec">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="87e56e60-382d-4899-b30f-ce27a6f493f5"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{End_Time}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="23" splitType="Stretch"/>
+	</columnFooter>
+</jasperReport>

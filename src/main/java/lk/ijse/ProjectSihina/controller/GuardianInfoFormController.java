@@ -278,11 +278,6 @@ public class GuardianInfoFormController implements Initializable {
     }
 
     @FXML
-    void btnPrintOnAction(ActionEvent event) {
-
-    }
-
-    @FXML
     void btnSearchOnAction(ActionEvent event) {
         String id = txtGuardianID.getText();
         if (id.isEmpty()) {

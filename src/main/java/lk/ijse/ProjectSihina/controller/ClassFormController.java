@@ -143,11 +143,6 @@ public class ClassFormController implements Initializable {
     }
 
     @FXML
-    void btnPrintOnAction(ActionEvent event) {
-
-    }
-
-    @FXML
     void btnUpdateOnAction(ActionEvent event) {
         String ClassId = txtID.getText();
         String ClassName = txtClassName.getText();

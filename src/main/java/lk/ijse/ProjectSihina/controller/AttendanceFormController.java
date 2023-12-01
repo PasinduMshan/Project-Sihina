@@ -96,10 +96,6 @@ public class AttendanceFormController implements Initializable {
     @FXML
     private JFXTextField txtType;
 
-    private Object year;
-    private Object month;
-    private Object DATE;
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         generateAttId();
@@ -158,13 +154,7 @@ public class AttendanceFormController implements Initializable {
         timeline.setCycleCount(Animation.INDEFINITE);
         timeline.play();
 
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy:MM:dd");
-        Calendar calendar = Calendar.getInstance();
-
-        year = calendar.get(Calendar.YEAR);
-        month = calendar.get(Calendar.MONTH);
-        DATE = calendar.get(Calendar.DATE);
-        txtDate.setText(year + "-" + month + "-" + DATE);
+        txtDate.setText(String.valueOf(LocalDate.now()));
     }
 
     private void updateTime() {
@@ -303,11 +293,6 @@ public class AttendanceFormController implements Initializable {
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
-    }
-
-    @FXML
-    void btnPrintOnAction(ActionEvent event) {
-
     }
 
     @FXML

@@ -85,6 +85,11 @@
                <font>
                   <Font size="14.0" />
                </font></JFXPasswordField>
+            <JFXButton layoutX="72.0" layoutY="321.0" onAction="#btnForgotPasswordOnAction" text="Forgot Password?" textFill="#1129c9">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
          </children></AnchorPane>
    </children>
 </AnchorPane>

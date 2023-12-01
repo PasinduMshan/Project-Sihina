@@ -37,7 +37,7 @@
             <TableColumn fx:id="colDate" prefWidth="111.0" text="Date" />
             </columns>
         </TableView>
-        <JFXButton buttonType="RAISED" layoutX="868.0" layoutY="258.0" onAction="#btnAddOnAction" prefHeight="40.0" prefWidth="108.0" style="-fx-background-color: #41c643; -fx-background-radius: 15;" text="Add">
+        <JFXButton buttonType="RAISED" layoutX="869.0" layoutY="283.0" onAction="#btnAddOnAction" prefHeight="40.0" prefWidth="108.0" style="-fx-background-color: #41c643; -fx-background-radius: 15;" text="Add">
             <font>
                 <Font name="System Bold" size="16.0" />
             </font>
@@ -45,7 +45,7 @@
                 <Cursor fx:constant="HAND" />
             </cursor>
         </JFXButton>
-        <JFXButton buttonType="RAISED" layoutX="868.0" layoutY="330.0" onAction="#btnUpdateOnAction" prefHeight="40.0" prefWidth="108.0" style="-fx-background-color: #54a9ff; -fx-background-radius: 15;" text="Update">
+        <JFXButton buttonType="RAISED" layoutX="869.0" layoutY="362.0" onAction="#btnUpdateOnAction" prefHeight="40.0" prefWidth="108.0" style="-fx-background-color: #54a9ff; -fx-background-radius: 15;" text="Update">
             <font>
                 <Font name="System Bold" size="16.0" />
             </font>
@@ -53,7 +53,7 @@
                 <Cursor fx:constant="HAND" />
             </cursor>
         </JFXButton>
-        <JFXButton buttonType="RAISED" layoutX="868.0" layoutY="469.0" onAction="#btnDeleteOnAction" prefHeight="40.0" prefWidth="108.0" style="-fx-background-color: #ff5454; -fx-background-radius: 15;" text="Delete">
+        <JFXButton buttonType="RAISED" layoutX="868.0" layoutY="513.0" onAction="#btnDeleteOnAction" prefHeight="40.0" prefWidth="108.0" style="-fx-background-color: #ff5454; -fx-background-radius: 15;" text="Delete">
             <font>
                 <Font name="System Bold" size="16.0" />
             </font>
@@ -61,7 +61,7 @@
                 <Cursor fx:constant="HAND" />
             </cursor>
         </JFXButton>
-        <JFXButton buttonType="RAISED" layoutX="868.0" layoutY="531.0" onAction="#btnPrintOnAction" prefHeight="40.0" prefWidth="108.0" style="-fx-background-color: #54a9ff; -fx-background-radius: 15;" text="Print">
+        <JFXButton buttonType="RAISED" layoutX="868.0" layoutY="591.0" onAction="#btnPrintOnAction" prefHeight="40.0" prefWidth="108.0" style="-fx-background-color: #54a9ff; -fx-background-radius: 15;" text="Print">
             <font>
                 <Font name="System Bold" size="16.0" />
             </font>
@@ -69,7 +69,7 @@
                 <Cursor fx:constant="HAND" />
             </cursor>
         </JFXButton>
-      <JFXTextArea fx:id="txtDescription" layoutX="614.0" layoutY="118.0" prefHeight="79.0" prefWidth="345.0" promptText="Description" />
+      <JFXTextArea fx:id="txtDescription" layoutX="610.0" layoutY="116.0" prefHeight="111.0" prefWidth="348.0" promptText="Description" />
       <JFXComboBox fx:id="cmbClass" layoutX="231.0" layoutY="112.0" prefHeight="30.0" prefWidth="132.0" promptText="Class" />
       <JFXComboBox fx:id="cmbSubject" layoutX="424.0" layoutY="112.0" prefHeight="30.0" prefWidth="132.0" promptText="Subject" />
       <JFXTextField fx:id="txtStartTime" layoutX="231.0" layoutY="197.0" prefHeight="30.0" prefWidth="132.0" promptText="Start Time">
@@ -82,15 +82,7 @@
             <Font size="14.0" />
          </font>
       </JFXTextField>
-      <JFXButton buttonType="RAISED" layoutX="868.0" layoutY="402.0" onAction="#btnSearchOnAction" prefHeight="40.0" prefWidth="108.0" style="-fx-background-color: #54a9ff; -fx-background-radius: 15;" text="Search">
-         <font>
-            <Font name="System Bold" size="16.0" />
-         </font>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </JFXButton>
-      <JFXButton buttonType="RAISED" layoutX="868.0" layoutY="628.0" onAction="#btnResultsOnAction" prefHeight="21.0" prefWidth="108.0" style="-fx-background-color: #54a9ff; -fx-background-radius: 15;" text="Results">
+      <JFXButton buttonType="RAISED" layoutX="869.0" layoutY="437.0" onAction="#btnSearchOnAction" prefHeight="40.0" prefWidth="108.0" style="-fx-background-color: #54a9ff; -fx-background-radius: 15;" text="Search">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>

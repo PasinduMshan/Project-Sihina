@@ -105,7 +105,8 @@ public class DashBoardFormController {
         ObservableList<DashBoardScheduleTm> obList = FXCollections.observableArrayList();
 
         try {
-            List<DashBordScheduleDto> dtoList = DashBordModel.getTodaySchedule();
+            LocalDate date = LocalDate.parse(lblDate.getText());
+            List<DashBordScheduleDto> dtoList = DashBordModel.getTodaySchedule(date);
 
             for (DashBordScheduleDto dto : dtoList) {
                 obList.add(new DashBoardScheduleTm(
@@ -116,7 +117,6 @@ public class DashBoardFormController {
                         dto.getType()
                 ));
             }
-            LocalDate date = LocalDate.parse(lblDate.getText());
             List<DashBordScheduleDto> todayExams = DashBordModel.getTodayExams(date);
 
             for (DashBordScheduleDto dtoEx : todayExams) {
@@ -189,13 +189,7 @@ public class DashBoardFormController {
         timeline.setCycleCount(Animation.INDEFINITE);
         timeline.play();
 
-        DateFormat dateFormat = new SimpleDateFormat("yyy-MM-dd");
-        Calendar cal = Calendar.getInstance();
-
-        year = cal.get(Calendar.YEAR);
-        month = cal.get(Calendar.MONTH);
-        DATE = cal.get(Calendar.DATE);
-        lblDate.setText(year + "-" + month + "-" + DATE);
+        lblDate.setText(String.valueOf(LocalDate.now()));
     }
     @FXML
     void btnAttendanceOnAction(ActionEvent event) throws IOException {
