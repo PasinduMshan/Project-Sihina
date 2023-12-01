@@ -60,9 +60,6 @@ public class DashBoardFormController {
 
     @FXML
     private Label lblUserName;
-    private Object year;
-    private Object month;
-    private Object DATE;
 
     @FXML
     private TableColumn<?, ?> colEndTime;
