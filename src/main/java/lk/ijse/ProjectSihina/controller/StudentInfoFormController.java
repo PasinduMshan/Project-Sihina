@@ -449,7 +449,7 @@ public class StudentInfoFormController implements Initializable {
         QRCodeGenerator.generateQRCode(qrCodeData, outputFilePath);
     }
 
-    private void tableListener(){
+    private void tableListener() {
         tblStudent.getSelectionModel()
                 .selectedItemProperty()
                 .addListener((observableValue, StudentTm, t1) -> {
