@@ -102,9 +102,9 @@ public class ForgetPasswordFormController {
             lblCheckYourEmail.setText("Check your email for the OTP");
 
         } catch (MessagingException e) {
-            throw new RuntimeException(e);
+            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
         }
     }
 
