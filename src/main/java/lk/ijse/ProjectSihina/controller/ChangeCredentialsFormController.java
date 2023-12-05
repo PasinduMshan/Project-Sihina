@@ -64,7 +64,7 @@ public class ChangeCredentialsFormController {
         }
 
         String confirmPassword = txtConfirmPassword.getText();
-        boolean matches3 = Pattern.matches("[a-zA-Z0-9]{5,13}", confirmPassword);
+        boolean matches3 = Pattern.matches("[a-zA-Z0-9]{4,}", confirmPassword);
         if (!matches3) {
             new Alert(Alert.AlertType.ERROR,"Invalid Password!!  Only include(A-Z,a-z,0-9) & (at least 4 characters)").show();
             return;

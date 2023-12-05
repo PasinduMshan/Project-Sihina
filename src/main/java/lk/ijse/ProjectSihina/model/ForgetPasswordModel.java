@@ -23,7 +23,7 @@ public class ForgetPasswordModel {
 
     public static boolean changeCredentials(String userName, String password, String NIC) throws SQLException {
         Connection connection = DbConnection.getInstance().getConnection();
-        PreparedStatement pstm = connection.prepareStatement("UPDATE user SET user_id = ?, Password = ? WHERE NIC = ?");
+        PreparedStatement pstm = connection.prepareStatement("UPDATE user SET user_Name = ?, Password = ? WHERE NIC = ?");
         pstm.setString(1, userName);
         pstm.setString(2, password);
         pstm.setString(3, NIC);

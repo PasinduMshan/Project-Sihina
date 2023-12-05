@@ -78,6 +78,11 @@ public class ForgetPasswordFormController {
             String nic = txtNIC.getText();
             String email = ForgetPasswordModel.getEmail(nic);
 
+            if (email == null) {
+                new Alert(Alert.AlertType.ERROR,"Your NIC Not Found").showAndWait();
+                return;
+            }
+
             MimeMessage mimeMessage = new MimeMessage(session);
             mimeMessage.setFrom(new InternetAddress(from));
             mimeMessage.addRecipient(Message.RecipientType.TO, new InternetAddress(email));
